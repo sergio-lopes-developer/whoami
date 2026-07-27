@@ -1,0 +1,122 @@
+root = true
+
+# ----------------------------------------------------------
+# General formatting
+# ----------------------------------------------------------
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+tab_width = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 80
+
+# ----------------------------------------------------------
+# Project and XML files
+# ----------------------------------------------------------
+[*.{csproj,props,targets,config,resx}]
+indent_size = 2
+tab_width = 2
+
+# ----------------------------------------------------------
+# C# formatting rules
+# ----------------------------------------------------------
+[*.cs]
+indent_size = 4
+tab_width = 4
+max_line_length = 80
+
+# ----------------------------------------------------------
+# Braces (K&R style)
+# ----------------------------------------------------------
+csharp_new_line_before_open_brace = none    # class, method, property, local functions
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+
+# Empty braces on a single line
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = true
+
+# ----------------------------------------------------------
+# Spacing
+# ----------------------------------------------------------
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_before_open_square_brackets = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+
+# ----------------------------------------------------------
+# Using directives
+# ----------------------------------------------------------
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+
+# ----------------------------------------------------------
+# Naming conventions
+# ----------------------------------------------------------
+
+# Private fields start with _
+dotnet_naming_rule.private_fields_should_be_camel_with_underscore.severity = warning
+dotnet_naming_rule.private_fields_should_be_camel_with_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_with_underscore.style = camel_with_underscore
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.camel_with_underscore.capitalization = camel_case
+dotnet_naming_style.camel_with_underscore.required_prefix = _
+
+# Constants in PascalCase
+dotnet_naming_rule.constants_should_be_pascal.severity = warning
+dotnet_naming_rule.constants_should_be_pascal.symbols = constants
+dotnet_naming_rule.constants_should_be_pascal.style = pascal_case_style
+
+dotnet_naming_symbols.constants.applicable_kinds = field
+dotnet_naming_symbols.constants.required_modifiers = const
+
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+# ----------------------------------------------------------
+# File-scoped namespaces
+# ----------------------------------------------------------
+csharp_style_namespace_declarations = file_scoped:suggestion
+
+# ----------------------------------------------------------
+# Expressions
+# ----------------------------------------------------------
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = when_on_single_line:suggestion
+dotnet_style_prefer_auto_properties = true:suggestion
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_collection_expression = true:suggestion
+
+# ----------------------------------------------------------
+# Var preferences
+# ----------------------------------------------------------
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:silent
+
+# ----------------------------------------------------------
+# Using directives placement
+# ----------------------------------------------------------
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent
+
+# ----------------------------------------------------------
+# Nullability
+# ----------------------------------------------------------
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_coalesce_expression = true:suggestion
+
+# ----------------------------------------------------------
+# Markdown
+# ----------------------------------------------------------
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
