@@ -42,7 +42,10 @@ ScaffoldingReadMe.txt
 # Others
 ~$*
 *~
+*.DotSettings.user
+.idea
 CodeCoverage/
+/data/
 
 # MSBuild Binary and Structured Log
 *.binlog
