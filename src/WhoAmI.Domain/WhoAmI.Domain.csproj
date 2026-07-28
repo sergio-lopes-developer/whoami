@@ -12,7 +12,6 @@
     <Folder Include="Profiles\Exceptions\" />
     <Folder Include="Profiles\ValueObjects\" />
     <Folder Include="Shared\Constraints\" />
-    <Folder Include="Shared\Exceptions\" />
     <Folder Include="Shared\Guards\" />
   </ItemGroup>
 
