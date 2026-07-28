@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/WhoAmI.Domain/WhoAmI.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/WhoAmI.Domain.Tests/WhoAmI.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

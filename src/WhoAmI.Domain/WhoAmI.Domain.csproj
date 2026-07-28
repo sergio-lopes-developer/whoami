@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Profiles\Entities\" />
+    <Folder Include="Profiles\Events\" />
+    <Folder Include="Profiles\Exceptions\" />
+    <Folder Include="Profiles\ValueObjects\" />
+    <Folder Include="Shared\Base\" />
+    <Folder Include="Shared\Constraints\" />
+    <Folder Include="Shared\Exceptions\" />
+    <Folder Include="Shared\Guards\" />
+  </ItemGroup>
+
+</Project>
