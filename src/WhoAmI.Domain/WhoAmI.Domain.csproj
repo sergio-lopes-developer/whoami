@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Profiles\Entities\" />
     <Folder Include="Profiles\Events\" />
-    <Folder Include="Shared\Constraints\" />
   </ItemGroup>
 
 </Project>
