@@ -38,7 +38,7 @@ public class CreateProfileCommandHandlerTests {
         );
 
         result.IsSuccess.Should().BeTrue();
-        result.Value!.Id.Should().NotBe(Guid.Empty);
+        result.Value.Id.Should().NotBe(Guid.Empty);
         result.Value.FirstName.Should().Be(command.FirstName);
         result.Value.LastName.Should().Be(command.LastName);
         result.Value.Email.Should().Be(command.Email);
