@@ -5,7 +5,7 @@ using WhoAmI.Domain.Shared.Constraints;
 namespace WhoAmI.Application.Tests.Validation;
 
 public class ValidationRuleBuilderTests {
-    private static readonly TextLengthConstraint LengthConstraint =
+    private static readonly TextLengthConstraint _lengthConstraint =
         new(
             2,
             10,
@@ -130,7 +130,7 @@ public class ValidationRuleBuilderTests {
     public void HasValidLength_ShouldAddError_WhenTooShort() {
         // Act
         var errors = Ensure.Field("A", "Name")
-            .HasValidLength(LengthConstraint)
+            .HasValidLength(_lengthConstraint)
             .ToErrors();
 
         // Assert
@@ -145,7 +145,7 @@ public class ValidationRuleBuilderTests {
     public void HasValidLength_ShouldAddError_WhenTooLong() {
         // Act
         var errors = Ensure.Field("ABCDEFGHIJK", "Name")
-            .HasValidLength(LengthConstraint)
+            .HasValidLength(_lengthConstraint)
             .ToErrors();
 
         // Assert
@@ -158,7 +158,7 @@ public class ValidationRuleBuilderTests {
     public void HasValidLength_ShouldNotAddError_WhenLengthIsValid() {
         // Act
         var errors = Ensure.Field("John", "Name")
-            .HasValidLength(LengthConstraint)
+            .HasValidLength(_lengthConstraint)
             .ToErrors();
 
         // Assert
@@ -169,7 +169,7 @@ public class ValidationRuleBuilderTests {
     public void HasValidLength_ShouldIgnoreNullValue() {
         // Act
         var errors = Ensure.Field<string?>(null, "Name")
-            .HasValidLength(LengthConstraint)
+            .HasValidLength(_lengthConstraint)
             .ToErrors();
 
         // Assert
@@ -180,7 +180,7 @@ public class ValidationRuleBuilderTests {
     public void HasValidLength_ShouldIgnoreWhitespaceValue() {
         // Act
         var errors = Ensure.Field("   ", "Name")
-            .HasValidLength(LengthConstraint)
+            .HasValidLength(_lengthConstraint)
             .ToErrors();
 
         // Assert
@@ -221,7 +221,7 @@ public class ValidationRuleBuilderTests {
     public void ValidationMethods_ShouldAccumulateMultipleErrors() {
         // Act
         var errors = Ensure.Field("A", "Name")
-            .HasValidLength(LengthConstraint)
+            .HasValidLength(_lengthConstraint)
             .Satisfies(value => value == "John")
             .ToErrors();
 
