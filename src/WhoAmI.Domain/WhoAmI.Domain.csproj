@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Profiles\Entities\" />
-    <Folder Include="Profiles\Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="WhoAmI.Domain.Tests" />
   </ItemGroup>
 
 </Project>

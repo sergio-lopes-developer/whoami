@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Profiles\Entities\" />
-    <Folder Include="Shared\Base\Dummies\" />
   </ItemGroup>
 
   <ItemGroup>
