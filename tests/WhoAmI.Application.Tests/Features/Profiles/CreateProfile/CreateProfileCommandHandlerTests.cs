@@ -28,6 +28,7 @@ public class CreateProfileCommandHandlerTests {
         // Assert
         repo.Received(1).Add(
             Arg.Is<Profile>(p =>
+                p != null &&
                 p.Email.Address == command.Email &&
                 p.FullName.FirstName.Value == command.FirstName &&
                 p.FullName.LastName.Value == command.LastName &&
