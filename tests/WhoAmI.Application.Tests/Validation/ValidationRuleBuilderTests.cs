@@ -11,8 +11,7 @@ public class ValidationRuleBuilderTests {
             10,
             value =>
                 !string.IsNullOrWhiteSpace(value) &&
-                value.Length >= 2 &&
-                value.Length <= 10
+                value.Length is >= 2 and <= 10
         );
 
     [Fact]
