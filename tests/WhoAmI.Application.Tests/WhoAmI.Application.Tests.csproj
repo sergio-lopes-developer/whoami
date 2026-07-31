@@ -22,6 +22,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\WhoAmI.Application\WhoAmI.Application.csproj" />
+      <ProjectReference Include="..\WhoAmI.Testing\WhoAmI.Testing.csproj" />
     </ItemGroup>
 
 </Project>
