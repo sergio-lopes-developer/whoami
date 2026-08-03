@@ -12,5 +12,6 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="WhoAmI.Application.Tests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 </Project>
