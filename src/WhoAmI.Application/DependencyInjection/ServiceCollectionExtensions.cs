@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using WhoAmI.Application.Abstractions.Commands;
 using WhoAmI.Application.Abstractions.Dispatching.Commands;
+using WhoAmI.Application.Abstractions.Dispatching.Queries;
 using WhoAmI.Application.Abstractions.Logging;
 using WhoAmI.Application.Abstractions.Queries;
 using WhoAmI.Application.Abstractions.Serialization;
@@ -8,6 +9,7 @@ using WhoAmI.Application.Abstractions.Validation;
 using WhoAmI.Application.Decorators.Commands;
 using WhoAmI.Application.Decorators.Queries;
 using WhoAmI.Application.Dispatching.Commands;
+using WhoAmI.Application.Dispatching.Queries;
 using WhoAmI.Application.Features.Profiles.CreateProfile;
 using WhoAmI.Application.Logging;
 using WhoAmI.Application.Serialization;
@@ -108,6 +110,7 @@ public static class ServiceCollectionExtensions {
 
         services.AddTransient(typeof(CommandHandlerAdapter<>));
         services.AddTransient(typeof(CommandHandlerAdapter<,>));
+        services.AddTransient(typeof(QueryHandlerAdapter<,>));
     }
 
     private static void AddValidations(IServiceCollection services) {
@@ -128,8 +131,10 @@ public static class ServiceCollectionExtensions {
         );
     }
 
-    private static void AddDispatchers(IServiceCollection services) =>
+    private static void AddDispatchers(IServiceCollection services) {
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
+        services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+    }
 
     private static void AddExecutionServices(IServiceCollection services) {
         services.AddSingleton<ISafeExecutionLogger, SafeExecutionLogger>();
