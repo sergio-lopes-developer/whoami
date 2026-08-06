@@ -9,7 +9,7 @@
             <mxRectangle height="49" width="150" x="43" y="41" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-52" parent="aXiQVhvDsdwy4hlqoxri-10" style="rounded=1;whiteSpace=wrap;html=1;" value="Query Request" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-52" parent="aXiQVhvDsdwy4hlqoxri-10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="Query Request" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="81" as="geometry" />
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="&lt;div&gt;Application&lt;/div&gt;" vertex="1">
@@ -20,16 +20,16 @@
         <mxCell id="aXiQVhvDsdwy4hlqoxri-45" edge="1" parent="aXiQVhvDsdwy4hlqoxri-11" source="aXiQVhvDsdwy4hlqoxri-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="aXiQVhvDsdwy4hlqoxri-38">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-35" parent="aXiQVhvDsdwy4hlqoxri-11" style="rounded=1;whiteSpace=wrap;html=1;" value="1 - QueryDispatcher" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-35" parent="aXiQVhvDsdwy4hlqoxri-11" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="1 - QueryDispatcher" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="81" as="geometry" />
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-51" edge="1" parent="aXiQVhvDsdwy4hlqoxri-11" source="aXiQVhvDsdwy4hlqoxri-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="aXiQVhvDsdwy4hlqoxri-39">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-38" parent="aXiQVhvDsdwy4hlqoxri-11" style="rounded=1;whiteSpace=wrap;html=1;" value="2 - QueryExecutionDecorator" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-38" parent="aXiQVhvDsdwy4hlqoxri-11" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="2 - QueryExecutionDecorator" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="161" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-39" parent="aXiQVhvDsdwy4hlqoxri-11" style="rounded=1;whiteSpace=wrap;html=1;" value="3 - QueryValidationDecorator" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-39" parent="aXiQVhvDsdwy4hlqoxri-11" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="3 - QueryValidationDecorator" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="241" as="geometry" />
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-12" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;swimlaneFillColor=none;" value="&lt;div&gt;Infrastructure&lt;/div&gt;" vertex="1">
@@ -37,13 +37,13 @@
             <mxRectangle height="49" width="220" x="43" y="790" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-16" parent="aXiQVhvDsdwy4hlqoxri-12" style="rounded=1;whiteSpace=wrap;html=1;" value="QueryHandler" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-16" parent="aXiQVhvDsdwy4hlqoxri-12" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="QueryHandler" vertex="1">
           <mxGeometry height="35" width="200" x="39.5" y="91" as="geometry" />
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-55" edge="1" parent="1" source="aXiQVhvDsdwy4hlqoxri-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="aXiQVhvDsdwy4hlqoxri-35">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-59" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=light-dark(#FFFFFF,#333333);align=center;verticalAlign=middle;rounded=0;gradientColor=none;" value="Application Query Pipeline" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-59" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;gradientColor=none;" value="Application Query Pipeline" vertex="1">
           <mxGeometry height="30" width="232" x="309" y="70" as="geometry" />
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-70" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#647687;strokeColor=#314354;startSize=50;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="Database" vertex="1">
@@ -51,7 +51,7 @@
             <mxRectangle height="30" width="90" x="113" y="320" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-71" parent="aXiQVhvDsdwy4hlqoxri-70" style="rounded=1;whiteSpace=wrap;html=1;" value="SQLite" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-71" parent="aXiQVhvDsdwy4hlqoxri-70" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="SQLite" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="82" as="geometry" />
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-74" edge="1" parent="1" source="aXiQVhvDsdwy4hlqoxri-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="aXiQVhvDsdwy4hlqoxri-71">
