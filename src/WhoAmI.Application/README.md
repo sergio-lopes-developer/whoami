@@ -102,7 +102,12 @@ The dispatchers resolve the appropriate handlers through dependency injection an
 As a CQRS application, Commands represent operations that modify the system state.
 Commands are executed through the following pipeline:
 
-![Command Pipeline](../../docs/application/application-command-pipeline.svg)
+<p align="center">
+  <img
+    src="../../docs/application/application-command-pipeline.svg"
+    alt="Application Command Pipeline"
+  />
+</p>
 
 Commands are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and is responsible for cross-cutting concerns such as logging, validation, and transaction management.
 
@@ -120,7 +125,12 @@ The query pipeline consists of two decorators:
 
 Queries are executed through the following pipeline:
 
-![Query Pipeline](../../docs/application/application-query-pipeline.svg)
+<p align="center">
+  <img
+    src="../../docs/application/application-query-pipeline.svg"
+    alt="Application Query Pipeline"
+  />
+</p>
 
 Unlike commands, queries do not modify the application state and therefore do not require transaction management.
 ---
