@@ -1,10 +1,10 @@
 <mxfile host="Electron">
   <diagram id="hP-y1lFqJb9d6Mk1fvwh" name="Page-1">
-    <mxGraphModel dx="1869" dy="724" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1869" dy="1764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;swimlaneFillColor=default;gradientColor=none;" value="Presentation&#xa;(CLI | API | Desktop)" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="Presentation&#xa;(CLI | API | Desktop)" vertex="1">
           <mxGeometry height="159" width="277" x="113" y="122" as="geometry">
             <mxRectangle height="49" width="150" x="43" y="41" as="alternateBounds" />
           </mxGeometry>
@@ -12,7 +12,7 @@
         <mxCell id="aXiQVhvDsdwy4hlqoxri-52" parent="aXiQVhvDsdwy4hlqoxri-10" style="rounded=1;whiteSpace=wrap;html=1;" value="Command Request" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="81" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;swimlaneFillColor=default;gradientColor=none;" value="&lt;div&gt;Application&lt;/div&gt;" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="&lt;div&gt;Application&lt;/div&gt;" vertex="1">
           <mxGeometry height="598" width="339" x="471" y="122" as="geometry">
             <mxRectangle height="49" width="180" x="43" y="202" as="alternateBounds" />
           </mxGeometry>
@@ -56,7 +56,7 @@
             <mxPoint x="149" y="728" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-12" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;swimlaneFillColor=default;" value="&lt;div&gt;Infrastructure&lt;/div&gt;" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-12" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;swimlaneFillColor=none;" value="&lt;div&gt;Infrastructure&lt;/div&gt;" vertex="1">
           <mxGeometry height="170" width="277" x="113" y="550" as="geometry">
             <mxRectangle height="49" width="220" x="43" y="790" as="alternateBounds" />
           </mxGeometry>
@@ -73,7 +73,7 @@
         <mxCell id="aXiQVhvDsdwy4hlqoxri-59" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=light-dark(#FFFFFF,#333333);align=center;verticalAlign=middle;rounded=0;gradientColor=none;" value="Application Command Pipeline" vertex="1">
           <mxGeometry height="30" width="232" x="309" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-70" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#647687;strokeColor=#314354;startSize=50;fontColor=#ffffff;swimlaneFillColor=default;gradientColor=none;" value="Database" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-70" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#647687;strokeColor=#314354;startSize=50;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="Database" vertex="1">
           <mxGeometry height="160" width="276" x="113" y="320" as="geometry">
             <mxRectangle height="30" width="90" x="113" y="320" as="alternateBounds" />
           </mxGeometry>
