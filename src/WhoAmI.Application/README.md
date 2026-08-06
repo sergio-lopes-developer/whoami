@@ -119,6 +119,7 @@ The query pipeline consists of two decorators:
 - QueryValidationDecorator
 
 Queries are executed through the following pipeline:
+
 ![Query Pipeline](../../docs/application/application-query-pipeline.svg)
 
 Unlike commands, queries do not modify the application state and therefore do not require transaction management.
