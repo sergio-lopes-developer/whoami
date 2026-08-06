@@ -1,19 +1,19 @@
 <mxfile host="Electron">
   <diagram id="hP-y1lFqJb9d6Mk1fvwh" name="Page-1">
-    <mxGraphModel dx="1402" dy="1323" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="801" dy="756" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="Presentation&#xa;(CLI | API | Desktop)" vertex="1">
-          <mxGeometry height="159" width="277" x="113" y="122" as="geometry">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;swimlaneFillColor=default;gradientColor=none;" value="Presentation&#xa;(CLI | API | Desktop)" vertex="1">
+          <mxGeometry height="159" width="277" x="110" y="121" as="geometry">
             <mxRectangle height="49" width="150" x="43" y="41" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-52" parent="aXiQVhvDsdwy4hlqoxri-10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="Query Request" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="81" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="&lt;div&gt;Application&lt;/div&gt;" vertex="1">
-          <mxGeometry height="598" width="339" x="471" y="122" as="geometry">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;swimlaneFillColor=default;gradientColor=none;" value="&lt;div&gt;Application&lt;/div&gt;" vertex="1">
+          <mxGeometry height="598" width="339" x="471" y="121" as="geometry">
             <mxRectangle height="49" width="180" x="43" y="202" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -32,8 +32,8 @@
         <mxCell id="aXiQVhvDsdwy4hlqoxri-39" parent="aXiQVhvDsdwy4hlqoxri-11" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="3 - QueryValidationDecorator" vertex="1">
           <mxGeometry height="35" width="200" x="37" y="241" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-12" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;swimlaneFillColor=none;" value="&lt;div&gt;Infrastructure&lt;/div&gt;" vertex="1">
-          <mxGeometry height="170" width="277" x="113" y="550" as="geometry">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-12" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=49;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#000000;swimlaneFillColor=default;" value="&lt;div&gt;Infrastructure&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="277" x="110" y="549" as="geometry">
             <mxRectangle height="49" width="220" x="43" y="790" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -43,11 +43,11 @@
         <mxCell id="aXiQVhvDsdwy4hlqoxri-55" edge="1" parent="1" source="aXiQVhvDsdwy4hlqoxri-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="aXiQVhvDsdwy4hlqoxri-35">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-59" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;gradientColor=none;" value="Application Query Pipeline" vertex="1">
-          <mxGeometry height="30" width="232" x="309" y="70" as="geometry" />
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-59" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;gradientColor=none;fontSize=20;fontStyle=1" value="Application Query Pipeline" vertex="1">
+          <mxGeometry height="30" width="700" x="110" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-70" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#647687;strokeColor=#314354;startSize=50;fontColor=#ffffff;swimlaneFillColor=none;gradientColor=none;" value="Database" vertex="1">
-          <mxGeometry height="160" width="276" x="113" y="320" as="geometry">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-70" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#647687;strokeColor=#314354;startSize=50;fontColor=#ffffff;swimlaneFillColor=default;gradientColor=none;" value="Database" vertex="1">
+          <mxGeometry height="160" width="276" x="110" y="320" as="geometry">
             <mxRectangle height="30" width="90" x="113" y="320" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -63,8 +63,8 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-79" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;autosizeText=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;fontSize=13;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;align=left;" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-size: 12px; background-color: transparent;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-size: 12px; background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(237, 237, 237));&quot;&gt;Solid Arrow&amp;nbsp; = Execution Flow&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="40" width="600" x="159" y="740" as="geometry" />
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-79" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;autosizeText=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;fontSize=13;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;align=left;" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-size: 12px; background-color: transparent;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-size: 12px; background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(237, 237, 237));&quot;&gt;Solid Arrow = Execution Flow&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="600" x="160" y="740" as="geometry" />
         </mxCell>
         <mxCell id="QxI0XE-M9UH4UTwsZIF8-1" edge="1" parent="1" source="aXiQVhvDsdwy4hlqoxri-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="aXiQVhvDsdwy4hlqoxri-16">
           <mxGeometry relative="1" as="geometry" />
