@@ -70,7 +70,7 @@
         <mxCell id="aXiQVhvDsdwy4hlqoxri-57" edge="1" parent="1" source="aXiQVhvDsdwy4hlqoxri-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="aXiQVhvDsdwy4hlqoxri-16">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="aXiQVhvDsdwy4hlqoxri-59" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;gradientColor=none;fontSize=20;fontStyle=1;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Application Command Pipeline&lt;/font&gt;" vertex="1">
+        <mxCell id="aXiQVhvDsdwy4hlqoxri-59" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=#666666;fillColor=#f5f5f5;align=center;verticalAlign=middle;rounded=0;fontSize=20;fontStyle=1;fillStyle=solid;gradientColor=#b3b3b3;fontColor=light-dark(#FFFFFF,#FFFFFF);" value="&lt;font style=&quot;color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255));&quot;&gt;Application Command Pipeline&lt;/font&gt;" vertex="1">
           <mxGeometry height="30" width="700" x="110" y="70" as="geometry" />
         </mxCell>
         <mxCell id="aXiQVhvDsdwy4hlqoxri-70" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=light-dark(#CC8400,#CC8400);strokeColor=light-dark(#CC8400,#CC8400);startSize=50;fontColor=light-dark(#000000,#000000);swimlaneFillColor=light-dark(#7D7D7D,#7D7D7D);gradientColor=none;fillStyle=solid;" value="Database" vertex="1">
