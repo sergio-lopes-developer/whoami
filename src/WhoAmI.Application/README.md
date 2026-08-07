@@ -1,6 +1,6 @@
 # Application Architecture
 ## Overview
-This application follows the principles of [Domain-Driven Design (DDD)](https://www.domainlanguage.com/), [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [SOLID](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [Command Query Responsibility Segregation (CQRS)](https://martinfowler.com/bliki/CQRS.html).
+This application follows the principles of [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html).
 
 The Application layer depends only on the Domain layer and a minimal set of framework libraries required for dependency injection. It has no dependency on Infrastructure, databases, external services, or presentation frameworks.
 
@@ -37,7 +37,7 @@ Its responsibilities include:
 - Orchestrating use cases
 - Dispatching commands and queries
 - Validating requests
-- Managing transactions through the [Unit of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
+- Managing transactions through the [**Unit of Work**](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 - Producing application results
 - Publishing execution information for observability
 
