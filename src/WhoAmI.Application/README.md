@@ -178,38 +178,6 @@ Execution information includes:
 This information can be consumed by logging providers such as Serilog, Seq, or Elasticsearch without coupling the Application layer to a specific logging framework.
 ---
 
-## Execution Flow
-The execution flow for commands:
-```
-CLI / API
-    ↓
-CommandDispatcher
-    ↓
-Decorator Pipeline
-    ↓
-CommandHandler
-    ↓
-Repository (Application Abstraction)
-    ↓
-Infrastructure Implementation
-    ↓
-Database
-```
-
-The execution flow for queries:
-```
-CLI / API
-    ↓
-QueryDispatcher
-    ↓
-Decorator Pipeline
-    ↓
-QueryHandler (Infrastructure)
-    ↓
-Database
-```
----
-
 ## References
 
 - [Domain-Driven Design](https://www.domainlanguage.com/) — Eric Evans
