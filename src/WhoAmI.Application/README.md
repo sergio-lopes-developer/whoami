@@ -7,6 +7,7 @@ The Application layer depends only on the Domain layer and a minimal set of fram
 All use cases are organized under the Features folder according to the aggregate they belong to.
 
 The Application layer is persistence-agnostic. It defines abstractions required by the use cases, while all database access is implemented by the Infrastructure layer.
+
 ---
 
 ## Dependencies
@@ -24,6 +25,7 @@ It never references:
 - Spectre.Console
 - Serilog
 - Any persistence technology
+
 ---
 
 ## Design Principles
@@ -40,6 +42,7 @@ Its responsibilities include:
 - Publishing execution information for observability
 
 Persistence and external integrations are delegated to the Infrastructure layer.
+
 ---
 
 ## Features
@@ -87,7 +90,8 @@ WhoAmI.Application
 ```
 
 Query handlers are intentionally implemented in the Infrastructure layer because queries interact directly with the read model. This keeps the Application layer independent of persistence technologies while allowing different query implementations such as EF Core, Dapper, or raw SQL.
-***
+
+---
 
 ## Dispatchers
 Commands and queries are executed through dedicated dispatchers.
@@ -95,6 +99,7 @@ Commands and queries are executed through dedicated dispatchers.
 - IQueryDispatcher
 
 The dispatchers resolve the appropriate handlers through dependency injection and apply the configured decorator pipeline before invoking the underlying handler.
+
 ---
 
 ## Pipeline
@@ -133,6 +138,7 @@ Queries are executed through the following pipeline:
 </p>
 
 Unlike commands, queries do not modify the application state and therefore do not require transaction management.
+
 ---
 
 ## Validation
@@ -145,6 +151,7 @@ Business invariants remain the responsibility of the Domain layer.
 
 Application validation verifies whether a request is well-formed and complete.
 Domain validation protects the business model against invalid state.
+
 ---
 
 ## Result Pattern
@@ -164,6 +171,7 @@ This approach:
 - provides consistent error handling across different presentation layers;
 - allows presentation layers to map application results into user-facing responses;
 - preserves structured information for logging and diagnostics.
+
 ---
 
 ## Observability
@@ -176,6 +184,7 @@ Execution information includes:
 - Unhandled exceptions
 
 This information can be consumed by logging providers such as Serilog, Seq, or Elasticsearch without coupling the Application layer to a specific logging framework.
+
 ---
 
 ## References
@@ -185,6 +194,7 @@ This information can be consumed by logging providers such as Serilog, Seq, or E
 - [SOLID Principles](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod) — Robert C. Martin
 - [CQRS](https://martinfowler.com/bliki/CQRS.html) — Martin Fowler
 - [Unit of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html) — Martin Fowler
+
 ---
 
 Built with ❤️ on Linux using JetBrains Rider.
