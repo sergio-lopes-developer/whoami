@@ -28,13 +28,8 @@
             <mxPoint x="480" y="561" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-11" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-10" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" value="Label" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-11" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-10" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;Depends on&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-12" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;" value="Depends on" vertex="1">
-          <mxGeometry relative="1" x="-0.0112" y="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-13" edge="1" parent="1" source="rtCw3h6Bx_P3iXErdyYO-6" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="rtCw3h6Bx_P3iXErdyYO-4" value="">
           <mxGeometry relative="1" as="geometry">
@@ -42,13 +37,8 @@
             <mxPoint x="480" y="561" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-14" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-13" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" value="Label" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-14" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-13" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Depends on&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-15" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;" value="Depends on" vertex="1">
-          <mxGeometry relative="1" x="0.05" y="-4" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-16" edge="1" parent="1" source="rtCw3h6Bx_P3iXErdyYO-4" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="rtCw3h6Bx_P3iXErdyYO-5" value="">
           <mxGeometry relative="1" as="geometry">
@@ -56,13 +46,8 @@
             <mxPoint x="490" y="481" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-17" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-16" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" value="Label" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-17" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-16" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp;Depends on&amp;nbsp; &amp;nbsp;&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-18" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;" value="&amp;nbsp; &amp;nbsp;Depends on&amp;nbsp; &amp;nbsp;" vertex="1">
-          <mxGeometry relative="1" x="-0.0078" y="-2" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-19" edge="1" parent="1" source="rtCw3h6Bx_P3iXErdyYO-2" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="rtCw3h6Bx_P3iXErdyYO-4" value="">
           <mxGeometry relative="1" as="geometry">
@@ -70,13 +55,8 @@
             <mxPoint x="480" y="561" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-20" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-19" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" value="Label" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-20" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-19" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Depends on&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-21" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-19" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;" value="Depends on" vertex="1">
-          <mxGeometry relative="1" x="0.0649" y="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-22" edge="1" parent="1" source="rtCw3h6Bx_P3iXErdyYO-2" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="rtCw3h6Bx_P3iXErdyYO-6" value="">
           <mxGeometry relative="1" as="geometry">
@@ -84,13 +64,8 @@
             <mxPoint x="480" y="561" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-23" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-22" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" value="Label" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-23" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-22" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Depends on&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-24" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-22" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;" value="Depends on" vertex="1">
-          <mxGeometry relative="1" x="-0.0042" y="-2" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-25" edge="1" parent="1" source="rtCw3h6Bx_P3iXErdyYO-1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="rtCw3h6Bx_P3iXErdyYO-2" value="">
           <mxGeometry relative="1" as="geometry">
@@ -98,13 +73,8 @@
             <mxPoint x="480" y="561" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-26" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-25" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" value="Label" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-26" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-25" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Depends on&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-27" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-25" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;" value="Depends on" vertex="1">
-          <mxGeometry relative="1" x="0.0621" y="6" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-30" edge="1" parent="1" source="rtCw3h6Bx_P3iXErdyYO-1" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="rtCw3h6Bx_P3iXErdyYO-4" value="">
           <mxGeometry relative="1" as="geometry">
@@ -115,7 +85,7 @@
             <mxPoint x="520" y="191" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-31" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-30" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontSize=13;" value="Depends on" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-31" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-30" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontSize=13;fontColor=light-dark(#000000,#FFFFFF);" value="Depends on" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-32" edge="1" parent="1" source="rtCw3h6Bx_P3iXErdyYO-1" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;dashed=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="rtCw3h6Bx_P3iXErdyYO-5" value="">
@@ -127,13 +97,8 @@
             <mxPoint x="700" y="431" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-33" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-32" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" value="Label" vertex="1">
+        <mxCell id="rtCw3h6Bx_P3iXErdyYO-33" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-32" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp;Depends on&amp;nbsp; &amp;nbsp;&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="rtCw3h6Bx_P3iXErdyYO-34" connectable="0" parent="rtCw3h6Bx_P3iXErdyYO-32" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;" value="&amp;nbsp; &amp;nbsp;Depends on&amp;nbsp; &amp;nbsp;" vertex="1">
-          <mxGeometry relative="1" x="-0.0088" y="2" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="rtCw3h6Bx_P3iXErdyYO-35" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;autosizeText=1;fontColor=light-dark(#000000,#000000);darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;fontSize=12;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;align=left;" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Dependency direction:&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; - Solid arrows represent direct project dependencies.&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; - Dashed arrows represent limited direct dependencies.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Note:&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; The Presentation layer has a limited direct dependency on the Domain layer for defensive handling of DomainException.&lt;/div&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="110" width="690" x="80" y="721" as="geometry" />
