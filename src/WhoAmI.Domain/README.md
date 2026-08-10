@@ -43,7 +43,7 @@ This separation allows the business model to remain independent of technical imp
 
 ---
 
-# Domain Structure
+## Domain Structure
 
 The current Domain project is organized around the Profiles domain and shared domain building blocks:
 
@@ -87,7 +87,7 @@ The `Shared` namespace contains abstractions and primitives that can be reused a
 
 ---
 
-# Aggregates
+## Aggregates
 
 An **aggregate** is a consistency boundary within the domain.
 
@@ -110,7 +110,7 @@ The aggregate root is responsible for maintaining the consistency of its own sta
 
 ---
 
-# Profile Aggregate
+## Profile Aggregate
 
 The `Profile` aggregate represents a person's profile within the WhoAmI domain.
 
@@ -137,7 +137,7 @@ This allows the aggregate to validate input and perform domain behavior whenever
 
 ---
 
-## Aggregate Creation
+### Aggregate Creation
 
 New profiles are created through the `Create` factory method:
 
@@ -171,11 +171,11 @@ Profile.Create(...)
 
 ---
 
-# Aggregate State Changes
+## Aggregate State Changes
 
 The aggregate exposes methods for changing its state.
 
-## Updating the Full Name
+### Updating the Full Name
 
 ```csharp
 profile.UpdateFullName(fullName);
@@ -185,7 +185,7 @@ The method rejects a null `FullName` and replaces the existing value.
 
 ---
 
-## Updating the Email
+### Updating the Email
 
 ```csharp
 profile.UpdateEmail(email);
@@ -217,7 +217,7 @@ This keeps the domain event associated with an actual domain state transition.
 
 ---
 
-## Updating Social Links
+### Updating Social Links
 
 ```csharp
 profile.UpdateSocialLinks(linkedIn, gitHub);
@@ -227,7 +227,7 @@ Both URLs must be valid non-null domain values before the aggregate accepts the 
 
 ---
 
-# Entities
+## Entities
 
 An **entity** is a domain object whose identity is significant independently of its current state.
 
@@ -254,7 +254,7 @@ The implementation also ensures that entities of different types are not conside
 
 ---
 
-## Entity Identity
+### Entity Identity
 
 New entities must be created with a non-empty identifier:
 
@@ -274,7 +274,7 @@ The domain-facing constructor still validates the identifier.
 
 ---
 
-# Value Objects
+## Value Objects
 
 Value objects represent domain concepts whose identity is defined by their values rather than by an identifier.
 
@@ -306,7 +306,7 @@ This prevents invalid values from becoming part of the domain model.
 
 ---
 
-# Value Object Equality
+## Value Object Equality
 
 All value objects inherit from `ValueObject`.
 
@@ -340,7 +340,7 @@ The result is based on the normalized domain value rather than object identity.
 
 ---
 
-# Text Value Objects
+## Text Value Objects
 
 `TextValueObject` provides common behavior for value objects whose underlying concepts are normalized text.
 
@@ -369,7 +369,7 @@ The normalization rules are part of the domain model rather than being left to a
 
 ---
 
-# Email
+## Email
 
 `Email` represents a validated email address.
 
@@ -400,7 +400,7 @@ cannot produce an invalid `Email`.
 
 ---
 
-## Email Normalization
+### Email Normalization
 
 Email addresses are normalized before being stored.
 
@@ -418,7 +418,7 @@ This means equality reflects the domain's normalized representation rather than 
 
 ---
 
-## Email Constraints
+### Email Constraints
 
 The domain defines:
 
@@ -439,7 +439,7 @@ which derives from `DomainException`.
 
 ---
 
-# FirstName and LastName
+## FirstName and LastName
 
 `FirstName` and `LastName` are text value objects with explicit domain length constraints.
 
@@ -470,7 +470,7 @@ This is preferable to representing every validation failure only as an unstructu
 
 ---
 
-# FullName
+## FullName
 
 `FullName` is a composite value object.
 
@@ -508,7 +508,7 @@ FirstName LastName
 
 ---
 
-# URL
+## URL
 
 `Url` represents a validated HTTP or HTTPS URL.
 
@@ -550,7 +550,7 @@ This allows equivalent URLs to compare consistently according to the domain's no
 
 ---
 
-# Domain Events
+## Domain Events
 
 Domain events represent facts about something meaningful that happened in the domain.
 
@@ -579,11 +579,11 @@ Domain events are therefore immutable records describing domain occurrences.
 
 ---
 
-# Current Domain Events
+## Current Domain Events
 
 The Profiles domain currently defines two events.
 
-## ProfileCreatedEvent
+### ProfileCreatedEvent
 
 ```csharp
 ProfileCreatedEvent(Guid ProfileId)
@@ -601,7 +601,7 @@ The aggregate therefore announces the domain fact that a profile has been create
 
 ---
 
-## EmailUpdatedEvent
+### EmailUpdatedEvent
 
 ```csharp
 EmailUpdatedEvent(
@@ -618,7 +618,7 @@ This distinction is important because domain events should represent meaningful 
 
 ---
 
-# Domain Event Lifecycle
+## Domain Event Lifecycle
 
 The aggregate root owns its domain events.
 
@@ -656,7 +656,7 @@ The Domain layer therefore owns **event generation**, while higher layers can be
 
 ---
 
-# Domain Exceptions
+## Domain Exceptions
 
 The base domain exception is:
 
@@ -679,7 +679,7 @@ The Domain layer simply reports that an operation cannot produce a valid domain 
 
 ---
 
-# Specialized Domain Exceptions
+## Specialized Domain Exceptions
 
 The Profiles domain defines specialized exceptions when additional information is useful.
 
@@ -706,7 +706,7 @@ This allows application and infrastructure layers to inspect structured domain i
 
 ---
 
-# Domain Constraints
+## Domain Constraints
 
 Reusable domain constraints are represented explicitly.
 
@@ -733,7 +733,7 @@ The value object remains the authoritative source of truth for its own validity.
 
 ---
 
-# Guards
+## Guards
 
 The internal `Guard` class provides reusable primitives for common domain preconditions.
 
@@ -761,7 +761,7 @@ expresses the invariant without duplicating exception-construction logic through
 
 ---
 
-# Encapsulation
+## Encapsulation
 
 Encapsulation is a central part of the domain model.
 
@@ -790,7 +790,7 @@ This ensures that domain invariants are enforced whenever state changes.
 
 ---
 
-# Creation and Persistence
+## Creation and Persistence
 
 The Domain model distinguishes between **creating new domain objects** and **reconstituting existing persisted objects**.
 
@@ -838,7 +838,7 @@ This keeps normal domain creation explicit while allowing the persistence layer 
 
 ---
 
-# Persistence Independence
+## Persistence Independence
 
 The Domain layer does not contain Entity Framework Core configuration or database-specific behavior.
 
@@ -868,7 +868,7 @@ The Domain layer should not depend on EF Core APIs merely to express its busines
 
 ---
 
-# Accessibility
+## Accessibility
 
 Accessibility is used to reinforce domain boundaries.
 
@@ -909,7 +909,7 @@ The general principle is:
 
 ---
 
-# Architectural Boundaries
+## Architectural Boundaries
 
 The Domain layer is the core of the application architecture.
 
@@ -926,7 +926,7 @@ The Domain does not depend on either Application or Infrastructure.
 
 This allows the same business model to be used by different application entry points without changing the underlying domain rules.
 
-## Presentation Layer → Domain Dependency
+### Presentation Layer → Domain Dependency
 
 Presentation layers have a limited direct dependency on the Domain layer for defensive handling of `DomainException`.
 
@@ -941,7 +941,7 @@ This dependency is therefore intentional and defensive; it does not represent th
 
 ---
 
-# Domain vs. Application
+## Domain vs. Application
 
 The separation between Domain and Application is intentional.
 
@@ -982,7 +982,7 @@ The Application layer uses the Domain model but does not own its business rules.
 
 ---
 
-# Testing the Domain
+## Testing the Domain
 
 Domain tests focus on behavior, invariants, and domain semantics.
 
@@ -1024,7 +1024,7 @@ The test suite therefore acts as an executable specification of the domain model
 
 ---
 
-# Domain Design Principles
+## Domain Design Principles
 
 The current Domain model follows these principles:
 
@@ -1079,7 +1079,7 @@ Persistence-specific accommodations exist only where required for object reconst
 
 ---
 
-# Summary
+## Summary
 
 The `WhoAmI.Domain` project represents the business model of WhoAmI.
 
@@ -1103,8 +1103,11 @@ The central architectural principle is:
 Application and Infrastructure layers depend on the Domain, but the Domain does not depend on them.
 
 ## Related Documentation
+
+- [Architecture](../../docs/architecture/README.md)
 - [WhoAmI — Project Overview](../../README.md)
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
+
 ---
 
 ## References

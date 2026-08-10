@@ -1,5 +1,7 @@
-# Application Architecture
+# WhoAmI.Application
+
 ## Overview
+
 This application follows the principles of [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html).
 
 The Application layer depends only on the Domain layer and a minimal set of framework libraries required for dependency injection. It has no dependency on Infrastructure, databases, external services, or presentation frameworks.
@@ -11,6 +13,7 @@ The Application layer is persistence-agnostic. It defines abstractions required 
 ---
 
 ## Dependencies
+
 The Application layer directly references only:
 
 - WhoAmI.Domain
@@ -29,6 +32,7 @@ It never references:
 ---
 
 ## Design Principles
+
 The Application layer is responsible for orchestrating use cases.
 
 It does not contain persistence logic, presentation logic, or infrastructure concerns.
@@ -46,7 +50,9 @@ Persistence and external integrations are delegated to the Infrastructure layer.
 ---
 
 ## Features
+
 ### Commands
+
 A command feature typically contains:
 - Command
 - Validator
@@ -70,6 +76,7 @@ WhoAmI.Application
 ```
 
 ### Queries
+
 A query feature typically contains:
 - Query
 - Validator (optional)
@@ -94,6 +101,7 @@ Query handlers are intentionally implemented in the Infrastructure layer because
 ---
 
 ## Dispatchers
+
 Commands and queries are executed through dedicated dispatchers.
 - ICommandDispatcher
 - IQueryDispatcher
@@ -103,7 +111,9 @@ The dispatchers resolve the appropriate handlers through dependency injection an
 ---
 
 ## Pipeline
+
 ### Command Pipeline
+
 As a CQRS application, Commands represent operations that modify the system state.
 Commands are executed through the following pipeline:
 
@@ -124,6 +134,7 @@ The command pipeline is composed of the following decorators:
 Each decorator is available in two implementations, one for commands that do not return a value and another generic implementation (`OfT`) for commands that return a result.
 
 ### Query Pipeline
+
 The query pipeline consists of two decorators:
 - QueryExecutionDecorator
 - QueryValidationDecorator
@@ -155,6 +166,7 @@ Domain validation protects the business model against invalid state.
 ---
 
 ## Result Pattern
+
 Application operations communicate failures through the Result pattern instead of throwing exceptions.
 
 Application operations return either `Result` or `Result<T>`. When an operation fails, the result contains one or more `Error` instances.
@@ -175,7 +187,9 @@ This approach:
 ---
 
 ## Observability
+
 ### Logging
+
 Execution information includes:
 - Operation name
 - Execution time
@@ -184,6 +198,14 @@ Execution information includes:
 - Unhandled exceptions
 
 This information can be consumed by logging providers such as Serilog, Seq, or Elasticsearch without coupling the Application layer to a specific logging framework.
+
+---
+
+## Related Documentation
+
+- [Architecture](../../docs/architecture/README.md)
+- [WhoAmI — Project Overview](../../README.md)
+- [WhoAmI.Domain](../WhoAmI.Domain/README.md)
 
 ---
 
