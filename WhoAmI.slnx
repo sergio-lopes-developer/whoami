@@ -7,10 +7,12 @@
   <Folder Name="/src/">
     <Project Path="src/WhoAmI.Application/WhoAmI.Application.csproj" />
     <Project Path="src/WhoAmI.Domain/WhoAmI.Domain.csproj" />
+    <Project Path="src/WhoAmI.Infrastructure/WhoAmI.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="tests/WhoAmI.Application.Tests/WhoAmI.Application.Tests.csproj" />
     <Project Path="tests/WhoAmI.Domain.Tests/WhoAmI.Domain.Tests.csproj" />
+    <Project Path="tests/WhoAmI.Infrastructure.Tests/WhoAmI.Infrastructure.Tests.csproj" />
     <Project Path="tests/WhoAmI.Testing/WhoAmI.Testing.csproj" />
   </Folder>
 </Solution>
