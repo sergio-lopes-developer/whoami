@@ -11,6 +11,13 @@ public static class ProfileErrors {
             new Dictionary<string, object?> { ["ProfileId"] = id }
         );
 
+    public static Error NotFoundByEmail(string email) =>
+        new(
+            "Profile.NotFoundByEmail",
+            "Profile was not found.",
+            new Dictionary<string, object?> { ["ProfileEmail"] = email }
+        );
+
     public static Error DuplicateEmail(Email email) =>
         new(
             "Profile.DuplicateEmail",
