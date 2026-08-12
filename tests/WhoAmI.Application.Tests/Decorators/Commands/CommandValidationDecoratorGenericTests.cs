@@ -37,7 +37,10 @@ public class CommandValidationDecoratorGenericTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -73,7 +76,10 @@ public class CommandValidationDecoratorGenericTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -117,7 +123,10 @@ public class CommandValidationDecoratorGenericTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -162,7 +171,10 @@ public class CommandValidationDecoratorGenericTests {
         >(inner, [validator1, validator2]);
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

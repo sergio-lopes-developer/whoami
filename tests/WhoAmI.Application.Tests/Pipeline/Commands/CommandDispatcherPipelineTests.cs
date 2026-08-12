@@ -34,7 +34,10 @@ public class CommandDispatcherPipelineTests {
         var command = new UpdateEmailCommand(profile.Id, "new@email.com");
 
         // Act
-        var result = await dispatcher.Send(command);
+        var result = await dispatcher.Send(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -61,7 +64,10 @@ public class CommandDispatcherPipelineTests {
         var command = new UpdateEmailCommand(profile.Id, "duplicate@email.com");
 
         // Act
-        var result = await dispatcher.Send(command);
+        var result = await dispatcher.Send(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -96,7 +102,10 @@ public class CommandDispatcherPipelineTests {
         var command = new UpdateEmailCommand(profile.Id, duplicateEmail);
 
         // Act
-        var result = await dispatcher.Send(command);
+        var result = await dispatcher.Send(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -155,7 +164,10 @@ public class CommandDispatcherPipelineTests {
         var command = new UpdateEmailCommand(profile.Id, "new@email.com");
 
         // Act
-        await dispatcher.Send(command);
+        await dispatcher.Send(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         await uow.Received(1).CommitAsync(Arg.Any<CancellationToken>());
@@ -193,7 +205,10 @@ public class CommandDispatcherPipelineTests {
         var command = new UpdateEmailCommand(profile.Id, "new@email.com");
 
         // Act
-        await dispatcher.Send(command);
+        await dispatcher.Send(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         executionOrder.Should().ContainInOrder("handler", "uow");

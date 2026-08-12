@@ -31,7 +31,10 @@ public class UpdateSocialLinksCommandHandlerTests {
         );
 
         // Act
-        var result = await handler.HandleAsync(command);
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         profile.LinkedIn.Value.Should().Be(newLinkedIn);
@@ -58,7 +61,10 @@ public class UpdateSocialLinksCommandHandlerTests {
         );
 
         // Act
-        var result = await handler.HandleAsync(command);
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

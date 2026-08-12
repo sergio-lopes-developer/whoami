@@ -46,7 +46,10 @@ public class CommandExecutionDecoratorTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -105,7 +108,10 @@ public class CommandExecutionDecoratorTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

@@ -30,7 +30,10 @@ public class CommandUnitOfWorkDecoratorTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -69,7 +72,10 @@ public class CommandUnitOfWorkDecoratorTests {
         );
 
         // Act
-        await decorator.HandleAsync(command);
+        await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         callOrder.Should().ContainInOrder("handler", "uow");
@@ -94,7 +100,10 @@ public class CommandUnitOfWorkDecoratorTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -154,7 +163,10 @@ public class CommandUnitOfWorkDecoratorTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(command);
+        var result = await decorator.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

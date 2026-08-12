@@ -24,7 +24,9 @@ public class WhoAmIDbContextTests {
         context.Profiles.Add(ProfileFactory.Create());
 
         // Act
-        var result = await context.CommitAsync();
+        var result = await context.CommitAsync(
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -52,12 +54,14 @@ public class WhoAmIDbContextTests {
         var profile2 =  ProfileFactory.Create();
 
         context.Profiles.Add(profile1);
-        await context.CommitAsync();
+        await context.CommitAsync(TestContext.Current.CancellationToken);
 
         context.Profiles.Add(profile2);
 
         // Act
-        var result = await context.CommitAsync();
+        var result = await context.CommitAsync(
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -81,12 +85,12 @@ public class WhoAmIDbContextTests {
         var profile2 = ProfileFactory.Create();
 
         context.Profiles.Add(profile1);
-        await context.CommitAsync();
+        await context.CommitAsync(TestContext.Current.CancellationToken);
 
         context.Profiles.Add(profile2);
 
         // Act
-        await context.CommitAsync();
+        await context.CommitAsync(TestContext.Current.CancellationToken);
 
         // Assert
         mapper.Received(1).Map(Arg.Any<DbUpdateException>());

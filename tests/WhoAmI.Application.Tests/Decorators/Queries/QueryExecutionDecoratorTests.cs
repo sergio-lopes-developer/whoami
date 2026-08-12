@@ -51,7 +51,10 @@ public class QueryExecutionDecoratorTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(query);
+        var result = await decorator.HandleAsync(
+            query,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -115,7 +118,10 @@ public class QueryExecutionDecoratorTests {
         );
 
         // Act
-        var result = await decorator.HandleAsync(query);
+        var result = await decorator.HandleAsync(
+            query,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

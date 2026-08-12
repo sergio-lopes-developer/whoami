@@ -25,7 +25,10 @@ public class UpdateEmailCommandHandlerTests {
         var command = new UpdateEmailCommand(profile.Id, newEmail);
 
         // Act
-        var result = await handler.HandleAsync(command);
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         profile.Email.Address.Should().Be(newEmail);
@@ -48,7 +51,10 @@ public class UpdateEmailCommandHandlerTests {
         var command = new UpdateEmailCommand(id, "new.email@provider.com");
 
         // Act
-        var result = await handler.HandleAsync(command);
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

@@ -27,7 +27,7 @@ public sealed class GetProfileByEmailQueryHandlerTests {
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
 
-        await connection.OpenAsync();
+        await connection.OpenAsync(TestContext.Current.CancellationToken);
 
         await CreateProfilesTable(connection);
 
@@ -65,11 +65,14 @@ public sealed class GetProfileByEmailQueryHandlerTests {
         var query = new GetProfileByEmailQuery("john@doe.com");
 
         // Act
-        var result = await sut.HandleAsync(query);
+        var result = await sut.HandleAsync(
+            query,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value!.Email.Should().Be("john@doe.com");
+        result.Value.Email.Should().Be("john@doe.com");
         result.Value.FirstName.Should().Be("John");
         result.Value.LastName.Should().Be("Doe");
     }
@@ -80,7 +83,7 @@ public sealed class GetProfileByEmailQueryHandlerTests {
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
 
-        await connection.OpenAsync();
+        await connection.OpenAsync(TestContext.Current.CancellationToken);
 
         await CreateProfilesTable(connection);
 
@@ -91,7 +94,10 @@ public sealed class GetProfileByEmailQueryHandlerTests {
         var query = new GetProfileByEmailQuery("missing@profile.com");
 
         // Act
-        var result = await sut.HandleAsync(query);
+        var result = await sut.HandleAsync(
+            query,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

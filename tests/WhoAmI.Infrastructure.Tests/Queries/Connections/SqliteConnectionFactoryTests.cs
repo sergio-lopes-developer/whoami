@@ -23,7 +23,9 @@ public sealed class SqliteConnectionFactoryTests {
         var sut = new SqliteConnectionFactory(configuration);
 
         // Act
-        var result = await sut.CreateOpenConnectionAsync();
+        var result = await sut.CreateOpenConnectionAsync(
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.Should().BeOfType<SqliteConnection>();

@@ -25,7 +25,7 @@ public sealed class ListProfilesQueryHandlerTests {
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
 
-        await connection.OpenAsync();
+        await connection.OpenAsync(TestContext.Current.CancellationToken);
 
         await CreateProfilesTable(connection);
 
@@ -46,7 +46,10 @@ public sealed class ListProfilesQueryHandlerTests {
         var sut = new ListProfilesQueryHandler(connectionFactory);
 
         // Act
-        var result = await sut.HandleAsync(new ListProfilesQuery());
+        var result = await sut.HandleAsync(
+            new ListProfilesQuery(),
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsSuccess.Should().BeTrue();

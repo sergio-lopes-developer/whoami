@@ -31,7 +31,10 @@ public class UpdateFullNameCommandHandlerTests {
         );
 
         // Act
-        var result = await handler.HandleAsync(command);
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         profile.FullName.FirstName.Value.Should().Be(newFirstName);
@@ -54,7 +57,10 @@ public class UpdateFullNameCommandHandlerTests {
         var command = new UpdateFullNameCommand(id, "John", "Miller");
 
         // Act
-        var result = await handler.HandleAsync(command);
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.IsFailure.Should().BeTrue();

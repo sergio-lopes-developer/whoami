@@ -23,7 +23,10 @@ public class CreateProfileCommandHandlerTests {
         );
 
         // Act
-        var result = await handler.HandleAsync(command);
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         repo.Received(1).Add(

@@ -25,16 +25,19 @@ public sealed class ProfileRepositoryTests {
 
         context.Profiles.Add(profile);
 
-        await context.CommitAsync();
+        await context.CommitAsync(TestContext.Current.CancellationToken);
 
         var repository = new ProfileRepository(context);
 
         // Act
-        var result = await repository.GetByIdAsync(profile.Id);
+        var result = await repository.GetByIdAsync(
+            profile.Id,
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.Should().NotBeNull();
-        result!.Id.Should().Be(profile.Id);
+        result.Id.Should().Be(profile.Id);
     }
 
     [Fact]
@@ -51,7 +54,10 @@ public sealed class ProfileRepositoryTests {
         var repository = new ProfileRepository(context);
 
         // Act
-        var result = await repository.GetByIdAsync(Guid.NewGuid());
+        var result = await repository.GetByIdAsync(
+            Guid.NewGuid(),
+            TestContext.Current.CancellationToken
+        );
 
         // Assert
         result.Should().BeNull();
