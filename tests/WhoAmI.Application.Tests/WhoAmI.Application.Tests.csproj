@@ -29,6 +29,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\WhoAmI.Application\WhoAmI.Application.csproj" />
+      <ProjectReference Include="..\..\src\WhoAmI.Infrastructure\WhoAmI.Infrastructure.csproj" />
       <ProjectReference Include="..\WhoAmI.Testing\WhoAmI.Testing.csproj" />
     </ItemGroup>
 
