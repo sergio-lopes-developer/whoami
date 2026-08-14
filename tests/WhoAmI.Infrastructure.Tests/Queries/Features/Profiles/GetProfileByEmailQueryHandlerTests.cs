@@ -2,10 +2,10 @@ using Dapper;
 using FluentAssertions;
 using Microsoft.Data.Sqlite;
 using WhoAmI.Application.Features.Profiles.GetProfileByEmail;
-using WhoAmI.Infrastructure.Data.Queries.Profiles.GetProfileByEmail;
+using WhoAmI.Infrastructure.Data.Queries.Features.Profiles.GetProfileByEmail;
 using WhoAmI.Infrastructure.Tests.Queries.TestDoubles;
 
-namespace WhoAmI.Infrastructure.Tests.Queries.Profiles;
+namespace WhoAmI.Infrastructure.Tests.Queries.Features.Profiles;
 
 public sealed class GetProfileByEmailQueryHandlerTests {
     private static async Task CreateProfilesTable(SqliteConnection connection) {

@@ -5,7 +5,8 @@ using WhoAmI.Application.Features.Profiles.GetProfileByEmail;
 using WhoAmI.Application.Results;
 using WhoAmI.Infrastructure.Data.Queries.Abstractions;
 
-namespace WhoAmI.Infrastructure.Data.Queries.Profiles.GetProfileByEmail;
+namespace WhoAmI.Infrastructure.Data.Queries.Features.Profiles
+    .GetProfileByEmail;
 
 internal sealed class GetProfileByEmailQueryHandler :
     IQueryHandler<GetProfileByEmailQuery, GetProfileByEmailResponse>

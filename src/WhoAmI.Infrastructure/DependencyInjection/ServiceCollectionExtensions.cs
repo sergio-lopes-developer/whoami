@@ -12,7 +12,7 @@ using WhoAmI.Infrastructure.Data.Persistence.ErrorHandling.Parsers.Sqlite;
 using WhoAmI.Infrastructure.Data.Persistence.Repositories;
 using WhoAmI.Infrastructure.Data.Queries.Abstractions;
 using WhoAmI.Infrastructure.Data.Queries.Connections;
-using WhoAmI.Infrastructure.Data.Queries.Profiles.GetProfileByEmail;
+using WhoAmI.Infrastructure.Data.Queries.Features.Profiles.GetProfileByEmail;
 
 namespace WhoAmI.Infrastructure.DependencyInjection;
 

@@ -5,7 +5,7 @@ using WhoAmI.Application.Decorators.Queries;
 using WhoAmI.Application.Tests.Architecture;
 using WhoAmI.Application.Tests.TestInfrastructure;
 using WhoAmI.Infrastructure.Data.Queries.Abstractions;
-using WhoAmI.Infrastructure.Data.Queries.Profiles.GetProfileByEmail;
+using WhoAmI.Infrastructure.Data.Queries.Features.Profiles.GetProfileByEmail;
 
 namespace WhoAmI.Application.Tests.Pipeline.Queries;
 

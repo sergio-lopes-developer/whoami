@@ -1,4 +1,5 @@
-namespace WhoAmI.Infrastructure.Data.Queries.Profiles.GetProfileByEmail;
+namespace WhoAmI.Infrastructure.Data.Queries.Features.Profiles
+    .GetProfileByEmail;
 
 internal static class GetProfileByEmailSql {
     internal const string Query = """

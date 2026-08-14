@@ -4,7 +4,7 @@ using WhoAmI.Application.Abstractions.Logging;
 using WhoAmI.Application.Abstractions.Queries;
 using WhoAmI.Application.DependencyInjection;
 using WhoAmI.Infrastructure.Data.Queries.Abstractions;
-using WhoAmI.Infrastructure.Data.Queries.Profiles.GetProfileByEmail;
+using WhoAmI.Infrastructure.Data.Queries.Features.Profiles.GetProfileByEmail;
 
 namespace WhoAmI.Application.Tests.TestInfrastructure;
 

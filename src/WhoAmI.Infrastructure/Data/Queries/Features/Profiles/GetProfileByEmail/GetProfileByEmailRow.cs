@@ -1,4 +1,5 @@
-namespace WhoAmI.Infrastructure.Data.Queries.Profiles.GetProfileByEmail;
+namespace WhoAmI.Infrastructure.Data.Queries.Features.Profiles
+    .GetProfileByEmail;
 
 internal sealed record GetProfileByEmailRow(
     string Id,

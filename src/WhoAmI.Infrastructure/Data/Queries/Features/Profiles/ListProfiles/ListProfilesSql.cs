@@ -1,4 +1,4 @@
-namespace WhoAmI.Infrastructure.Data.Queries.Profiles.ListProfiles;
+namespace WhoAmI.Infrastructure.Data.Queries.Features.Profiles.ListProfiles;
 
 internal static class ListProfilesSql {
     internal const string Query = """

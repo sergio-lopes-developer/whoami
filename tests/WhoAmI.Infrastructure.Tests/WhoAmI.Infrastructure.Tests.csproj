@@ -34,4 +34,8 @@
       <ProjectReference Include="..\WhoAmI.Testing\WhoAmI.Testing.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Queries\Features\" />
+    </ItemGroup>
+
 </Project>

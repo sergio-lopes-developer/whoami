@@ -4,7 +4,7 @@ using WhoAmI.Application.Features.Profiles.ListProfiles;
 using WhoAmI.Application.Results;
 using WhoAmI.Infrastructure.Data.Queries.Abstractions;
 
-namespace WhoAmI.Infrastructure.Data.Queries.Profiles.ListProfiles;
+namespace WhoAmI.Infrastructure.Data.Queries.Features.Profiles.ListProfiles;
 
 internal sealed class ListProfilesQueryHandler :
     IQueryHandler<ListProfilesQuery, IReadOnlyCollection<ListProfilesResponse>>
