@@ -51,7 +51,7 @@ public sealed class PersistenceErrorMapperTests {
     }
 
     [Fact]
-    public void Map_ShouldReturnUnmappedConstraint_WhenMapperDoesNotExist() {
+    public void Map_ShouldReturnUnmappedViolation_WhenMapperDoesNotExist() {
         // Arrange
         var parser = Substitute.For<IConstraintViolationParser>();
 
@@ -72,6 +72,6 @@ public sealed class PersistenceErrorMapperTests {
         var result = sut.Map(exception);
 
         // Assert
-        result.Should().Be(PersistenceErrors.UnmappedConstraint);
+        result.Should().Be(PersistenceErrors.UnmappedViolation);
     }
 }

@@ -26,7 +26,7 @@ internal sealed class PersistenceErrorMapper : IPersistenceErrorMapper {
         var code = _parser.Parse(inner);
 
         return !_mappers.TryGetValue(code, out var mapper)
-            ? PersistenceErrors.UnmappedConstraint
+            ? PersistenceErrors.UnmappedViolation
             : mapper.Map(exception);
     }
 }
