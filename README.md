@@ -1,6 +1,14 @@
 # WhoAmI
 
-WhoAmI is a portfolio project with two main goals.
+## Introduction
+
+**WhoAmI** is a .NET portfolio project built around two primary goals: creating an interactive developer profile and showcasing software architecture through a real-world application.
+
+## Why WhoAmI
+
+The project is designed to introduce who I am as a software developer. It displays my profile information while also showcasing my programming and software architecture skills through a real-world application.
+
+The name is inspired by the classic Linux `whoami` command, which prints the name of the current user. In the same spirit, this project introduces me through both its output and its source code.
 
 ## Goals
 
@@ -10,13 +18,7 @@ A command-line application that serves as an interactive version of my developer
 
 ### 2. Software architecture
 
-A real-world .NET application built using [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), and [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The project demonstrates architectural principles, maintainability, and testing through a practical, evolving application, with additional interfaces such as an API and a web application planned.
-
-## Why WhoAmI
-
-The project is designed to introduce who I am as a software developer. It displays my profile information while also showcasing my programming and software architecture skills through a real-world application.
-
-The name is inspired by the classic Linux `whoami` command, which prints the name of the current user. In the same spirit, this project introduces me through both its output and its source code.
+A real-world .NET application built using [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), and [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The project demonstrates architectural principles, maintainability, and testing practices through a practical, evolving application, with additional interfaces such as an API and a web application planned.
 
 ## Repository Guide
 
@@ -25,6 +27,7 @@ The name is inspired by the classic Linux `whoami` command, which prints the nam
 | docs | Architecture and project documentation. |
 | WhoAmI.Domain | Domain model and business rules. |
 | WhoAmI.Application | Application layer, CQRS, validation, and use cases. |
+| WhoAmI.Infrastructure | Persistence, repositories, queries, and infrastructure services. |
 
 ---
 
@@ -35,12 +38,41 @@ whoami/
 ├── docs/
 ├── src/
 │   ├── WhoAmI.Application/
-│   └── WhoAmI.Domain/
+│   ├── WhoAmI.Domain/
+│   └── WhoAmI.Infrastructure/
 └── tests/
     ├── WhoAmI.Application.Tests/
     ├── WhoAmI.Domain.Tests/
+    ├── WhoAmI.Infrastructure.Tests/
     └── WhoAmI.Testing/
 ```
+
+---
+
+## Roadmap
+
+### Architecture
+
+- [x] Domain layer
+- [x] Application layer
+- [x] Infrastructure layer
+- [ ] Bootstrap
+
+### Interfaces
+
+- [ ] Command-line interface
+- [ ] REST API
+- [ ] Web application
+- [ ] Desktop application
+
+### Business Features
+
+- [x] Profile management
+- [ ] Skills management
+
+### Technical Improvements
+
+- [ ] Pagination
 
 ---
 
