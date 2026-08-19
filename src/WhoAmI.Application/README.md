@@ -206,6 +206,7 @@ This information can be consumed by logging providers such as Serilog, Seq, or E
 - [Architecture](../../docs/architecture/README.md)
 - [WhoAmI — Project Overview](../../README.md)
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md)
+- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
 
 ---
 

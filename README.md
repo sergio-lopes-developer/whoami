@@ -49,6 +49,7 @@ whoami/
 - [Architecture](docs/architecture/README.md)
 - [WhoAmI.Application](src/WhoAmI.Application/README.md)
 - [WhoAmI.Domain](src/WhoAmI.Domain/README.md)
+- [WhoAmI.Infrastructure](src/WhoAmI.Infrastructure/README.md)
 
 ---
 

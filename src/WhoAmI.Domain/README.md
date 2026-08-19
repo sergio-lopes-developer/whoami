@@ -1107,6 +1107,7 @@ Application and Infrastructure layers depend on the Domain, but the Domain does 
 - [Architecture](../../docs/architecture/README.md)
 - [WhoAmI — Project Overview](../../README.md)
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
+- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
 
 ---
 
