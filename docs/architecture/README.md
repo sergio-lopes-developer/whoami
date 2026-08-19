@@ -1,8 +1,10 @@
 # Architecture
 
-This document provides a high-level overview of the architecture used by the WhoAmI project.
+## Introduction
 
-Rather than explaining concepts such as [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), or [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), this document focuses on how those principles are applied throughout the solution.
+This document provides a high-level overview of the architecture used by the **WhoAmI** project.
+
+Rather than explaining concepts such as [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), or [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), this document explains how those principles are applied throughout the project.
 
 For implementation details of individual projects, see the related documentation at the end of this document.
 
@@ -23,7 +25,7 @@ The architecture aims to:
 
 ## Architectural Overview
 
-The solution follows the principles of Clean Architecture.
+The project is organized around the principles of Clean Architecture.
 
 <p align="center">
     <img
@@ -32,21 +34,21 @@ The solution follows the principles of Clean Architecture.
     />
 </p>
 
-The dependency direction always points inward.
+All dependencies point toward the Domain.
 
-The Domain project sits at the center of the application and contains the business model.
+The Domain project is the core of the application and contains the business model.
 
-The Application project orchestrates use cases by coordinating the Domain.
+The Application project orchestrates use cases by coordinating domain objects.
 
-Infrastructure implements technical concerns such as persistence and external integrations.
+The Infrastructure project implements technical concerns such as persistence and external integrations.
 
-Bootstrap is the composition root responsible for assembling the application.
+The Bootstrap project serves as the composition root responsible for assembling the application.
 
-Presentation projects provide different ways to interact with the application without containing business rules.
+Presentation projects provide different ways to interact with the application while remaining free of business rules.
 
 ---
 
-## Architectural Philosophy
+## Architectural Principles
 
 The architecture emphasizes clear boundaries and explicit responsibilities over convenience.
 
@@ -58,23 +60,34 @@ Technical concerns are isolated within Infrastructure.
 
 Presentation projects remain thin, translating user interactions into application requests without containing business logic.
 
-As the solution evolves, new features should be added by extending existing layers rather than changing their responsibilities.
+These principles are enforced through the following dependency rules:
+
+- Domain depends on nothing.
+- Application depends only on Domain.
+- Infrastructure depends on Application and Domain.
+- Bootstrap depends on Application and Infrastructure.
+- Presentation projects depend on Bootstrap.
+- Dependencies always point toward the Domain.
+
+As the project evolves, new features should be added by extending existing layers rather than changing their responsibilities.
 
 This approach keeps the business model independent of frameworks and allows the application to evolve without compromising its architectural boundaries.
 
 ---
 
-## Solution Structure
+## Project Structure
 
 ```text
 whoami/
 ├── docs/
 ├── src/
 │   ├── WhoAmI.Application/
-│   └── WhoAmI.Domain/
+│   ├── WhoAmI.Domain/
+│   └── WhoAmI.Infrastructure/
 └── tests/
     ├── WhoAmI.Application.Tests/
     ├── WhoAmI.Domain.Tests/
+    ├── WhoAmI.Infrastructure.Tests/
     └── WhoAmI.Testing/
 ```
 
@@ -92,7 +105,7 @@ Each project has a single architectural responsibility.
 
 ### tests
 
-Contains unit and integration tests that verify the behavior of the solution.
+Contains unit and integration tests that verify the behavior of the project.
 
 ---
 
@@ -129,7 +142,7 @@ Business rules remain inside the Domain.
 
 The Infrastructure layer provides technical implementations required by the Application.
 
-Typical responsibilities include:
+Responsibilities typically include:
 
 - persistence;
 - repositories;
@@ -170,24 +183,9 @@ Presentation projects translate user input into application requests and present
 
 ---
 
-## Dependency Rules
-
-The following dependency rules are intentionally enforced.
-
-- Domain depends on nothing.
-- Application depends only on Domain.
-- Infrastructure depends on Application and Domain.
-- Bootstrap depends on Application and Infrastructure.
-- Presentation projects depend on Bootstrap.
-- Dependencies always point toward the Domain.
-
-These rules allow infrastructure technologies and user interfaces to evolve without affecting the business model.
-
----
-
 ## Design Decisions
 
-Several architectural decisions intentionally shape the solution.
+Several architectural decisions intentionally shape the project.
 
 ### Commands and Queries
 
@@ -217,15 +215,15 @@ This avoids duplication while keeping user interface concerns isolated.
 
 ## Evolution
 
-The current implementation centers around the Domain and Application layers, with additional projects being introduced incrementally.
+The current implementation is centered on the Domain and Application layers, with additional projects being introduced incrementally.
 
 Future work includes additional projects such as:
 
-- Infrastructure
 - Bootstrap
-- CLI
+- Command-line interface
 - REST API
 - Web application
+- Desktop application
 
 The architecture has been designed so these additions can be introduced without changing the responsibilities of the existing layers.
 
