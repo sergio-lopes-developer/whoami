@@ -2,11 +2,11 @@
 
 ## Overview
 
-This application follows the principles of [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html).
+This application is designed following the principles of [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html).
 
-The Application layer depends only on the Domain layer and a minimal set of framework libraries required for dependency injection. It has no dependency on Infrastructure, databases, external services, or presentation frameworks.
+The Application layer depends only on the Domain layer and a minimal set of framework used for dependency injection. It has no dependency on Infrastructure, databases, external services, or presentation frameworks.
 
-All use cases are organized under the Features folder according to the aggregate they belong to.
+All use cases are organized by aggregate under the Features directory.
 
 The Application layer is persistence-agnostic. It defines abstractions required by the use cases, while all database access is implemented by the Infrastructure layer.
 
@@ -53,7 +53,7 @@ Persistence and external integrations are delegated to the Infrastructure layer.
 
 ### Commands
 
-A command feature typically contains:
+A command feature typically consists of:
 - Command
 - Validator
 - Handler
@@ -77,7 +77,7 @@ WhoAmI.Application
 
 ### Queries
 
-A query feature typically contains:
+A query feature typically consists of:
 - Query
 - Validator (optional)
 - Response
@@ -96,7 +96,7 @@ WhoAmI.Application
              └── ListProfilesResponse.cs
 ```
 
-Query handlers are intentionally implemented in the Infrastructure layer because queries interact directly with the read model. This keeps the Application layer independent of persistence technologies while allowing different query implementations such as EF Core, Dapper, or raw SQL.
+Query handlers are intentionally implemented in the Infrastructure layer because queries interact directly with the read model. This keeps the Application layer independent of persistence technologies while allowing multiple query implementations such as EF Core, Dapper, or raw SQL.
 
 ---
 
@@ -124,14 +124,14 @@ Commands are executed through the following pipeline:
   />
 </p>
 
-Commands are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and is responsible for cross-cutting concerns such as logging, validation, and transaction management.
+Commands are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and handles a specific cross-cutting concern, such as logging, validation, or transaction management.
 
 The command pipeline is composed of the following decorators:
 - `CommandExecutionDecorator` and  `CommandExecutionDecoratorOfT`, records execution information for logging and observability.
 - `CommandValidationDecorator` and `CommandValidationDecoratorOfT`, validates incoming commands before execution.
 - `CommandUnitOfWorkDecorator` and `CommandUnitOfWorkDecoratorOfT`, executes the handler inside a Unit of Work and commits the transaction when the operation succeeds.
 
-Each decorator is available in two implementations, one for commands that do not return a value and another generic implementation (`OfT`) for commands that return a result.
+Each decorator is available in two versions, one for commands that do not return a value and another generic implementation (`OfT`) for commands that return a result.
 
 ### Query Pipeline
 
@@ -160,23 +160,22 @@ Validation is performed by the corresponding validation decorators, ensuring tha
 
 Business invariants remain the responsibility of the Domain layer.
 
-Application validation verifies whether a request is well-formed and complete.
-Domain validation protects the business model against invalid state.
+Application validation ensures that requests are well-formed and complete, while domain validation protects business invariants and prevents the domain model from entering an invalid state.
 
 ---
 
 ## Result Pattern
 
-Application operations communicate failures through the Result pattern instead of throwing exceptions.
+Application operations communicate business failures through the Result pattern instead of using exceptions for control flow.
 
-Application operations return either `Result` or `Result<T>`. When an operation fails, the result contains one or more `Error` instances.
+Operations return either `Result` or `Result<T>`. On failure, the result contains one or more Error instances.
 
 Each `Error` contains:
 - Code
 - Message
 - Metadata (optional)
 
-The optional `Metadata` dictionary allows additional contextual information to be attached to an error without changing its structure.
+The optional `Metadata` dictionary allows additional context to be attached to an error without changing its structure.
 
 This approach:
 - avoids exception-based control flow;
