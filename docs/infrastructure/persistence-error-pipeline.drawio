@@ -8,47 +8,47 @@
           <mxGeometry height="30" width="700" x="75" y="40" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-7" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="PersistenceErrorMapper" vertex="1">
-          <mxGeometry height="65" width="230" x="580" y="161" as="geometry" />
+          <mxGeometry height="65" width="230" x="580" y="146" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-8" parent="Ety8YQFKwrcArtkjtk72-7" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="&lt;div&gt;Coordinates the complete persistence error translation process&lt;/div&gt;" vertex="1">
           <mxGeometry height="35" width="230" y="30" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-9" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-7" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-24" value="">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="780" y="253" as="targetPoint" />
+            <mxPoint x="780" y="238" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-20" connectable="0" parent="Ety8YQFKwrcArtkjtk72-9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="passes the&amp;nbsp;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;exception&lt;/span&gt;" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-20" connectable="0" parent="Ety8YQFKwrcArtkjtk72-9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp;passes the&amp;nbsp;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;exception&amp;nbsp;&lt;/span&gt;" vertex="1">
           <mxGeometry relative="1" x="-0.0654" y="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-24" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="IConstraintViolationParser" vertex="1">
-          <mxGeometry height="65" width="210" x="590" y="280" as="geometry" />
+          <mxGeometry height="65" width="210" x="590" y="265" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-25" parent="Ety8YQFKwrcArtkjtk72-24" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="Interprets provider-specific exceptions" vertex="1">
           <mxGeometry height="35" width="210" y="30" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-26" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-24" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-60" value="">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="540" y="230" as="targetPoint" />
+            <mxPoint x="540" y="215" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-31" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;direction=east;" value="Is there&lt;div&gt;a registered violation mapper?&lt;/div&gt;" vertex="1">
-          <mxGeometry height="110" width="139" x="310" y="714" as="geometry" />
+          <mxGeometry height="110" width="139" x="310" y="747" as="geometry" />
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-32" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-31" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-37" value="&amp;nbsp; &amp;nbsp;no">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-32" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-31" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-37" value="&amp;nbsp;no&amp;nbsp;">
           <mxGeometry relative="1" x="-1" as="geometry">
-            <mxPoint x="706" y="915" as="targetPoint" />
+            <mxPoint x="706" y="948" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-33" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-31" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-56" value="&amp;nbsp; &amp;nbsp;yes">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-33" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-31" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-56" value="&amp;nbsp;yes&amp;nbsp;">
           <mxGeometry relative="1" x="-1" as="geometry">
-            <mxPoint x="434" y="879" as="targetPoint" />
+            <mxPoint x="434" y="912" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-37" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="PersistenceErrors" vertex="1">
-          <mxGeometry height="65" width="180" x="568" y="803" as="geometry" />
+          <mxGeometry height="65" width="180" x="568" y="836" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-38" parent="Ety8YQFKwrcArtkjtk72-37" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="Creates an&lt;div&gt;UnmappedViolation error&lt;/div&gt;" vertex="1">
           <mxGeometry height="35" width="180" y="30" as="geometry" />
@@ -56,111 +56,111 @@
         <mxCell id="Ety8YQFKwrcArtkjtk72-39" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-38" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-50" value="">
           <mxGeometry relative="1" as="geometry">
             <Array as="points" />
-            <mxPoint x="586" y="895" as="sourcePoint" />
-            <mxPoint x="586" y="957" as="targetPoint" />
+            <mxPoint x="586" y="928" as="sourcePoint" />
+            <mxPoint x="586" y="990" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-55" connectable="0" parent="Ety8YQFKwrcArtkjtk72-39" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="returns" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-55" connectable="0" parent="Ety8YQFKwrcArtkjtk72-39" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp;returns&amp;nbsp;" vertex="1">
           <mxGeometry relative="1" x="-0.2258" y="2" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-40" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="Subtitle" vertex="1">
-          <mxGeometry width="160" x="361" y="977" as="geometry" />
+          <mxGeometry width="160" x="361" y="1010" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-46" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="WhoAmIDbContext" vertex="1">
-          <mxGeometry height="65" width="210" x="40" y="110" as="geometry" />
+          <mxGeometry height="65" width="210" x="40" y="95" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-47" parent="Ety8YQFKwrcArtkjtk72-46" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="Catches DbUpdateException&lt;div&gt;during commit&lt;/div&gt;" vertex="1">
           <mxGeometry height="35" width="210" y="30" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-48" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-46" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-7" value="">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="760" y="130" as="targetPoint" />
+            <mxPoint x="760" y="115" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-49" connectable="0" parent="Ety8YQFKwrcArtkjtk72-48" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp; &amp;nbsp;passes the exception&amp;nbsp; &amp;nbsp;" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-49" connectable="0" parent="Ety8YQFKwrcArtkjtk72-48" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp;passes the exception&amp;nbsp;" vertex="1">
           <mxGeometry relative="1" x="-0.1008" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-50" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Error" vertex="1">
-          <mxGeometry height="104" width="300" x="508" y="957" as="geometry" />
+        <mxCell id="Ety8YQFKwrcArtkjtk72-50" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=light-dark(#FF0000,#FF9090);horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;swimlaneFillColor=light-dark(#ADADAD,#ADADAD);fontColor=light-dark(#000000,#000000);" value="&lt;b&gt;Error&lt;/b&gt;" vertex="1">
+          <mxGeometry height="104" width="300" x="508" y="990" as="geometry" />
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-51" parent="Ety8YQFKwrcArtkjtk72-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ Code: string" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-51" parent="Ety8YQFKwrcArtkjtk72-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=light-dark(#000000,#000000);" value="+ Code: string" vertex="1">
           <mxGeometry height="26" width="300" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-52" parent="Ety8YQFKwrcArtkjtk72-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ Message: string" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-52" parent="Ety8YQFKwrcArtkjtk72-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=light-dark(#000000,#000000);" value="+ Message: string" vertex="1">
           <mxGeometry height="26" width="300" y="52" as="geometry" />
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-53" parent="Ety8YQFKwrcArtkjtk72-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ Metadata: IReadOnlyDictionary&amp;lt;string, object?&amp;gt;?" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-53" parent="Ety8YQFKwrcArtkjtk72-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontColor=light-dark(#000000,#000000);" value="+ Metadata: IReadOnlyDictionary&amp;lt;string, object?&amp;gt;?" vertex="1">
           <mxGeometry height="26" width="300" y="78" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-56" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="IPersistenceViolationMapper" vertex="1">
-          <mxGeometry height="80" width="210" x="275.5" y="871" as="geometry" />
+          <mxGeometry height="80" width="210" x="274.5" y="926" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-57" parent="Ety8YQFKwrcArtkjtk72-56" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="Maps the persistence violation to a provider-independent application error" vertex="1">
           <mxGeometry height="50" width="210" y="30" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-58" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-56" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-52" value="">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="351" y="1171" as="targetPoint" />
+            <mxPoint x="351" y="1204" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-59" connectable="0" parent="Ety8YQFKwrcArtkjtk72-58" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp; &amp;nbsp;returns&amp;nbsp; &amp;nbsp;" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-59" connectable="0" parent="Ety8YQFKwrcArtkjtk72-58" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp;returns&amp;nbsp;" vertex="1">
           <mxGeometry relative="1" x="0.3867" as="geometry">
             <mxPoint x="1" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-60" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" value="Is the exception provider-specific?" vertex="1">
-          <mxGeometry height="120" width="135.5" x="312" y="349" as="geometry" />
+          <mxGeometry height="120" width="135.5" x="312" y="334" as="geometry" />
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-61" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-60" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-64" value="&amp;nbsp; &amp;nbsp;no">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-61" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-60" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-64" value="&amp;nbsp;no&amp;nbsp;">
           <mxGeometry relative="1" x="-1" as="geometry">
-            <mxPoint x="522" y="386" as="targetPoint" />
+            <mxPoint x="522" y="371" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-72" connectable="0" parent="Ety8YQFKwrcArtkjtk72-61" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp; &amp;nbsp;throw&amp;nbsp; &amp;nbsp;" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-72" connectable="0" parent="Ety8YQFKwrcArtkjtk72-61" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp;throw&amp;nbsp;" vertex="1">
           <mxGeometry relative="1" x="-0.0172" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-62" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-60" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-66" value="&amp;nbsp; &amp;nbsp;yes">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-62" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-60" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-66" value="&amp;nbsp;yes&amp;nbsp;">
           <mxGeometry relative="1" x="-1" as="geometry">
-            <mxPoint x="420" y="480" as="targetPoint" />
+            <mxPoint x="420" y="465" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-63" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="UnrecognizedConstraintException" vertex="1">
-          <mxGeometry height="100" width="220" x="590" y="361" as="geometry" />
+          <mxGeometry height="100" width="220" x="590" y="346" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-64" parent="Ety8YQFKwrcArtkjtk72-63" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="Thrown when the parser cannot recognize a provider-specific constraint or receives an unexpected exception type" vertex="1">
           <mxGeometry height="70" width="220" y="30" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-66" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" value="Does&lt;div&gt;the error message&lt;/div&gt;&lt;div&gt;contain a registered constraint&lt;/div&gt;&lt;div&gt;signature?&lt;/div&gt;" vertex="1">
-          <mxGeometry height="150" width="150" x="305.5" y="506" as="geometry" />
+          <mxGeometry height="150" width="150" x="305.5" y="511" as="geometry" />
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-67" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-66" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-64" value="&amp;nbsp; &amp;nbsp;no">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-67" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-66" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-64" value="&amp;nbsp;no&amp;nbsp;">
           <mxGeometry relative="1" x="-1" as="geometry">
-            <mxPoint x="527" y="520" as="targetPoint" />
+            <mxPoint x="527" y="505" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-74" connectable="0" parent="Ety8YQFKwrcArtkjtk72-67" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp; &amp;nbsp;throw&amp;nbsp; &amp;nbsp;" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-74" connectable="0" parent="Ety8YQFKwrcArtkjtk72-67" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp;throw&amp;nbsp;" vertex="1">
           <mxGeometry relative="1" x="-0.4094" y="-1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-68" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-66" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-31" value="&amp;nbsp; &amp;nbsp;yes">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-68" edge="1" parent="1" source="Ety8YQFKwrcArtkjtk72-66" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;" target="Ety8YQFKwrcArtkjtk72-31" value="&amp;nbsp;yes&amp;nbsp;">
           <mxGeometry relative="1" x="-1" as="geometry">
-            <mxPoint x="457" y="720" as="targetPoint" />
+            <mxPoint x="457" y="725" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ety8YQFKwrcArtkjtk72-70" connectable="0" parent="Ety8YQFKwrcArtkjtk72-68" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="return violation code" vertex="1">
+        <mxCell id="Ety8YQFKwrcArtkjtk72-70" connectable="0" parent="Ety8YQFKwrcArtkjtk72-68" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&amp;nbsp;return violation code&amp;nbsp;" vertex="1">
           <mxGeometry relative="1" x="0.0033" y="1" as="geometry">
             <mxPoint x="-1" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-77" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="WhoAmIDbContext" vertex="1">
-          <mxGeometry height="65" width="210" x="40" y="200" as="geometry" />
+          <mxGeometry height="65" width="210" x="40" y="185" as="geometry" />
         </mxCell>
         <mxCell id="Ety8YQFKwrcArtkjtk72-78" parent="Ety8YQFKwrcArtkjtk72-77" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="Returns a &lt;code data-start=&quot;578&quot; data-end=&quot;586&quot;&gt;&lt;b&gt;Result&lt;/b&gt;&lt;/code&gt; containing the mapped application &lt;code data-start=&quot;621&quot; data-end=&quot;628&quot;&gt;&lt;b&gt;Error&lt;/b&gt;&lt;/code&gt;" vertex="1">
           <mxGeometry height="35" width="210" y="30" as="geometry" />
