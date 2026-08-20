@@ -337,10 +337,11 @@ Applications only need to call a single extension method.
 
 ## Related Documentation
 
-- [Architecture](../../docs/architecture/README.md)
 - [WhoAmI — Project Overview](../../README.md)
-- [WhoAmI.Domain](../WhoAmI.Domain/README.md)
+- [Architecture](../../docs/architecture/README.md)
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+- [WhoAmI.Domain](../WhoAmI.Domain/README.md)
 
 ---
 
@@ -352,7 +353,7 @@ Applications only need to call a single extension method.
 
 ---
 
-Built with ❤️ on Linux using JetBrains Rider.
+Built with ❤️ on **Linux** using **JetBrains Rider**.
 
 > "Casting all your care upon him; for he cares for you."
 >

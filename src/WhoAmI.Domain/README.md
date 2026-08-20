@@ -1104,9 +1104,10 @@ Application and Infrastructure layers depend on the Domain, but the Domain does 
 
 ## Related Documentation
 
-- [Architecture](../../docs/architecture/README.md)
 - [WhoAmI — Project Overview](../../README.md)
+- [Architecture](../../docs/architecture/README.md)
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
 
 ---
@@ -1118,7 +1119,7 @@ Application and Infrastructure layers depend on the Domain, but the Domain does 
 
 ---
 
-Built with ❤️ on Linux using JetBrains Rider.
+Built with ❤️ on **Linux** using **JetBrains Rider**.
 
 > "I can do all things through Christ who strengthens me."
 >

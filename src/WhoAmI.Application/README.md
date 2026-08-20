@@ -202,8 +202,9 @@ This information can be consumed by logging providers such as Serilog, Seq, or E
 
 ## Related Documentation
 
-- [Architecture](../../docs/architecture/README.md)
 - [WhoAmI — Project Overview](../../README.md)
+- [Architecture](../../docs/architecture/README.md)
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md)
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
 
@@ -219,7 +220,7 @@ This information can be consumed by logging providers such as Serilog, Seq, or E
 
 ---
 
-Built with ❤️ on Linux using JetBrains Rider.
+Built with ❤️ on **Linux** using **JetBrains Rider**.
 
 > "These things I have spoken unto you, that in me you might have peace. In the world you shall have tribulation: but be of good cheer; I have overcome the world."
 >

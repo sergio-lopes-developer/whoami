@@ -80,6 +80,7 @@ whoami/
 
 - [Architecture](docs/architecture/README.md)
 - [WhoAmI.Application](src/WhoAmI.Application/README.md)
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
 - [WhoAmI.Domain](src/WhoAmI.Domain/README.md)
 - [WhoAmI.Infrastructure](src/WhoAmI.Infrastructure/README.md)
 
@@ -101,7 +102,7 @@ While you're welcome to use, modify, and learn from the code under the terms of 
 
 ---
 
-Built with ❤️ on Linux using JetBrains Rider.
+Built with ❤️ on **Linux** using **JetBrains Rider**.
 
 > "Be not overcome of evil, but overcome evil with good."
 >

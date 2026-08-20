@@ -233,6 +233,7 @@ The architecture has been designed so these additions can be introduced without 
 
 - [WhoAmI — Project Overview](../../README.md)
 - [WhoAmI.Application](../../src/WhoAmI.Application/README.md)
+- [WhoAmI.Bootstrap](../../WhoAmI.Bootstrap/README.md)
 - [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md)
 - [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md)
 
@@ -246,7 +247,7 @@ The architecture has been designed so these additions can be introduced without 
 
 ---
 
-Built with ❤️ on Linux using JetBrains Rider.
+Built with ❤️ on **Linux** using **JetBrains Rider**.
 
 > "Trust in the LORD with all your heart; and lean not unto your own understanding."
 >
