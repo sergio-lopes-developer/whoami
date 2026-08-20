@@ -82,6 +82,7 @@ whoami/
 ├── docs/
 ├── src/
 │   ├── WhoAmI.Application/
+│   ├── WhoAmI.Bootstrap/
 │   ├── WhoAmI.Domain/
 │   └── WhoAmI.Infrastructure/
 └── tests/
