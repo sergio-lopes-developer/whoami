@@ -81,7 +81,7 @@ whoami/
 
 - [Architecture](docs/architecture/README.md)
 - [WhoAmI.Application](src/WhoAmI.Application/README.md)
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+- [WhoAmI.Bootstrap](src/WhoAmI.Bootstrap/README.md)
 - [WhoAmI.Domain](src/WhoAmI.Domain/README.md)
 - [WhoAmI.Infrastructure](src/WhoAmI.Infrastructure/README.md)
 
