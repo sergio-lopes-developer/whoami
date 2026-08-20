@@ -6,6 +6,7 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/WhoAmI.Application/WhoAmI.Application.csproj" />
+    <Project Path="src/WhoAmI.Bootstrap/WhoAmI.Bootstrap.csproj" />
     <Project Path="src/WhoAmI.Domain/WhoAmI.Domain.csproj" />
     <Project Path="src/WhoAmI.Infrastructure/WhoAmI.Infrastructure.csproj" />
   </Folder>
