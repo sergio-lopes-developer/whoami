@@ -57,7 +57,7 @@ whoami/
 - [x] Domain layer
 - [x] Application layer
 - [x] Infrastructure layer
-- [ ] Bootstrap
+- [x] Bootstrap
 
 ### Interfaces
 

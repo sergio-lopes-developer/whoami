@@ -220,7 +220,6 @@ The current implementation is centered on the Domain and Application layers, wit
 
 Future work includes additional projects such as:
 
-- Bootstrap
 - Command-line interface
 - REST API
 - Web application
