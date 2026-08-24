@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WhoAmI.Bootstrap.DependencyInjection;
 using WhoAmI.CLI.Commands;
+using WhoAmI.CLI.DependencyInjection;
 
 namespace WhoAmI.CLI.Configuration;
 
@@ -13,5 +14,7 @@ internal static class ServiceConfiguration {
             builder.Configuration,
             builder.Environment
         );
+
+        builder.Services.AddObservability();
     }
 }

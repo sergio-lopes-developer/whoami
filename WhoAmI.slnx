@@ -13,6 +13,7 @@
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="tests/WhoAmI.Application.Tests/WhoAmI.Application.Tests.csproj" />
+    <Project Path="tests/WhoAmI.CLI.Tests/WhoAmI.CLI.Tests.csproj" />
     <Project Path="tests/WhoAmI.Domain.Tests/WhoAmI.Domain.Tests.csproj" />
     <Project Path="tests/WhoAmI.Infrastructure.Tests/WhoAmI.Infrastructure.Tests.csproj" />
     <Project Path="tests/WhoAmI.Testing/WhoAmI.Testing.csproj" />
