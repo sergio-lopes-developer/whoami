@@ -44,8 +44,9 @@ ScaffoldingReadMe.txt
 *~
 *.DotSettings.user
 .idea
-CodeCoverage/
 /data/
+CodeCoverage/
+appsettings.Development.json
 
 # MSBuild Binary and Structured Log
 *.binlog

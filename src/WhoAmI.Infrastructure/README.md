@@ -335,6 +335,14 @@ Applications only need to call a single extension method.
 
 ---
 
+## Migrations
+
+Contains Entity Framework Core migrations used to evolve the database schema over time.
+
+Each migration represents a versioned set of schema changes, allowing the database structure to remain synchronized with the persistence model defined by the Infrastructure layer.
+
+---
+
 ## Related Documentation
 
 - [WhoAmI — Project Overview](../../README.md)
