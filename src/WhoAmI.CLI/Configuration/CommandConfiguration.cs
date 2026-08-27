@@ -36,6 +36,7 @@ internal static class CommandConfiguration {
                 update.SetDescription("Update profile information");
 
                 update.AddCommand<UpdateEmail>("email");
+                update.AddCommand<UpdateFullName>("name");
             });
         });
     }

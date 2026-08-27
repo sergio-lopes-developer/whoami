@@ -15,4 +15,10 @@ internal static class CommandSettingsFactory {
         Id = Guid.NewGuid(),
         Email = "john.doe@email.com"
     };
+
+    public static UpdateFullNameCommandSettings UpdateFullName() => new() {
+        Id = Guid.NewGuid(),
+        FirstName = "Sérgio",
+        LastName = "Lopes"
+    };
 }

@@ -23,6 +23,7 @@ internal static class ServiceConfiguration {
         services
             .AddTransient<CreateProfile>()
             .AddTransient<UpdateEmail>()
+            .AddTransient<UpdateFullName>()
             .AddTransient<VersionCommand>();
 
         services.AddObservability();
