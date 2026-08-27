@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Hosting;
 using Spectre.Console.Cli;
 using WhoAmI.CLI.Commands;
+using WhoAmI.CLI.Commands.Profiles;
 using WhoAmI.CLI.DependencyInjection.Spectre;
 
 namespace WhoAmI.CLI.Configuration;
@@ -25,5 +26,11 @@ internal static class CommandConfiguration {
         config.ValidateExamples();
 
         config.AddCommand<VersionCommand>("version").WithAlias("v");
+
+        config.AddBranch("profile", profile => {
+            profile.SetDescription("Profile operations");
+
+            profile.AddCommand<CreateProfile>("create");
+        });
     }
 }

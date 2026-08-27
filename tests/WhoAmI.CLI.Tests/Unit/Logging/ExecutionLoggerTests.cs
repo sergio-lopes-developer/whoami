@@ -7,7 +7,7 @@ using WhoAmI.Application.Logging;
 using WhoAmI.Application.Results;
 using WhoAmI.CLI.Logging;
 
-namespace WhoAmI.CLI.Tests.Logging;
+namespace WhoAmI.CLI.Tests.Unit.Logging;
 
 public sealed class ExecutionLoggerTests {
     private readonly ExecutionLogger _logger = new();

@@ -14,6 +14,7 @@
         </PackageReference>
         <PackageReference Include="FluentAssertions" Version="8.10.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
+        <PackageReference Include="NSubstitute" Version="6.2.0" />
         <PackageReference Include="Serilog.Sinks.InMemory" Version="2.0.0" />
         <PackageReference Include="Serilog.Sinks.InMemory.Assertions" Version="2.0.0" />
         <PackageReference Include="xunit.runner.visualstudio" Version="4.0.0">
@@ -30,6 +31,10 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\WhoAmI.Application\WhoAmI.Application.csproj" />
       <ProjectReference Include="..\..\src\WhoAmI.CLI\WhoAmI.CLI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Unit\" />
     </ItemGroup>
 
 </Project>

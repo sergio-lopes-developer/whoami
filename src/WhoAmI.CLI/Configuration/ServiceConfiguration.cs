@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WhoAmI.Bootstrap.DependencyInjection;
 using WhoAmI.CLI.Commands;
+using WhoAmI.CLI.Commands.Profiles;
 using WhoAmI.CLI.DependencyInjection;
 
 namespace WhoAmI.CLI.Configuration;
@@ -19,7 +20,9 @@ internal static class ServiceConfiguration {
     }
 
     internal static void RegisterCliServices(IServiceCollection services) {
-        services.AddTransient<VersionCommand>();
+        services
+            .AddTransient<CreateProfile>()
+            .AddTransient<VersionCommand>();
 
         services.AddObservability();
     }
