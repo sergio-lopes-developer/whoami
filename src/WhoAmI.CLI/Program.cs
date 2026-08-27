@@ -1,19 +1,9 @@
-using Microsoft.Extensions.Hosting;
-using Serilog;
-using WhoAmI.Bootstrap.Initialization;
-using WhoAmI.CLI.Configuration;
+using WhoAmI.CLI.Hosting;
 
-var builder = Host.CreateApplicationBuilder(args);
+await using var application = CliApplication.Create(args);
 
-LoggingConfiguration.Configure(builder);
-ServiceConfiguration.Configure(builder);
+await application.InitializeAsync();
 
-using var host = builder.Build();
-
-await host.Services.InitializeDatabaseAsync();
-
-var exitCode = CommandConfiguration.Run(host, args);
-
-Log.CloseAndFlush();
+var exitCode = application.Run();
 
 return exitCode;

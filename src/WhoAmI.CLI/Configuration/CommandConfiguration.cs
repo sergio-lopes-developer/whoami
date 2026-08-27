@@ -6,16 +6,21 @@ using WhoAmI.CLI.DependencyInjection.Spectre;
 namespace WhoAmI.CLI.Configuration;
 
 internal static class CommandConfiguration {
-    public static int Run(IHost host, string[] args) {
-        var registrar = new SpectreCliTypeRegistrar(host.Services);
-
+    internal static CommandApp Create(ITypeRegistrar registrar) {
         var app = new CommandApp(registrar);
-        app.Configure(ConfigureCommands);
 
-        return app.Run(args);
+        app.Configure(Configure);
+
+        return app;
     }
 
-    private static void ConfigureCommands(IConfigurator config) {
+    internal static int Run(IHost host, string[] args) {
+        var registrar = new SpectreCliTypeRegistrar(host.Services);
+
+        return Create(registrar).Run(args);
+    }
+
+    private static void Configure(IConfigurator config) {
         config.SetApplicationName("WhoAmI CLI");
         config.ValidateExamples();
 

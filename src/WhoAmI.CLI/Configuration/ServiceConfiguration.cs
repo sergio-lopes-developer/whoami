@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WhoAmI.Bootstrap.DependencyInjection;
@@ -8,13 +9,25 @@ namespace WhoAmI.CLI.Configuration;
 
 internal static class ServiceConfiguration {
     public static void Configure(HostApplicationBuilder builder) {
-        builder.Services.AddTransient<VersionCommand>();
+        RegisterCliServices(builder.Services);
 
-        builder.Services.AddBootstrap(
+        RegisterApplicationServices(
+            builder.Services,
             builder.Configuration,
             builder.Environment
         );
-
-        builder.Services.AddObservability();
     }
+
+    internal static void RegisterCliServices(IServiceCollection services) {
+        services.AddTransient<VersionCommand>();
+
+        services.AddObservability();
+    }
+
+    private static void RegisterApplicationServices(
+        IServiceCollection services,
+        IConfiguration configuration,
+        IHostEnvironment environment
+    ) =>
+        services.AddBootstrap(configuration, environment);
 }

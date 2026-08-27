@@ -6,9 +6,8 @@ namespace WhoAmI.CLI.DependencyInjection.Spectre;
 internal sealed class SpectreCliTypeResolver : ITypeResolver, IDisposable {
     private readonly IServiceScope _scope;
 
-    public SpectreCliTypeResolver(IServiceProvider serviceProvider) {
+    public SpectreCliTypeResolver(IServiceProvider serviceProvider) =>
         _scope = serviceProvider.CreateScope();
-    }
 
     public object Resolve(Type? type) {
         if (type is null) {
