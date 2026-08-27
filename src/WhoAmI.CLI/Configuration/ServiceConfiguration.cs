@@ -22,6 +22,7 @@ internal static class ServiceConfiguration {
     internal static void RegisterCliServices(IServiceCollection services) {
         services
             .AddTransient<CreateProfile>()
+            .AddTransient<UpdateEmail>()
             .AddTransient<VersionCommand>();
 
         services.AddObservability();
