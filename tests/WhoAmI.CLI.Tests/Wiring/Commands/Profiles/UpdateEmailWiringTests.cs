@@ -1,6 +1,5 @@
 using FluentAssertions;
 using WhoAmI.Application.Features.Profiles.UpdateEmail;
-using WhoAmI.CLI.Output;
 using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;

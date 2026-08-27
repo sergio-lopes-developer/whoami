@@ -9,20 +9,20 @@ using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
-public sealed class UpdateEmailTests {
+public sealed class UpdateEmailUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
 
     private readonly UpdateEmail _command;
 
-    public UpdateEmailTests() =>
+    public UpdateEmailUnitTests() =>
         _command = new UpdateEmail(
             _dispatcher,
             LoggerFactory.Create<UpdateEmail>()
         );
 
     [Fact]
-    public async Task ExecuteAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
+    public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
         // Arrange
         var settings = CommandSettingsFactory.UpdateEmail();
 
@@ -50,7 +50,7 @@ public sealed class UpdateEmailTests {
     }
 
     [Fact]
-    public async Task ExecuteAsync_ShouldReturnError_WhenCommandFails() {
+    public async Task ExecuteInternalAsync_ShouldReturnError_WhenCommandFails() {
         // Arrange
         var settings = CommandSettingsFactory.UpdateEmail();
 

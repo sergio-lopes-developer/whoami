@@ -23,7 +23,7 @@ public class CreateProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
+    public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
         // Arrange
         var settings = CommandSettingsFactory.CreateProfile();
 
@@ -63,7 +63,7 @@ public class CreateProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteAsync_ShouldReturnError_WhenCommandFails() {
+    public async Task ExecuteInternalAsync_ShouldReturnError_WhenCommandFails() {
         // Arrange
         var settings = CommandSettingsFactory.CreateProfile();
 
