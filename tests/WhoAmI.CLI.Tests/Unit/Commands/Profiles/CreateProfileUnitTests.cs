@@ -4,6 +4,7 @@ using WhoAmI.Application.Abstractions.Dispatching.Commands;
 using WhoAmI.Application.Features.Profiles.CreateProfile;
 using WhoAmI.Application.Results;
 using WhoAmI.CLI.Commands.Profiles;
+using WhoAmI.CLI.Output;
 using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
@@ -40,14 +41,14 @@ public class CreateProfileUnitTests {
             .Returns(Result<CreateProfileResponse>.Success(response));
 
         // Act
-        var result = await _command.ExecuteInternalAsync(
+        var exit = await _command.ExecuteInternalAsync(
             CommandContextFactory.Create("create"),
             settings,
             CancellationToken.None
         );
 
         // Assert
-        result.Should().Be(0);
+        exit.Should().Be(CliExit.Success());
 
         await _dispatcher.Received(1).Send(
             Arg.Is<CreateProfileCommand>(x =>
@@ -79,13 +80,13 @@ public class CreateProfileUnitTests {
             ));
 
         // Act
-        var result = await _command.ExecuteInternalAsync(
+        var exit = await _command.ExecuteInternalAsync(
             CommandContextFactory.Create("create"),
             settings,
             CancellationToken.None
         );
 
-        result.Should().Be(1);
+        exit.Should().Be(CliExit.Error());
 
         // Assert
         await _dispatcher.Received(1).Send(

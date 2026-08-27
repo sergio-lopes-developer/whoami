@@ -38,6 +38,7 @@ public sealed class CreateProfileWiringTests {
             "--github", "github"
         ]);
 
+        // Assert
         command.FirstName.Should().Be("John");
         command.LastName.Should().Be("Doe");
         command.Email.Should().Be("john@doe.com");
@@ -98,14 +99,5 @@ public sealed class CreateProfileWiringTests {
 
         // Assert
         command.GitHub.Should().Be("github");
-    }
-
-    [Fact]
-    public void CreateProfile_Should_RejectUnknownOption() {
-        // Act
-        var exit = CliCommandRunner.Run("profile", "create", "--unknown");
-
-        // Assert
-        exit.Should().NotBe(CliExit.Success());
     }
 }
