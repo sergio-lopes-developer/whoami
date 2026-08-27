@@ -1,6 +1,6 @@
 using System.ComponentModel;
-using System.Reflection;
 using Spectre.Console.Cli;
+using WhoAmI.CLI.Hosting;
 using WhoAmI.CLI.Output;
 
 namespace WhoAmI.CLI.Commands;
@@ -11,13 +11,8 @@ public sealed class VersionCommand : Command {
         CommandContext context,
         CancellationToken cancellationToken
     ) {
-        CliMessage.ShowInfo($"WhoAmI CLI - v{_cliVersion}");
+        CliMessage.ShowInfo($"WhoAmI CLI - v{CliVersion.Current}");
+
         return CliExit.Success();
     }
-
-    private static readonly string _cliVersion =
-        typeof(VersionCommand)
-            .Assembly
-            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
-            .InformationalVersion ?? "unknown";
 }
