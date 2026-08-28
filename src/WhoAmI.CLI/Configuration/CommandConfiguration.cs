@@ -37,6 +37,7 @@ internal static class CommandConfiguration {
 
                 update.AddCommand<UpdateEmail>("email");
                 update.AddCommand<UpdateFullName>("name");
+                update.AddCommand<UpdateSocialLinks>("social-links");
             });
         });
     }

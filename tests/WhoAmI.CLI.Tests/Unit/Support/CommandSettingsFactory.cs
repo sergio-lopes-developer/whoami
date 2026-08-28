@@ -21,4 +21,11 @@ internal static class CommandSettingsFactory {
         FirstName = "Sérgio",
         LastName = "Lopes"
     };
+
+    public static UpdateSocialLinksCommandSettings UpdateSocialLinks() =>
+        new() {
+            Id = Guid.NewGuid(),
+            LinkedIn = "https://www.linkedin.com/in/username",
+            GitHub = "https://github.com/username"
+        };
 }
