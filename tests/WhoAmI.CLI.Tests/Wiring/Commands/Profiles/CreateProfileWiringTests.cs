@@ -28,75 +28,97 @@ public sealed class CreateProfileWiringTests {
 
     [Fact]
     public void CreateProfile_Should_ParseAllArguments() {
+        // Arrange
+        const string firstName = "John";
+        const string lastName = "Doe";
+        const string email = "john@doe.com";
+        const string linkedIn = "linkedin";
+        const string gitHub = "github";
+
         // Act
         var command = RunCreateProfileCommand([
-            "--first-name", "John",
-            "--last-name", "Doe",
-            "--email", "john@doe.com",
-            "--linkedin", "linkedin",
-            "--github", "github"
+            "--first-name", firstName,
+            "--last-name", lastName,
+            "--email", email,
+            "--linkedin", linkedIn,
+            "--github", gitHub
         ]);
 
         // Assert
-        command.FirstName.Should().Be("John");
-        command.LastName.Should().Be("Doe");
-        command.Email.Should().Be("john@doe.com");
-        command.LinkedIn.Should().Be("linkedin");
-        command.GitHub.Should().Be("github");
+        command.FirstName.Should().Be(firstName);
+        command.LastName.Should().Be(lastName);
+        command.Email.Should().Be(email);
+        command.LinkedIn.Should().Be(linkedIn);
+        command.GitHub.Should().Be(gitHub);
     }
 
     [Theory]
     [InlineData("--first-name")]
     [InlineData("-f")]
     public void CreateProfile_Should_ParseFirstName(string option) {
+        // Arrange
+        const string firstName = "John";
+
         // Act
-        var command = RunCreateProfileCommand([option, "John"]);
+        var command = RunCreateProfileCommand(option, firstName);
 
         // Assert
-        command.FirstName.Should().Be("John");
+        command.FirstName.Should().Be(firstName);
     }
 
     [Theory]
     [InlineData("--last-name")]
     [InlineData("-l")]
     public void CreateProfile_Should_ParseLastName(string option) {
+        // Arrange
+        const string lastName = "Doe";
+
         // Act
-        var command = RunCreateProfileCommand([option, "Doe"]);
+        var command = RunCreateProfileCommand(option, lastName);
 
         // Assert
-        command.LastName.Should().Be("Doe");
+        command.LastName.Should().Be(lastName);
     }
 
     [Theory]
     [InlineData("--email")]
     [InlineData("-e")]
     public void CreateProfile_Should_ParseEmail(string option) {
+        // Arrange
+        const string email = "john@doe.com";
+
         // Act
-        var command = RunCreateProfileCommand([option, "john@doe.com"]);
+        var command = RunCreateProfileCommand(option, email);
 
         // Assert
-        command.Email.Should().Be("john@doe.com");
+        command.Email.Should().Be(email);
     }
 
     [Theory]
     [InlineData("--linkedin")]
     [InlineData("-n")]
     public void CreateProfile_Should_ParseLinkedin(string option) {
+        // Arrange
+        const string linkedIn = "linkedin";
+
         // Act
-        var command = RunCreateProfileCommand([option, "linkedin"]);
+        var command = RunCreateProfileCommand(option, linkedIn);
 
         // Assert
-        command.LinkedIn.Should().Be("linkedin");
+        command.LinkedIn.Should().Be(linkedIn);
     }
 
     [Theory]
     [InlineData("--github")]
     [InlineData("-g")]
     public void CreateProfile_Should_ParseGithub(string option) {
+        // Arrange
+        const string gitHub = "github";
+
         // Act
-        var command = RunCreateProfileCommand([option, "github"]);
+        var command = RunCreateProfileCommand(option, gitHub);
 
         // Assert
-        command.GitHub.Should().Be("github");
+        command.GitHub.Should().Be(gitHub);
     }
 }

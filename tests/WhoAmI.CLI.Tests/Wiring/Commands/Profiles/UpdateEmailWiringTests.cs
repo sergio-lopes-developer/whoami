@@ -17,16 +17,17 @@ public sealed class UpdateEmailWiringTests {
     public void UpdateEmail_Should_ParseAllArguments() {
         // Arrange
         var id = Guid.NewGuid().ToString();
+        const string email = "john@doe.com";
 
         // Act
         var command = RunUpdateEmailCommand(
             "--id", id,
-            "--email", "john@doe.com"
+            "--email", email
         );
 
         // Assert
         command.Id.Should().Be(id);
-        command.Email.Should().Be("john@doe.com");
+        command.Email.Should().Be(email);
     }
 
     [Theory]
@@ -47,10 +48,13 @@ public sealed class UpdateEmailWiringTests {
     [InlineData("--email")]
     [InlineData("-e")]
     public void UpdateEmail_Should_ParseEmail(string option) {
+        // Arrange
+        const string email = "john@doe.com";
+
         // Act
-        var command = RunUpdateEmailCommand(option, "john@doe.com");
+        var command = RunUpdateEmailCommand(option, email);
 
         // Assert
-        command.Email.Should().Be("john@doe.com");
+        command.Email.Should().Be(email);
     }
 }

@@ -17,18 +17,20 @@ public sealed class UpdateFullNameWiringTests {
     public void UpdateFullName_Should_ParseAllArguments() {
         // Arrange
         var id = Guid.NewGuid().ToString();
+        const string firstName = "John";
+        const string lastName = "Doe";
 
         // Act
         var command = RunUpdateFullNameCommand(
             "--id", id,
-            "--first-name", "John",
-            "--last-name", "Doe"
+            "--first-name", firstName,
+            "--last-name", lastName
         );
 
         // Assert
         command.Id.Should().Be(id);
-        command.FirstName.Should().Be("John");
-        command.LastName.Should().Be("Doe");
+        command.FirstName.Should().Be(firstName);
+        command.LastName.Should().Be(lastName);
     }
 
     [Theory]
@@ -49,21 +51,27 @@ public sealed class UpdateFullNameWiringTests {
     [InlineData("--first-name")]
     [InlineData("-f")]
     public void UpdateFullName_Should_ParseFirstName(string option) {
+        // Arrange
+        const string firstName = "John";
+
         // Act
-        var command = RunUpdateFullNameCommand(option, "John");
+        var command = RunUpdateFullNameCommand(option, firstName);
 
         // Assert
-        command.FirstName.Should().Be("John");
+        command.FirstName.Should().Be(firstName);
     }
 
     [Theory]
     [InlineData("--last-name")]
     [InlineData("-l")]
     public void UpdateFullName_Should_ParseLastName(string option) {
+        // Arrange
+        const string lastName = "Doe";
+
         // Act
-        var command = RunUpdateFullNameCommand(option, "Doe");
+        var command = RunUpdateFullNameCommand(option, lastName);
 
         // Assert
-        command.LastName.Should().Be("Doe");
+        command.LastName.Should().Be(lastName);
     }
 }
