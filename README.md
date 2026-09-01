@@ -28,6 +28,7 @@ A real-world .NET application built using [**Domain-Driven Design (DDD)**](https
 | WhoAmI.Domain | Domain model and business rules. |
 | WhoAmI.Application | Application layer, CQRS, validation, and use cases. |
 | WhoAmI.Infrastructure | Persistence, repositories, queries, and infrastructure services. |
+| WhoAmI.Bootstrap | Composition root and dependency injection configuration. |
 
 ---
 
