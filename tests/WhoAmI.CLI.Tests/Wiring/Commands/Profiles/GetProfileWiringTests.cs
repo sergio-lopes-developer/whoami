@@ -10,13 +10,11 @@ public sealed class GetProfileWiringTests {
         "John",
         "Doe",
         "john@doe.com",
-        "linkedin",
-        "github"
+        "https://www.linkedin.com/in/username",
+        "https://github.com/username"
     );
 
-    private static GetProfileByEmailQuery RunGetProfileQuery(
-        params string[] args
-    ) {
+    private static GetProfileByEmailQuery RunGetProfile(params string[] args) {
         string[] commandArgs = ["profile", "get", ..args];
 
         return CliApplicationQueryRunner
@@ -32,7 +30,7 @@ public sealed class GetProfileWiringTests {
         const string email = "john@doe.com";
 
         // Act
-        var response = RunGetProfileQuery([
+        var query = RunGetProfile([
             "--email", email,
             "--hide-email",
             "--hide-linkedin",
@@ -40,6 +38,6 @@ public sealed class GetProfileWiringTests {
         ]);
 
         // Assert
-        response.Email.Should().Be(email);
+        query.Email.Should().Be(email);
     }
 }

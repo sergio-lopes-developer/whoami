@@ -90,7 +90,7 @@ public sealed class GetProfileParsingTests {
     [InlineData("-m")]
     public void GetProfile_Should_ParseHideEmail(string option) {
         // Act
-        var execution = Parse("--email", Email, option);
+        var execution = Parse(option);
 
         // Assert
         var settings = GetSettings(execution);
@@ -103,7 +103,7 @@ public sealed class GetProfileParsingTests {
     [InlineData("-n")]
     public void GetProfile_Should_ParseHideLinkedIn(string option) {
         // Act
-        var execution = Parse("--email", Email, option);
+        var execution = Parse(option);
 
         // Assert
         var settings = GetSettings(execution);
@@ -116,7 +116,7 @@ public sealed class GetProfileParsingTests {
     [InlineData("-v")]
     public void GetProfile_Should_ParseVerbose(string option) {
         // Act
-        var execution = Parse("--email", Email, option);
+        var execution = Parse(option);
 
         // Assert
         var settings = GetSettings(execution);
@@ -127,7 +127,7 @@ public sealed class GetProfileParsingTests {
     [Fact]
     public void GetProfile_Should_UseDefaultValuesForOptionalArguments() {
         // Act
-        var execution = Parse("--email", Email);
+        var execution = Parse();
 
         // Assert
         var settings = GetSettings(execution);
