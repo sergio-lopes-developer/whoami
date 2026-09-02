@@ -10,7 +10,7 @@ public sealed class UpdateEmailWiringTests {
     ) {
         string[] commandArgs = ["profile", "update", "email", ..args];
 
-        return CliCommandRunner.Run<UpdateEmailCommand>(commandArgs);
+        return CliApplicationCommandRunner.Run<UpdateEmailCommand>(commandArgs);
     }
 
     [Fact]

@@ -10,7 +10,8 @@ public sealed class UpdateSocialLinksWiringTests {
     ) {
         string[] commandArgs = ["profile", "update", "social-links", ..args];
 
-        return CliCommandRunner.Run<UpdateSocialLinksCommand>(commandArgs);
+        return CliApplicationCommandRunner
+            .Run<UpdateSocialLinksCommand>(commandArgs);
     }
 
     [Fact]

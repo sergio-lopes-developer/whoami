@@ -19,8 +19,8 @@ public sealed class CreateProfileWiringTests {
     ) {
         string[] commandArgs = ["profile", "create", ..args];
 
-        return
-            CliCommandRunner.Run<CreateProfileCommand, CreateProfileResponse>(
+        return CliApplicationCommandRunner
+            .Run<CreateProfileCommand, CreateProfileResponse>(
                 CreateProfileResponse(),
                 commandArgs
             );

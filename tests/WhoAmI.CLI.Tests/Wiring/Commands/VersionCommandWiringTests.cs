@@ -5,19 +5,12 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 namespace WhoAmI.CLI.Tests.Wiring.Commands;
 
 public sealed class VersionCommandWiringTests {
-    [Fact]
-    public void Version_Should_BeRegistered() {
+    [Theory]
+    [InlineData("version")]
+    [InlineData("v")]
+    public void Version_Should_BeRegistered(string command) {
         // Act
-        var exit = CliCommandRunner.Run("version");
-
-        // Assert
-        exit.Should().Be(CliExit.Success());
-    }
-
-    [Fact]
-    public void Version_Should_BeRegisteredWithAlias() {
-        // Act
-        var exit = CliCommandRunner.Run("v");
+        var exit = CliRunner.Run(command);
 
         // Assert
         exit.Should().Be(CliExit.Success());

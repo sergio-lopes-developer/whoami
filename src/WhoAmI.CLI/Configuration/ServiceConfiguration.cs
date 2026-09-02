@@ -22,6 +22,7 @@ internal static class ServiceConfiguration {
     internal static void RegisterCliServices(IServiceCollection services) {
         services
             .AddTransient<CreateProfile>()
+            .AddTransient<GetProfile>()
             .AddTransient<UpdateEmail>()
             .AddTransient<UpdateFullName>()
             .AddTransient<UpdateSocialLinks>()

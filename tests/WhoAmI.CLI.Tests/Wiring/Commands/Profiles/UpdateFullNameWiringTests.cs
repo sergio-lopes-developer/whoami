@@ -10,7 +10,8 @@ public sealed class UpdateFullNameWiringTests {
     ) {
         string[] commandArgs = ["profile", "update", "name", ..args];
 
-        return CliCommandRunner.Run<UpdateFullNameCommand>(commandArgs);
+        return CliApplicationCommandRunner
+            .Run<UpdateFullNameCommand>(commandArgs);
     }
 
     [Fact]

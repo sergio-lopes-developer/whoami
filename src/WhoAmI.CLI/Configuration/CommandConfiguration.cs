@@ -31,6 +31,7 @@ internal static class CommandConfiguration {
             profile.SetDescription("Profile operations");
 
             profile.AddCommand<CreateProfile>("create");
+            profile.AddCommand<GetProfile>("get");
 
             profile.AddBranch("update", update => {
                 update.SetDescription("Update profile information");

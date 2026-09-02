@@ -6,8 +6,8 @@ using WhoAmI.CLI.DependencyInjection.Spectre;
 
 namespace WhoAmI.CLI.Tests.Wiring.Support;
 
-internal static class CliCommandAppFactory {
-    public static CliCommandApp Create() {
+internal static class CliExecutionContextFactory {
+    public static CliExecutionContext CreateContext() {
         var services = new ServiceCollection();
 
         var commandDispatcher = new FakeCommandDispatcher();
@@ -27,8 +27,12 @@ internal static class CliCommandAppFactory {
 
         var registrar = new SpectreCliTypeRegistrar(provider);
 
-        var app = CommandConfiguration.Create(registrar);
+        var commandApp = CommandConfiguration.Create(registrar);
 
-        return new CliCommandApp(app, commandDispatcher, queryDispatcher);
+        return new CliExecutionContext(
+            commandApp,
+            commandDispatcher,
+            queryDispatcher
+        );
     }
 }
