@@ -1,3 +1,8 @@
 namespace WhoAmI.CLI.Output.Renderers;
 
-internal sealed record InfoItem(string Label, string? Value);
+internal sealed record InfoItem(
+    string Label,
+    string? Value
+) {
+    public string DisplayValue => Value ?? "-";
+}

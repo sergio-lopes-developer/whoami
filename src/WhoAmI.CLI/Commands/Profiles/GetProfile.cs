@@ -15,8 +15,6 @@ public sealed class GetProfile(
     IQueryDispatcher dispatcher,
     ILogger<GetProfile> logger
 ) : CommandBase<GetProfile, GetProfileCommandSettings>(logger) {
-    private const string InfoTitle = "PROFILE";
-
     protected override async Task<int> ExecuteCommandAsync(
         CommandContext context,
         GetProfileCommandSettings commandSettings,
@@ -42,14 +40,16 @@ public sealed class GetProfile(
         }
 
         InfoRenderer.Render(
-            InfoTitle,
-            GetInfoItems(result.Value, commandSettings)
+            new InfoRenderOptions{
+                Title = "PROFILE",
+                Items = BuildInfoItems(result.Value, commandSettings)
+            }
         );
 
         return CliExit.Success();
     }
 
-    private static IEnumerable<InfoItem> GetInfoItems(
+    private static IEnumerable<InfoItem> BuildInfoItems(
         GetProfileByEmailResponse profile,
         GetProfileCommandSettings settings
     ) {
