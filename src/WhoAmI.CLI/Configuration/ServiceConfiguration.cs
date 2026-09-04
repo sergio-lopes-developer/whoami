@@ -23,6 +23,7 @@ internal static class ServiceConfiguration {
         services
             .AddTransient<CreateProfile>()
             .AddTransient<GetProfile>()
+            .AddTransient<ListProfiles>()
             .AddTransient<UpdateEmail>()
             .AddTransient<UpdateFullName>()
             .AddTransient<UpdateSocialLinks>()

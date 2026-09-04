@@ -15,6 +15,8 @@ internal static class CommandSettingsFactory {
         Email = "john@doe.com"
     };
 
+    public static ListProfilesCommandSettings ListProfiles() => new() { };
+
     public static UpdateEmailCommandSettings UpdateEmail() => new() {
         Id = Guid.NewGuid(),
         Email = "john.doe@email.com"
