@@ -1108,6 +1108,7 @@ Application and Infrastructure layers depend on the Domain, but the Domain does 
 - [Architecture](../../docs/architecture/README.md)
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
 - [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
 
 ---
@@ -1121,6 +1122,6 @@ Application and Infrastructure layers depend on the Domain, but the Domain does 
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> "I can do all things through Christ who strengthens me."
+> “I can do all things through Christ who strengthens me.”
 >
 > — Philippians 4:13

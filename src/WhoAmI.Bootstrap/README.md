@@ -51,6 +51,7 @@ This ensures that the database schema is kept up to date before the application 
 - [WhoAmI — Project Overview](../../README.md)
 - [Architecture](../../docs/architecture/README.md)
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md)
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
 
@@ -58,6 +59,6 @@ This ensures that the database schema is kept up to date before the application 
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
  
-> "Taste and see that the Lord is good; blessed is the one who takes refuge in him."
+> “Taste and see that the Lord is good; blessed is the one who takes refuge in him.”
 > 
 > — Psalm 34:8

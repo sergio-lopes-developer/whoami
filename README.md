@@ -22,13 +22,14 @@ A real-world .NET application built using [**Domain-Driven Design (DDD)**](https
 
 ## Repository Guide
 
-| Project | Description |
-|---------|-------------|
-| docs | Architecture and project documentation. |
-| WhoAmI.Domain | Domain model and business rules. |
-| WhoAmI.Application | Application layer, CQRS, validation, and use cases. |
+| Project               | Description                                                      |
+|-----------------------|------------------------------------------------------------------|
+| docs                  | Architecture and project documentation.                          |
+| WhoAmI.Domain         | Domain model and business rules.                                 |
+| WhoAmI.Application    | Application layer, CQRS, validation, and use cases.              |
 | WhoAmI.Infrastructure | Persistence, repositories, queries, and infrastructure services. |
-| WhoAmI.Bootstrap | Composition root and dependency injection configuration. |
+| WhoAmI.Bootstrap      | Composition root and dependency injection configuration.         |
+| WhoAmI.CLI            | Command-line interface.                                          |
 
 ---
 
@@ -40,10 +41,12 @@ whoami/
 ├── src/
 │   ├── WhoAmI.Application/
 │   ├── WhoAmI.Bootstrap/
+│   ├── WhoAmI.CLI/
 │   ├── WhoAmI.Domain/
 │   └── WhoAmI.Infrastructure/
 └── tests/
     ├── WhoAmI.Application.Tests/
+    ├── WhoAmI.CLI.Tests/
     ├── WhoAmI.Domain.Tests/
     ├── WhoAmI.Infrastructure.Tests/
     └── WhoAmI.Testing/
@@ -62,7 +65,7 @@ whoami/
 
 ### Interfaces
 
-- [ ] Command-line interface
+- [x] Command-line interface
 - [ ] REST API
 - [ ] Web application
 - [ ] Desktop application
@@ -83,6 +86,7 @@ whoami/
 - [Architecture](docs/architecture/README.md)
 - [WhoAmI.Application](src/WhoAmI.Application/README.md)
 - [WhoAmI.Bootstrap](src/WhoAmI.Bootstrap/README.md)
+- [WhoAmI.CLI](src/WhoAmI.CLI/README.md)
 - [WhoAmI.Domain](src/WhoAmI.Domain/README.md)
 - [WhoAmI.Infrastructure](src/WhoAmI.Infrastructure/README.md)
 
@@ -106,6 +110,6 @@ While you're welcome to use, modify, and learn from the code under the terms of 
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> "Be not overcome of evil, but overcome evil with good."
+> “Be not overcome of evil, but overcome evil with good.”
 >
 > — Romans 12:21

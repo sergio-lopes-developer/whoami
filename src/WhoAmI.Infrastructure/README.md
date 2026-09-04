@@ -349,6 +349,7 @@ Each migration represents a versioned set of schema changes, allowing the databa
 - [Architecture](../../docs/architecture/README.md)
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
 - [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md)
 
 ---
@@ -363,6 +364,6 @@ Each migration represents a versioned set of schema changes, allowing the databa
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> "Casting all your care upon him; for he cares for you."
+> “Cast all your anxiety on him because he cares for you.”
 >
 > — 1 Peter 5:7

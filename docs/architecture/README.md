@@ -83,10 +83,12 @@ whoami/
 ├── src/
 │   ├── WhoAmI.Application/
 │   ├── WhoAmI.Bootstrap/
+│   ├── WhoAmI.CLI/
 │   ├── WhoAmI.Domain/
 │   └── WhoAmI.Infrastructure/
 └── tests/
     ├── WhoAmI.Application.Tests/
+    ├── WhoAmI.CLI.Tests/
     ├── WhoAmI.Domain.Tests/
     ├── WhoAmI.Infrastructure.Tests/
     └── WhoAmI.Testing/
@@ -176,7 +178,6 @@ Presentation projects expose the application to users.
 
 Current and planned presentation layers include:
 
-- CLI
 - REST API
 - Web application
 
@@ -234,6 +235,7 @@ The architecture has been designed so these additions can be introduced without 
 - [WhoAmI — Project Overview](../../README.md)
 - [WhoAmI.Application](../../src/WhoAmI.Application/README.md)
 - [WhoAmI.Bootstrap](../../src/WhoAmI.Bootstrap/README.md)
+- [WhoAmI.CLI](../../src/WhoAmI.CLI/README.md)
 - [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md)
 - [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md)
 
@@ -249,6 +251,6 @@ The architecture has been designed so these additions can be introduced without 
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> "Trust in the LORD with all your heart; and lean not unto your own understanding."
+> “Trust in the Lord with all your heart and lean not on your own understanding;”
 >
 > — Proverbs 3:5
