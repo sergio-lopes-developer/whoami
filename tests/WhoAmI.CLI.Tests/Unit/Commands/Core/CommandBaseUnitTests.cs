@@ -8,7 +8,7 @@ using WhoAmI.Domain.Shared.Exceptions;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Core;
 
-public class CommandBaseUnitTests {
+public sealed class CommandBaseUnitTests {
     public sealed class TestCommand(
         ILogger<TestCommand> logger,
         Func<CommandContext, TestSettings, CancellationToken, Task<int>> execute

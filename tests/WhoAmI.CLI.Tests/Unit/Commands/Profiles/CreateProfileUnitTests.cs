@@ -9,7 +9,7 @@ using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
-public class CreateProfileUnitTests {
+public sealed class CreateProfileUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
 
