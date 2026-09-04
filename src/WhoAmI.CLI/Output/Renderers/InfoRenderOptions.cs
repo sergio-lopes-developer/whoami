@@ -9,5 +9,8 @@ internal sealed record InfoRenderOptions {
 
     public Justify HeaderAlignment { get; init; } = Justify.Center;
 
+    public HorizontalAlignment Alignment { get; init; }
+        = HorizontalAlignment.Center;
+
     public BoxBorder Border { get; init; } = BoxBorder.Rounded;
 }

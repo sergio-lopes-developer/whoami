@@ -40,7 +40,7 @@ public sealed class GetProfile(
         }
 
         InfoRenderer.Render(
-            new InfoRenderOptions{
+            new InfoRenderOptions {
                 Title = "PROFILE",
                 Items = BuildInfoItems(result.Value, commandSettings)
             }

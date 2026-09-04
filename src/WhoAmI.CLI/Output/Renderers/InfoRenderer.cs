@@ -17,6 +17,8 @@ internal static class InfoRenderer {
             .Header($"[bold] {options.Title} [/]", options.HeaderAlignment)
             .Border(options.Border);
 
-        AnsiConsole.Write(Align.Center(panel));
+        AnsiConsole.Write(
+            new Align(panel, options.Alignment)
+        );
     }
 }
