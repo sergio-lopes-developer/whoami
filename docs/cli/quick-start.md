@@ -1,5 +1,9 @@
 # Quick Start
 
+[🏠 Home](../../README.md) / [CLI Documentation](../../src/WhoAmI.CLI/README.md) / **Quick Start**
+
+---
+
 ## Introduction
 
 This guide will help you configure and run the **WhoAmI CLI** for the first time.
@@ -200,7 +204,7 @@ Once the CLI is running successfully, you may want to explore:
 
 | &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | :----------------------------------------------------: | :------------------------------------------------------------------------: |
-| [CLI Documentation](../../src/WhoAmI.CLI/README.md)    | [Profile Create](./configuration.md)                                       |
+| [CLI Documentation](../../src/WhoAmI.CLI/README.md)    | [Configuration](./configuration.md)                                       |
 
 </div>
 
