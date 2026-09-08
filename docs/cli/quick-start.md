@@ -1,6 +1,6 @@
 # Quick Start
 
-[🏠 Home](../../README.md) / [CLI Documentation](../../src/WhoAmI.CLI/README.md) / **Quick Start**
+[🏠 Home](../../README.md) / [CLI](../../src/WhoAmI.CLI/README.md) / **Quick Start**
 
 ---
 

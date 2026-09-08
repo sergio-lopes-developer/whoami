@@ -1,23 +1,22 @@
 # WhoAmI.Infrastructure
+
+[🏠 Home](../../README.md) / **Infrastructure**
+
+---
+
 ## Introduction
 
 The **WhoAmI.Infrastructure** project contains all infrastructure-specific implementations used by the application.
 
 Its primary responsibility is to provide implementations for the abstractions defined by the Application layer while keeping technology-specific concerns isolated from the rest of the solution.
 
-The project follows the principles of [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), and [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), ensuring that business logic remains independent of persistence details.
-
 ---
 
 ## Architectural Principles
 
-The Infrastructure project is designed according to the principles of:
+The project follows the principles of [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), and [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod).
 
-- Clean Architecture
-- Domain-Driven Design (DDD)
-- SOLID
-
-Technology-specific concerns remain isolated within the Infrastructure layer through well-defined abstractions. Components have focused responsibilities and are designed to be extended without modifying existing implementations, making it straightforward to introduce new persistence providers, query implementations, or persistence violation mappings while keeping the Domain and Application layers independent of infrastructure details.
+Components have focused responsibilities and are designed to be extended without modifying existing implementations, making it straightforward to introduce new persistence providers, query implementations, or persistence violation mappings while keeping the Domain and Application layers independent of infrastructure details.
 
 ---
 
@@ -65,7 +64,7 @@ WhoAmI.Infrastructure/
 #### Configurations
 
 This folder contains:
-- The Entity Framework model configurations that defines:
+- The Entity Framework model configurations that define:
   - tables;
   - columns;
   - indexes;
@@ -74,13 +73,12 @@ This folder contains:
   - database constraints.
 
   > These classes contain only persistence mapping.
-  > No business logic belongs here.
+  > Business logic does not belong here.
 
-- Database constraint names are centralized in the class `/Configurations/Constraints/DatabaseConstraintNames.cs`.
+- Database constraint names are centralized in the class [DatabaseConstraintNames](./Data/Persistence/Configurations/Constraints/DatabaseConstraintNames.cs).
   - This avoids duplicated string literals throughout the persistence configuration.
 
   > These constants are used only when configuring the database schema for unique indexes or unique constraints.
-
 
 #### Context
 
@@ -92,7 +90,6 @@ Its responsibilities include:
 - applying configurations;
 - configuring interceptors;
 - acting as the Unit of Work implementation.
-
 
 #### Repositories
 
@@ -129,7 +126,7 @@ Future implementations may use different technologies without impacting the **Do
 
 Responsible for creating database connections used by query handlers.
 
-This isolates connection creation behind the abstraction `IDbConnectionFactory`.
+This isolates connection creation behind the abstraction [IDbConnectionFactory](./Data/Queries/Abstractions/IDbConnectionFactory.cs).
 
 #### Features
 
@@ -235,7 +232,7 @@ The flow is:
 4. Invoke the appropriate violation mapper.
 5. Return the corresponding application error.
 
-`WhoAmIDbContext` then wraps this `Error` in a failed `Result` and returns it to the Application layer.
+[WhoAmIDbContext](./Data/Persistence/Context/WhoAmIDbContext.cs) then wraps this `Error` in a failed [ResultOfT](../WhoAmI.Application/Results/ResultOfT.cs) and returns it to the Application layer.
 
 The Application layer receives only the resulting application error and never depends on provider-specific exception details.
 
@@ -321,7 +318,7 @@ The diagram below describes the persistence error handling step by step.
 
 ## Dependency Injection
 
-The `ServiceCollectionExtensions.cs` class registers all Infrastructure services.
+The [ServiceCollectionExtensions.cs](./DependencyInjection/ServiceCollectionExtensions.cs) class registers all Infrastructure services.
 
 Examples include:
 
@@ -345,12 +342,23 @@ Each migration represents a versioned set of schema changes, allowing the databa
 
 ## Related Documentation
 
-- [WhoAmI — Project Overview](../../README.md)
+- [Repository Guide](../../README.md)
+  Repository overview and getting started.
+
 - [Architecture](../../docs/architecture/README.md)
-- [WhoAmI.Application](../WhoAmI.Application/README.md)
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
-- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
+  High-level architecture, layer responsibilities, design decisions, and dependency structure.
+
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md)
+  Business model, entities, value objects, aggregates, and domain events.
+
+- [WhoAmI.Application](../WhoAmI.Application/README.md)
+  Application workflows, CQRS, validation, and the Result pattern.
+
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+  Dependency injection and application composition.
+
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
+  Command-line interface and available commands.
 
 ---
 
@@ -364,6 +372,6 @@ Each migration represents a versioned set of schema changes, allowing the databa
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> “Cast all your anxiety on him because he cares for you.”
+> *“Cast all your anxiety on him because he cares for you.”*
 >
-> — 1 Peter 5:7
+> — **1 Peter 5:7**

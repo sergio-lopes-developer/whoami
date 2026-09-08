@@ -1,12 +1,16 @@
 # Architecture
 
+[🏠 Home](../../README.md) / **Architecture**
+
+---
+
 ## Introduction
 
 This document provides a high-level overview of the architecture used by the **WhoAmI** project.
 
 Rather than explaining concepts such as [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), or [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), this document explains how those principles are applied throughout the project.
 
-For implementation details of individual projects, see the related documentation at the end of this document.
+For implementation details of individual projects, see the [related documentation](#related-documentation) at the end of this document.
 
 ---
 
@@ -16,7 +20,7 @@ The architecture aims to:
 
 - Keep business rules independent of frameworks and infrastructure.
 - Separate application workflows from domain logic.
-- Make infrastructure replaceable.
+- Isolate technical concerns.
 - Support multiple presentation layers.
 - Encourage maintainability and testability.
 - Keep dependencies pointing toward the core business model.
@@ -34,81 +38,34 @@ The project is organized around the principles of Clean Architecture.
     />
 </p>
 
-All dependencies point toward the Domain.
+Dependencies always point toward the Domain, which contains the core business model.
 
-The Domain project is the core of the application and contains the business model.
+The solution is organized into five architectural layers:
 
-The Application project orchestrates use cases by coordinating domain objects.
+- [Domain](#domain)
+- [Application](#application)
+- [Infrastructure](#infrastructure)
+- [Bootstrap](#bootstrap)
+- [Presentation](#presentation)
 
-The Infrastructure project implements technical concerns such as persistence and external integrations.
+Each layer has a single responsibility and depends only on lower-level layers, keeping business rules independent of infrastructure and presentation technologies.
 
-The Bootstrap project serves as the composition root responsible for assembling the application.
-
-Presentation projects provide different ways to interact with the application while remaining free of business rules.
-
----
-
-## Architectural Principles
-
-The architecture emphasizes clear boundaries and explicit responsibilities over convenience.
-
-Business rules belong exclusively to the Domain layer.
-
-Application workflows belong to the Application layer.
-
-Technical concerns are isolated within Infrastructure.
-
-Presentation projects remain thin, translating user interactions into application requests without containing business logic.
-
-These principles are enforced through the following dependency rules:
-
-- Domain depends on nothing.
-- Application depends only on Domain.
-- Infrastructure depends on Application and Domain.
-- Bootstrap depends on Application and Infrastructure.
-- Presentation projects depend on Bootstrap.
-- Dependencies always point toward the Domain.
-
-As the project evolves, new features should be added by extending existing layers rather than changing their responsibilities.
-
-This approach keeps the business model independent of frameworks and allows the application to evolve without compromising its architectural boundaries.
+Detailed responsibilities for each layer are described in the following section.
 
 ---
 
-## Project Structure
+## Architectural Decisions
 
-```text
-whoami/
-├── docs/
-├── src/
-│   ├── WhoAmI.Application/
-│   ├── WhoAmI.Bootstrap/
-│   ├── WhoAmI.CLI/
-│   ├── WhoAmI.Domain/
-│   └── WhoAmI.Infrastructure/
-└── tests/
-    ├── WhoAmI.Application.Tests/
-    ├── WhoAmI.CLI.Tests/
-    ├── WhoAmI.Domain.Tests/
-    ├── WhoAmI.Infrastructure.Tests/
-    └── WhoAmI.Testing/
-```
+Several architectural decisions intentionally shape the project:
 
-The repository is organized into three main areas.
+- **Commands and Queries**  
+  Commands modify state, while queries retrieve information. Keeping them separate simplifies reasoning about application behavior.
 
-### docs
+- **Domain-Centric Design**  
+  Business rules are always enforced by the Domain. The Application coordinates use cases but does not own business behavior.
 
-Contains architecture documentation, diagrams, and design decisions.
-
-### src
-
-Contains the application source code.
-
-Each project has a single architectural responsibility.
-
-### tests
-
-Contains unit and integration tests that verify the behavior of the project.
+- **Multiple Presentation Layers**  
+  The architecture allows different user interfaces to reuse the same Application and Domain logic. This avoids duplication while keeping user interface concerns isolated.
 
 ---
 
@@ -176,68 +133,38 @@ Presentation projects use the Bootstrap layer to initialize the application with
 
 Presentation projects expose the application to users.
 
-Current and planned presentation layers include:
+They translate user input into application requests and present the results returned by the Application layer.
 
-- REST API
-- Web application
-
-Presentation projects translate user input into application requests and present the results returned by the Application layer.
-
----
-
-## Design Decisions
-
-Several architectural decisions intentionally shape the project.
-
-### Commands and Queries
-
-Commands modify state.
-
-Queries retrieve information.
-
-Keeping them separate simplifies reasoning about application behavior.
-
----
-
-### Domain-Centric Design
-
-Business rules are always enforced by the Domain.
-
-The Application coordinates use cases but does not own business behavior.
-
----
-
-### Multiple Presentation Layers
-
-The architecture allows different user interfaces to reuse the same application and domain logic.
-
-This avoids duplication while keeping user interface concerns isolated.
-
----
-
-## Evolution
-
-The current implementation is centered on the Domain and Application layers, with additional projects being introduced incrementally.
-
-Future work includes additional projects such as:
+The architecture supports multiple presentation layers, including:
 
 - Command-line interface
 - REST API
 - Web application
 - Desktop application
 
-The architecture has been designed so these additions can be introduced without changing the responsibilities of the existing layers.
+Each presentation layer can be introduced independently without changing the responsibilities of the existing layers.
 
 ---
 
 ## Related Documentation
 
-- [WhoAmI — Project Overview](../../README.md)
-- [WhoAmI.Application](../../src/WhoAmI.Application/README.md)
-- [WhoAmI.Bootstrap](../../src/WhoAmI.Bootstrap/README.md)
-- [WhoAmI.CLI](../../src/WhoAmI.CLI/README.md)
+- [Repository Guide](../../README.md)
+  Repository overview and getting started.
+  
 - [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md)
+  Business model, entities, value objects, aggregates, and domain events.
+  
+- [WhoAmI.Application](../../src/WhoAmI.Application/README.md)
+  Application workflows, CQRS, validation, and the Result pattern.
+  
 - [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md)
+  Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+  
+- [WhoAmI.Bootstrap](../../src/WhoAmI.Bootstrap/README.md)
+  Dependency injection and application composition.
+  
+- [WhoAmI.CLI](../../src/WhoAmI.CLI/README.md)
+  Command-line interface and available commands.
 
 ---
 
@@ -251,6 +178,6 @@ The architecture has been designed so these additions can be introduced without 
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> “Trust in the Lord with all your heart and lean not on your own understanding;”
+> *“Trust in the Lord with all your heart and lean not on your own understanding;”*
 >
-> — Proverbs 3:5
+> — **Proverbs 3:5**

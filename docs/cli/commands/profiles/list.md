@@ -1,6 +1,6 @@
 # Profile List
 
-[🏠 Home](../../../../README.md) / [CLI Documentation](../../../../src/WhoAmI.CLI/README.md) / [Usage](../../usage.md) / **Profile List**
+[🏠 Home](../../../../README.md) / [CLI](../../../../src/WhoAmI.CLI/README.md) / [Usage](../../usage.md) / **Profile List**
 
 ---
 

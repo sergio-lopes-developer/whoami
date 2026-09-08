@@ -1,6 +1,6 @@
 # Usage
 
-[🏠 Home](../../README.md) / [CLI Documentation](../../src/WhoAmI.CLI/README.md) / **Usage**
+[🏠 Home](../../README.md) / [CLI](../../src/WhoAmI.CLI/README.md) / **Usage**
 
 ---
 

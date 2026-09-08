@@ -1,5 +1,11 @@
 # WhoAmI.Domain
 
+[🏠 Home](../../README.md) / **Domain**
+
+---
+
+## Introduction
+
 The **WhoAmI.Domain** project contains the core business model of the WhoAmI application.
 
 It defines the domain concepts, business rules, invariants, value objects, entities, aggregate roots, domain events, and domain-specific exceptions that represent the business itself.
@@ -1102,14 +1108,27 @@ The central architectural principle is:
 
 Application and Infrastructure layers depend on the Domain, but the Domain does not depend on them.
 
+---
+
 ## Related Documentation
 
-- [WhoAmI — Project Overview](../../README.md)
+- [Repository Guide](../../README.md)
+  Repository overview and getting started.
+
 - [Architecture](../../docs/architecture/README.md)
+  High-level architecture, layer responsibilities, design decisions, and dependency structure.
+
 - [WhoAmI.Application](../WhoAmI.Application/README.md)
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
-- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
+  Application workflows, CQRS, validation, and the Result pattern.
+
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
+  Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+  Dependency injection and application composition.
+
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
+  Command-line interface and available commands.
 
 ---
 
@@ -1122,6 +1141,6 @@ Application and Infrastructure layers depend on the Domain, but the Domain does 
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> “I can do all things through Christ who strengthens me.”
+> *“I can do all things through Christ who strengthens me.”*
 >
-> — Philippians 4:13
+> — **Philippians 4:13**

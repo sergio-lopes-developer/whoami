@@ -1,5 +1,9 @@
 # WhoAmI.CLI
 
+[🏠 Home](../../README.md) / **CLI**
+
+---
+
 ## Introduction
 
 The **WhoAmI CLI** is the command-line interface for the WhoAmI project.
@@ -82,12 +86,23 @@ WhoAmI.CLI
 
 ## Related Documentation
 
-- [Project Overview](../../README.md)
+- [Repository Guide](../../README.md)
+  Repository overview and getting started.
+
 - [Architecture](../../docs/architecture/README.md)
-- [WhoAmI.Application](../WhoAmI.Application/README.md)
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+  High-level architecture, layer responsibilities, design decisions, and dependency structure.
+
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md)
+  Business model, entities, value objects, aggregates, and domain events.
+
+- [WhoAmI.Application](../WhoAmI.Application/README.md)
+  Application workflows, CQRS, validation, and the Result pattern.
+
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
+  Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+  Dependency injection and application composition.
 
 ---
 
@@ -100,6 +115,6 @@ WhoAmI.CLI
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> “The Lord is my shepherd, I lack nothing.”
+> *“The Lord is my shepherd, I lack nothing.”*
 >
-> — Psalm 23:1
+> — **Psalm 23:1**

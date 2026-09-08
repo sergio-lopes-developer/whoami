@@ -4,11 +4,15 @@
 
 **WhoAmI** is a .NET portfolio project built around two primary goals: creating an interactive developer profile and showcasing software architecture through a real-world application.
 
+---
+
 ## Why WhoAmI
 
 The project is designed to introduce who I am as a software developer. It displays my profile information while also showcasing my programming and software architecture skills through a real-world application.
 
 The name is inspired by the classic Linux `whoami` command, which prints the name of the current user. In the same spirit, this project introduces me through both its output and its source code.
+
+---
 
 ## Goals
 
@@ -20,9 +24,11 @@ A command-line application that serves as an interactive version of my developer
 
 A real-world .NET application built using [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), and [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The project demonstrates architectural principles, maintainability, and testing practices through a practical, evolving application, with additional interfaces such as an API and a web application planned.
 
+---
+
 ## Repository Guide
 
-| Project               | Description                                                      |
+| Component             | Description                                                      |
 |-----------------------|------------------------------------------------------------------|
 | docs                  | Architecture and project documentation.                          |
 | WhoAmI.Domain         | Domain model and business rules.                                 |
@@ -35,7 +41,7 @@ A real-world .NET application built using [**Domain-Driven Design (DDD)**](https
 
 ## Project Structure
 
-```
+```text
 whoami/
 ├── docs/
 ├── src/
@@ -51,6 +57,12 @@ whoami/
     ├── WhoAmI.Infrastructure.Tests/
     └── WhoAmI.Testing/
 ```
+
+The repository is organized into three main areas:
+
+- **`docs/`** — Contains project documentation, including architecture, design decisions, diagrams, and development guides.
+- **`src/`** — Contains the application source code. Each project has a single architectural responsibility.
+- **`tests/`** — Contains unit and integration tests that verify the behavior of the project.
 
 ---
 
@@ -83,12 +95,23 @@ whoami/
 
 ## Documentation
 
-- [Architecture](docs/architecture/README.md)
-- [WhoAmI.Application](src/WhoAmI.Application/README.md)
-- [WhoAmI.Bootstrap](src/WhoAmI.Bootstrap/README.md)
-- [WhoAmI.CLI](src/WhoAmI.CLI/README.md)
-- [WhoAmI.Domain](src/WhoAmI.Domain/README.md)
-- [WhoAmI.Infrastructure](src/WhoAmI.Infrastructure/README.md)
+- [Architecture](./docs/architecture/README.md)
+  High-level architecture, layer responsibilities, design decisions, and dependency structure.
+
+- [WhoAmI.Domain](./src/WhoAmI.Domain/README.md)
+  Business model, entities, value objects, aggregates, and domain events.
+
+- [WhoAmI.Application](./src/WhoAmI.Application/README.md)
+  Application workflows, CQRS, validation, and the Result pattern.
+
+- [WhoAmI.Infrastructure](./src/WhoAmI.Infrastructure/README.md)
+  Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+
+- [WhoAmI.Bootstrap](./src/WhoAmI.Bootstrap/README.md)
+  Dependency injection and application composition.
+
+- [WhoAmI.CLI](./src/WhoAmI.CLI/README.md)
+  Command-line interface and available commands.
 
 ---
 
@@ -110,6 +133,6 @@ While you're welcome to use, modify, and learn from the code under the terms of 
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> “Be not overcome of evil, but overcome evil with good.”
+> *“Be not overcome of evil, but overcome evil with good.”*
 >
-> — Romans 12:21
+> — **Romans 12:21**

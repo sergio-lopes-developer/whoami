@@ -1,6 +1,10 @@
 # WhoAmI.Application
 
-## Overview
+[🏠 Home](../../README.md) / **Application**
+
+---
+
+## Introduction
 
 This application is designed following the principles of [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html).
 
@@ -103,8 +107,8 @@ Query handlers are intentionally implemented in the Infrastructure layer because
 ## Dispatchers
 
 Commands and queries are executed through dedicated dispatchers.
-- ICommandDispatcher
-- IQueryDispatcher
+- [ICommandDispatcher](./Abstractions/Dispatching/Commands/ICommandDispatcher.cs)
+- [IQueryDispatcher](./Abstractions/Dispatching/Queries/IQueryDispatcher.cs)
 
 The dispatchers resolve the appropriate handlers through dependency injection and apply the configured decorator pipeline before invoking the underlying handler.
 
@@ -127,17 +131,17 @@ Commands are executed through the following pipeline:
 Commands are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and handles a specific cross-cutting concern, such as logging, validation, or transaction management.
 
 The command pipeline is composed of the following decorators:
-- `CommandExecutionDecorator` and  `CommandExecutionDecoratorOfT`, records execution information for logging and observability.
-- `CommandValidationDecorator` and `CommandValidationDecoratorOfT`, validates incoming commands before execution.
-- `CommandUnitOfWorkDecorator` and `CommandUnitOfWorkDecoratorOfT`, executes the handler inside a Unit of Work and commits the transaction when the operation succeeds.
+- [CommandExecutionDecorator](./Decorators/Commands/CommandExecutionDecorator.cs) and  [CommandExecutionDecoratorOfT](./Decorators/Commands/CommandExecutionDecoratorOfT.cs), records execution information for logging and observability.
+- [CommandValidationDecorator](./Decorators/Commands/CommandValidationDecorator.cs) and [CommandValidationDecoratorOfT](./Decorators/Commands/CommandValidationDecoratorOfT.cs), validates incoming commands before execution.
+- [CommandUnitOfWorkDecorator](./Decorators/Commands/CommandUnitOfWorkDecorator.cs) and [CommandUnitOfWorkDecoratorOfT](./Decorators/Commands/CommandUnitOfWorkDecoratorOfT.cs), executes the handler inside a Unit of Work and commits the transaction when the operation succeeds.
 
 Each decorator is available in two versions, one for commands that do not return a value and another generic implementation (`OfT`) for commands that return a result.
 
 ### Query Pipeline
 
 The query pipeline consists of two decorators:
-- QueryExecutionDecorator
-- QueryValidationDecorator
+- [QueryExecutionDecorator](./Decorators/Queries/QueryExecutionDecorator.cs)
+- [QueryValidationDecorator](./Decorators/Queries/QueryValidationDecorator.cs)
 
 Queries are executed through the following pipeline:
 
@@ -168,9 +172,9 @@ Application validation ensures that requests are well-formed and complete, while
 
 Application operations communicate business failures through the Result pattern instead of using exceptions for control flow.
 
-Operations return either `Result` or `Result<T>`. On failure, the result contains one or more Error instances.
+Operations return either [Result](./Results/Result.cs) or [Result<T>](./Results/ResultOfT.cs). On failure, the result contains one or more Error instances.
 
-Each `Error` contains:
+Each [Error](./Results/Error.cs) contains:
 - Code
 - Message
 - Metadata (optional)
@@ -202,12 +206,23 @@ This information can be consumed by logging providers such as Serilog, Seq, or E
 
 ## Related Documentation
 
-- [WhoAmI — Project Overview](../../README.md)
+- [Repository Guide](../../README.md)
+  Repository overview and getting started.
+
 - [Architecture](../../docs/architecture/README.md)
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
-- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
+  High-level architecture, layer responsibilities, design decisions, and dependency structure.
+
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md)
+  Business model, entities, value objects, aggregates, and domain events.
+
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
+  Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
+  Dependency injection and application composition.
+
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
+  Command-line interface and available commands.
 
 ---
 
@@ -223,6 +238,6 @@ This information can be consumed by logging providers such as Serilog, Seq, or E
 
 Built with ❤️ on **Linux** using **JetBrains Rider**.
 
-> “I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.”
+> *“I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.”*
 >
-> — John 16:33
+> — **John 16:33**
