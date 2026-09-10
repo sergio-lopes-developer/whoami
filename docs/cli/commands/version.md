@@ -82,7 +82,7 @@ WhoAmI CLI - v1.0.0
 <div align="center">
 
 | &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-| :----------------------------------------------------: | :------------------------------------------------------------------------: |
-| [Profile Update Social Links](./profiles/update/social-links.md) | [CLI Documentation](../../../src/WhoAmI.CLI/README.md) |
+| :----------------------------------------------------: |:--------------------------------------------------------------------------:|
+| [Profile Update Social Links](./profiles/update/social-links.md) |                  [CLI](../../../src/WhoAmI.CLI/README.md)                  |
 
 </div>

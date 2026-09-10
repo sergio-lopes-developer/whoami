@@ -1112,23 +1112,12 @@ Application and Infrastructure layers depend on the Domain, but the Domain does 
 
 ## Related Documentation
 
-- [Repository Guide](../../README.md)
-  Repository overview and getting started.
-
-- [Architecture](../../docs/architecture/README.md)
-  High-level architecture, layer responsibilities, design decisions, and dependency structure.
-
-- [WhoAmI.Application](../WhoAmI.Application/README.md)
-  Application workflows, CQRS, validation, and the Result pattern.
-
-- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md)
-  Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
-  Dependency injection and application composition.
-
-- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
-  Command-line interface and available commands.
+- [Repository Guide](../../README.md) — Repository overview and getting started.
+- [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Application](../WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md) — Command-line interface and available commands.
 
 ---
 

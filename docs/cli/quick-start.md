@@ -203,8 +203,8 @@ Once the CLI is running successfully, you may want to explore:
 <div align="center">
 
 | &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-| :----------------------------------------------------: | :------------------------------------------------------------------------: |
-| [CLI Documentation](../../src/WhoAmI.CLI/README.md)    | [Configuration](./configuration.md)                                       |
+|:------------------------------------------------------:| :------------------------------------------------------------------------: |
+|         [CLI](../../src/WhoAmI.CLI/README.md)          | [Configuration](./configuration.md)                                       |
 
 </div>
 

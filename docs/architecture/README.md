@@ -77,12 +77,12 @@ The Domain layer represents the business itself.
 
 It owns:
 
-- business rules;
-- aggregates;
-- entities;
-- value objects;
-- domain events;
-- domain exceptions.
+- Business rules.
+- Aggregates.
+- Entities.
+- Value objects.
+- Domain events.
+- Domain exceptions.
 
 The Domain never depends on higher layers.
 
@@ -104,11 +104,11 @@ The Infrastructure layer provides technical implementations required by the Appl
 
 Responsibilities typically include:
 
-- persistence;
-- repositories;
-- Entity Framework Core configuration;
-- Dapper query implementations;
-- external services.
+- Persistence.
+- Repositories.
+- Entity Framework Core configuration.
+- Dapper query implementations.
+- External services.
 
 Infrastructure depends on the Application and Domain layers, never the opposite.
 
@@ -120,10 +120,10 @@ The Bootstrap layer acts as the application's composition root.
 
 Its responsibility is to configure the application by:
 
-- registering dependency injection services;
-- wiring together Application and Infrastructure implementations;
-- configuring external frameworks and libraries;
-- providing a single composition root for presentation projects.
+- Registering dependency injection services.
+- Wiring together Application and Infrastructure implementations.
+- Configuring external frameworks and libraries.
+- Providing a single composition root for presentation projects.
 
 Presentation projects use the Bootstrap layer to initialize the application without containing dependency injection or infrastructure configuration themselves.
 
@@ -137,10 +137,10 @@ They translate user input into application requests and present the results retu
 
 The architecture supports multiple presentation layers, including:
 
-- Command-line interface
-- REST API
-- Web application
-- Desktop application
+- Command-line interface.
+- REST API.
+- Web application.
+- Desktop application.
 
 Each presentation layer can be introduced independently without changing the responsibilities of the existing layers.
 
@@ -148,23 +148,12 @@ Each presentation layer can be introduced independently without changing the res
 
 ## Related Documentation
 
-- [Repository Guide](../../README.md)
-  Repository overview and getting started.
-  
-- [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md)
-  Business model, entities, value objects, aggregates, and domain events.
-  
-- [WhoAmI.Application](../../src/WhoAmI.Application/README.md)
-  Application workflows, CQRS, validation, and the Result pattern.
-  
-- [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md)
-  Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-  
-- [WhoAmI.Bootstrap](../../src/WhoAmI.Bootstrap/README.md)
-  Dependency injection and application composition.
-  
-- [WhoAmI.CLI](../../src/WhoAmI.CLI/README.md)
-  Command-line interface and available commands.
+- [Repository Guide](../../README.md) — Repository overview and getting started.
+- [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
+- [WhoAmI.Application](../../src/WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+- [WhoAmI.Bootstrap](../../src/WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
+- [WhoAmI.CLI](../../src/WhoAmI.CLI/README.md) — Command-line interface and available commands.
 
 ---
 

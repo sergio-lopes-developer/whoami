@@ -342,23 +342,12 @@ Each migration represents a versioned set of schema changes, allowing the databa
 
 ## Related Documentation
 
-- [Repository Guide](../../README.md)
-  Repository overview and getting started.
-
-- [Architecture](../../docs/architecture/README.md)
-  High-level architecture, layer responsibilities, design decisions, and dependency structure.
-
-- [WhoAmI.Domain](../WhoAmI.Domain/README.md)
-  Business model, entities, value objects, aggregates, and domain events.
-
-- [WhoAmI.Application](../WhoAmI.Application/README.md)
-  Application workflows, CQRS, validation, and the Result pattern.
-
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md)
-  Dependency injection and application composition.
-
-- [WhoAmI.CLI](../WhoAmI.CLI/README.md)
-  Command-line interface and available commands.
+- [Repository Guide](../../README.md) — Repository overview and getting started.
+- [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
+- [WhoAmI.Application](../WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md) — Command-line interface and available commands.
 
 ---
 
