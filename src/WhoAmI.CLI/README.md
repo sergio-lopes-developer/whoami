@@ -6,7 +6,7 @@
 
 ## Introduction
 
-The **WhoAmI CLI** is the command-line interface for the WhoAmI project.
+The **WhoAmI.CLI** project provides the command-line interface for the WhoAmI application.
 
 It provides a terminal-based interface for creating, retrieving, listing, and updating developer profiles without requiring a graphical user interface.
 
@@ -14,7 +14,7 @@ The CLI is designed to be:
 
 - Script-friendly.
 - Cross-platform.
-- Easy to extend.
+- Extensible.
 - Consistent.
 
 ---

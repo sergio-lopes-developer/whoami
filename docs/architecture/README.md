@@ -8,7 +8,7 @@
 
 This document provides a high-level overview of the architecture used by the **WhoAmI** project.
 
-Rather than explaining concepts such as [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), or [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), this document explains how those principles are applied throughout the project.
+Rather than explaining concepts such as [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), or [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html), this document explains how those principles are applied throughout the solution.
 
 For implementation details of individual projects, see the [related documentation](#related-documentation) at the end of this document.
 
@@ -29,7 +29,7 @@ The architecture aims to:
 
 ## Architectural Overview
 
-The project is organized around the principles of Clean Architecture.
+The solution is organized around the principles of Clean Architecture.
 
 <p align="center">
     <img
@@ -59,7 +59,7 @@ Detailed responsibilities for each layer are described in the following section.
 Several architectural decisions intentionally shape the project:
 
 - **Commands and Queries**  
-  Commands modify state, while queries retrieve information. Keeping them separate simplifies reasoning about application behavior.
+  Commands modify state, while queries retrieve information. Keeping them separate simplifies reasoning about business operations.
 
 - **Domain-Centric Design**  
   Business rules are always enforced by the Domain. The Application coordinates use cases but does not own business behavior.

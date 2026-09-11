@@ -8,32 +8,28 @@
 
 The **WhoAmI.Infrastructure** project contains all infrastructure-specific implementations used by the application.
 
-Its primary responsibility is to provide implementations for the abstractions defined by the Application layer while keeping technology-specific concerns isolated from the rest of the solution.
+It provides concrete implementations for the abstractions defined by the Application layer while keeping technology-specific concerns isolated from the rest of the application.
 
----
-
-## Architectural Principles
-
-The project follows the principles of [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), and [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod).
-
-Components have focused responsibilities and are designed to be extended without modifying existing implementations, making it straightforward to introduce new persistence providers, query implementations, or persistence violation mappings while keeping the Domain and Application layers independent of infrastructure details.
+The project follows the principles of **Clean Architecture**, **Domain-Driven Design (DDD)**, and **SOLID**, allowing infrastructure technologies to evolve independently without affecting the Domain or Application layers.
 
 ---
 
 ## Responsibilities
 
+The Infrastructure layer is designed to be extensible. New persistence providers, query implementations, or persistence violation mappings can be introduced without affecting the Domain or Application layers.
+
 The Infrastructure layer is responsible for:
 
-- Configuring the database model
-- Implementing repositories
-- Persisting aggregates
-- Translating provider-specific persistence errors
-- Registering infrastructure services
-- Executing SQL queries
+- Configuring the database model.
+- Implementing repositories.
+- Persisting aggregates.
+- Translating provider-specific persistence errors.
+- Registering infrastructure services.
+- Executing SQL queries.
 
-It is **not** responsible for business rules.
-
-Business validation belongs to the Domain and Application layers.
+> [!NOTE]
+>
+> The Infrastructure layer is **not** responsible for business rules. Business validation belongs to the Domain and Application layers.
 
 ---
 

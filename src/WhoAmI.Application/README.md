@@ -6,7 +6,7 @@
 
 ## Introduction
 
-This application is designed following the principles of [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html).
+The **WhoAmI.Application** project implements the application layer following the principles of [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod), and [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html).
 
 The Application layer depends only on the Domain layer and a minimal set of framework libraries required for dependency injection. It has no dependency on Infrastructure, databases, external services, or presentation frameworks.
 
@@ -88,7 +88,8 @@ WhoAmI.Application
 > [!IMPORTANT]
 > 
 > Query handlers are intentionally implemented in the Infrastructure layer because queries operate directly on the read model.
-> This design keeps the Application layer independent of persistence technologies while allowing multiple query implementations such as EF Core, Dapper, or raw SQL.
+>
+> This design keeps the Application layer independent of persistence technologies while allowing the read and write sides to evolve independently.
 
 ---
 
@@ -105,7 +106,7 @@ The dispatchers resolve the appropriate handlers through dependency injection an
 
 ## Command Pipeline
 
-Commands represent operations that modify the system state.
+Commands represent operations that modify the application state.
 
 Commands are executed through the following pipeline:
 
@@ -128,12 +129,7 @@ Each decorator is available in two versions: one for commands that do not return
 
 ## Query Pipeline
 
-Queries are processed through a decorator pipeline before reaching their handlers.
-
-Queries are executed through the following pipeline:
-
-- [QueryExecutionDecorator&lt;TQuery, TResult&gt;](./Decorators/Queries/QueryExecutionDecorator.cs).
-- [QueryValidationDecorator&lt;TQuery, TResult&gt;](./Decorators/Queries/QueryValidationDecorator.cs).
+Queries represent operations that retrieve information without modifying application state.
 
 Queries are executed through the following pipeline:
 
@@ -144,7 +140,14 @@ Queries are executed through the following pipeline:
   />
 </p>
 
-Unlike commands, queries do not modify application state and therefore do not require transaction management.
+Queries are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and addresses a specific cross-cutting concern, such as logging or validation.
+
+The query pipeline is composed of the following decorators:
+
+- [QueryExecutionDecorator&lt;TQuery, TResult&gt;](./Decorators/Queries/QueryExecutionDecorator.cs).
+- [QueryValidationDecorator&lt;TQuery, TResult&gt;](./Decorators/Queries/QueryValidationDecorator.cs).
+
+Unlike the command pipeline, the query pipeline does not include transaction management because queries never modify application state.
 
 ---
 
@@ -169,7 +172,7 @@ Application validation ensures that requests are well-formed and complete.
 
 Application operations communicate expected business failures through the Result pattern instead of using exceptions for control flow.
 
-Operations return either [Result](./Results/Result.cs) or [Result&lt;T&gt;](./Results/ResultOfT.cs). On failure, the result contains one or more Error instances.
+Operations return either [Result](./Results/Result.cs) or [Result&lt;T&gt;](./Results/ResultOfT.cs). On failure, the result contains one or more error instances.
 
 Each [Error](./Results/Error.cs) contains:
 

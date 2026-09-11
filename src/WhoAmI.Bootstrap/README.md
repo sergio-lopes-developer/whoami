@@ -16,6 +16,8 @@ This project acts as the **Composition Root**, keeping host applications (such a
 
 ## Responsibilities
 
+The Bootstrap layer is responsible for the following tasks:
+
 - Register application services.
 - Register infrastructure services.
 - Configure the application pipeline.
@@ -38,6 +40,12 @@ Internally, it composes the application by:
 - Registering the Infrastructure layer.
 - Configuring the command and query pipelines.
 
+> [!IMPORTANT]
+>
+> The Bootstrap project is the application's Composition Root.
+>
+> Presentation projects should configure the application exclusively through the Bootstrap layer instead of registering services directly. This keeps application composition centralized and consistent across different hosts.
+
 ---
 
 ## Database Initialization
@@ -49,16 +57,6 @@ await serviceProvider.InitializeDatabaseAsync();
 ```
 
 This ensures that the database schema is kept up to date before the application begins processing requests.
-
----
-
-## Dependencies
-
-- **WhoAmI.Application**
-- **WhoAmI.Infrastructure**
-- **Microsoft.Extensions.DependencyInjection**
-- **Microsoft.Extensions.Hosting**
-- **Microsoft.EntityFrameworkCore**
 
 ---
 

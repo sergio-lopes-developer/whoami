@@ -75,7 +75,6 @@ The repository is organized into three top-level directories: `docs/`, `src/`, a
   - ✅ Application layer
   - ✅ Infrastructure layer
   - ✅ Bootstrap
-  - ...
 - **Interfaces**
   - ✅ Command-line interface
   - ⏳ REST API
