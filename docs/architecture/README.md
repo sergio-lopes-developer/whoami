@@ -38,7 +38,11 @@ The solution is organized around the principles of Clean Architecture.
     />
 </p>
 
-Dependencies always point toward the Domain, which contains the core business model.
+> [!IMPORTANT]
+>
+> The Presentation layer has a limited direct dependency on the Domain layer solely for defensive handling of `DomainException`.
+> 
+> Except for the limited dependency described above, dependencies always point toward the Domain, which contains the core business model.
 
 The solution is organized into five architectural layers:
 

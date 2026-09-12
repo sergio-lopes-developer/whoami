@@ -22,7 +22,7 @@ The Infrastructure layer is responsible for:
 
 - Configuring the database model.
 - Implementing repositories.
-- Persisting aggregates.
+- Persisting aggregates and executing other write operations against the database.
 - Translating provider-specific persistence errors.
 - Registering infrastructure services.
 - Executing SQL queries.
@@ -33,136 +33,111 @@ The Infrastructure layer is responsible for:
 
 ---
 
-## Project Structure
-
-The `Data` folder is divided into two primary areas:
-
-- **Persistence**, which contains the write-side implementation.
-- **Queries**, which contains the read-side implementation.
+## Data Access
 
 ### Persistence
 
-This is the **Persistence** structure:
-
-```text
-WhoAmI.Infrastructure/
-└── Data/
-    └── Persistence/
-        ├── Configurations/
-        ├── Context/
-        ├── ErrorHandling/
-        └── Repositories/
-```
-
-**Persistence** is responsible for persisting aggregates and other write operations against the database.
-
-
 #### Configurations
 
-This folder contains:
-- The Entity Framework model configurations that define:
-  - tables;
-  - columns;
-  - indexes;
-  - conversions;
-  - owned types;
-  - database constraints.
+Infrastructure uses Entity Framework Core model configurations to define how aggregates are mapped to the database.
 
-  > These classes contain only persistence mapping.
-  > Business logic does not belong here.
+Each aggregate has an Entity Framework model configuration where the following are configured:
+- Tables.
+- Columns.
+- Indexes.
+- Conversions.
+- Owned types.
+- Database constraints.
 
-- Database constraint names are centralized in the class [DatabaseConstraintNames](./Data/Persistence/Configurations/Constraints/DatabaseConstraintNames.cs).
-  - This avoids duplicated string literals throughout the persistence configuration.
+These classes contain only persistence mapping and no business logic.
 
-  > These constants are used only when configuring the database schema for unique indexes or unique constraints.
+Database constraint names are centralized in the [DatabaseConstraintNames](./Data/Persistence/Configurations/Constraints/DatabaseConstraintNames.cs) class. This avoids repeating string literals throughout the persistence configuration.
+
+> [!NOTE]
+>
+> These constants are used only when configuring the database schema for unique indexes or unique constraints.
+
+---
 
 #### Context
 
-Contains the EF Core DbContext.
+The [WhoAmIDbContext](./Data/Persistence/Context/WhoAmIDbContext.cs) class is the central entry point for Entity Framework Core persistence.
+
+Besides managing entity persistence, it also coordinates the persistence error translation pipeline, ensuring provider-specific exceptions are converted into provider-independent application errors before leaving the Infrastructure layer.
 
 Its responsibilities include:
 
-- exposing DbSets;
-- applying configurations;
-- configuring interceptors;
-- acting as the Unit of Work implementation.
+- Exposing `DbSet` properties.
+- Applying Entity Framework model configurations.
+- Acting as the `IUnitOfWork` implementation.
+- Coordinating persistence error translation.
+
+---
 
 #### Repositories
 
-Repositories implement the repository interfaces defined by the Application layer.
+Repositories implement the repository interfaces defined by the Application layer, providing persistence for aggregate roots.
 
-Their responsibility is limited to persisting aggregates.
+They encapsulate Entity Framework Core operations required to store and retrieve aggregates while hiding persistence-specific implementation details from the rest of the application.
 
-Business rules are intentionally kept outside repositories.
+Their responsibilities include:
+
+- Persisting aggregate roots.
+- Retrieving aggregate roots.
+- Encapsulating Entity Framework Core operations.
+- Providing an abstraction over the persistence mechanism.
 
 ---
 
 ### Queries
 
-This is the **Queries** structure:
+The query side is responsible for executing read operations against the database.
 
-```text
-WhoAmI.Infrastructure/
-└── Data/
-    └── Queries/
-        ├── Abstractions/
-        ├── Connections/
-        └── Features/
-```
+Unlike the persistence side, queries do not load or modify aggregates. Instead, they retrieve only the data required by each use case, allowing read operations to remain independent of the write model.
 
-The query side is separated from aggregate persistence.
+This separation follows the CQRS approach adopted by the project, enabling each side to evolve independently while keeping the Domain and Application layers unaware of persistence technology.
 
-This allows read operations to evolve independently of write operations.
-
-Although the current implementation uses SQLite, the structure allows replacing the query technology without affecting the rest of the application.
-
-Future implementations may use different technologies without impacting the **Domain** or **Application** layers.
+---
 
 #### Connections
 
-Responsible for creating database connections used by query handlers.
+Query handlers obtain database connections through the [IDbConnectionFactory](./Data/Queries/Abstractions/IDbConnectionFactory.cs) abstraction.
 
-This isolates connection creation behind the abstraction [IDbConnectionFactory](./Data/Queries/Abstractions/IDbConnectionFactory.cs).
+The current implementation provides a SQLite connection factory, but the abstraction allows the underlying provider to be replaced without affecting query handlers.
 
-#### Features
+This keeps connection creation centralized and prevents provider-specific code from being scattered throughout the query implementation.
 
-##### Query Handlers
+---
 
-Each query resides in its own folder, organized by feature and aggregate.
+#### Query Handlers
 
-Example:
+Each query handler is responsible for executing a single read operation.
+
+Rather than retrieving aggregates, query handlers execute SQL directly against the database and return only the data required by the use case.
+
+Organizing each query in its own directory groups all related artifacts together, improving discoverability and making each read operation self-contained.
+
+A query typically consists of:
+
+- Query handler.
+- SQL statement.
+- Row model (when required).
+
+For example:
 
 ```text
-WhoAmI.Infrastructure/
-└── Data/
-    └── Queries/
-        ├── Abstractions/
-        ├── Connections/
-        └── Features/
-            └── Profiles
-                └── GetProfileByEmail
-                    ├── GetProfileByEmailQueryHandler.cs
-                    ├── GetProfileByEmailRow.cs
-                    └── GetProfileByEmailSql.cs
+Profiles/
+└── GetProfileByEmail/
+    ├── GetProfileByEmailQueryHandler.cs
+    ├── GetProfileByEmailRow.cs
+    └── GetProfileByEmailSql.cs
 ```
-
-Keeping SQL close to its handler improves discoverability and keeps related code together.
-
-Each query typically contains:
-
-- SQL definition
-- Row model (DTO)
-- Query handler
 
 ---
 
 ## CQRS Infrastructure Overview
 
-The following diagram illustrates how the Infrastructure project supports the Command (write) and Query (read) sides of the application.
-
-Although both flows ultimately interact with the same SQLite database today, they are intentionally separated so that each side can evolve independently. This separation allows different persistence strategies, read models, or even dedicated databases to be introduced in the future without affecting the Application or Domain layers.
-
-The following diagram summarizes how the write and read sides are implemented inside the Infrastructure layer.
+The following diagram illustrates how the Infrastructure layer implements the Command (write) and Query (read) sides of the application and how both flows interact with the persistence layer.
 
 <p align="center">
   <img
@@ -171,137 +146,115 @@ The following diagram summarizes how the write and read sides are implemented in
   />
 </p>
 
+> [!NOTE]
+>
+> Although the diagram illustrates separate read and write databases, the current implementation uses a single SQLite database for both operations.
+>
+> The separation represents the CQRS architecture rather than the physical database layout. It allows the read and write sides to evolve independently and enables different persistence strategies, read models, or dedicated databases to be introduced in the future without affecting the Application or Domain layers.
+
 ---
 
 ## Persistence Error Handling
 
-One of the goals of this project is preventing database-specific details from escaping the Infrastructure layer.
+One of the responsibilities of the Infrastructure layer is translating provider-specific persistence errors into provider-independent application errors.
 
-The error handling is designed to translate provider-specific persistence errors into provider-independent persistence violation codes and, ultimately, application errors.
+This prevents SQLite, SQL Server, PostgreSQL, or any other database-specific implementation details from leaking into the Application layer.
 
-This approach prevents SQLite, SQL Server, PostgreSQL, or any other provider-specific implementation details from leaking into the Application layer.
-
-For example, SQLite generates provider-specific exceptions containing messages such as:
-
-```
-UNIQUE constraint failed: Profiles.email
-```
-
-The rest of the application should never depend on these messages.
-
-Instead, Infrastructure translates them into provider-independent persistence violation codes and then maps them to application errors.
-
-Below is shown the error handling structure:
-
-```text
-WhoAmI.Infrastructure/
-└── Data/
-    └── Persistence/
-        └── ErrorHandling/
-            ├── Abstractions/
-            │   ├── IConstraintViolationParser.cs
-            │   ├── IPersistenceErrorMapper.cs
-            │   └── IPersistenceViolationMapper.cs
-            ├── Exceptions/
-            │   └── UnrecognizedConstraintException.cs
-            ├── Parsers/
-            │   └── Sqlite/
-            │       ├── SqliteConstraintSignatures.cs
-            │       └── SqliteConstraintViolationParser.cs
-            ├── ViolationMappers/
-            │   └── DuplicateProfileEmailViolationMapper.cs
-            ├── PersistenceErrorMapper.cs
-            └── PersistenceViolationCode.cs
-```
+For example, SQLite may generate an exception such as `UNIQUE constraint failed: Profiles.email`.
 
 ---
 
 ### PersistenceErrorMapper
 
-Coordinates the complete persistence error translation process.
+Coordinates the persistence error translation process.
 
-The flow is:
+It receives provider-specific exceptions, delegates the parsing and violation mapping to the appropriate components, and returns the corresponding application error.
 
-1. Receive the provider exception.
-2. Parse it.
-3. Determine the persistence violation code.
-4. Invoke the appropriate violation mapper.
-5. Return the corresponding application error.
-
-[WhoAmIDbContext](./Data/Persistence/Context/WhoAmIDbContext.cs) then wraps this `Error` in a failed [ResultOfT](../WhoAmI.Application/Results/ResultOfT.cs) and returns it to the Application layer.
+[WhoAmIDbContext](./Data/Persistence/Context/WhoAmIDbContext.cs) then creates a failed [Result](../WhoAmI.Application/Results/Result.cs) containing the returned `Error` and returns it to the Application layer.
 
 The Application layer receives only the resulting application error and never depends on provider-specific exception details.
+
+This process is implemented by [PersistenceErrorMapper](./Data/Persistence/ErrorHandling/PersistenceErrorMapper.cs).
 
 ---
 
 ### Parsing
 
-Parsers interpret provider-specific exceptions. Each database provider requires its own parser implementation.
+Parsers are responsible for interpreting provider-specific persistence exceptions and translating them into provider-independent persistence violation codes.
 
-For SQLite, the parser inspects the exception message and recognizes known constraint signatures.
+Each database provider requires its own parser implementation because exception types and messages vary between providers.
 
-Example: `Profiles.email` is translated into `DuplicateProfileEmail`.
+For SQLite, the parser inspects the exception message and matches known constraint signatures.
 
-No SQLite-specific information leaves this layer.
+For example, the exception message `UNIQUE constraint failed: Profiles.email` is translated into the persistence violation code `DuplicateProfileEmail`.
+
+This translation isolates provider-specific knowledge within the Infrastructure layer, ensuring that no SQLite-specific details leak into the Application layer.
+
+For SQLite, this responsibility is implemented by [SqliteConstraintViolationParser](./Data/Persistence/ErrorHandling/Parsers/Sqlite/SqliteConstraintViolationParser.cs).
 
 ---
 
-### PersistenceViolationCode
+### [PersistenceViolationCode](./Data/Persistence/ErrorHandling/PersistenceViolationCode.cs)
 
-Represents provider-independent persistence violation codes.
+`PersistenceViolationCode` represents persistence violations independently of any specific database provider.
 
 Examples include:
 
-- DuplicateProfileEmail
-- DuplicateProfileGuid
+- `DuplicateProfileEmail`
+- `DuplicateProfileGuid`
 
-These codes provide a provider-independent representation of persistence violations and are used to map provider-specific exceptions to application errors.
+These codes provide a stable abstraction between provider-specific persistence exceptions and application errors. They allow the Infrastructure layer to recognize a persistence violation regardless of whether it originated from SQLite, SQL Server, PostgreSQL, or another database provider.
 
-They intentionally do not reference:
+The codes intentionally do not represent:
 
-- SQLite
-- SQL Server
-- PostgreSQL
-- constraint names
-- SQL messages
+- Database providers.
+- Constraint names.
+- SQL messages.
+- Exception types.
+
+Instead, they describe the semantic meaning of the persistence violation, allowing the Application layer to remain completely independent of persistence technology.
 
 ---
 
 ### Constraint Signatures
 
-Contains the mapping between SQLite exception signatures and provider-independent violation codes.
+Constraint signatures define the mapping between provider-specific exception signatures and provider-independent persistence violation codes.
 
-The signature registry isolates all provider-specific knowledge in one place.
+They centralize all database-specific knowledge in a single location, allowing parsers to translate persistence exceptions without scattering provider-specific strings throughout the codebase.
 
-If another database provider is introduced in the future, it simply receives its own parser and signature registry.
+If support for another database provider is introduced, it can define its own parser and corresponding signature registry without affecting the existing implementation.
+
+For SQLite, the signature registry is implemented by [SqliteConstraintSignatures](./Data/Persistence/ErrorHandling/Parsers/Sqlite/SqliteConstraintSignatures.cs).
 
 ---
 
 ### Violation Mappers
 
-Violation mappers extract domain-relevant metadata from EF Core entities.
+Violation mappers are responsible for translating persistence violation codes into application errors.
 
-For example: `DuplicateProfileEmail` extracts `Email = john@example.com`
+Each mapper extracts the domain-relevant metadata required to produce a rich, provider-independent application error.
 
-This metadata is used to produce rich, provider-independent application errors that can later be interpreted by the Application layer.
+For example, the mapper for `DuplicateProfileEmail` extracts the `Email` value from the tracked EF Core entity and uses it to construct the corresponding application error.
 
-Each mapper has a single responsibility.
+Each mapper has a single responsibility and handles exactly one persistence violation.
 
 Adding support for a new persistence violation typically requires creating a new mapper without modifying existing ones, respecting the Open-Closed principle of [**SOLID**](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod).
 
+For example, the mapper for `DuplicateProfileEmail` is implemented by [DuplicateProfileEmailViolationMapper](./Data/Persistence/ErrorHandling/ViolationMappers/DuplicateProfileEmailViolationMapper.cs).
+
 ---
 
-### UnrecognizedConstraintException
+### [UnrecognizedConstraintException](./Data/Persistence/ErrorHandling/Exceptions/UnrecognizedConstraintException.cs)
 
-Thrown when the parser cannot recognize a provider-specific persistence constraint or receives an unexpected exception type.
+Thrown when the parser receives an unexpected provider exception type or cannot match a provider-specific exception to a registered constraint signature.
 
-Failing fast prevents silent data inconsistencies and makes missing mappings immediately visible during development.
+Failing fast prevents silent data inconsistencies and makes unsupported database constraint violations immediately visible during development.
 
 ---
 
 ### Persistence Error Pipeline
 
-The diagram below describes the persistence error handling step by step.
+The following diagram illustrates the persistence error handling pipeline step by step.
 
 <p align="center">
   <img
@@ -314,25 +267,27 @@ The diagram below describes the persistence error handling step by step.
 
 ## Dependency Injection
 
-The [ServiceCollectionExtensions.cs](./DependencyInjection/ServiceCollectionExtensions.cs) class registers all Infrastructure services.
+Infrastructure exposes a single entry point for registering all of its services through [ServiceCollectionExtensions](./DependencyInjection/ServiceCollectionExtensions.cs).
 
-Examples include:
+This includes the registration of:
 
-- DbContext
-- repositories
-- persistence error handlers
-- query services
-- database connections
+- The Entity Framework Core `DbContext`.
+- Repository implementations.
+- Persistence error handling components.
+- Query handlers.
+- Database connection factories.
 
-Applications only need to call a single extension method.
+Applications only need to invoke a single extension method to configure the entire Infrastructure layer.
 
 ---
 
 ## Migrations
 
-Contains Entity Framework Core migrations used to evolve the database schema over time.
+The `Migrations` folder contains the Entity Framework Core migrations that manage the evolution of the database schema.
 
-Each migration represents a versioned set of schema changes, allowing the database structure to remain synchronized with the persistence model defined by the Infrastructure layer.
+Each migration represents a versioned set of schema changes, allowing the database structure to evolve alongside the persistence model while preserving existing data.
+
+This keeps the database schema synchronized with the persistence model as the application evolves.
 
 ---
 

@@ -63,6 +63,8 @@ WhoAmI.Application
              └── UpdateEmailCommandValidator.cs
 ```
 
+---
+
 ### Queries
 
 A query feature typically consists of:
