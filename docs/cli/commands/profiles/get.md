@@ -6,7 +6,7 @@
 
 ## Description
 
-Displays information about a profile identified by its email address.
+Displays a profile identified by its email address.
 
 ---
 
@@ -20,19 +20,19 @@ whoami-cli profile get [options]
 
 ## Options
 
-| Options         | Alias | Required |  Type   | Domain Type                                                           | Description                                                        |
-|:----------------|:-----:|:--------:|:-------:|:----------------------------------------------------------------------|:-------------------------------------------------------------------|
-| --email         |  -e   |   Yes    |  email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | Profile email address.                                             |
-| --hide-email    |  -m   |    No    | boolean |                                                                       | Hides the profile email address from the output.                   |
-| --hide-linkedin |  -n   |    No    | boolean |                                                                       | Hides the profile LinkedIn URL from the output.                    |
-| --verbose       |  -v   |    No    | boolean |                                                                       | Displays additional information, including the profile identifier. |
-| --help          |  -h   |    No    | boolean |                                                                       | Displays command help.                                             |
+| Option          | Alias | Required |  Type   | Domain Value Object                                                   | Description                                                      |
+|:----------------|:-----:|:--------:|:-------:|:----------------------------------------------------------------------|:-----------------------------------------------------------------|
+| --email         |  -e   |   Yes    |  Email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | Profile email address.                                           |
+| --hide-email    |  -m   |    No    | Boolean |                                                                       | Hides the profile email address from the output.                 |
+| --hide-linkedin |  -n   |    No    | Boolean |                                                                       | Hides the profile LinkedIn URL from the output.                  |
+| --verbose       |  -v   |    No    | Boolean |                                                                       | Displays additional information, such as the profile identifier. |
+| --help          |  -h   |    No    | Boolean |                                                                       | Displays command help.                                           |
 
 ---
 
 ## Validation
 
-Input validation is performed by the application layer before the command is executed.
+Input validation is performed by the Application layer before the command handler is executed.
 
 **Validator**:
 - [GetProfileByEmailQueryValidator](../../../../src/WhoAmI.Application/Features/Profiles/GetProfileByEmail/GetProfileByEmailQueryValidator.cs)
@@ -41,7 +41,7 @@ Input validation is performed by the application layer before the command is exe
 
 ## Examples
 
-### Minimal
+### Basic Example
 
 Retrieve a profile.
 
@@ -61,7 +61,7 @@ Expected output:
 ╰────────────────────────────────────────────────╯
 ```
 
-### Hidden Email
+### Hide Email Address
 
 Hide the email address from the output.
 
@@ -81,7 +81,27 @@ Expected output:
 ╰────────────────────────────────────────────────╯
 ```
 
-### Verbose
+### Hide LinkedIn URL
+
+Hide the LinkedIn URL from the output.
+
+```shell
+whoami-cli profile get \
+    -e sergio@example.com \
+    --hide-linkedin
+```
+
+Expected output:
+
+```text
+╭─────────────────── PROFILE ────────────────────╮
+│ Name      Sérgio Lopes                         │
+│ Email     sergio@example.com                   │
+│ GitHub    https://github.com/username          │
+╰────────────────────────────────────────────────╯
+```
+
+### Display Verbose Output
 
 Display additional information.
 

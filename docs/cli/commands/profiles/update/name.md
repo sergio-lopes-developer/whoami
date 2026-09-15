@@ -6,7 +6,7 @@
 
 ## Description
 
-Updates the name of a profile.
+Updates a profile's name.
 
 ---
 
@@ -20,18 +20,18 @@ whoami-cli profile update name [options]
 
 ## Options
 
-| Options      | Alias | Required | Min Length | Max Length |  Type   | Domain Type                                                                      | Description            |
+| Option       | Alias | Required | Min Length | Max Length |  Type   | Domain Value Object                                                              | Description            |
 |:-------------|:-----:|:--------:|:----------:|:----------:|:-------:|:---------------------------------------------------------------------------------|:-----------------------|
-| --id         |  -i   |   Yes    |            |            |  guid   |                                                                                  | Profile identifier.    |
-| --first-name |  -f   |   Yes    |     2      |    100     |  text   | [FirstName](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/FirstName.cs) | Profile first name.    |
-| --last-name  |  -l   |   Yes    |     2      |    100     |  text   | [LastName](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/LastName.cs)   | Profile last name.     |
-| --help       |  -h   |    No    |            |            | boolean |                                                                                  | Displays command help. |
+| --id         |  -i   |   Yes    |            |            |  GUID   |                                                                                  | Profile identifier.    |
+| --first-name |  -f   |   Yes    |     2      |    100     |  Text   | [FirstName](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/FirstName.cs) | New first name.        |
+| --last-name  |  -l   |   Yes    |     2      |    100     |  Text   | [LastName](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/LastName.cs)   | New last name.         |
+| --help       |  -h   |    No    |            |            | Boolean |                                                                                  | Displays command help. |
 
 ---
 
 ## Validation
 
-Input validation is performed by the application layer before the command is executed.
+Input validation is performed by the Application layer before the command handler is executed.
 
 **Validator**:
 - [UpdateFullNameCommandValidator](../../../../../src/WhoAmI.Application/Features/Profiles/UpdateFullName/UpdateFullNameCommandValidator.cs)
@@ -40,9 +40,9 @@ Input validation is performed by the application layer before the command is exe
 
 ## Examples
 
-### Minimal
+### Basic Example
 
-Update the name of a profile.
+Update the name.
 
 ```shell
 whoami-cli profile update name \

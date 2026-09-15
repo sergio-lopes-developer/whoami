@@ -6,7 +6,7 @@
 
 ## Description
 
-Creates a new profile.
+Creates a new profile using the supplied personal information.
 
 ---
 
@@ -20,20 +20,20 @@ whoami-cli profile create [options]
 
 ## Options
 
-| Options      | Alias | Required | Min Length | Max Length |  Type   | Domain Type                                                                   | Description            |
+| Option       | Alias | Required | Min Length | Max Length |  Type   | Domain Value Object                                                           | Description            |
 |:-------------|:-----:|:--------:|:----------:|:----------:|:-------:|-------------------------------------------------------------------------------|:-----------------------|
-| --first-name |  -f   |   Yes    |     2      |    100     |  text   | [FirstName](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/FirstName.cs) | Profile first name.    |
-| --last-name  |  -l   |   Yes    |     2      |    100     |  text   | [LastName](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/LastName.cs)   | Profile last name.     |
-| --email      |  -e   |   Yes    |            |            |  email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs)         | Profile email address. |
+| --first-name |  -f   |   Yes    |     2      |    100     |  Text   | [FirstName](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/FirstName.cs) | Profile first name.    |
+| --last-name  |  -l   |   Yes    |     2      |    100     |  Text   | [LastName](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/LastName.cs)   | Profile last name.     |
+| --email      |  -e   |   Yes    |            |            |  Email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs)         | Profile email address. |
 | --linkedin   |  -n   |   Yes    |            |    255     |   URL   | [Url](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Url.cs)             | Profile LinkedIn URL.  |
 | --github     |  -g   |   Yes    |            |    255     |   URL   | [Url](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Url.cs)             | Profile GitHub URL.    |
-| --help       |  -h   |    No    |            |            | boolean |                                                                               | Displays command help. |
+| --help       |  -h   |    No    |            |            | Boolean |                                                                               | Displays command help. |
 
 ---
 
 ## Validation
 
-Input validation is performed by the application layer before the command is executed.
+Input validation is performed by the Application layer before the command handler is executed.
 
 **Validator**:
 - [CreateProfileCommandValidator](../../../../src/WhoAmI.Application/Features/Profiles/CreateProfile/CreateProfileCommandValidator.cs)
@@ -42,7 +42,7 @@ Input validation is performed by the application layer before the command is exe
 
 ## Examples
 
-### Minimal
+### Basic Example
 
 Create a profile.
 
@@ -51,7 +51,7 @@ whoami-cli profile create \
     -f Sergio \
     -l Lopes \
     -e sergio@example.com \
-    -n https://linkedin.com/in/username \
+    -n https://www.linkedin.com/in/username \
     -g https://github.com/username
 ```
 
@@ -60,6 +60,11 @@ Expected output:
 ```text
 Profile successfully created.
 ```
+
+> [!NOTE]
+>
+> - Email addresses must be unique.
+> - LinkedIn and GitHub URLs must be valid absolute URLs.
 
 ---
 

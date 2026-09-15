@@ -6,7 +6,7 @@
 
 ## Description
 
-Updates the email address of a profile.
+Updates a profile's email address.
 
 ---
 
@@ -20,17 +20,17 @@ whoami-cli profile update email [options]
 
 ## Options
 
-| Options | Alias | Required |  Type   | Domain Type                                                           | Description                |
-|:--------|:-----:|:--------:|:-------:|:----------------------------------------------------------------------|:---------------------------|
-| --id    |  -i   |   Yes    |  guid   |                                                                       | Profile identifier.        |
-| --email |  -e   |   Yes    |  email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | New profile email address. |
-| --help  |  -h   |    No    | boolean |                                                                       | Displays command help.     |
+| Option  | Alias | Required |  Type   | Domain Value Object                                                   | Description            |
+|:--------|:-----:|:--------:|:-------:|:----------------------------------------------------------------------|:-----------------------|
+| --id    |  -i   |   Yes    |  GUID   |                                                                       | Profile identifier.    |
+| --email |  -e   |   Yes    |  Email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | New email address.     |
+| --help  |  -h   |    No    | Boolean |                                                                       | Displays command help. |
 
 ---
 
 ## Validation
 
-Input validation is performed by the application layer before the command is executed.
+Input validation is performed by the Application layer before the command handler is executed.
 
 **Validator**:
 - [UpdateEmailCommandValidator](../../../../../src/WhoAmI.Application/Features/Profiles/UpdateEmail/UpdateEmailCommandValidator.cs)
@@ -39,9 +39,9 @@ Input validation is performed by the application layer before the command is exe
 
 ## Examples
 
-### Minimal
+### Basic Example
 
-Update the email address of a profile.
+Update the email address.
 
 ```shell
 whoami-cli profile update email \
@@ -54,6 +54,10 @@ Expected output:
 ```text
 Email successfully updated.
 ```
+
+> [!NOTE]
+>
+> - Email addresses must be unique.
 
 ---
 

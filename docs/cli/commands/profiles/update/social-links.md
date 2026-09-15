@@ -6,7 +6,7 @@
 
 ## Description
 
-Updates the social links of a profile.
+Updates a profile's social links.
 
 ---
 
@@ -20,18 +20,18 @@ whoami-cli profile update social-links [options]
 
 ## Options
 
-| Options    | Alias | Required | Max Length |  Type   | Domain Type                                                       | Description            |
-|:-----------|:-----:|:--------:|:----------:|:-------:|:------------------------------------------------------------------|:-----------------------|
-| --id       |  -i   |   Yes    |            |  guid   |                                                                   | Profile identifier.    |
-| --linkedin |  -n   |   Yes    |    255     |   URL   | [Url](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Url.cs) | Profile LinkedIn URL.  |
-| --github   |  -g   |   Yes    |    255     |   URL   | [Url](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Url.cs) | Profile GitHub URL.    |
-| --help     |  -h   |    No    |            | boolean |                                                                   | Displays command help. |
+| Option     | Alias | Required | Max Length |  Type   | Domain Value Object                                                  | Description            |
+|:-----------|:-----:|:--------:|:----------:|:-------:|:---------------------------------------------------------------------|:-----------------------|
+| --id       |  -i   |   Yes    |            |  GUID   |                                                                      | Profile identifier.    |
+| --linkedin |  -n   |   Yes    |    255     |   URL   | [Url](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Url.cs) | New LinkedIn URL.      |
+| --github   |  -g   |   Yes    |    255     |   URL   | [Url](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Url.cs) | New GitHub URL.        |
+| --help     |  -h   |    No    |            | Boolean |                                                                      | Displays command help. |
 
 ---
 
 ## Validation
 
-Input validation is performed by the application layer before the command is executed.
+Input validation is performed by the Application layer before the command handler is executed.
 
 **Validator**:
 - [UpdateSocialLinksCommandValidator](../../../../../src/WhoAmI.Application/Features/Profiles/UpdateSocialLinks/UpdateSocialLinksCommandValidator.cs)
@@ -40,14 +40,14 @@ Input validation is performed by the application layer before the command is exe
 
 ## Examples
 
-### Minimal
+### Basic Example
 
-Update the social links of a profile.
+Update the social links.
 
 ```shell
 whoami-cli profile update social-links \
     -i b30545b1-b92b-4040-bbca-c733deb8b1c2 \
-    -n https://linkedin.com/in/new-username \
+    -n https://www.linkedin.com/in/new-username \
     -g https://github.com/new-username
 ```
 
@@ -56,6 +56,10 @@ Expected output:
 ```text
 Social links successfully updated.
 ```
+
+> [!NOTE]
+>
+> - LinkedIn and GitHub URLs must be valid absolute URLs.
 
 ---
 

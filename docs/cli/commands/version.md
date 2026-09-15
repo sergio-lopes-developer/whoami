@@ -12,6 +12,8 @@ Displays the CLI version.
 
 ## Synopsis
 
+Primary command:
+
 ```shell
 whoami-cli version [options]
 ```
@@ -26,21 +28,21 @@ whoami-cli v [options]
 
 ## Options
 
-| Options | Alias | Required |  Type   | Description            |
+| Option  | Alias | Required |  Type   | Description            |
 |:--------|:-----:|:--------:|:-------:|:-----------------------|
-| --help  |  -h   |    No    | boolean | Displays command help. |
+| --help  |  -h   |    No    | Boolean | Displays command help. |
 
 ---
 
 ## Validation
 
-Not applicable.
+This command does not accept user input and therefore requires no validation.
 
 ---
 
 ## Examples
 
-### Minimal
+### Basic Example
 
 Display the CLI version.
 
@@ -54,7 +56,7 @@ Expected output:
 WhoAmI CLI - v1.0.0
 ```
 
-### Alias
+### Using the Alias
 
 Display the CLI version using the command alias.
 
@@ -81,8 +83,8 @@ WhoAmI CLI - v1.0.0
 
 <div align="center">
 
-| &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-| :----------------------------------------------------: |:--------------------------------------------------------------------------:|
-| [Profile Update Social Links](./profiles/update/social-links.md) |                  [CLI](../../../src/WhoAmI.CLI/README.md)                  |
+|      &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp;      | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+|:----------------------------------------------------------------:|:--------------------------------------------------------------------------:|
+| [Profile Update Social Links](./profiles/update/social-links.md) | [CLI](../../../src/WhoAmI.CLI/README.md) |
 
 </div>

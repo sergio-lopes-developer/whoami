@@ -6,7 +6,7 @@
 
 ## Description
 
-Lists all profiles.
+Displays a list of all stored profiles.
 
 ---
 
@@ -20,21 +20,21 @@ whoami-cli profile list [options]
 
 ## Options
 
-| Options | Alias | Required |  Type   | Description            |
+| Option  | Alias | Required |  Type   | Description            |
 |:--------|:-----:|:--------:|:-------:|:-----------------------|
-| --help  |  -h   |    No    | boolean | Displays command help. |
+| --help  |  -h   |    No    | Boolean | Displays command help. |
 
 ---
 
 ## Validation
 
-Not applicable.
+This command does not accept user input and therefore requires no validation.
 
 ---
 
 ## Examples
 
-### Minimal
+### Basic Example
 
 List all profiles.
 
