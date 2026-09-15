@@ -39,7 +39,13 @@ public sealed class ListProfiles(
             return CliExit.Error();
         }
 
-        var listItems = BuildListItems(result.Value.ToList());
+        if (result.Value.Count == 0) {
+            CliMessage.ShowInfo("No profiles were found.");
+
+            return CliExit.Success();
+        }
+
+        var listItems = BuildListItems(result.Value);
 
         ListRenderer.Render(
             new ListRenderOptions {
@@ -56,7 +62,7 @@ public sealed class ListProfiles(
     }
 
     private static IEnumerable<IReadOnlyList<string>> BuildListItems(
-        IReadOnlyList<ListProfilesResponse> profiles
+        IReadOnlyCollection<ListProfilesResponse> profiles
     ) {
         var index = 1;
 

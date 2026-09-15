@@ -11,7 +11,7 @@ internal static class CliMessage {
         Show(string.Join(Environment.NewLine, messages), MessageColor.Red);
 
     internal static void ShowInfo(string message) =>
-        Show(message, MessageColor.White);
+        AnsiConsole.MarkupLine(Markup.Escape(message));
 
     internal static void ShowSuccess(string message) =>
         Show(message, MessageColor.Green);

@@ -19,8 +19,7 @@ public sealed class ListProfilesQueryHandlerTests {
     }
 
     [Fact]
-    public async Task
-        HandleAsync_ShouldReturnProfilesOrderedByFirstNameThenLastName() {
+    public async Task HandleAsync_ShouldReturnProfilesOrderedByFirstNameThenLastName_WhenProfilesExist() {
         // Arrange
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
@@ -60,5 +59,30 @@ public sealed class ListProfilesQueryHandlerTests {
                 "Alice Brown",
                 "Zoe Smith"
             );
+    }
+
+    [Fact]
+    public async Task HandleAsync_ShouldReturnEmptyCollection_WhenNoProfilesExist() {
+        // Arrange
+        await using var connection =
+            new SqliteConnection("Data Source=:memory:");
+
+        await connection.OpenAsync(TestContext.Current.CancellationToken);
+
+        await CreateProfilesTable(connection);
+
+        var connectionFactory = new FakeDbConnectionFactory(connection);
+
+        var sut = new ListProfilesQueryHandler(connectionFactory);
+
+        // Act
+        var result = await sut.HandleAsync(
+            new ListProfilesQuery(),
+            TestContext.Current.CancellationToken
+        );
+
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Should().BeEmpty();
     }
 }
