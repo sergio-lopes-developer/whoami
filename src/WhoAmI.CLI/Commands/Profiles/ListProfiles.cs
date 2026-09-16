@@ -69,7 +69,7 @@ public sealed class ListProfiles(
         foreach (var profile in profiles) {
             yield return [
                 index.ToString(),
-                profile.FullName,
+                $"{profile.FirstName} {profile.LastName}",
                 profile.Email
             ];
 

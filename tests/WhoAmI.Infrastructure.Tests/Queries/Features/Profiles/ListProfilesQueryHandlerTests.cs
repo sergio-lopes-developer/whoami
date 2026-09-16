@@ -52,12 +52,27 @@ public sealed class ListProfilesQueryHandlerTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Select(x => x.FullName)
+        result.Value
             .Should()
-            .ContainInOrder(
-                "Alice Anderson",
-                "Alice Brown",
-                "Zoe Smith"
+            .BeEquivalentTo(
+                [
+                    new ListProfilesResponse(
+                        "Alice",
+                        "Anderson",
+                        "alice2@test.com"
+                    ),
+                    new ListProfilesResponse(
+                        "Alice",
+                        "Brown",
+                        "alice@test.com"
+                    ),
+                    new ListProfilesResponse(
+                        "Zoe",
+                        "Smith",
+                        "zoe@test.com"
+                    )
+                ],
+                options => options.WithStrictOrdering()
             );
     }
 

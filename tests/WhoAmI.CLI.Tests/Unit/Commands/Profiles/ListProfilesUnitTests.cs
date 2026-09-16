@@ -36,11 +36,13 @@ public sealed class ListProfilesUnitTests {
                 Result<IReadOnlyCollection<ListProfilesResponse>>.Success(
                     [
                         new(
-                            "John Doe",
+                            "John",
+                            "Doe",
                             "john@doe.com"
                         ),
                         new(
-                            "Jane Doe",
+                            "Jane",
+                            "Doe",
                             "jane@doe.com"
                         )
                     ]

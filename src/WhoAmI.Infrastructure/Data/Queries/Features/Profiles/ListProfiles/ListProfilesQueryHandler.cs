@@ -28,14 +28,7 @@ internal sealed class ListProfilesQueryHandler :
             cancellationToken: cancellationToken
         );
 
-        var rows  = await connection.QueryAsync<ListProfilesRow>(command);
-
-        var result = rows
-            .Select(row => new ListProfilesResponse(
-                $"{row.FirstName} {row.LastName}",
-                row.Email
-            ))
-            .ToList();
+        var result = await connection.QueryAsync<ListProfilesResponse>(command);
 
         return Result<IReadOnlyCollection<ListProfilesResponse>>.Success(
             result.ToList()
