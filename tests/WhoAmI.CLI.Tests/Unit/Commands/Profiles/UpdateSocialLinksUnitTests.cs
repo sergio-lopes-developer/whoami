@@ -5,10 +5,12 @@ using WhoAmI.Application.Features.Profiles.UpdateSocialLinks;
 using WhoAmI.Application.Results;
 using WhoAmI.CLI.Commands.Profiles;
 using WhoAmI.CLI.Output;
+using WhoAmI.CLI.Settings.Profiles;
 using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
+[Collection("CLI Console")]
 public sealed class UpdateSocialLinksUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
@@ -20,6 +22,11 @@ public sealed class UpdateSocialLinksUnitTests {
             _dispatcher,
             LoggerFactory.Create<UpdateSocialLinks>()
         );
+
+    private Task<(int ExitCode, string ConsoleOutput)> Execute(
+        UpdateSocialLinksCommandSettings settings
+    ) =>
+        CliCommandExecutor.Execute(settings, _command.ExecuteInternalAsync);
 
     [Fact]
     public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
@@ -34,14 +41,11 @@ public sealed class UpdateSocialLinksUnitTests {
             .Returns(Result.Success());
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("update-social-links"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Success());
+        exitCode.Should().Be(CliExit.Success());
+        consoleOutput.Should().Contain("Social links successfully updated.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<UpdateSocialLinksCommand>(x =>
@@ -68,14 +72,11 @@ public sealed class UpdateSocialLinksUnitTests {
             );
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("update-social-links"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Error());
+        exitCode.Should().Be(CliExit.Error());
+        consoleOutput.Should().Contain("Profile was not found.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<UpdateSocialLinksCommand>(x =>

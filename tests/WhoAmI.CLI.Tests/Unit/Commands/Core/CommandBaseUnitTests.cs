@@ -8,6 +8,7 @@ using WhoAmI.Domain.Shared.Exceptions;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Core;
 
+[Collection("CLI Console")]
 public sealed class CommandBaseUnitTests {
     public sealed class TestCommand(
         ILogger<TestCommand> logger,

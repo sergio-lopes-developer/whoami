@@ -5,10 +5,12 @@ using WhoAmI.Application.Features.Profiles.UpdateFullName;
 using WhoAmI.Application.Results;
 using WhoAmI.CLI.Commands.Profiles;
 using WhoAmI.CLI.Output;
+using WhoAmI.CLI.Settings.Profiles;
 using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
+[Collection("CLI Console")]
 public sealed class UpdateFullNameUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
@@ -20,6 +22,11 @@ public sealed class UpdateFullNameUnitTests {
             _dispatcher,
             LoggerFactory.Create<UpdateFullName>()
         );
+
+    private Task<(int ExitCode, string ConsoleOutput)> Execute(
+        UpdateFullNameCommandSettings settings
+    ) =>
+        CliCommandExecutor.Execute(settings, _command.ExecuteInternalAsync);
 
     [Fact]
     public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
@@ -34,14 +41,11 @@ public sealed class UpdateFullNameUnitTests {
             .Returns(Result.Success());
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("update-name"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Success());
+        exitCode.Should().Be(CliExit.Success());
+        consoleOutput.Should().ContainAll("Name successfully updated.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<UpdateFullNameCommand>(x =>
@@ -68,14 +72,11 @@ public sealed class UpdateFullNameUnitTests {
             );
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("update-name"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Error());
+        exitCode.Should().Be(CliExit.Error());
+        consoleOutput.Should().ContainAll("Profile not found.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<UpdateFullNameCommand>(x =>

@@ -5,10 +5,12 @@ using WhoAmI.Application.Features.Profiles.UpdateEmail;
 using WhoAmI.Application.Results;
 using WhoAmI.CLI.Commands.Profiles;
 using WhoAmI.CLI.Output;
+using WhoAmI.CLI.Settings.Profiles;
 using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
+[Collection("CLI Console")]
 public sealed class UpdateEmailUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
@@ -21,6 +23,11 @@ public sealed class UpdateEmailUnitTests {
             LoggerFactory.Create<UpdateEmail>()
         );
 
+    private Task<(int ExitCode, string ConsoleOutput)> Execute(
+        UpdateEmailCommandSettings settings
+    ) =>
+        CliCommandExecutor.Execute(settings, _command.ExecuteInternalAsync);
+
     [Fact]
     public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
         // Arrange
@@ -31,14 +38,11 @@ public sealed class UpdateEmailUnitTests {
             .Returns(Result.Success());
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("update-email"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Success());
+        exitCode.Should().Be(CliExit.Success());
+        consoleOutput.Should().ContainAll("Email successfully updated.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<UpdateEmailCommand>(x =>
@@ -61,14 +65,11 @@ public sealed class UpdateEmailUnitTests {
             );
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("update-email"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Error());
+        exitCode.Should().Be(CliExit.Error());
+        consoleOutput.Should().ContainAll("Invalid email.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<UpdateEmailCommand>(x =>

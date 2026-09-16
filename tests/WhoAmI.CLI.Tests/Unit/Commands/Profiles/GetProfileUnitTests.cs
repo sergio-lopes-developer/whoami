@@ -5,10 +5,12 @@ using WhoAmI.Application.Features.Profiles.GetProfileByEmail;
 using WhoAmI.Application.Results;
 using WhoAmI.CLI.Commands.Profiles;
 using WhoAmI.CLI.Output;
+using WhoAmI.CLI.Settings.Profiles;
 using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
+[Collection("CLI Console")]
 public sealed class GetProfileUnitTests {
     private readonly IQueryDispatcher _dispatcher =
         DispatcherFactory.CreateQueryDispatcher();
@@ -22,10 +24,19 @@ public sealed class GetProfileUnitTests {
         );
     }
 
+    private Task<(int ExitCode, string ConsoleOutput)> Execute(
+        GetProfileCommandSettings settings
+    ) =>
+        CliCommandExecutor.Execute(settings, _command.ExecuteInternalAsync);
+
     [Fact]
     public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenQuerySucceeds() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile();
+        var firstName = "John";
+        var lastName = "Doe";
+        var linkedIn = "linkedin";
+        var gitHub = "github";
 
         _dispatcher
             .Send(
@@ -36,24 +47,26 @@ public sealed class GetProfileUnitTests {
                 Result<GetProfileByEmailResponse>.Success(
                     new GetProfileByEmailResponse(
                         Guid.Empty,
-                        "John",
-                        "Doe",
+                        firstName,
+                        lastName,
                         settings.Email,
-                        "linkedin",
-                        "Github"
+                        linkedIn,
+                        gitHub
                     )
                 )
             );
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("get"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Success());
+        exitCode.Should().Be(CliExit.Success());
+        consoleOutput.Should().ContainAll(
+            $"{firstName} {lastName}",
+            settings.Email,
+            linkedIn,
+            gitHub
+        );
 
         await _dispatcher.Received(1).Send(
             Arg.Is<GetProfileByEmailQuery>(q => q.Email == settings.Email),
@@ -81,14 +94,11 @@ public sealed class GetProfileUnitTests {
             );
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("get"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Error());
+        exitCode.Should().Be(CliExit.Error());
+        consoleOutput.Should().Contain("Profile not found.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<GetProfileByEmailQuery>(q => q.Email == settings.Email),

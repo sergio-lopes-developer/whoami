@@ -5,10 +5,12 @@ using WhoAmI.Application.Features.Profiles.CreateProfile;
 using WhoAmI.Application.Results;
 using WhoAmI.CLI.Commands.Profiles;
 using WhoAmI.CLI.Output;
+using WhoAmI.CLI.Settings.Profiles;
 using WhoAmI.CLI.Tests.Unit.Support;
 
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
+[Collection("CLI Console")]
 public sealed class CreateProfileUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
@@ -21,6 +23,11 @@ public sealed class CreateProfileUnitTests {
             LoggerFactory.Create<CreateProfile>()
         );
     }
+
+    private Task<(int ExitCode, string ConsoleOutput)> Execute(
+        CreateProfileCommandSettings settings
+    ) =>
+        CliCommandExecutor.Execute(settings, _command.ExecuteInternalAsync);
 
     [Fact]
     public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenCommandSucceeds() {
@@ -41,14 +48,11 @@ public sealed class CreateProfileUnitTests {
             .Returns(Result<CreateProfileResponse>.Success(response));
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("create"),
-            settings,
-            CancellationToken.None
-        );
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
-        exit.Should().Be(CliExit.Success());
+        exitCode.Should().Be(CliExit.Success());
+        consoleOutput.Should().Contain("Profile successfully created.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<CreateProfileCommand>(x =>
@@ -80,15 +84,12 @@ public sealed class CreateProfileUnitTests {
             ));
 
         // Act
-        var exit = await _command.ExecuteInternalAsync(
-            CommandContextFactory.Create("create"),
-            settings,
-            CancellationToken.None
-        );
-
-        exit.Should().Be(CliExit.Error());
+        var (exitCode, consoleOutput) = await Execute(settings);
 
         // Assert
+        exitCode.Should().Be(CliExit.Error());
+        consoleOutput.Should().Contain("The email must be unique.");
+
         await _dispatcher.Received(1).Send(
             Arg.Is<CreateProfileCommand>(x =>
                 x.FirstName == settings.FirstName &&
