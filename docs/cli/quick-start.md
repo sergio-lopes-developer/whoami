@@ -6,24 +6,23 @@
 
 ## Introduction
 
-This guide will help you configure and run the **WhoAmI CLI** for the first time.
+This guide explains how to set up and run the **WhoAmI CLI** for the first time.
 
 ## Prerequisites
 
 Before starting, ensure you have the following installed:
 
-* .NET 10 SDK
-* SQLite
-* Git
-
-You also need a local copy of the complete **WhoAmI** solution.
+- .NET 10 SDK.
+- Git.
 
 ---
 
 ## 1. Clone the Repository
 
-```bash
-git clone <repository-url>
+Open a terminal and clone the repository:
+
+```shell
+git clone https://github.com/sergio-lopes-developer/whoami.git
 cd whoami
 ```
 
@@ -31,11 +30,21 @@ cd whoami
 
 ## 2. Configure the Database Connection
 
-The CLI reads its database connection from `appsettings.json`.
+For development, copy:
 
-For development, create an `appsettings.Development.json` file in the **WhoAmI.CLI** project.
+```text
+src/WhoAmI.CLI/appsettings.Development.example.json
+```
 
-Example:
+to:
+
+```text
+src/WhoAmI.CLI/appsettings.Development.json
+```
+
+Then update the connection string to specify the location of the SQLite database file.
+
+For example:
 
 ```json
 {
@@ -46,165 +55,63 @@ Example:
 }
 ```
 
-Replace the path with the location where your SQLite database should be stored.
+The development configuration overrides the default connection string without modifying the repository's default configuration.
+
+For more information, see the [Configuration](./configuration.md) guide.
 
 ---
 
-## 3. Create the Database
+## 3. Build the Solution
 
-The database schema is managed by Entity Framework Core migrations located in the **WhoAmI.Infrastructure** project.
+Restore the project dependencies:
 
-Run the project's migration process to create the SQLite database before using the CLI.
+```shell
+dotnet restore
+```
 
-> **Note**
->
-> The CLI automatically initializes the database during startup, but it expects the migration history and schema to already exist.
+Build the solution:
 
----
-
-## 4. Build the Solution
-
-From the repository root:
-
-```bash
+```shell
 dotnet build
 ```
 
 ---
 
-## 5. Run the CLI
+## 4. Verify Installation
 
-Navigate to the CLI project:
+Run the following command:
 
-```bash
-cd src/WhoAmI.CLI
+```shell
+dotnet run --project src/WhoAmI.CLI -- profile list
 ```
 
-Run the application:
+If the database does not exist, the CLI automatically creates it and applies any pending Entity Framework Core migrations.
 
-```bash
-dotnet run -- version
-```
-
-You should see output similar to:
+If the database is empty, you should see:
 
 ```text
-WhoAmI CLI - v0.1.0
+No profiles were found.
 ```
 
----
-
-## 6. Create Your First Profile
-
-```bash
-dotnet run -- profile create \
-    -f John \
-    -l Doe \
-    -e john@example.com \
-    -n https://linkedin.com/in/johndoe \
-    -g https://github.com/johndoe
-```
-
-Expected output:
-
-```text
-Profile successfully created.
-```
-
----
-
-## 7. List Profiles
-
-```bash
-dotnet run -- profile list
-```
-
-Example:
-
-```text
-┌───┬──────────┬────────────────────┐
-│ # │ Name     │ Email              │
-├───┼──────────┼────────────────────┤
-│ 1 │ John Doe │ john@example.com   │
-└───┴──────────┴────────────────────┘
-```
-
----
-
-## 8. Display a Profile
-
-```bash
-dotnet run -- profile get \
-    -e john@example.com
-```
-
-To display all available information:
-
-```bash
-dotnet run -- profile get \
-    -e john@example.com \
-    --verbose
-```
-
----
-
-## 9. Update a Profile
-
-Update the email address:
-
-```bash
-dotnet run -- profile update email \
-    -i <PROFILE_ID> \
-    -e john.doe@example.com
-```
-
-Update the name:
-
-```bash
-dotnet run -- profile update name \
-    -i <PROFILE_ID> \
-    -f Jonathan \
-    -l Doe
-```
-
-Update social links:
-
-```bash
-dotnet run -- profile update social-links \
-    -i <PROFILE_ID> \
-    -n https://linkedin.com/in/jonathandoe \
-    -g https://github.com/jonathandoe
-```
-
----
-
-## Log Files
-
-Execution logs are written automatically to the `logs` directory.
-
-```
-logs/
-├── log-yyyyMMdd.json
-└── log-yyyyMMdd.txt
-```
+If the command completes successfully, your **WhoAmI CLI** installation is ready to use.
 
 ---
 
 ## Next Steps
 
-Once the CLI is running successfully, you may want to explore:
+After verifying the installation, you may want to:
 
-* The complete command reference in the [usage](usage.md).
-* The application architecture documentation.
-* The Domain, Application, Infrastructure, and Bootstrap projects to understand how requests flow through the system.
+- Learn how to [configure the CLI](./configuration.md).
+- Explore the [command reference](usage.md).
+- Learn about the [project's architecture](../architecture/README.md).
 
 ---
 
 <div align="center">
 
 | &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-|:------------------------------------------------------:| :------------------------------------------------------------------------: |
-|         [CLI](../../src/WhoAmI.CLI/README.md)          | [Configuration](./configuration.md)                                       |
+|:------------------------------------------------------:|:--------------------------------------------------------------------------:|
+| [CLI](../../src/WhoAmI.CLI/README.md) | [Configuration](./configuration.md) |
 
 </div>
 

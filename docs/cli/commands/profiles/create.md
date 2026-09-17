@@ -21,7 +21,7 @@ whoami-cli profile create [options]
 ## Options
 
 | Option       | Alias | Required | Min Length | Max Length |  Type   | Domain Value Object                                                           | Description            |
-|:-------------|:-----:|:--------:|:----------:|:----------:|:-------:|-------------------------------------------------------------------------------|:-----------------------|
+|:-------------|:-----:|:--------:|:----------:|:----------:|:-------:|:------------------------------------------------------------------------------|:-----------------------|
 | --first-name |  -f   |   Yes    |     2      |    100     |  Text   | [FirstName](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/FirstName.cs) | Profile first name.    |
 | --last-name  |  -l   |   Yes    |     2      |    100     |  Text   | [LastName](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/LastName.cs)   | Profile last name.     |
 | --email      |  -e   |   Yes    |            |            |  Email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs)         | Profile email address. |
