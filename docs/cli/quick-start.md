@@ -8,6 +8,8 @@
 
 This guide explains how to set up and run the **WhoAmI CLI** for the first time.
 
+---
+
 ## Prerequisites
 
 Before starting, ensure you have the following installed:
