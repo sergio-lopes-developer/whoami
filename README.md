@@ -1,6 +1,8 @@
+<div align="center">
 # WhoAmI
 
 ![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet) ![Platform](https://img.shields.io/badge/Tested-Linux-success?logo=linux) ![License](https://img.shields.io/badge/license-MIT-green) ![Portfolio](https://img.shields.io/badge/Portfolio-Developer-blue)
+</div>
 
 **WhoAmI** is a .NET portfolio project that serves two purposes: providing a command-line application for managing developer profiles and demonstrating modern software architecture through a real-world application.
 
