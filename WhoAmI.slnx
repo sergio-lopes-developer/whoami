@@ -16,6 +16,7 @@
     <Project Path="tests/WhoAmI.CLI.Tests/WhoAmI.CLI.Tests.csproj" />
     <Project Path="tests/WhoAmI.Domain.Tests/WhoAmI.Domain.Tests.csproj" />
     <Project Path="tests/WhoAmI.Infrastructure.Tests/WhoAmI.Infrastructure.Tests.csproj" />
+    <Project Path="tests/WhoAmI.IntegrationTests/WhoAmI.IntegrationTests.csproj" />
     <Project Path="tests/WhoAmI.Testing/WhoAmI.Testing.csproj" />
   </Folder>
 </Solution>
