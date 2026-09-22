@@ -5,6 +5,7 @@ using WhoAmI.Application.Abstractions.Dispatching.Queries;
 using WhoAmI.Application.Abstractions.Logging;
 using WhoAmI.Application.Abstractions.Queries;
 using WhoAmI.Application.Abstractions.Serialization;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Abstractions.Validation;
 using WhoAmI.Application.Decorators.Commands;
 using WhoAmI.Application.Decorators.Queries;
@@ -13,6 +14,7 @@ using WhoAmI.Application.Dispatching.Queries;
 using WhoAmI.Application.Features.Profiles.CreateProfile;
 using WhoAmI.Application.Logging;
 using WhoAmI.Application.Serialization;
+using WhoAmI.Application.Time;
 
 namespace WhoAmI.Application.DependencyInjection;
 
@@ -20,10 +22,11 @@ public static class ServiceCollectionExtensions {
     public static IServiceCollection AddApplicationServices(
         this IServiceCollection services
     ) {
-        AddHandlers(services);
-        AddValidations(services);
         AddDispatchers(services);
         AddExecutionServices(services);
+        AddHandlers(services);
+        AddTime(services);
+        AddValidations(services);
 
         return services;
     }
@@ -89,6 +92,17 @@ public static class ServiceCollectionExtensions {
         return services;
     }
 
+    private static void AddDispatchers(IServiceCollection services) {
+        services.AddScoped<ICommandDispatcher, CommandDispatcher>();
+        services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+    }
+
+    private static void AddExecutionServices(IServiceCollection services) {
+        services.AddSingleton<ISafeExecutionLogger, SafeExecutionLogger>();
+        services.AddSingleton<IObjectSerializer, ObjectSerializer>();
+        services.AddSingleton<IExecutionInfoFactory, ExecutionInfoFactory>();
+    }
+
     private static void AddHandlers(IServiceCollection services) {
         services.Scan(scan => scan
             .FromAssemblyOf<CreateProfileCommandHandler>()
@@ -113,6 +127,9 @@ public static class ServiceCollectionExtensions {
         services.AddTransient(typeof(QueryHandlerAdapter<,>));
     }
 
+    private static void AddTime(IServiceCollection services) =>
+        services.AddSingleton<IClock, Clock>();
+
     private static void AddValidations(IServiceCollection services) {
         services.Scan(scan => scan
             .FromAssemblyOf<ICommandValidator<object>>()
@@ -129,16 +146,5 @@ public static class ServiceCollectionExtensions {
             .AsImplementedInterfaces()
             .WithScopedLifetime()
         );
-    }
-
-    private static void AddDispatchers(IServiceCollection services) {
-        services.AddScoped<ICommandDispatcher, CommandDispatcher>();
-        services.AddScoped<IQueryDispatcher, QueryDispatcher>();
-    }
-
-    private static void AddExecutionServices(IServiceCollection services) {
-        services.AddSingleton<ISafeExecutionLogger, SafeExecutionLogger>();
-        services.AddSingleton<IObjectSerializer, ObjectSerializer>();
-        services.AddSingleton<IExecutionInfoFactory, ExecutionInfoFactory>();
     }
 }

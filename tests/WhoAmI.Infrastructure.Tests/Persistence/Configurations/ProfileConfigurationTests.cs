@@ -34,32 +34,25 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
 
     public ValueTask DisposeAsync() => _scope.DisposeAsync();
 
-    private static void AssertRequiredProperty(
+    private static IProperty AssertRequiredProperty(
         IProperty? property,
         string columnName
     ) {
         property.Should().NotBeNull();
-        property!.GetColumnName().Should().Be(columnName);
+        property.GetColumnName().Should().Be(columnName);
         property.IsNullable.Should().BeFalse();
+
+        return property;
     }
 
     [Fact]
-    public void Configure_ShouldMapProfileToProfilesTable() {
+    public void Configure_ShouldMapProfileToTable() {
         // Assert
         _entityType.GetTableName().Should().Be("Profiles");
     }
 
     [Fact]
-    public void Configure_ShouldMapIdPropertyCorrectly() {
-        // Arrange
-        var property = _entityType.FindProperty(nameof(Profile.Id));
-
-        // Assert
-        AssertRequiredProperty(property, "id");
-    }
-
-    [Fact]
-    public void Configure_ShouldCreateUniqueIndexForId() {
+    public void Configure_ShouldCreateUniqueIdIndex() {
         // Arrange
         var index = _entityType.GetIndexes()
             .Single(i => i.Properties.Single().Name == nameof(Profile.Id));
@@ -71,7 +64,7 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
     }
 
     [Fact]
-    public void Configure_ShouldCreateUniqueIndexForEmail() {
+    public void Configure_ShouldCreateUniqueEmailIndex() {
         // Arrange
         var index = _entityType.GetIndexes()
             .Single(i => i.Properties.Single().Name == nameof(Profile.Email));
@@ -83,47 +76,73 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
     }
 
     [Fact]
-    public void Configure_ShouldMapEmailPropertyCorrectly() {
+    public void Configure_ShouldMapIdProperty() {
+        // Arrange
+        var property = _entityType.FindProperty(nameof(Profile.Id));
+
+        // Assert
+        var id = AssertRequiredProperty(property, "id");
+
+        id.ClrType.Should().Be<Guid>();
+    }
+
+    [Fact]
+    public void Configure_ShouldMapCreatedAtProperty() {
+        // Arrange
+        var property = _entityType.FindProperty(nameof(Profile.CreatedAt));
+
+        // Assert
+        var createdAt = AssertRequiredProperty(property, "created_at");
+
+        createdAt.ClrType.Should().Be<DateTimeOffset>();
+    }
+
+    [Fact]
+    public void Configure_ShouldMapEmailProperty() {
         // Arrange
         var property = _entityType.FindProperty(nameof(Profile.Email));
 
         // Assert
-        AssertRequiredProperty(property, "email");
+        var email = AssertRequiredProperty(property, "email");
 
-        property!.GetMaxLength().Should().Be(Email.MaxLength);
+        email.ClrType.Should().Be<Email>();
+        email.GetMaxLength().Should().Be(Email.MaxLength);
     }
 
     [Fact]
-    public void Configure_ShouldMapLinkedInPropertyCorrectly() {
+    public void Configure_ShouldMapLinkedInProperty() {
         // Arrange
         var property = _entityType.FindProperty(nameof(Profile.LinkedIn));
 
         // Assert
-        AssertRequiredProperty(property, "linkedin_url");
+        var linkedIn = AssertRequiredProperty(property, "linkedin_url");
+
+        linkedIn.ClrType.Should().Be<Url>();
     }
 
     [Fact]
-    public void Configure_ShouldMapGitHubPropertyCorrectly() {
+    public void Configure_ShouldMapGitHubProperty() {
         // Arrange
         var property = _entityType.FindProperty(nameof(Profile.GitHub));
 
         // Assert
-        AssertRequiredProperty(property, "github_url");
+        var gitHub = AssertRequiredProperty(property, "github_url");
+
+        gitHub.ClrType.Should().Be<Url>();
     }
 
     [Fact]
-    public void Configure_ShouldConfigureFullNameAsOwnedEntity() {
+    public void Configure_ShouldConfigureFullNameOwnership() {
         // Arrange
         var navigation = _entityType.FindNavigation(nameof(Profile.FullName));
 
         // Assert
         navigation.Should().NotBeNull();
-
-        navigation!.ForeignKey.IsOwnership.Should().BeTrue();
+        navigation.ForeignKey.IsOwnership.Should().BeTrue();
     }
 
     [Fact]
-    public void Configure_ShouldMapFirstNamePropertyCorrectly() {
+    public void Configure_ShouldMapFirstNameProperty() {
         // Arrange
         var firstNameEntity = _model.GetEntityTypes()
             .Single(e => e.ClrType == typeof(FirstName));
@@ -131,13 +150,13 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         var property = firstNameEntity.FindProperty(nameof(FirstName.Value));
 
         // Assert
-        AssertRequiredProperty(property, "first_name");
+        var firstName = AssertRequiredProperty(property, "first_name");
 
-        property!.GetMaxLength().Should().Be(FirstName.MaxLength);
+        firstName.GetMaxLength().Should().Be(FirstName.MaxLength);
     }
 
     [Fact]
-    public void Configure_ShouldMapLastNamePropertyCorrectly() {
+    public void Configure_ShouldMapLastNameProperty() {
         // Arrange
         var lastNameEntity =
             _model.GetEntityTypes().Single(e => e.ClrType == typeof(LastName));
@@ -145,8 +164,8 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         var property = lastNameEntity.FindProperty(nameof(LastName.Value));
 
         // Assert
-        AssertRequiredProperty(property, "last_name");
+        var lastName = AssertRequiredProperty(property, "last_name");
 
-        property!.GetMaxLength().Should().Be(LastName.MaxLength);
+        lastName.GetMaxLength().Should().Be(LastName.MaxLength);
     }
 }

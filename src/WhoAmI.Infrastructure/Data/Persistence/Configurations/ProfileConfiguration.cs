@@ -37,11 +37,20 @@ internal sealed class ProfileConfiguration : IEntityTypeConfiguration<Profile> {
         EntityTypeBuilder<Profile> builder
     ) {
         ConfigureId(builder);
+        ConfigureCreatedAt(builder);
         ConfigureFullName(builder);
         ConfigureEmail(builder);
         ConfigureLinkedIn(builder);
         ConfigureGitHub(builder);
     }
+
+    private static void ConfigureCreatedAt(
+        EntityTypeBuilder<Profile> builder
+    ) =>
+        builder
+            .Property(p => p.CreatedAt)
+            .HasColumnName("created_at")
+            .IsRequired();
 
     private static void ConfigureId(EntityTypeBuilder<Profile> builder) =>
         builder

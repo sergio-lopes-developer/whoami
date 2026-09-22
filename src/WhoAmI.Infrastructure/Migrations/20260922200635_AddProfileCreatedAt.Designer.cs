@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhoAmI.Infrastructure.Data.Persistence.Context;
 
@@ -10,9 +11,11 @@ using WhoAmI.Infrastructure.Data.Persistence.Context;
 namespace WhoAmI.Infrastructure.Migrations
 {
     [DbContext(typeof(WhoAmIDbContext))]
-    partial class WhoAmIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260922200635_AddProfileCreatedAt")]
+    partial class AddProfileCreatedAt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.11");

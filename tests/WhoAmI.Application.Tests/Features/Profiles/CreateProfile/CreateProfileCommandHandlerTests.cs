@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NSubstitute;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Features.Profiles;
 using WhoAmI.Application.Features.Profiles.CreateProfile;
 using WhoAmI.Domain.Profiles;
@@ -12,12 +13,21 @@ public class CreateProfileCommandHandlerTests {
         // Arrange
         var repo =  Substitute.For<IProfileRepository>();
 
-        var handler = new CreateProfileCommandHandler(repo);
+        var createdAt = new DateTimeOffset(
+            2026, 9, 22,
+            13, 25, 0,
+            TimeSpan.Zero
+        );
+
+        var clock = Substitute.For<IClock>();
+        clock.UtcNow.Returns(createdAt);
+
+        var handler = new CreateProfileCommandHandler(repo, clock);
 
         var command = new CreateProfileCommand(
             "Sérgio",
             "Lopes",
-            "email@provider.com",
+            "email@example.com",
             "https://www.linkedin.com/in/username",
             "https://github.com/username"
         );
@@ -32,6 +42,7 @@ public class CreateProfileCommandHandlerTests {
         repo.Received(1).Add(
             Arg.Is<Profile>(p =>
                 p != null &&
+                p.CreatedAt == createdAt &&
                 p.Email.Address == command.Email &&
                 p.FullName.FirstName.Value == command.FirstName &&
                 p.FullName.LastName.Value == command.LastName &&

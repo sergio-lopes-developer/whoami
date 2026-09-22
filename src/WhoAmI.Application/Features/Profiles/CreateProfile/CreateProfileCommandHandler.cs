@@ -1,4 +1,5 @@
 using WhoAmI.Application.Abstractions.Commands;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Results;
 using WhoAmI.Domain.Profiles;
 using WhoAmI.Domain.Profiles.ValueObjects;
@@ -10,8 +11,15 @@ internal sealed class CreateProfileCommandHandler :
 {
     private readonly IProfileRepository _profileRepository;
 
-    public CreateProfileCommandHandler(IProfileRepository profileRepository) =>
+    private readonly IClock _clock;
+
+    public CreateProfileCommandHandler(
+        IProfileRepository profileRepository,
+        IClock clock
+    ) {
         _profileRepository = profileRepository;
+        _clock = clock;
+    }
 
     public async Task<Result<CreateProfileResponse>> HandleAsync(
         CreateProfileCommand command,
@@ -25,7 +33,13 @@ internal sealed class CreateProfileCommandHandler :
             new LastName(command.LastName)
         );
 
-        var profile = Profile.Create(fullName, email, linkedIn, gitHub);
+        var profile = Profile.Create(
+            _clock.UtcNow,
+            fullName,
+            email,
+            linkedIn,
+            gitHub
+        );
 
         _profileRepository.Add(profile);
 
