@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NSubstitute;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Features.Profiles;
 using WhoAmI.Application.Features.Profiles.UpdateEmail;
 using WhoAmI.Domain.Profiles;
@@ -17,10 +18,19 @@ public class UpdateEmailCommandHandlerTests {
 
         var repo = Substitute.For<IProfileRepository>();
 
+        var updatedAt = new DateTimeOffset(
+            2026, 9, 23,
+            10, 30, 0,
+            TimeSpan.Zero
+        );
+
+        var clock = Substitute.For<IClock>();
+        clock.UtcNow.Returns(updatedAt);
+
         repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns(profile);
 
-        var handler = new UpdateEmailCommandHandler(repo);
+        var handler = new UpdateEmailCommandHandler(repo, clock);
 
         var command = new UpdateEmailCommand(profile.Id, newEmail);
 
@@ -32,6 +42,7 @@ public class UpdateEmailCommandHandlerTests {
 
         // Assert
         profile.Email.Address.Should().Be(newEmail);
+        profile.UpdatedAt.Should().Be(updatedAt);
 
         result.IsSuccess.Should().BeTrue();
     }
@@ -41,10 +52,12 @@ public class UpdateEmailCommandHandlerTests {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
 
+        var clock = Substitute.For<IClock>();
+
         repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns((Profile?)null);
 
-        var handler = new UpdateEmailCommandHandler(repo);
+        var handler = new UpdateEmailCommandHandler(repo, clock);
 
         var id = Guid.NewGuid();
 

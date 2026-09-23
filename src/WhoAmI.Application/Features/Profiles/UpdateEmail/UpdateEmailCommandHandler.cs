@@ -1,4 +1,5 @@
 using WhoAmI.Application.Abstractions.Commands;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Results;
 using WhoAmI.Domain.Profiles.ValueObjects;
 
@@ -9,8 +10,15 @@ internal sealed class UpdateEmailCommandHandler :
 {
     private readonly IProfileRepository _profileRepository;
 
-    public UpdateEmailCommandHandler(IProfileRepository profileRepository) =>
+    private readonly IClock _clock;
+
+    public UpdateEmailCommandHandler(
+        IProfileRepository profileRepository,
+        IClock clock
+    ) {
         _profileRepository = profileRepository;
+        _clock = clock;
+    }
 
     public async Task<Result> HandleAsync(
         UpdateEmailCommand command,
@@ -25,7 +33,7 @@ internal sealed class UpdateEmailCommandHandler :
 
         var newEmail = new Email(command.Email);
 
-        profile.UpdateEmail(newEmail);
+        profile.UpdateEmail(newEmail, _clock.UtcNow);
 
         return Result.Success();
     }

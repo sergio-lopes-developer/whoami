@@ -8,7 +8,13 @@ public abstract class AggregateRoot : Entity {
 
     protected AggregateRoot() { } // for EF
 
-    protected AggregateRoot(Guid id) : base(id) { }
+    protected AggregateRoot(
+        Guid id,
+        DateTimeOffset createdAt
+    ) : base(
+        id,
+        createdAt
+    ) { }
 
     protected void AddDomainEvent(IDomainEvent domainEvent) =>
         _domainEvents.Add(domainEvent);

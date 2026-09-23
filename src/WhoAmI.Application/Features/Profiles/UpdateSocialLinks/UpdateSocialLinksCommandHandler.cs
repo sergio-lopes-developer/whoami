@@ -1,4 +1,5 @@
 using WhoAmI.Application.Abstractions.Commands;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Results;
 using WhoAmI.Domain.Profiles.ValueObjects;
 
@@ -9,10 +10,15 @@ internal sealed class UpdateSocialLinksCommandHandler :
 {
     private readonly IProfileRepository _profileRepository;
 
+    private readonly IClock _clock;
+
     public UpdateSocialLinksCommandHandler(
-        IProfileRepository profileRepository
-    ) =>
+        IProfileRepository profileRepository,
+        IClock clock
+    ) {
         _profileRepository = profileRepository;
+        _clock = clock;
+    }
 
     public async Task<Result> HandleAsync(
         UpdateSocialLinksCommand command,
@@ -28,7 +34,7 @@ internal sealed class UpdateSocialLinksCommandHandler :
         var newLinkedIn = new Url(command.LinkedIn);
         var newGitHub = new Url(command.GitHub);
 
-        profile.UpdateSocialLinks(newLinkedIn, newGitHub);
+        profile.UpdateSocialLinks(newLinkedIn, newGitHub, _clock.UtcNow);
 
         return Result.Success();
     }

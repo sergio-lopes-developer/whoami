@@ -5,31 +5,64 @@ using WhoAmI.Domain.Tests.Shared.Base.Dummies;
 namespace WhoAmI.Domain.Tests.Shared.Base;
 
 public class EntityTests {
+    private static readonly DateTimeOffset _createdAt =
+        new(2026, 9, 22, 13, 25, 0, TimeSpan.Zero);
+
     [Fact]
     public void Entity_ShouldBeCreated_WhenIdIsValid() {
+        // Arrange
         var id = Guid.NewGuid();
 
-        var entity = new DummyEntity(id);
+        // Act
+        var entity = new DummyEntity(id, _createdAt);
 
+        // Assert
         entity.Id.Should().Be(id);
+        entity.CreatedAt.Should().Be(_createdAt);
+        entity.UpdatedAt.Should().BeNull();
+    }
+
+    [Fact]
+    public void Entity_ShouldStoreCreatedAtAsUtc_WhenLocalTimeIsProvided() {
+        // Arrange
+        var createdAt = new DateTimeOffset(
+            2026, 9, 22,
+            11, 30, 0,
+            TimeSpan.FromHours(-3)
+        );
+
+        // Act
+        var entity = new DummyEntity(Guid.NewGuid(), createdAt);
+
+        // Assert
+        entity.CreatedAt.Should().Be(createdAt.ToUniversalTime());
     }
 
     [Fact]
     public void Entity_ShouldThrowDomainException_WhenIdIsEmpty() {
-        var id = Guid.Empty;
+        // Act
+        var act = () => new DummyEntity(Guid.Empty, _createdAt);
 
-        var act = () => new DummyEntity(id);
-
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Fact]
     public void Entity_ShouldBeEqual_WhenIdsAreIdentical() {
+        // Arrange
         var id = Guid.NewGuid();
 
-        var entity = new DummyEntity(id);
-        var sameEntity = new DummyEntity(id);
+        var entity = new DummyEntity(
+            id,
+            new DateTimeOffset(2026, 9, 22, 14, 30, 0, TimeSpan.Zero)
+        );
 
+        var sameEntity = new DummyEntity(
+            id,
+            new DateTimeOffset(2030, 1, 1, 8, 0, 0, TimeSpan.Zero)
+        );
+
+        // Assert
         entity.Should().Be(sameEntity);
         entity.GetHashCode().Should().Be(sameEntity.GetHashCode());
         (entity == sameEntity).Should().BeTrue();
@@ -38,11 +71,41 @@ public class EntityTests {
 
     [Fact]
     public void Entity_ShouldNotBeEqual_WhenIdsAreDifferent() {
-        var entity = new DummyEntity(Guid.NewGuid());
-        var otherEntity = new DummyEntity(Guid.NewGuid());
+        // Arrange
+        var entity = new DummyEntity(
+            Guid.NewGuid(),
+            _createdAt
+        );
 
+        var otherEntity = new DummyEntity(
+            Guid.NewGuid(),
+            _createdAt
+        );
+
+        // Assert
         entity.Should().NotBe(otherEntity);
         (entity != otherEntity).Should().BeTrue();
         (entity == otherEntity).Should().BeFalse();
+    }
+
+    [Fact]
+    public void Entity_ShouldSetUpdatedAtAsUtc_WhenMarkAsUpdatedIsCalledAndLocalTimeIsProvided() {
+        // Arrange
+        var entity = new DummyEntity(
+            Guid.NewGuid(),
+            _createdAt
+        );
+
+        var updatedAt = new DateTimeOffset(
+            2026, 9, 23,
+            10, 15, 0,
+            TimeSpan.FromHours(-3)
+        );
+
+        // Act
+        entity.InvokeMarkAsUpdated(updatedAt);
+
+        // Assert
+        entity.UpdatedAt.Should().Be(updatedAt.ToUniversalTime());
     }
 }

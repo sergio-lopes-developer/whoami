@@ -16,11 +16,12 @@ public sealed class Profile : AggregateRoot {
 
     internal Profile(
         Guid id,
+        DateTimeOffset createdAt,
         FullName fullName,
         Email email,
         Url linkedIn,
         Url gitHub
-    ) : base(id) {
+    ) : base(id, createdAt) {
         Guard.AgainstNull(fullName, nameof(fullName));
         Guard.AgainstNull(email, nameof(email));
         Guard.AgainstNull(linkedIn, nameof(linkedIn));
@@ -36,6 +37,7 @@ public sealed class Profile : AggregateRoot {
     private Profile() { } // required by EF
 
     public static Profile Create(
+        DateTimeOffset createdAt,
         FullName fullName,
         Email email,
         Url linkedIn,
@@ -43,6 +45,7 @@ public sealed class Profile : AggregateRoot {
     ) {
         var profile = new Profile(
             Guid.NewGuid(),
+            createdAt,
             fullName,
             email,
             linkedIn,
@@ -54,27 +57,42 @@ public sealed class Profile : AggregateRoot {
         return profile;
     }
 
-    public void UpdateFullName(FullName fullName) {
+    public void UpdateFullName(FullName fullName, DateTimeOffset updatedAt) {
         Guard.AgainstNull(fullName, nameof(fullName));
+
+        if (FullName == fullName) return;
+
         FullName = fullName;
+
+        MarkAsUpdated(updatedAt);
     }
 
-    public void UpdateEmail(Email email) {
+    public void UpdateEmail(Email email, DateTimeOffset updatedAt) {
         Guard.AgainstNull(email, nameof(email));
 
         if (Email == email) return;
 
         Email = email;
 
+        MarkAsUpdated(updatedAt);
+
         AddDomainEvent(new EmailUpdatedEvent(Id, email.Address));
     }
 
-    public void UpdateSocialLinks(Url linkedIn, Url gitHub) {
+    public void UpdateSocialLinks(
+        Url linkedIn,
+        Url gitHub,
+        DateTimeOffset updatedAt
+    ) {
         Guard.AgainstNull(linkedIn, nameof(linkedIn));
         Guard.AgainstNull(gitHub, nameof(gitHub));
 
+        if (LinkedIn == linkedIn && GitHub == gitHub) return;
+
         LinkedIn = linkedIn;
         GitHub = gitHub;
+
+        MarkAsUpdated(updatedAt);
     }
 
     public override string ToString() => $"Profile - {FullName}";

@@ -1,4 +1,5 @@
 using WhoAmI.Application.Abstractions.Commands;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Results;
 using WhoAmI.Domain.Profiles.ValueObjects;
 
@@ -9,8 +10,15 @@ internal sealed class UpdateFullNameCommandHandler :
 {
     private readonly IProfileRepository _profileRepository;
 
-    public UpdateFullNameCommandHandler(IProfileRepository profileRepository) =>
+    private readonly IClock _clock;
+
+    public UpdateFullNameCommandHandler(
+        IProfileRepository profileRepository,
+        IClock clock
+    ) {
         _profileRepository = profileRepository;
+        _clock = clock;
+    }
 
     public async Task<Result> HandleAsync(
         UpdateFullNameCommand command,
@@ -28,7 +36,7 @@ internal sealed class UpdateFullNameCommandHandler :
             new LastName(command.LastName)
         );
 
-        profile.UpdateFullName(newFullName);
+        profile.UpdateFullName(newFullName, _clock.UtcNow);
 
         return Result.Success();
     }

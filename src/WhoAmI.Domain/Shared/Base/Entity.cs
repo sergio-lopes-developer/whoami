@@ -6,12 +6,21 @@ namespace WhoAmI.Domain.Shared.Base;
 public abstract class Entity {
     public Guid Id { get;  private set; } // private set required by EF
 
+    public DateTimeOffset CreatedAt { get; private set; } // private set required by EF
+
+    public DateTimeOffset? UpdatedAt { get; private set; } // private set required by EF
+
     protected Entity() { } // required by EF
 
-    protected Entity(Guid id) {
+    protected Entity(Guid id, DateTimeOffset createdAt) {
         Guard.AgainstEmptyGuid(id, nameof(id));
+
         Id = id;
+        CreatedAt = createdAt.ToUniversalTime();
     }
+
+    protected void MarkAsUpdated(DateTimeOffset updatedAt) =>
+        UpdatedAt = updatedAt.ToUniversalTime();
 
     protected bool Equals(Entity other) => Id == other.Id;
 

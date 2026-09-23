@@ -8,74 +8,130 @@ using WhoAmI.Testing.TestData.Profiles.ValueObjects;
 namespace WhoAmI.Domain.Tests.Profiles;
 
 public class ProfileCreationTests {
+    private static readonly DateTimeOffset _createdAt =
+        new(2026, 9, 22, 13, 25, 0, TimeSpan.Zero);
+
     [Fact]
     public void Profile_ShouldAllowCreation_WhenParametersAreValid() {
+        // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var email = Emails.CreateSergio();
         var linkedIn = Urls.CreateLinkedIn();
         var gitHub = Urls.CreateGitHub();
 
-        var profile = Profile.Create(fullName, email, linkedIn, gitHub);
+        // Act
+        var profile = Profile.Create(
+            _createdAt,
+            fullName,
+            email,
+            linkedIn,
+            gitHub
+        );
 
+        // Assert
         profile.Id.Should().NotBeEmpty();
         profile.FullName.Should().Be(fullName);
         profile.Email.Should().Be(email);
         profile.LinkedIn.Should().Be(linkedIn);
         profile.GitHub.Should().Be(gitHub);
+        profile.CreatedAt.Should().Be(_createdAt);
+        profile.UpdatedAt.Should().BeNull();
     }
 
     [Fact]
     public void Profile_ShouldNotAllowCreation_WhenFullNameIsNull() {
+        // Arrange
         var email = Emails.CreateSergio();
         var linkedIn = Urls.CreateLinkedIn();
         var gitHub = Urls.CreateGitHub();
 
-        var act = () => Profile.Create(null!, email, linkedIn, gitHub);
+        // Act
+        var act = () => Profile.Create(
+            _createdAt,
+            null!,
+            email,
+            linkedIn,
+            gitHub
+        );
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Fact]
     public void Profile_ShouldNotAllowCreation_WhenEmailIsNull() {
+        // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var linkedIn = Urls.CreateLinkedIn();
         var gitHub = Urls.CreateGitHub();
 
-        var act = () => Profile.Create(fullName, null!, linkedIn, gitHub);
+        // Act
+        var act = () => Profile.Create(
+            _createdAt,
+            fullName,
+            null!,
+            linkedIn,
+            gitHub
+        );
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Fact]
     public void Profile_ShouldNotAllowCreation_WhenLinkedInIsNull() {
+        // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var email = Emails.CreateSergio();
         var gitHub = Urls.CreateGitHub();
 
-        var act = () => Profile.Create(fullName, email, null!, gitHub);
+        // Act
+        var act = () => Profile.Create(
+            _createdAt,
+            fullName,
+            email,
+            null!,
+            gitHub
+        );
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Fact]
     public void Profile_ShouldNotAllowCreation_WhenGitHubIsNull() {
+        // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var email = Emails.CreateSergio();
         var linkedIn = Urls.CreateLinkedIn();
 
-        var act = () => Profile.Create(fullName, email, linkedIn, null!);
+        // Act
+        var act = () => Profile.Create(
+            _createdAt,
+            fullName,
+            email,
+            linkedIn,
+            null!
+        );
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Fact]
     public void Profile_ShouldRaiseProfileCreatedEvent_WhenProfileIsCreated() {
+        // Arrange
         var profile = ProfileFactory.Create();
 
-        profile.DomainEvents
-            .Should().ContainSingle(e => e is ProfileCreatedEvent);
-        var domainEvent =
-            profile.DomainEvents.OfType<ProfileCreatedEvent>().Single();
+        // Assert
+        var domainEvent = profile.DomainEvents
+            .Should()
+            .ContainSingle()
+            .Which
+            .Should()
+            .BeOfType<ProfileCreatedEvent>()
+            .Subject;
+
         domainEvent.ProfileId.Should().Be(profile.Id);
     }
 }
