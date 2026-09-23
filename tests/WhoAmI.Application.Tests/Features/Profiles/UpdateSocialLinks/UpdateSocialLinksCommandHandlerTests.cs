@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NSubstitute;
+using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Features.Profiles;
 using WhoAmI.Application.Features.Profiles.UpdateSocialLinks;
 using WhoAmI.Domain.Profiles;
@@ -13,21 +14,30 @@ public class UpdateSocialLinksCommandHandlerTests {
         // Arrange
         var profile = ProfileFactory.Create();
 
-        var newLinkedIn = "https://www.linkedin.com/in/username";
+        var newLinkedIn = "https://www.linkedin.com/in/new-username";
 
-        var newGithub = "https://github.com/username";
+        var newGitHub = "https://github.com/new-username";
+
+        var updatedAt = new DateTimeOffset(
+            2026, 9, 23,
+            10, 30, 0,
+            TimeSpan.Zero
+        );
 
         var repo = Substitute.For<IProfileRepository>();
+
+        var clock = Substitute.For<IClock>();
+        clock.UtcNow.Returns(updatedAt);
 
         repo.GetByIdAsync(profile.Id, Arg.Any<CancellationToken>())
             .Returns(profile);
 
-        var handler = new UpdateSocialLinksCommandHandler(repo);
+        var handler = new UpdateSocialLinksCommandHandler(repo, clock);
 
         var command = new UpdateSocialLinksCommand(
             profile.Id,
             newLinkedIn,
-            newGithub
+            newGitHub
         );
 
         // Act
@@ -38,7 +48,9 @@ public class UpdateSocialLinksCommandHandlerTests {
 
         // Assert
         profile.LinkedIn.Value.Should().Be(newLinkedIn);
-        profile.GitHub.Value.Should().Be(newGithub);
+        profile.GitHub.Value.Should().Be(newGitHub);
+        profile.UpdatedAt.Should().Be(updatedAt);
+
         result.IsSuccess.Should().BeTrue();
     }
 
@@ -47,10 +59,12 @@ public class UpdateSocialLinksCommandHandlerTests {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
 
+        var clock = Substitute.For<IClock>();
+
         repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns((Profile)null!);
 
-        var handler = new UpdateSocialLinksCommandHandler(repo);
+        var handler = new UpdateSocialLinksCommandHandler(repo, clock);
 
         var id = Guid.NewGuid();
 

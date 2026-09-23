@@ -8,4 +8,7 @@ internal sealed class DummyEntity(
 ) : Entity(
     id,
     createdAt
-);
+) {
+    public void InvokeMarkAsUpdated(DateTimeOffset updatedAt) =>
+        MarkAsUpdated(updatedAt);
+}

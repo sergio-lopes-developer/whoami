@@ -38,11 +38,19 @@ internal sealed class ProfileConfiguration : IEntityTypeConfiguration<Profile> {
     ) {
         ConfigureId(builder);
         ConfigureCreatedAt(builder);
+        ConfigureUpdatedAt(builder);
         ConfigureFullName(builder);
         ConfigureEmail(builder);
         ConfigureLinkedIn(builder);
         ConfigureGitHub(builder);
     }
+
+    private static void ConfigureId(EntityTypeBuilder<Profile> builder) =>
+        builder
+            .Property(p => p.Id)
+            .HasColumnName("id")
+            .HasConversion(v => v.ToString(), v => Guid.Parse(v))
+            .IsRequired();
 
     private static void ConfigureCreatedAt(
         EntityTypeBuilder<Profile> builder
@@ -52,12 +60,12 @@ internal sealed class ProfileConfiguration : IEntityTypeConfiguration<Profile> {
             .HasColumnName("created_at")
             .IsRequired();
 
-    private static void ConfigureId(EntityTypeBuilder<Profile> builder) =>
+    private static void ConfigureUpdatedAt(
+        EntityTypeBuilder<Profile> builder
+    ) =>
         builder
-            .Property(p => p.Id)
-            .HasColumnName("id")
-            .HasConversion(v => v.ToString(), v => Guid.Parse(v))
-            .IsRequired();
+            .Property(p => p.UpdatedAt)
+            .HasColumnName("updated_at");
 
     private static void ConfigureFullName(EntityTypeBuilder<Profile> builder) {
         builder.OwnsOne(p => p.FullName, fullName => {

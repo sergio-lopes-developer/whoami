@@ -8,6 +8,8 @@ public abstract class Entity {
 
     public DateTimeOffset CreatedAt { get; private set; } // private set required by EF
 
+    public DateTimeOffset? UpdatedAt { get; private set; } // private set required by EF
+
     protected Entity() { } // required by EF
 
     protected Entity(Guid id, DateTimeOffset createdAt) {
@@ -16,6 +18,9 @@ public abstract class Entity {
         Id = id;
         CreatedAt = createdAt.ToUniversalTime();
     }
+
+    protected void MarkAsUpdated(DateTimeOffset updatedAt) =>
+        UpdatedAt = updatedAt.ToUniversalTime();
 
     protected bool Equals(Entity other) => Id == other.Id;
 

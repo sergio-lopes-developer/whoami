@@ -35,6 +35,7 @@ public class ProfileCreationTests {
         profile.LinkedIn.Should().Be(linkedIn);
         profile.GitHub.Should().Be(gitHub);
         profile.CreatedAt.Should().Be(_createdAt);
+        profile.UpdatedAt.Should().BeNull();
     }
 
     [Fact]

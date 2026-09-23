@@ -19,6 +19,7 @@ public class EntityTests {
         // Assert
         entity.Id.Should().Be(id);
         entity.CreatedAt.Should().Be(_createdAt);
+        entity.UpdatedAt.Should().BeNull();
     }
 
     [Fact]
@@ -85,5 +86,26 @@ public class EntityTests {
         entity.Should().NotBe(otherEntity);
         (entity != otherEntity).Should().BeTrue();
         (entity == otherEntity).Should().BeFalse();
+    }
+
+    [Fact]
+    public void Entity_ShouldSetUpdatedAtAsUtc_WhenMarkAsUpdatedIsCalledAndLocalTimeIsProvided() {
+        // Arrange
+        var entity = new DummyEntity(
+            Guid.NewGuid(),
+            _createdAt
+        );
+
+        var updatedAt = new DateTimeOffset(
+            2026, 9, 23,
+            10, 15, 0,
+            TimeSpan.FromHours(-3)
+        );
+
+        // Act
+        entity.InvokeMarkAsUpdated(updatedAt);
+
+        // Assert
+        entity.UpdatedAt.Should().Be(updatedAt.ToUniversalTime());
     }
 }

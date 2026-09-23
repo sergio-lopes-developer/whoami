@@ -34,13 +34,34 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
 
     public ValueTask DisposeAsync() => _scope.DisposeAsync();
 
-    private static IProperty AssertRequiredProperty(
+    private static IProperty AssertMappedProperty(
         IProperty? property,
         string columnName
     ) {
         property.Should().NotBeNull();
         property.GetColumnName().Should().Be(columnName);
+
+        return property;
+    }
+
+    private static IProperty AssertRequiredProperty(
+        IProperty? property,
+        string columnName
+    ) {
+        property = AssertMappedProperty(property, columnName);
+
         property.IsNullable.Should().BeFalse();
+
+        return property;
+    }
+
+    private static IProperty AssertNotRequiredProperty(
+        IProperty? property,
+        string columnName
+    ) {
+        property = AssertMappedProperty(property, columnName);
+
+        property.IsNullable.Should().BeTrue();
 
         return property;
     }
@@ -95,6 +116,17 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         var createdAt = AssertRequiredProperty(property, "created_at");
 
         createdAt.ClrType.Should().Be<DateTimeOffset>();
+    }
+
+    [Fact]
+    public void Configure_ShouldMapUpdatedAtProperty() {
+        // Arrange
+        var property = _entityType.FindProperty(nameof(Profile.UpdatedAt));
+
+        // Assert
+        var updatedAt = AssertNotRequiredProperty(property, "updated_at");
+
+        updatedAt.ClrType.Should().Be<DateTimeOffset?>();
     }
 
     [Fact]
