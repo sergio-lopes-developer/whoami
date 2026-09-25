@@ -56,6 +56,7 @@ whoami/
     ├── WhoAmI.CLI.Tests/
     ├── WhoAmI.Domain.Tests/
     ├── WhoAmI.Infrastructure.Tests/
+    ├── WhoAmI.IntegrationTests/
     └── WhoAmI.Testing/
 ```
 
@@ -72,27 +73,22 @@ The repository is organized into three top-level directories: `docs/`, `src/`, a
 
 ---
 
-## Roadmap
+## Project Roadmap
 
-- **Architecture**
-  - ✅ Domain layer
-  - ✅ Application layer
-  - ✅ Infrastructure layer
-  - ✅ Bootstrap
-- **Interfaces**
-  - ✅ Command-line interface
-  - ⏳ REST API
-  - ⏳ Web application
-  - ⏳ Desktop application
-- **Business Features**
-  - ✅ Profile management
-  - ⏳ Skills management
-- **Enhancements**
-  - ⏳ Pagination
+| Category          | Scope                                                                                 |
+|-------------------|------------------------------------------------------------------------------------------|
+| Architecture      | ✅ Domain layer<br>✅ Application layer<br>✅ Infrastructure layer<br>✅ Bootstrap       |
+| Interfaces        | ✅ Command-line interface<br>⏳ REST API<br>⏳ Web application<br>⏳ Desktop application |
+| Business Features | ✅ Profile management<br>⏳ Skills management                                            |
+| Enhancements      | ⏳ Pagination                                                                            |
 
 > [!NOTE]
 >
 > **Legend:** ✅ Completed · ⏳ Planned
+
+For detailed tracking of issues, pull requests, and ongoing work, see the GitHub Project:
+
+[WhoAmI Development Roadmap](https://github.com/sergio-lopes-developer/whoami/projects)
 
 ---
 
