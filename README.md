@@ -2,7 +2,7 @@
 
 # WhoAmI
 
-![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet) ![Platform](https://img.shields.io/badge/Tested-Linux-success?logo=linux) ![License](https://img.shields.io/badge/license-MIT-green) ![Portfolio](https://img.shields.io/badge/Portfolio-Developer-blue)
+![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet) [![CI](https://github.com/sergio-lopes-developer/whoami/actions/workflows/ci.yml/badge.svg)](https://github.com/sergio-lopes-developer/whoami/actions/workflows/ci.yml) ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Portfolio](https://img.shields.io/badge/Portfolio-Developer-blue)
 
 </div>
 
@@ -89,6 +89,8 @@ The repository is organized into three top-level directories: `docs/`, `src/`, a
 For detailed tracking of issues, pull requests, and ongoing work, see the GitHub Project:
 
 [WhoAmI Development Roadmap](https://github.com/sergio-lopes-developer/whoami/projects)
+
+Project development follows a transparent workflow based on GitHub Issues, Pull Requests, Milestones, GitHub Projects, and GitHub Actions.
 
 ---
 
