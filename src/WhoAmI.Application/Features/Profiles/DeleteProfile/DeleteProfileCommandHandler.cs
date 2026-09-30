@@ -5,7 +5,8 @@ using WhoAmI.Application.Results;
 namespace WhoAmI.Application.Features.Profiles.DeleteProfile;
 
 internal sealed class DeleteProfileCommandHandler :
-    ICommandHandler<DeleteProfileCommand> {
+    ICommandHandler<DeleteProfileCommand>
+{
     private readonly IProfileRepository _profileRepository;
 
     private readonly IClock _clock;

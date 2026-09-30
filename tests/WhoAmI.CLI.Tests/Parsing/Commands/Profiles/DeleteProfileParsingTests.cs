@@ -34,28 +34,6 @@ public sealed class DeleteProfileParsingTests {
             .BeOfType<DeleteProfileCommandSettings>()
             .Subject;
 
-    [Fact]
-    public void DeleteProfile_Should_ParseAllArguments() {
-        // Act
-        var execution = Parse("--id", Id);
-
-        // Assert
-        var settings = GetSettings(execution);
-
-        settings.Id.Should().Be(Id);
-    }
-
-    [Fact]
-    public void DeleteProfile_Should_ParseShortOptionsTogether() {
-        // Act
-        var execution = Parse("-i", Id);
-
-        // Assert
-        var settings = GetSettings(execution);
-
-        settings.Id.Should().Be(Id);
-    }
-
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
