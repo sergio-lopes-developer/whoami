@@ -31,6 +31,8 @@ internal sealed class UpdateFullNameCommandHandler :
 
         if (profile == null) return ProfileErrors.NotFoundById(command.Id);
 
+        if (profile.IsDeleted) return ProfileErrors.AlreadyDeleted(command.Id);
+
         var newFullName = new FullName(
             new FirstName(command.FirstName),
             new LastName(command.LastName)

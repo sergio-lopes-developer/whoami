@@ -7,6 +7,7 @@ internal static class ListProfilesSql {
             last_name AS LastName,
             email AS Email
         FROM Profiles
+        WHERE deleted_at IS NULL
         ORDER BY first_name, last_name;
     """;
 }

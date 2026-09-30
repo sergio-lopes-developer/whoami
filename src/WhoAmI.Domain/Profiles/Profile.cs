@@ -57,6 +57,8 @@ public sealed class Profile : AggregateRoot {
         return profile;
     }
 
+    public void Delete(DateTimeOffset deletedAt) => MarkAsDeleted(deletedAt);
+
     public void UpdateFullName(FullName fullName, DateTimeOffset updatedAt) {
         Guard.AgainstNull(fullName, nameof(fullName));
 

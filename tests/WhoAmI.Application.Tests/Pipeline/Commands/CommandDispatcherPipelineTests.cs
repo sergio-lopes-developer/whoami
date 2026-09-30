@@ -92,7 +92,7 @@ public class CommandDispatcherPipelineTests {
         var uow = Substitute.For<IUnitOfWork>();
 
         uow.CommitAsync(Arg.Any<CancellationToken>()).Returns(
-            Result.Failure(ProfileErrors.DuplicateEmail(new(duplicateEmail)))
+            Result.Failure(ProfileErrors.EmailAlreadyExists(new(duplicateEmail)))
         );
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
@@ -109,7 +109,7 @@ public class CommandDispatcherPipelineTests {
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.FirstError!.Code.Should().Be("Profile.DuplicateEmail");
+        result.FirstError!.Code.Should().Be("Profile.EmailAlreadyExists");
         result.FirstError.Metadata!["ProfileEmail"].Should().Be(duplicateEmail);
     }
 

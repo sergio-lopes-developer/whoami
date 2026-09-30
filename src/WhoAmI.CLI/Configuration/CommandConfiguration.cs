@@ -31,6 +31,7 @@ internal static class CommandConfiguration {
             profile.SetDescription("Profile operations");
 
             profile.AddCommand<CreateProfile>("create");
+            profile.AddCommand<DeleteProfile>("delete");
             profile.AddCommand<GetProfile>("get");
             profile.AddCommand<ListProfiles>("list");
 

@@ -75,8 +75,8 @@ public sealed class CreateProfileUnitTests {
             .Send(Arg.Any<CreateProfileCommand>(), Arg.Any<CancellationToken>())
             .Returns(Result<CreateProfileResponse>.Failure(
                 new Error(
-                    "Profile.DuplicateEmail",
-                    "The email must be unique.",
+                    "Profile.EmailAlreadyExists",
+                    "The email is already associated with a profile.",
                     new Dictionary<string, object?> {
                         ["ProfileEmail"] = settings.Email
                     }
@@ -88,7 +88,10 @@ public sealed class CreateProfileUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Error());
-        consoleOutput.Should().Contain("The email must be unique.");
+
+        consoleOutput
+            .Should()
+            .Contain("The email is already associated with a profile.");
 
         await _dispatcher.Received(1).Send(
             Arg.Is<CreateProfileCommand>(x =>

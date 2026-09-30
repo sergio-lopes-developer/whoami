@@ -85,4 +85,50 @@ public class UpdateSocialLinksCommandHandlerTests {
         result.FirstError!.Code.Should().Be("Profile.NotFound");
         result.FirstError.Metadata!["ProfileId"].Should().Be(id);
     }
+
+    [Fact]
+    public async Task UpdateSocialLinks_ShouldReturnFailure_WhenProfileIsAlreadyDeleted() {
+        // Arrange
+        var repo = Substitute.For<IProfileRepository>();
+
+        var clock = Substitute.For<IClock>();
+
+        var deletedAt = new DateTimeOffset(
+            2026, 9, 29,
+            11, 30, 0,
+            TimeSpan.FromHours(-3)
+        );
+
+        var profile = ProfileFactory.CreateWithoutEvents();
+        profile.Delete(deletedAt);
+
+        var currentLinkedInUrl = profile.LinkedIn;
+        var currentGitHubUrl = profile.GitHub;
+
+        repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
+            .Returns(profile);
+
+        var handler = new UpdateSocialLinksCommandHandler(repo, clock);
+
+        var command = new UpdateSocialLinksCommand(
+            profile.Id,
+            "https://www.linkedin.com/in/changed-username",
+            "https://github.com/changed-username"
+        );
+
+        // Act
+        var result = await handler.HandleAsync(
+            command,
+            TestContext.Current.CancellationToken
+        );
+
+        // Assert
+        profile.LinkedIn.Should().Be(currentLinkedInUrl);
+        profile.GitHub.Should().Be(currentGitHubUrl);
+        profile.UpdatedAt.Should().BeNull();
+
+        result.IsFailure.Should().BeTrue();
+        result.FirstError!.Code.Should().Be("Profile.AlreadyDeleted");
+        result.FirstError.Metadata!["ProfileId"].Should().Be(profile.Id);
+    }
 }

@@ -20,7 +20,7 @@ internal sealed class DuplicateProfileEmailViolationMapper :
             .OfType<Profile>()
             .Single();
 
-        return ProfileErrors.DuplicateEmail(
+        return ProfileErrors.EmailAlreadyExists(
             new Email(profile.Email.Address)
         );
     }
