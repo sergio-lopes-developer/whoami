@@ -39,10 +39,12 @@ public sealed class GetProfile(
             return CliExit.Error();
         }
 
+        var profile = result.Value;
+
         InfoRenderer.Render(
             new InfoRenderOptions {
-                Title = "PROFILE",
-                Items = BuildInfoItems(result.Value, commandSettings)
+                Title = $"{profile.FirstName} {profile.LastName}",
+                Items = BuildInfoItems(profile, commandSettings)
             }
         );
 
@@ -54,19 +56,17 @@ public sealed class GetProfile(
         GetProfileCommandSettings settings
     ) {
         if (settings.Verbose) {
-            yield return new("Id", profile.Id.ToString());
+            yield return new("Id:", profile.Id.ToString());
         }
-
-        yield return new("Name", $"{profile.FirstName} {profile.LastName}");
 
         if (!settings.HideEmail) {
-            yield return new("Email", profile.Email);
+            yield return new("Email:", profile.Email);
         }
 
-        yield return new("GitHub", profile.GitHub);
+        yield return new("GitHub:", profile.GitHub);
 
         if (!settings.HideLinkedIn) {
-            yield return new("LinkedIn", profile.LinkedIn);
+            yield return new("LinkedIn:", profile.LinkedIn);
         }
     }
 }

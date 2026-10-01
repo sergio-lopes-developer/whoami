@@ -61,12 +61,14 @@ public sealed class GetProfileUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Success());
-        consoleOutput.Should().ContainAll(
-            $"{firstName} {lastName}",
-            settings.Email,
-            linkedIn,
-            gitHub
-        );
+
+        consoleOutput.Should().Contain($"{firstName} {lastName}");
+        consoleOutput.Should().Contain("Email:");
+        consoleOutput.Should().Contain(settings.Email);
+        consoleOutput.Should().Contain("GitHub:");
+        consoleOutput.Should().Contain(gitHub);
+        consoleOutput.Should().Contain("LinkedIn:");
+        consoleOutput.Should().Contain(linkedIn);
 
         await _dispatcher.Received(1).Send(
             Arg.Is<GetProfileByEmailQuery>(q => q.Email == settings.Email),
