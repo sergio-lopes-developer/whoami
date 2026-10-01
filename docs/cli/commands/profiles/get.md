@@ -53,12 +53,11 @@ whoami-cli profile get \
 Expected output:
 
 ```text
-╭─────────────────── PROFILE ────────────────────╮
-│ Name      Sérgio Lopes                         │
-│ Email     sergio@example.com                   │
-│ GitHub    https://github.com/username          │
-│ LinkedIn  https://www.linkedin.com/in/username │
-╰────────────────────────────────────────────────╯
+╭───────────────── Sergio Lopes ──────────────────╮
+│ Email:     sergio@example.com                   │
+│ GitHub:    https://github.com/username          │
+│ LinkedIn:  https://www.linkedin.com/in/username │
+╰─────────────────────────────────────────────────╯
 ```
 
 ### Hide Email Address
@@ -74,11 +73,10 @@ whoami-cli profile get \
 Expected output:
 
 ```text
-╭─────────────────── PROFILE ────────────────────╮
-│ Name      Sérgio Lopes                         │
-│ GitHub    https://github.com/username          │
-│ LinkedIn  https://www.linkedin.com/in/username │
-╰────────────────────────────────────────────────╯
+╭───────────────── Sergio Lopes ──────────────────╮
+│ GitHub:    https://github.com/username          │
+│ LinkedIn:  https://www.linkedin.com/in/username │
+╰─────────────────────────────────────────────────╯
 ```
 
 ### Hide LinkedIn URL
@@ -94,11 +92,10 @@ whoami-cli profile get \
 Expected output:
 
 ```text
-╭─────────────────── PROFILE ────────────────────╮
-│ Name      Sérgio Lopes                         │
-│ Email     sergio@example.com                   │
-│ GitHub    https://github.com/username          │
-╰────────────────────────────────────────────────╯
+╭───────────────── Sergio Lopes ──────────────────╮
+│ Email:     sergio@example.com                   │
+│ GitHub:    https://github.com/username          │
+╰─────────────────────────────────────────────────╯
 ```
 
 ### Display Verbose Output
@@ -114,13 +111,12 @@ whoami-cli profile get \
 Expected output:
 
 ```text
-╭─────────────────── PROFILE ────────────────────╮
-│ Id        b30545b1-b92b-4040-bbca-c733deb8b1c2 │
-│ Name      Sérgio Lopes                         │
-│ Email     sergio@example.com                   │
-│ GitHub    https://github.com/username          │
-│ LinkedIn  https://www.linkedin.com/in/username │
-╰────────────────────────────────────────────────╯
+╭───────────────── Sergio Lopes ──────────────────╮
+│ Id:        b30545b1-b92b-4040-bbca-c733deb8b1c2 │
+│ Email:     sergio@example.com                   │
+│ GitHub:    https://github.com/username          │
+│ LinkedIn:  https://www.linkedin.com/in/username │
+╰─────────────────────────────────────────────────╯
 ```
 
 ---
