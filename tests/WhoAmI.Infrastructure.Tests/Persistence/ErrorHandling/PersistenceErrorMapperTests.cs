@@ -18,8 +18,8 @@ public sealed class PersistenceErrorMapperTests {
             .Returns(PersistenceViolationCode.DuplicateProfileEmail);
 
         var expectedError = new Error(
-            "Profile.DuplicateEmail",
-            "Email already exists."
+            "Profile.EmailAlreadyExists",
+            "The email is already associated with a profile."
         );
 
         var violationMapper =

@@ -31,6 +31,8 @@ internal sealed class UpdateEmailCommandHandler :
 
         if (profile == null) return ProfileErrors.NotFoundById(command.Id);
 
+        if (profile.IsDeleted) return ProfileErrors.AlreadyDeleted(command.Id);
+
         var newEmail = new Email(command.Email);
 
         profile.UpdateEmail(newEmail, _clock.UtcNow);

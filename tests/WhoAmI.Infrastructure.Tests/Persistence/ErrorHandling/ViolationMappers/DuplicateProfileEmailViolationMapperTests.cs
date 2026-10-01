@@ -55,7 +55,7 @@ public sealed class DuplicateProfileEmailViolationMapperTests {
 
         // Assert
         result.Should().BeEquivalentTo(
-            ProfileErrors.DuplicateEmail(profile.Email)
+            ProfileErrors.EmailAlreadyExists(profile.Email)
         );
     }
 }

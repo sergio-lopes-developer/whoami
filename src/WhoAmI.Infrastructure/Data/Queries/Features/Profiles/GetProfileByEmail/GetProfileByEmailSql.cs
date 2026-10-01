@@ -12,6 +12,7 @@ internal static class GetProfileByEmailSql {
             github_url AS GitHub
         FROM Profiles
         WHERE email = @Email
+          AND deleted_at IS NULL
         LIMIT 1;
     """;
 }

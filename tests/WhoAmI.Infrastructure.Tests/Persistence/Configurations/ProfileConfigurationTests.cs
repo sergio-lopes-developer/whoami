@@ -44,6 +44,17 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         return property;
     }
 
+    private static IProperty AssertOptionalProperty(
+        IProperty? property,
+        string columnName
+    ) {
+        property = AssertMappedProperty(property, columnName);
+
+        property.IsNullable.Should().BeTrue();
+
+        return property;
+    }
+
     private static IProperty AssertRequiredProperty(
         IProperty? property,
         string columnName
@@ -51,17 +62,6 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         property = AssertMappedProperty(property, columnName);
 
         property.IsNullable.Should().BeFalse();
-
-        return property;
-    }
-
-    private static IProperty AssertNotRequiredProperty(
-        IProperty? property,
-        string columnName
-    ) {
-        property = AssertMappedProperty(property, columnName);
-
-        property.IsNullable.Should().BeTrue();
 
         return property;
     }
@@ -124,9 +124,20 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         var property = _entityType.FindProperty(nameof(Profile.UpdatedAt));
 
         // Assert
-        var updatedAt = AssertNotRequiredProperty(property, "updated_at");
+        var updatedAt = AssertOptionalProperty(property, "updated_at");
 
         updatedAt.ClrType.Should().Be<DateTimeOffset?>();
+    }
+
+    [Fact]
+    public void Configure_ShouldMapDeletedAtProperty() {
+        // Arrange
+        var property = _entityType.FindProperty(nameof(Profile.DeletedAt));
+
+        // Assert
+        var deletedAt = AssertOptionalProperty(property, "deleted_at");
+
+        deletedAt.ClrType.Should().Be<DateTimeOffset?>();
     }
 
     [Fact]
@@ -199,5 +210,14 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         var lastName = AssertRequiredProperty(property, "last_name");
 
         lastName.GetMaxLength().Should().Be(LastName.MaxLength);
+    }
+
+    [Fact]
+    public void Configure_ShouldNotMapIsDeletedProperty() {
+        // Arrange
+        var property = _entityType.FindProperty(nameof(Profile.IsDeleted));
+
+        // Assert
+        property.Should().BeNull();
     }
 }

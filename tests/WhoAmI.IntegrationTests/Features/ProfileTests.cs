@@ -39,7 +39,7 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
 
             // Assert
             result.IsFailure.Should().BeTrue();
-            result.FirstError!.Code.Should().Be("Profile.DuplicateEmail");
+            result.FirstError!.Code.Should().Be("Profile.EmailAlreadyExists");
             result.FirstError.Metadata!["ProfileEmail"]
                 .Should()
                 .Be(command.Email);

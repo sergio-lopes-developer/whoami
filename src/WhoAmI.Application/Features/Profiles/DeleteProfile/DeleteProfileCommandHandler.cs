@@ -1,18 +1,17 @@
 using WhoAmI.Application.Abstractions.Commands;
 using WhoAmI.Application.Abstractions.Time;
 using WhoAmI.Application.Results;
-using WhoAmI.Domain.Profiles.ValueObjects;
 
-namespace WhoAmI.Application.Features.Profiles.UpdateSocialLinks;
+namespace WhoAmI.Application.Features.Profiles.DeleteProfile;
 
-internal sealed class UpdateSocialLinksCommandHandler :
-    ICommandHandler<UpdateSocialLinksCommand>
+internal sealed class DeleteProfileCommandHandler :
+    ICommandHandler<DeleteProfileCommand>
 {
     private readonly IProfileRepository _profileRepository;
 
     private readonly IClock _clock;
 
-    public UpdateSocialLinksCommandHandler(
+    public DeleteProfileCommandHandler(
         IProfileRepository profileRepository,
         IClock clock
     ) {
@@ -21,8 +20,8 @@ internal sealed class UpdateSocialLinksCommandHandler :
     }
 
     public async Task<Result> HandleAsync(
-        UpdateSocialLinksCommand command,
-        CancellationToken cancellationToken = default
+        DeleteProfileCommand command,
+        CancellationToken cancellationToken
     ) {
         var profile = await _profileRepository.GetByIdAsync(
             command.Id,
@@ -33,11 +32,9 @@ internal sealed class UpdateSocialLinksCommandHandler :
 
         if (profile.IsDeleted) return ProfileErrors.AlreadyDeleted(command.Id);
 
-        var newLinkedIn = new Url(command.LinkedIn);
-        var newGitHub = new Url(command.GitHub);
-
-        profile.UpdateSocialLinks(newLinkedIn, newGitHub, _clock.UtcNow);
+        profile.Delete(_clock.UtcNow);
 
         return Result.Success();
     }
+
 }

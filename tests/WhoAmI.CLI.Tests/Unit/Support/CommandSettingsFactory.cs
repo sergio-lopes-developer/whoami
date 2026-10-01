@@ -11,6 +11,10 @@ internal static class CommandSettingsFactory {
         GitHub = "https://github.com/username"
     };
 
+    public static DeleteProfileCommandSettings DeleteProfile() => new() {
+        Id = Guid.NewGuid()
+    };
+
     public static GetProfileCommandSettings GetProfile() => new() {
         Email = "john@doe.com"
     };

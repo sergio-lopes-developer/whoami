@@ -36,8 +36,8 @@ public class WhoAmIDbContextTests {
     public async Task CommitAsync_ShouldReturnFailure_WhenDbUpdateExceptionOccurs() {
         // Arrange
         var expected = new Error(
-            "Profile.DuplicateEmail",
-            "Email already exists."
+            "Profile.EmailAlreadyExists",
+            "The email is already associated with a profile."
         );
 
         var mapper = Substitute.For<IPersistenceErrorMapper>();

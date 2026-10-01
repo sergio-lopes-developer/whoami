@@ -39,11 +39,17 @@ internal sealed class ProfileConfiguration : IEntityTypeConfiguration<Profile> {
         ConfigureId(builder);
         ConfigureCreatedAt(builder);
         ConfigureUpdatedAt(builder);
+        ConfigureDeletedAt(builder);
         ConfigureFullName(builder);
         ConfigureEmail(builder);
         ConfigureLinkedIn(builder);
         ConfigureGitHub(builder);
+
+        IgnoreProperties(builder);
     }
+
+    private static void IgnoreProperties(EntityTypeBuilder<Profile> builder) =>
+        builder.Ignore(p => p.IsDeleted);
 
     private static void ConfigureId(EntityTypeBuilder<Profile> builder) =>
         builder
@@ -66,6 +72,13 @@ internal sealed class ProfileConfiguration : IEntityTypeConfiguration<Profile> {
         builder
             .Property(p => p.UpdatedAt)
             .HasColumnName("updated_at");
+
+    private static void ConfigureDeletedAt(
+        EntityTypeBuilder<Profile> builder
+    ) =>
+        builder
+            .Property(p => p.DeletedAt)
+            .HasColumnName("deleted_at");
 
     private static void ConfigureFullName(EntityTypeBuilder<Profile> builder) {
         builder.OwnsOne(p => p.FullName, fullName => {

@@ -1,3 +1,4 @@
+using WhoAmI.Domain.Shared.Exceptions;
 using WhoAmI.Domain.Shared.Guards;
 
 namespace WhoAmI.Domain.Shared.Base;
@@ -10,6 +11,10 @@ public abstract class Entity {
 
     public DateTimeOffset? UpdatedAt { get; private set; } // private set required by EF
 
+    public DateTimeOffset? DeletedAt { get; private set; } // private set required by EF
+
+    public bool IsDeleted => DeletedAt is not null;
+
     protected Entity() { } // required by EF
 
     protected Entity(Guid id, DateTimeOffset createdAt) {
@@ -19,8 +24,23 @@ public abstract class Entity {
         CreatedAt = createdAt.ToUniversalTime();
     }
 
-    protected void MarkAsUpdated(DateTimeOffset updatedAt) =>
+    protected void MarkAsDeleted(DateTimeOffset deletedAt) {
+        Guard.Against(
+            IsDeleted,
+            DomainExceptionMessages.EntityAlreadyDeleted
+        );
+
+        DeletedAt = deletedAt.ToUniversalTime();
+    }
+
+    protected void MarkAsUpdated(DateTimeOffset updatedAt) {
+        Guard.Against(
+            IsDeleted,
+            DomainExceptionMessages.CannotUpdateDeletedEntity
+        );
+
         UpdatedAt = updatedAt.ToUniversalTime();
+    }
 
     protected bool Equals(Entity other) => Id == other.Id;
 

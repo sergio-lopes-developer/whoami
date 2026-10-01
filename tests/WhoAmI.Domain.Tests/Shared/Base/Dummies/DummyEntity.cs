@@ -9,6 +9,9 @@ internal sealed class DummyEntity(
     id,
     createdAt
 ) {
+    public void InvokeMarkAsDeleted(DateTimeOffset deletedAt) =>
+        MarkAsDeleted(deletedAt);
+
     public void InvokeMarkAsUpdated(DateTimeOffset updatedAt) =>
         MarkAsUpdated(updatedAt);
 }
