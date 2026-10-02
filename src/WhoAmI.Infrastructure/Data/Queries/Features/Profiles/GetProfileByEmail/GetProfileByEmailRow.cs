@@ -7,5 +7,7 @@ internal sealed record GetProfileByEmailRow(
     string LastName,
     string Email,
     string LinkedIn,
-    string GitHub
+    string GitHub,
+    string CreatedAt,
+    string? UpdatedAt
 );

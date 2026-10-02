@@ -11,7 +11,9 @@ public sealed class GetProfileWiringTests {
         "Doe",
         "john@doe.com",
         "https://www.linkedin.com/in/username",
-        "https://github.com/username"
+        "https://github.com/username",
+        new DateTimeOffset(2026, 9, 22, 13, 25, 0, TimeSpan.Zero),
+        null
     );
 
     private static GetProfileByEmailQuery RunGetProfile(params string[] args) {

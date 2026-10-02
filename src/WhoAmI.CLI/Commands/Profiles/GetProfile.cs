@@ -56,7 +56,9 @@ public sealed class GetProfile(
         GetProfileCommandSettings settings
     ) {
         if (settings.Verbose) {
-            yield return new("Id:", profile.Id.ToString());
+            yield return InfoItem.Identifier("ID:", profile.Id);
+
+            yield return InfoItem.BlankLine();
         }
 
         if (!settings.HideEmail) {
@@ -67,6 +69,14 @@ public sealed class GetProfile(
 
         if (!settings.HideLinkedIn) {
             yield return new("LinkedIn:", profile.LinkedIn);
+        }
+
+        if (settings.Verbose) {
+            yield return InfoItem.BlankLine();
+
+            yield return InfoItem.Timestamp("Created at:", profile.CreatedAt);
+
+            yield return InfoItem.Timestamp("Updated at:", profile.UpdatedAt);
         }
     }
 }

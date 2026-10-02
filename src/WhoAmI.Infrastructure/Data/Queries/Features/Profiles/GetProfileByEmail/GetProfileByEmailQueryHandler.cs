@@ -42,7 +42,9 @@ internal sealed class GetProfileByEmailQueryHandler :
             row.LastName,
             row.Email,
             row.LinkedIn,
-            row.GitHub
+            row.GitHub,
+            DateTimeOffset.Parse(row.CreatedAt),
+            row.UpdatedAt is null ? null : DateTimeOffset.Parse(row.UpdatedAt)
         );
 
         return Result<GetProfileByEmailResponse>.Success(response);

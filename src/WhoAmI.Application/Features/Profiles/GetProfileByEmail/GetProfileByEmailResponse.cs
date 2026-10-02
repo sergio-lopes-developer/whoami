@@ -6,5 +6,7 @@ public sealed record GetProfileByEmailResponse(
     string LastName,
     string Email,
     string LinkedIn,
-    string GitHub
+    string GitHub,
+    DateTimeOffset CreatedAt,
+    DateTimeOffset? UpdatedAt
 );
