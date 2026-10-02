@@ -9,7 +9,9 @@ internal static class GetProfileByEmailSql {
             last_name AS LastName,
             email AS Email,
             linkedin_url AS LinkedIn,
-            github_url AS GitHub
+            github_url AS GitHub,
+            created_at AS CreatedAt,
+            updated_at AS UpdatedAt
         FROM Profiles
         WHERE email = @Email
           AND deleted_at IS NULL

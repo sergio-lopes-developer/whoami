@@ -15,8 +15,15 @@ internal static class CommandSettingsFactory {
         Id = Guid.NewGuid()
     };
 
-    public static GetProfileCommandSettings GetProfile() => new() {
-        Email = "john@doe.com"
+    public static GetProfileCommandSettings GetProfile(
+        bool hideEmail = false,
+        bool hideLinkedIn = false,
+        bool verbose = false
+    ) => new() {
+        Email = "john@doe.com",
+        HideEmail = hideEmail,
+        HideLinkedIn = hideLinkedIn,
+        Verbose = verbose
     };
 
     public static ListProfilesCommandSettings ListProfiles() => new() { };

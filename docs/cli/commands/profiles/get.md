@@ -111,12 +111,16 @@ whoami-cli profile get \
 Expected output:
 
 ```text
-╭───────────────── Sergio Lopes ──────────────────╮
-│ Id:        b30545b1-b92b-4040-bbca-c733deb8b1c2 │
-│ Email:     sergio@example.com                   │
-│ GitHub:    https://github.com/username          │
-│ LinkedIn:  https://www.linkedin.com/in/username │
-╰─────────────────────────────────────────────────╯
+╭────────────────── Sergio Lopes ───────────────────╮
+│ ID:          b30545b1-b92b-4040-bbca-c733deb8b1c2 │
+│                                                   │
+│ Email:       sergio@example.com                   │
+│ GitHub:      https://github.com/username          │
+│ LinkedIn:    https://www.linkedin.com/in/username │
+│                                                   │
+│ Created at:  2026-09-22 17:48:31 -03:00           │
+│ Updated at:  Never                                │
+╰───────────────────────────────────────────────────╯
 ```
 
 ---
