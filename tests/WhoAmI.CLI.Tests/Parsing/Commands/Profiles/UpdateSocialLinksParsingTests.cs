@@ -39,7 +39,7 @@ public sealed class UpdateSocialLinksParsingTests {
             .Subject;
 
     [Fact]
-    public void UpdateSocialLinks_Should_ParseAllArguments() {
+    public void UpdateSocialLinks_Should_ParseAllOptions() {
         // Act
         var execution = Parse(
             "--id", Id,

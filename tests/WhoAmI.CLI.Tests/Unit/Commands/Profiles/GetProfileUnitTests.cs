@@ -144,6 +144,42 @@ public sealed class GetProfileUnitTests {
     }
 
     [Fact]
+    public async Task ExecuteInternalAsync_ShouldHideGitHub_WhenRequested() {
+        // Arrange
+        var settings = CommandSettingsFactory.GetProfile(
+            hideGitHub: true
+        );
+
+        _dispatcher
+            .Send(
+                Arg.Any<GetProfileByEmailQuery>(),
+                Arg.Any<CancellationToken>()
+            )
+            .Returns(
+                GenerateResponse(settings.Email)
+            );
+
+        // Act
+        var (exitCode, consoleOutput) = await Execute(settings);
+
+        // Assert
+        exitCode.Should().Be(CliExit.Success());
+
+        consoleOutput.Should().NotContain("GitHub:");
+        consoleOutput.Should().NotContain(GitHub);
+
+        ShouldNotContainVerboseInformation(consoleOutput);
+
+        consoleOutput.Should().Contain($"{FirstName} {LastName}");
+        consoleOutput.Should().Contain("Email:");
+        consoleOutput.Should().Contain(settings.Email);
+        consoleOutput.Should().Contain("LinkedIn:");
+        consoleOutput.Should().Contain(LinkedIn);
+
+        await ShouldHaveDispatchedQuery(settings.Email);
+    }
+
+    [Fact]
     public async Task ExecuteInternalAsync_ShouldHideLinkedIn_WhenRequested() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile(
@@ -259,6 +295,45 @@ public sealed class GetProfileUnitTests {
         consoleOutput.Should().Contain(GitHub);
         consoleOutput.Should().Contain("LinkedIn:");
         consoleOutput.Should().Contain(LinkedIn);
+
+        await ShouldHaveDispatchedQuery(settings.Email);
+    }
+
+    [Fact]
+    public async Task ExecuteInternalAsync_ShouldDisplayWarning_WhenAllOptionalInformationIsHidden() {
+        // Arrange
+        var settings = CommandSettingsFactory.GetProfile(
+            hideEmail: true,
+            hideGitHub: true,
+            hideLinkedIn: true
+        );
+
+        _dispatcher
+            .Send(
+                Arg.Any<GetProfileByEmailQuery>(),
+                Arg.Any<CancellationToken>()
+            )
+            .Returns(
+                GenerateResponse(settings.Email)
+            );
+
+        // Act
+        var (exitCode, consoleOutput) = await Execute(settings);
+
+        // Assert
+        exitCode.Should().Be(CliExit.Success());
+
+        consoleOutput.Should().Contain("All profile information is hidden.");
+        consoleOutput.Should()
+            .Contain("Use --verbose to display additional information.");
+
+        consoleOutput.Should().NotContain($"{FirstName} {LastName}");
+        consoleOutput.Should().NotContain("Email:");
+        consoleOutput.Should().NotContain(settings.Email);
+        consoleOutput.Should().NotContain("GitHub:");
+        consoleOutput.Should().NotContain(GitHub);
+        consoleOutput.Should().NotContain("LinkedIn:");
+        consoleOutput.Should().NotContain(LinkedIn);
 
         await ShouldHaveDispatchedQuery(settings.Email);
     }

@@ -20,13 +20,14 @@ whoami-cli profile get [options]
 
 ## Options
 
-| Option          | Alias | Required |  Type   | Domain Value Object                                                   | Description                                                      |
-|:----------------|:-----:|:--------:|:-------:|:----------------------------------------------------------------------|:-----------------------------------------------------------------|
-| --email         |  -e   |   Yes    |  Email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | Profile email address.                                           |
-| --hide-email    |  -m   |    No    | Boolean |                                                                       | Hides the profile email address from the output.                 |
-| --hide-linkedin |  -n   |    No    | Boolean |                                                                       | Hides the profile LinkedIn URL from the output.                  |
-| --verbose       |  -v   |    No    | Boolean |                                                                       | Displays additional information, such as the profile identifier. |
-| --help          |  -h   |    No    | Boolean |                                                                       | Displays command help.                                           |
+| Option          | Alias | Required |  Type   | Domain Value Object                                                   | Description                                                                     |
+|:----------------|:-----:|:--------:|:-------:|:----------------------------------------------------------------------|:--------------------------------------------------------------------------------|
+| --email         |  -e   |   Yes    |  Email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | Profile email address.                                                          |
+| --hide-email    |  -m   |    No    | Boolean |                                                                       | Hides the profile email address from the output.                                |
+| --hide-github   |  -g   |    No    | Boolean |                                                                       | Hides the profile GitHub URL from the output.                                   |
+| --hide-linkedin |  -n   |    No    | Boolean |                                                                       | Hides the profile LinkedIn URL from the output.                                 |
+| --verbose       |  -v   |    No    | Boolean |                                                                       | Displays additional information, including the profile ID and audit timestamps. |
+| --help          |  -h   |    No    | Boolean |                                                                       | Displays command help.                                                          |
 
 ---
 
@@ -79,6 +80,25 @@ Expected output:
 ╰─────────────────────────────────────────────────╯
 ```
 
+### Hide GitHub URL
+
+Hide the GitHub URL from the output.
+
+```shell
+whoami-cli profile get \
+    -e sergio@example.com \
+    --hide-github
+```
+
+Expected output:
+
+```text
+╭───────────────── Sergio Lopes ──────────────────╮
+│ Email:     sergio@example.com                   │
+│ LinkedIn:  https://www.linkedin.com/in/username │
+╰─────────────────────────────────────────────────╯
+```
+
 ### Hide LinkedIn URL
 
 Hide the LinkedIn URL from the output.
@@ -98,9 +118,28 @@ Expected output:
 ╰─────────────────────────────────────────────────╯
 ```
 
+### Hide All Optional Information
+
+When all optional information is hidden, the command displays a warning message.
+
+```shell
+whoami-cli profile get \
+    -e sergio@example.com \
+    --hide-email \
+    --hide-github \
+    --hide-linkedin
+```
+
+Expected output:
+
+```text
+All profile information is hidden.
+Use --verbose to display additional information.
+```
+
 ### Display Verbose Output
 
-Display additional information.
+Display additional profile information, including the ID and audit timestamps.
 
 ```shell
 whoami-cli profile get \

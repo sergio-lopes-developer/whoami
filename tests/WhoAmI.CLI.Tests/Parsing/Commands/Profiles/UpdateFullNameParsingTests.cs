@@ -39,7 +39,7 @@ public sealed class UpdateFullNameParsingTests {
             .Subject;
 
     [Fact]
-    public void UpdateFullName_Should_ParseAllArguments() {
+    public void UpdateFullName_Should_ParseAllOptions() {
         // Act
         var execution = Parse(
             "--id", Id,

@@ -17,11 +17,13 @@ internal static class CommandSettingsFactory {
 
     public static GetProfileCommandSettings GetProfile(
         bool hideEmail = false,
+        bool hideGitHub = false,
         bool hideLinkedIn = false,
         bool verbose = false
     ) => new() {
         Email = "john@doe.com",
         HideEmail = hideEmail,
+        HideGitHub = hideGitHub,
         HideLinkedIn = hideLinkedIn,
         Verbose = verbose
     };

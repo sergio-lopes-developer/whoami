@@ -12,6 +12,10 @@ public sealed class GetProfileCommandSettings : CommandSettings {
     [Description("Hide the email address")]
     public bool HideEmail { get; init; } = false;
 
+    [CommandOption("--hide-github|-g")]
+    [Description("Hide the GitHub profile URL")]
+    public bool HideGitHub { get; init; } = false;
+
     [CommandOption("--hide-linkedin|-n")]
     [Description("Hide the LinkedIn profile URL")]
     public bool HideLinkedIn { get; init; } = false;
