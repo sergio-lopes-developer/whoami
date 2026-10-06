@@ -41,10 +41,21 @@ public sealed class GetProfile(
 
         var profile = result.Value;
 
+        var items = BuildInfoItems(profile, commandSettings).ToList();
+
+        if (items.All(i => i.IsBlank)) {
+            CliMessage.ShowWarning(
+                "All profile information is hidden." +
+                "\nUse --verbose to display additional information."
+            );
+
+            return CliExit.Success();
+        }
+
         InfoRenderer.Render(
             new InfoRenderOptions {
                 Title = $"{profile.FirstName} {profile.LastName}",
-                Items = BuildInfoItems(profile, commandSettings)
+                Items = items
             }
         );
 
@@ -65,7 +76,9 @@ public sealed class GetProfile(
             yield return new("Email:", profile.Email);
         }
 
-        yield return new("GitHub:", profile.GitHub);
+        if (!settings.HideGitHub) {
+            yield return new("GitHub:", profile.GitHub);
+        }
 
         if (!settings.HideLinkedIn) {
             yield return new("LinkedIn:", profile.LinkedIn);

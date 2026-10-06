@@ -32,12 +32,7 @@ public sealed class GetProfileWiringTests {
         const string email = "john@doe.com";
 
         // Act
-        var query = RunGetProfile([
-            "--email", email,
-            "--hide-email",
-            "--hide-linkedin",
-            "--verbose"
-        ]);
+        var query = RunGetProfile(["--email", email]);
 
         // Assert
         query.Email.Should().Be(email);

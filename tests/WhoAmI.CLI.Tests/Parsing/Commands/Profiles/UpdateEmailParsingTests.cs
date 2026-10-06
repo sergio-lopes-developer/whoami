@@ -38,7 +38,7 @@ public sealed class UpdateEmailParsingTests {
             .Subject;
 
     [Fact]
-    public void UpdateEmail_Should_ParseAllArguments() {
+    public void UpdateEmail_Should_ParseAllOptions() {
         // Act
         var execution = Parse(
             "--id", Id,

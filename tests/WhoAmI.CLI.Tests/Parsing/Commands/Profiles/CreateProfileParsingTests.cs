@@ -39,7 +39,7 @@ public sealed class CreateProfileParsingTests {
             .Subject;
 
     [Fact]
-    public void CreateProfile_Should_ParseAllArguments() {
+    public void CreateProfile_Should_ParseAllOptions() {
         // Act
         var execution = Parse(
             "--first-name", FirstName,

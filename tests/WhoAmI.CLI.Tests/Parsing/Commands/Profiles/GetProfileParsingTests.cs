@@ -35,11 +35,12 @@ public sealed class GetProfileParsingTests {
             .Subject;
 
     [Fact]
-    public void GetProfile_Should_ParseAllArguments() {
+    public void GetProfile_Should_ParseAllOptions() {
         // Act
         var execution = Parse(
             "--email", Email,
             "--hide-email",
+            "--hide-github",
             "--hide-linkedin",
             "--verbose"
         );
@@ -49,6 +50,7 @@ public sealed class GetProfileParsingTests {
 
         settings.Email.Should().Be(Email);
         settings.HideEmail.Should().BeTrue();
+        settings.HideGitHub.Should().BeTrue();
         settings.HideLinkedIn.Should().BeTrue();
         settings.Verbose.Should().BeTrue();
     }
@@ -59,6 +61,7 @@ public sealed class GetProfileParsingTests {
         var execution = Parse(
             "-e", Email,
             "-m",
+            "-g",
             "-n",
             "-v"
         );
@@ -68,6 +71,7 @@ public sealed class GetProfileParsingTests {
 
         settings.Email.Should().Be(Email);
         settings.HideEmail.Should().BeTrue();
+        settings.HideGitHub.Should().BeTrue();
         settings.HideLinkedIn.Should().BeTrue();
         settings.Verbose.Should().BeTrue();
     }
@@ -96,6 +100,19 @@ public sealed class GetProfileParsingTests {
         var settings = GetSettings(execution);
 
         settings.HideEmail.Should().BeTrue();
+    }
+
+    [Theory]
+    [InlineData("--hide-github")]
+    [InlineData("-g")]
+    public void GetProfile_Should_ParseHideGitHub(string option) {
+        // Act
+        var execution = Parse(option);
+
+        // Assert
+        var settings = GetSettings(execution);
+
+        settings.HideGitHub.Should().BeTrue();
     }
 
     [Theory]
@@ -133,6 +150,7 @@ public sealed class GetProfileParsingTests {
         var settings = GetSettings(execution);
 
         settings.HideEmail.Should().BeFalse();
+        settings.HideGitHub.Should().BeFalse();
         settings.HideLinkedIn.Should().BeFalse();
         settings.Verbose.Should().BeFalse();
     }

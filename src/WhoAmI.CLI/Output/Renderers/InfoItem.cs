@@ -1,6 +1,10 @@
 namespace WhoAmI.CLI.Output.Renderers;
 
 internal sealed record InfoItem(string Label, string? Value) {
+    public bool IsBlank =>
+        string.IsNullOrWhiteSpace(Label) &&
+        string.IsNullOrWhiteSpace(Value);
+
     public string DisplayValue => Value ?? "-";
 
     public static InfoItem BlankLine() => new("", "");
