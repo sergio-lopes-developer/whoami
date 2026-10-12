@@ -15,8 +15,9 @@ internal sealed class GetProfileByEmailQueryHandler :
 
     public GetProfileByEmailQueryHandler(
         IDbConnectionFactory connectionFactory
-    ) =>
+    ) {
         _connectionFactory = connectionFactory;
+    }
 
     public async Task<Result<GetProfileByEmailResponse>> HandleAsync(
         GetProfileByEmailQuery query,

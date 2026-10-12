@@ -13,7 +13,6 @@ public class DeleteProfileCommandHandlerTests {
     public async Task DeleteProfile_ShouldDeleteProfile_WhenProfileExists() {
         // Arrange
         var profile = ProfileFactory.Create();
-
         var repo = Substitute.For<IProfileRepository>();
 
         var deletedAt = new DateTimeOffset(
@@ -29,7 +28,6 @@ public class DeleteProfileCommandHandlerTests {
             .Returns(profile);
 
         var handler = new DeleteProfileCommandHandler(repo, clock);
-
         var command = new DeleteProfileCommand(profile.Id);
 
         // Act
@@ -52,16 +50,13 @@ public class DeleteProfileCommandHandlerTests {
     public async Task DeleteProfile_ShouldReturnFailure_WhenProfileDoesNotExist() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns((Profile?)null);
 
         var handler = new DeleteProfileCommandHandler(repo, clock);
-
         var id = Guid.NewGuid();
-
         var command = new DeleteProfileCommand(id);
 
         // Act
@@ -80,7 +75,6 @@ public class DeleteProfileCommandHandlerTests {
     public async Task DeleteProfile_ShouldReturnFailure_WhenProfileIsAlreadyDeleted() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         var deletedAt = new DateTimeOffset(
@@ -96,7 +90,6 @@ public class DeleteProfileCommandHandlerTests {
             .Returns(profile);
 
         var handler = new DeleteProfileCommandHandler(repo, clock);
-
         var command = new DeleteProfileCommand(profile.Id);
 
         // Act

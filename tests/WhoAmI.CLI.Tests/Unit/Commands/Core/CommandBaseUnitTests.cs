@@ -9,8 +9,8 @@ using WhoAmI.Domain.Shared.Exceptions;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Core;
 
 [Collection("CLI Console")]
-public sealed class CommandBaseUnitTests {
-    public sealed class TestCommand(
+public class CommandBaseUnitTests {
+    public class TestCommand(
         ILogger<TestCommand> logger,
         Func<CommandContext, TestSettings, CancellationToken, Task<int>> execute
     ) : CommandBase<TestCommand, TestSettings>(logger) {
@@ -43,7 +43,7 @@ public sealed class CommandBaseUnitTests {
         );
 
     [Fact]
-    public async Task ExecuteAsync_ShouldReturnCommandResult() {
+    public async Task ExecuteAsync_ShouldReturnResultFromExecuteCommandAsync_WhenExecutionSucceeds() {
         // Arrange
         var logger = Substitute.For<ILogger<TestCommand>>();
 
@@ -127,7 +127,6 @@ public sealed class CommandBaseUnitTests {
     public async Task ExecuteAsync_ShouldReturnError_WhenUnhandledExceptionIsThrown() {
         // Arrange
         var logger = Substitute.For<ILogger<TestCommand>>();
-
         var exception = new InvalidOperationException("Boom.");
 
         var command = new TestCommand(
@@ -147,10 +146,9 @@ public sealed class CommandBaseUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteAsync_ShouldLogUnhandledException() {
+    public async Task ExecuteAsync_ShouldLogUnhandledException_WhenUnhandledExceptionIsThrown() {
         // Arrange
         var logger = Substitute.For<ILogger<TestCommand>>();
-
         var exception = new InvalidOperationException("Boom.");
 
         var command = new TestCommand(

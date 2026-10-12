@@ -19,9 +19,7 @@ internal sealed class ValidationRuleBuilder<T> {
     internal ValidationRuleBuilder<T> IsRequired() {
         switch (_value) {
             case null:
-
             case string text when string.IsNullOrWhiteSpace(text):
-
             case Guid guid when guid == Guid.Empty:
                 AddError(ValidationErrors.Required(_field));
                 break;
@@ -67,9 +65,7 @@ internal sealed class ValidationRuleBuilder<T> {
     private void AddError(Error error) => (_errors ??= []).Add(error);
 
     internal void AddTo(List<Error> errors) {
-        if (_errors is null) {
-            return;
-        }
+        if (_errors is null) return;
 
         errors.AddRange(_errors);
     }

@@ -10,9 +10,7 @@ internal sealed class SpectreCliTypeResolver : ITypeResolver, IDisposable {
         _scope = serviceProvider.CreateScope();
 
     public object Resolve(Type? type) {
-        if (type is null) {
-            throw new InvalidOperationException();
-        }
+        if (type is null) throw new InvalidOperationException();
 
         if (!typeof(CommandSettings).IsAssignableFrom(type)) {
             return _scope.ServiceProvider.GetRequiredService(type);

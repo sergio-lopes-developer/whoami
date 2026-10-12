@@ -77,7 +77,6 @@ public sealed class Profile : AggregateRoot {
         Email = email;
 
         MarkAsUpdated(updatedAt);
-
         AddDomainEvent(new EmailUpdatedEvent(Id, email.Address));
     }
 

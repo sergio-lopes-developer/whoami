@@ -4,9 +4,9 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
-public sealed class ListProfilesWiringTests {
+public class ListProfilesWiringTests {
     [Fact]
-    public void ListProfiles_Should_BeResolvedAndDispatchQuery() {
+    public void ListProfiles_ShouldResolveAndDispatchQuery_WhenCommandIsExecuted() {
         // Act
         var query = CliApplicationQueryRunner
             .Run<ListProfilesQuery, IReadOnlyCollection<ListProfilesResponse>>(

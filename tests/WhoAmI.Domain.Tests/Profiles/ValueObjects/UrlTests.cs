@@ -13,36 +13,45 @@ public class UrlTests {
     [InlineData(Urls.GitHub)]
     [InlineData("https://example.com")]
     [InlineData("HTTPS://Example.Com")]
-    public void Url_ShouldAllowCreation_WhenInputIsValid(string input) {
+    public void Url_ShouldCreate_WhenInputIsValid(string input) {
+        // Act
         var url = new Url(input);
 
+        // Assert
         url.Value.Should().Be(input);
     }
 
     [Fact]
     public void Url_ShouldPreserveInputCase_WhenCreated() {
-        var canonicalInput = Urls.LinkedIn;
+        // Arrange
+        const string canonicalInput = Urls.LinkedIn;
         var caseVariantInput = canonicalInput.ToUpperInvariant();
 
+        // Act
         var url = new Url(caseVariantInput);
 
+        // Assert
         url.Value.Should().Be(caseVariantInput);
     }
 
     [Fact]
-    public void Url_ShouldNotAllowCreation_WhenInputIsNull() {
+    public void Url_ShouldThrow_WhenInputIsNull() {
+        // Act
         var act = () => new Url(null!);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Theory]
     [MemberData(nameof(TextInputs.Blank), MemberType = typeof(TextInputs))]
-    public void Url_ShouldNotAllowCreation_WhenInputIsEmptyOrWhiteSpace(
+    public void Url_ShouldThrow_WhenInputIsEmptyOrWhiteSpace(
         string input
     ) {
+        // Act
         var act = () => new Url(input);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
@@ -50,13 +59,16 @@ public class UrlTests {
     [InlineData(Urls.LinkedIn + " ")]
     [InlineData(" " + Urls.LinkedIn)]
     [InlineData(" " + Urls.LinkedIn + " ")]
-    public void Url_ShouldTrimLeadingOrTrailingWhiteSpace_WhenInputContainsIt(
+    public void Url_ShouldTrimLeadingAndTrailingWhiteSpace_WhenInputContainsWhiteSpace(
         string leadingOrTrailingWhiteSpaceInput
     ) {
-        var canonicalInput = Urls.LinkedIn;
+        // Arrange
+        const string canonicalInput = Urls.LinkedIn;
 
+        // Act
         var url = new Url(leadingOrTrailingWhiteSpaceInput);
 
+        // Assert
         url.Value.Should().Be(canonicalInput);
     }
 
@@ -85,9 +97,11 @@ public class UrlTests {
     [InlineData("just some text")]
     [InlineData("123456")]
     [InlineData("////")]
-    public void Url_ShouldNotAllowCreation_WhenInputIsMalformed(string input) {
+    public void Url_ShouldThrow_WhenInputIsMalformed(string input) {
+        // Act
         var act = () => new Url(input);
 
+        // Assert
         act.Should().Throw<InvalidUrlException>();
     }
 
@@ -98,52 +112,45 @@ public class UrlTests {
     [InlineData(Urls.Example + "/\"test\"")]
     [InlineData(Urls.Example + "/{test}")]
     [InlineData(Urls.Example + "/pa th")]
-    public void Url_ShouldNotAllowCreation_WhenInputContainsIllegalCharacters(
+    public void Url_ShouldThrow_WhenInputContainsInvalidCharacters(
         string input
     ) {
+        // Act
         var act = () => new Url(input);
 
+        // Assert
         act.Should().Throw<InvalidUrlException>();
     }
 
     [Fact]
-    public void Url_ShouldBeCaseInsensitive_ForSchemeAndHost() {
-        var canonicalInput = Urls.Example;
+    public void Url_ShouldBeEqual_WhenSchemeAndHostDifferOnlyInCase() {
+        // Arrange
+        const string canonicalInput = Urls.Example;
         var caseVariantInput = canonicalInput.ToUpperInvariant();
 
         var caseVariant = new Url(caseVariantInput);
         var canonicalUrl = new Url(canonicalInput);
 
+        // Assert
         canonicalUrl.Should().Be(caseVariant);
         canonicalUrl.GetHashCode().Should().Be(caseVariant.GetHashCode());
+
         (canonicalUrl == caseVariant).Should().BeTrue();
         (canonicalUrl != caseVariant).Should().BeFalse();
     }
 
-    [Theory]
-    [InlineData(Urls.GitHub + "/FILE", Urls.GitHub + "/file")]
-    [InlineData(Urls.GitHub + "/file?name=ZIP", Urls.GitHub + "/file?name=zip")]
-    public void Url_ShouldBeCaseSensitive_ForPathAndQuery(
-        string input,
-        string variantInput
-    ) {
-        var canonicalUrl = new Url(input);
-        var caseVariant = new Url(variantInput);
-
-        canonicalUrl.Should().NotBe(caseVariant);
-        (canonicalUrl != caseVariant).Should().BeTrue();
-        (canonicalUrl == caseVariant).Should().BeFalse();
-    }
-
     [Fact]
-    public void Url_ShouldBeEqual_WhenValuesAreIdentical() {
-        var input = Urls.LinkedIn;
+    public void Url_ShouldBeEqual_WhenValuesAreEqual() {
+        // Arrange
+        const string input = Urls.LinkedIn;
 
         var url = new Url(input);
         var sameUrl = new Url(input);
 
+        // Assert
         url.Should().Be(sameUrl);
         url.GetHashCode().Should().Be(sameUrl.GetHashCode());
+
         (url == sameUrl).Should().BeTrue();
         (url != sameUrl).Should().BeFalse();
     }
@@ -151,44 +158,73 @@ public class UrlTests {
     [Theory]
     [InlineData("https://example.com", "https://example.com:443")]
     [InlineData("http://example.com", "http://example.com:80")]
-    public void Url_ShouldBeEqual_WhenOnlyDefaultPortDiffers(
+    public void Url_ShouldBeEqual_WhenValuesDifferOnlyByDefaultPort(
         string input,
         string equivalentInput
     ) {
+        // Arrange
         var canonicalUrl = new Url(equivalentInput);
         var defaultPortVariant = new Url(input);
 
+        // Assert
         canonicalUrl.Should().Be(defaultPortVariant);
+
         canonicalUrl.GetHashCode()
             .Should().Be(defaultPortVariant.GetHashCode());
+
         (canonicalUrl == defaultPortVariant).Should().BeTrue();
         (canonicalUrl != defaultPortVariant).Should().BeFalse();
     }
 
     [Fact]
     public void Url_ShouldBeEqual_WhenValuesDifferOnlyInLeadingOrTrailingWhiteSpace() {
-        var input = Urls.GitHub;
-        var variantInput = " " + input + " ";
+        // Arrange
+        const string input = Urls.GitHub;
+        const string variantInput = " " + input + " ";
 
         var canonicalUrl = new Url(input);
         var leadingOrTrailingWhiteSpaceVariant = new Url(variantInput);
 
+        // Assert
         canonicalUrl.Should().Be(leadingOrTrailingWhiteSpaceVariant);
+
         canonicalUrl.GetHashCode()
             .Should().Be(leadingOrTrailingWhiteSpaceVariant.GetHashCode());
+
         (canonicalUrl == leadingOrTrailingWhiteSpaceVariant).Should().BeTrue();
         (canonicalUrl != leadingOrTrailingWhiteSpaceVariant).Should().BeFalse();
     }
 
+    [Theory]
+    [InlineData(Urls.GitHub + "/FILE", Urls.GitHub + "/file")]
+    [InlineData(Urls.GitHub + "/file?name=ZIP", Urls.GitHub + "/file?name=zip")]
+    public void Url_ShouldNotBeEqual_WhenPathAndQueryDifferOnlyInCase(
+        string input,
+        string variantInput
+    ) {
+        // Arrange
+        var canonicalUrl = new Url(input);
+        var caseVariant = new Url(variantInput);
+
+        // Assert
+        canonicalUrl.Should().NotBe(caseVariant);
+
+        (canonicalUrl != caseVariant).Should().BeTrue();
+        (canonicalUrl == caseVariant).Should().BeFalse();
+    }
+
     [Fact]
     public void Url_ShouldNotBeEqual_WhenNonDefaultPortsDiffer() {
-        var input = Urls.Example;
-        var variantInput = $"{input}:8443";
+        // Arrange
+        const string input = Urls.Example;
+        const string variantInput = $"{input}:8443";
 
         var canonicalUrl = new Url(input);
         var nonDefaultPortVariant = new Url(variantInput);
 
+        // Assert
         canonicalUrl.Should().NotBe(nonDefaultPortVariant);
+
         (canonicalUrl != nonDefaultPortVariant).Should().BeTrue();
         (canonicalUrl == nonDefaultPortVariant).Should().BeFalse();
     }
@@ -200,12 +236,27 @@ public class UrlTests {
         string input,
         string variantInput
     ) {
+        // Arrange
         var url = new Url(input);
         var otherUrl = new Url(variantInput);
 
+        // Assert
         url.Should().NotBe(otherUrl);
+
         (url != otherUrl).Should().BeTrue();
         (url == otherUrl).Should().BeFalse();
+    }
+
+    [Fact]
+    public void Url_ShouldReturnValue_WhenConvertedToString() {
+        // Arrange
+        var url = Urls.CreateLinkedIn();
+
+        // Act
+        var result = url.ToString();
+
+        // Assert
+        result.Should().Be(url.Value);
     }
 
     [Theory]
@@ -213,8 +264,10 @@ public class UrlTests {
     [InlineData("HTTPS://Example.Com")]
     [InlineData("  HTTPS://Example.Com  ")]
     public void IsValid_ShouldReturnTrue_WhenInputIsValid(string input) {
+        // Act
         var result = Url.IsValid(input);
 
+        // Assert
         result.Should().BeTrue();
     }
 
@@ -247,37 +300,10 @@ public class UrlTests {
     [InlineData("123456")]
     [InlineData("////")]
     public void IsValid_ShouldReturnFalse_WhenInputIsInvalid(string? input) {
+        // Act
         var result = Url.IsValid(input);
 
+        // Assert
         result.Should().BeFalse();
-    }
-
-    [Fact]
-    public void ConstructorAndIsValid_ShouldAcceptValidInputs() {
-        var input = Urls.LinkedIn;
-        Url.IsValid(input).Should().BeTrue();
-
-        var act = () => new Url(input);
-
-        act.Should().NotThrow();
-    }
-
-    [Fact]
-    public void ConstructorAndIsValid_ShouldRejectInvalidInputs() {
-        var input = "www.example.com";
-        Url.IsValid(input).Should().BeFalse();
-
-        var act = () => new Url(input);
-
-        act.Should().Throw<InvalidUrlException>();
-    }
-
-    [Fact]
-    public void Url_ShouldReturnValue_WhenConvertedToString() {
-        var url = Urls.CreateLinkedIn();
-
-        var result = url.ToString();
-
-        result.Should().Be(url.Value);
     }
 }

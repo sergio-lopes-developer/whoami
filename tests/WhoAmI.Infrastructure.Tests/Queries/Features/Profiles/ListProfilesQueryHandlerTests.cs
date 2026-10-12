@@ -7,7 +7,7 @@ using WhoAmI.Infrastructure.Tests.Queries.TestDoubles;
 
 namespace WhoAmI.Infrastructure.Tests.Queries.Features.Profiles;
 
-public sealed class ListProfilesQueryHandlerTests {
+public class ListProfilesQueryHandlerTests {
     private static async Task CreateProfilesTable(SqliteConnection connection) {
         await connection.ExecuteAsync("""
             CREATE TABLE Profiles (
@@ -20,7 +20,7 @@ public sealed class ListProfilesQueryHandlerTests {
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnProfilesOrderedByFirstNameThenLastName_WhenProfilesExist() {
+    public async Task ListProfiles_ShouldReturnProfilesOrderedByFirstNameThenLastName_WhenProfilesExist() {
         // Arrange
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
@@ -44,11 +44,10 @@ public sealed class ListProfilesQueryHandlerTests {
         );
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new ListProfilesQueryHandler(connectionFactory);
+        var handler = new ListProfilesQueryHandler(connectionFactory);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             new ListProfilesQuery(),
             TestContext.Current.CancellationToken
         );
@@ -80,7 +79,7 @@ public sealed class ListProfilesQueryHandlerTests {
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnEmptyCollection_WhenNoProfilesExist() {
+    public async Task ListProfiles_ShouldReturnEmptyCollection_WhenNoProfilesExist() {
         // Arrange
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
@@ -90,11 +89,10 @@ public sealed class ListProfilesQueryHandlerTests {
         await CreateProfilesTable(connection);
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new ListProfilesQueryHandler(connectionFactory);
+        var handler = new ListProfilesQueryHandler(connectionFactory);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             new ListProfilesQuery(),
             TestContext.Current.CancellationToken
         );
@@ -105,7 +103,7 @@ public sealed class ListProfilesQueryHandlerTests {
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldNotReturnDeletedProfiles_WhenTheyExist() {
+    public async Task ListProfiles_ShouldReturnOnlyActiveProfiles_WhenDeletedProfilesExist() {
         // Arrange
         var deletedAt = new DateTimeOffset(
             2026, 9, 30,
@@ -139,11 +137,10 @@ public sealed class ListProfilesQueryHandlerTests {
         );
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new ListProfilesQueryHandler(connectionFactory);
+        var handler = new ListProfilesQueryHandler(connectionFactory);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             new ListProfilesQuery(),
             TestContext.Current.CancellationToken
         );

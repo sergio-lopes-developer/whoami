@@ -11,17 +11,18 @@ using WhoAmI.CLI.Tests.Unit.Support;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
 [Collection("CLI Console")]
-public sealed class UpdateSocialLinksUnitTests {
+public class UpdateSocialLinksUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
 
     private readonly UpdateSocialLinks _command;
 
-    public UpdateSocialLinksUnitTests() =>
+    public UpdateSocialLinksUnitTests() {
         _command = new UpdateSocialLinks(
             _dispatcher,
             LoggerFactory.Create<UpdateSocialLinks>()
         );
+    }
 
     private Task<(int ExitCode, string ConsoleOutput)> Execute(
         UpdateSocialLinksCommandSettings settings
@@ -45,6 +46,7 @@ public sealed class UpdateSocialLinksUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Success());
+
         consoleOutput.Should().Contain("Social links successfully updated.");
 
         await _dispatcher.Received(1).Send(
@@ -76,6 +78,7 @@ public sealed class UpdateSocialLinksUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Error());
+
         consoleOutput.Should().Contain("Profile was not found.");
 
         await _dispatcher.Received(1).Send(

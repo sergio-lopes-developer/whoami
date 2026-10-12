@@ -4,17 +4,16 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
-public sealed class DeleteProfileWiringTests {
+public class DeleteProfileWiringTests {
     private static DeleteProfileCommand RunDeleteProfile(params string[] args) {
         string[] commandArgs = ["profile", "delete", ..args];
 
-        return CliApplicationCommandRunner.Run<DeleteProfileCommand>(
-            commandArgs
-        );
+        return CliApplicationCommandRunner
+            .Run<DeleteProfileCommand>(commandArgs);
     }
 
     [Fact]
-    public void DeleteProfile_Should_BindCliArgumentsAndDispatchCommand() {
+    public void DeleteProfile_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
         // Arrange
         var id = Guid.NewGuid().ToString();
 

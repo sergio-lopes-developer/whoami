@@ -28,7 +28,6 @@ public sealed class TestApplicationFactory : IAsyncLifetime {
         await _connection.OpenAsync();
 
         services.AddSingleton(_connection);
-
         services.AddLogging(x => x.SetMinimumLevel(LogLevel.Warning));
 
         var configuration = new ConfigurationBuilder()

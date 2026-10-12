@@ -106,16 +106,18 @@ public static class ServiceCollectionExtensions {
     private static void AddHandlers(IServiceCollection services) {
         services.Scan(scan => scan
             .FromAssemblyOf<CreateProfileCommandHandler>()
-            .AddClasses(c => c
-                .AssignableTo(typeof(ICommandHandler<>))
-                .Where(type => !type.IsGenericTypeDefinition),
+            .AddClasses(
+                c => c
+                    .AssignableTo(typeof(ICommandHandler<>))
+                    .Where(type => !type.IsGenericTypeDefinition),
                 publicOnly: false
             )
             .AsImplementedInterfaces()
             .WithScopedLifetime()
-            .AddClasses(c => c
-                .AssignableTo(typeof(ICommandHandler<,>))
-                .Where(type => !type.IsGenericTypeDefinition),
+            .AddClasses(
+                c => c
+                    .AssignableTo(typeof(ICommandHandler<,>))
+                    .Where(type => !type.IsGenericTypeDefinition),
                 publicOnly: false
             )
             .AsImplementedInterfaces()
@@ -133,14 +135,14 @@ public static class ServiceCollectionExtensions {
     private static void AddValidations(IServiceCollection services) {
         services.Scan(scan => scan
             .FromAssemblyOf<ICommandValidator<object>>()
-            .AddClasses(c =>
-                c.AssignableTo(typeof(ICommandValidator<>)),
+            .AddClasses(
+                c => c.AssignableTo(typeof(ICommandValidator<>)),
                 publicOnly: false
             )
             .AsImplementedInterfaces()
             .WithScopedLifetime()
-            .AddClasses(c =>
-                c.AssignableTo(typeof(IQueryValidator<>)),
+            .AddClasses(
+                c => c.AssignableTo(typeof(IQueryValidator<>)),
                 publicOnly: false
             )
             .AsImplementedInterfaces()

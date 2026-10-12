@@ -28,6 +28,7 @@ internal sealed class CreateProfileCommandHandler :
         var email = new Email(command.Email);
         var linkedIn = new Url(command.LinkedIn);
         var gitHub = new Url(command.GitHub);
+
         var fullName = new FullName(
             new FirstName(command.FirstName),
             new LastName(command.LastName)

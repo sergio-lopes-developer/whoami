@@ -6,7 +6,7 @@ using WhoAmI.CLI.Settings.Profiles;
 
 namespace WhoAmI.CLI.Tests.Parsing.Commands.Profiles;
 
-public sealed class UpdateEmailParsingTests {
+public class UpdateEmailParsingTests {
     private const string Id = "11111111-1111-1111-1111-111111111111";
     private const string Email = "john@doe.com";
 
@@ -38,7 +38,7 @@ public sealed class UpdateEmailParsingTests {
             .Subject;
 
     [Fact]
-    public void UpdateEmail_Should_ParseAllOptions() {
+    public void UpdateEmail_ShouldParseAllOptions_WhenAllOptionsAreProvided() {
         // Act
         var execution = Parse(
             "--id", Id,
@@ -53,7 +53,7 @@ public sealed class UpdateEmailParsingTests {
     }
 
     [Fact]
-    public void UpdateEmail_Should_ParseShortOptionsTogether() {
+    public void UpdateEmail_ShouldParseAllOptions_WhenShortOptionsAreProvided() {
         // Act
         var execution = Parse(
             "-i", Id,
@@ -70,7 +70,7 @@ public sealed class UpdateEmailParsingTests {
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
-    public void UpdateEmail_Should_ParseId(string option) {
+    public void UpdateEmail_ShouldParseId_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, Id);
 
@@ -83,7 +83,7 @@ public sealed class UpdateEmailParsingTests {
     [Theory]
     [InlineData("--email")]
     [InlineData("-e")]
-    public void UpdateEmail_Should_ParseEmail(string option) {
+    public void UpdateEmail_ShouldParseEmail_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, Email);
 

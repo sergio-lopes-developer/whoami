@@ -30,8 +30,6 @@ internal sealed class CommandUnitOfWorkDecorator<TCommand> :
 
         if (result.IsFailure) return result;
 
-        var commitResult = await _unitOfWork.CommitAsync(cancellationToken);
-
-        return commitResult;
+        return await _unitOfWork.CommitAsync(cancellationToken);
     }
 }

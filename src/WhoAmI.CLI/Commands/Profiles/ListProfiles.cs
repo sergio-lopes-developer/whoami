@@ -41,7 +41,6 @@ public sealed class ListProfiles(
 
         if (result.Value.Count == 0) {
             CliMessage.ShowInfo("No profiles were found.");
-
             return CliExit.Success();
         }
 

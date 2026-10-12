@@ -12,14 +12,14 @@ using WhoAmI.Testing.Factories;
 namespace WhoAmI.Infrastructure.Tests.Persistence.ErrorHandling
     .ViolationMappers;
 
-public sealed class DuplicateProfileEmailViolationMapperTests {
+public class DuplicateProfileEmailViolationMapperTests {
     [Fact]
     public void Code_ShouldReturnDuplicateProfileEmail() {
         // Arrange
-        var sut = new DuplicateProfileEmailViolationMapper();
+        var violationMapper = new DuplicateProfileEmailViolationMapper();
 
         // Act
-        var result = sut.Code;
+        var result = violationMapper.Code;
 
         // Assert
         result.Should().Be(PersistenceViolationCode.DuplicateProfileEmail);
@@ -27,6 +27,7 @@ public sealed class DuplicateProfileEmailViolationMapperTests {
 
     [Fact]
     public async Task Map_ShouldReturnDuplicateEmailError() {
+        // Arrange
         var mapper = Substitute.For<IPersistenceErrorMapper>();
 
         await using var scope =
@@ -34,10 +35,9 @@ public sealed class DuplicateProfileEmailViolationMapperTests {
                 options => new WhoAmIDbContext(options, mapper)
             );
 
-        var context = scope.Context;
-
         var profile = ProfileFactory.Create();
 
+        var context = scope.Context;
         context.Profiles.Add(profile);
 
         var entry = context.Entry(profile);
@@ -48,10 +48,10 @@ public sealed class DuplicateProfileEmailViolationMapperTests {
             [entry]
         );
 
-        var sut = new DuplicateProfileEmailViolationMapper();
+        var violationMapper = new DuplicateProfileEmailViolationMapper();
 
         // Act
-        var result = sut.Map(exception);
+        var result = violationMapper.Map(exception);
 
         // Assert
         result.Should().BeEquivalentTo(

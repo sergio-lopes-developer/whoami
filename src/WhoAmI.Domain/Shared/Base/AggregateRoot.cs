@@ -11,10 +11,7 @@ public abstract class AggregateRoot : Entity {
     protected AggregateRoot(
         Guid id,
         DateTimeOffset createdAt
-    ) : base(
-        id,
-        createdAt
-    ) { }
+    ) : base(id, createdAt) { }
 
     protected void AddDomainEvent(IDomainEvent domainEvent) =>
         _domainEvents.Add(domainEvent);

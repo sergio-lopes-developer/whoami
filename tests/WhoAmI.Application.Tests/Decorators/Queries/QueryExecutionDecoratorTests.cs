@@ -18,7 +18,6 @@ public class QueryExecutionDecoratorTests {
     public async Task HandleAsync_ShouldReturnSuccess_WhenInnerHandlerSucceeds() {
         // Arrange
         var query = new FakeQuery();
-
         var expected = new FakeResult();
 
         var info = new ExecutionInfo(
@@ -29,19 +28,23 @@ public class QueryExecutionDecoratorTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Result<CommandExecutionDecoratorGenericTests.FakeResult>>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<
+                    Result<CommandExecutionDecoratorGenericResultTests.FakeResult>
+                >(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<IQueryHandler<FakeQuery, FakeResult>>();
 
-        inner.HandleAsync(query, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(query, Arg.Any<CancellationToken>())
             .Returns(Result<FakeResult>.Success(expected));
 
         var decorator = new QueryExecutionDecorator<FakeQuery, FakeResult>(
@@ -81,11 +84,7 @@ public class QueryExecutionDecoratorTests {
     public async Task HandleAsync_ShouldReturnFailure_WhenInnerHandlerFails() {
         // Arrange
         var query = new FakeQuery();
-
-        var error = new Error(
-            "Fake.Error",
-            "Something failed."
-        );
+        var error = new Error("Fake.Error", "Something failed.");
 
         var info = new ExecutionInfo(
             Operation: nameof(FakeQuery),
@@ -96,19 +95,21 @@ public class QueryExecutionDecoratorTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Result<FakeResult>>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Result<FakeResult>>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<IQueryHandler<FakeQuery, FakeResult>>();
 
-        inner.HandleAsync(query, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(query, Arg.Any<CancellationToken>())
             .Returns(Result<FakeResult>.Failure(error));
 
         var decorator = new QueryExecutionDecorator<FakeQuery, FakeResult>(
@@ -148,7 +149,6 @@ public class QueryExecutionDecoratorTests {
     public async Task HandleAsync_ShouldPropagateException_WhenInnerHandlerThrows() {
         // Arrange
         var query = new FakeQuery();
-
         var exception = new InvalidOperationException();
 
         var info = new ExecutionInfo(
@@ -160,19 +160,21 @@ public class QueryExecutionDecoratorTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Exception>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Exception>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<IQueryHandler<FakeQuery, FakeResult>>();
 
-        inner.HandleAsync(query, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(query, Arg.Any<CancellationToken>())
             .Returns(Task.FromException<Result<FakeResult>>(exception));
 
         var decorator = new QueryExecutionDecorator<FakeQuery, FakeResult>(
@@ -185,8 +187,7 @@ public class QueryExecutionDecoratorTests {
         var act = () => decorator.HandleAsync(query);
 
         // Assert
-        var thrown =
-            await act.Should().ThrowAsync<InvalidOperationException>();
+        var thrown = await act.Should().ThrowAsync<InvalidOperationException>();
 
         thrown.Which.Should().BeSameAs(exception);
 

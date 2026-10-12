@@ -4,7 +4,7 @@ using Spectre.Console.Cli;
 
 namespace WhoAmI.CLI.Tests.Unit.Support;
 
-public static class CliCommandExecutor {
+internal static class CliCommandExecutor {
     public static async Task<(
         int ExitCode,
         string ConsoleOutput

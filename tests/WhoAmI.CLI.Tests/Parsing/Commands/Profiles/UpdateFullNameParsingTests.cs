@@ -6,7 +6,7 @@ using WhoAmI.CLI.Settings.Profiles;
 
 namespace WhoAmI.CLI.Tests.Parsing.Commands.Profiles;
 
-public sealed class UpdateFullNameParsingTests {
+public class UpdateFullNameParsingTests {
     private const string Id = "11111111-1111-1111-1111-111111111111";
     private const string FirstName = "John";
     private const string LastName = "Doe";
@@ -39,7 +39,7 @@ public sealed class UpdateFullNameParsingTests {
             .Subject;
 
     [Fact]
-    public void UpdateFullName_Should_ParseAllOptions() {
+    public void UpdateFullName_ShouldParseAllOptions_WhenAllOptionsAreProvided() {
         // Act
         var execution = Parse(
             "--id", Id,
@@ -56,7 +56,7 @@ public sealed class UpdateFullNameParsingTests {
     }
 
     [Fact]
-    public void UpdateFullName_Should_ParseShortOptionsTogether() {
+    public void UpdateFullName_ShouldParseAllOptions_WhenShortOptionsAreProvided() {
         // Act
         var execution = Parse(
             "-i", Id,
@@ -75,7 +75,7 @@ public sealed class UpdateFullNameParsingTests {
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
-    public void UpdateFullName_Should_ParseId(string option) {
+    public void UpdateFullName_ShouldParseId_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, Id);
 
@@ -88,7 +88,7 @@ public sealed class UpdateFullNameParsingTests {
     [Theory]
     [InlineData("--first-name")]
     [InlineData("-f")]
-    public void UpdateFullName_Should_ParseFirstName(string option) {
+    public void UpdateFullName_ShouldParseFirstName_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, FirstName);
 
@@ -101,7 +101,7 @@ public sealed class UpdateFullNameParsingTests {
     [Theory]
     [InlineData("--last-name")]
     [InlineData("-l")]
-    public void UpdateFullName_Should_ParseLastName(string option) {
+    public void UpdateFullName_ShouldParseLastName_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, LastName);
 

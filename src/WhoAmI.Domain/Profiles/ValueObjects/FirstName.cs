@@ -6,9 +6,9 @@ using WhoAmI.Domain.Shared.Guards;
 namespace WhoAmI.Domain.Profiles.ValueObjects;
 
 public sealed class FirstName : TextValueObject {
-    public const int MinLength = 2;
+    private const int MinLength = 2;
 
-    public const int MaxLength = 100;
+    private const int MaxLength = 100;
 
     public string Value { get; } = null!;
 
@@ -41,9 +41,7 @@ public sealed class FirstName : TextValueObject {
     }
 
     private static bool HasValidLength(string? input) {
-        if (string.IsNullOrWhiteSpace(input)) {
-            return false;
-        }
+        if (string.IsNullOrWhiteSpace(input)) return false;
 
         var normalizedInput = Normalize(input);
 

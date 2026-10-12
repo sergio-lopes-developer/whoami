@@ -11,7 +11,7 @@ using WhoAmI.CLI.Tests.Unit.Support;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
 [Collection("CLI Console")]
-public sealed class GetProfileUnitTests {
+public class GetProfileUnitTests {
     private const string Id = "b30545b1-b92b-4040-bbca-c733deb8b1c2";
     private const string FirstName = "John";
     private const string LastName = "Doe";
@@ -108,7 +108,7 @@ public sealed class GetProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteInternalAsync_ShouldHideEmail_WhenRequested() {
+    public async Task ExecuteInternalAsync_ShouldHideEmail_WhenOptionIsProvided() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile(
             hideEmail: true
@@ -144,7 +144,7 @@ public sealed class GetProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteInternalAsync_ShouldHideGitHub_WhenRequested() {
+    public async Task ExecuteInternalAsync_ShouldHideGitHub_WhenOptionIsProvided() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile(
             hideGitHub: true
@@ -180,7 +180,7 @@ public sealed class GetProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteInternalAsync_ShouldHideLinkedIn_WhenRequested() {
+    public async Task ExecuteInternalAsync_ShouldHideLinkedIn_WhenOptionIsProvided() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile(
             hideLinkedIn: true
@@ -216,7 +216,7 @@ public sealed class GetProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteInternalAsync_ShouldDisplayVerboseInformation_WhenRequested() {
+    public async Task ExecuteInternalAsync_ShouldDisplayVerboseInformation_WhenOptionIsProvided() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile(
             verbose: true
@@ -261,7 +261,7 @@ public sealed class GetProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteInternalAsync_ShouldDisplayNever_WhenVerboseRequestedForProfileWithoutUpdateAtDate() {
+    public async Task ExecuteInternalAsync_ShouldDisplayNever_WhenProfileHasNoUpdateDateAndVerboseOptionIsProvided() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile(
             verbose: true
@@ -300,7 +300,7 @@ public sealed class GetProfileUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteInternalAsync_ShouldDisplayWarning_WhenAllOptionalInformationIsHidden() {
+    public async Task ExecuteInternalAsync_ShouldDisplayWarning_WhenAllOptionalInformationOptionsAreProvided() {
         // Arrange
         var settings = CommandSettingsFactory.GetProfile(
             hideEmail: true,
@@ -324,7 +324,9 @@ public sealed class GetProfileUnitTests {
         exitCode.Should().Be(CliExit.Success());
 
         consoleOutput.Should().Contain("All profile information is hidden.");
-        consoleOutput.Should()
+
+        consoleOutput
+            .Should()
             .Contain("Use --verbose to display additional information.");
 
         consoleOutput.Should().NotContain($"{FirstName} {LastName}");
@@ -362,6 +364,7 @@ public sealed class GetProfileUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Error());
+
         consoleOutput.Should().Contain("Profile not found.");
 
         await ShouldHaveDispatchedQuery(settings.Email);

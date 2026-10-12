@@ -24,19 +24,21 @@ public class CommandExecutionDecoratorTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Result>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Result>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(Result.Success());
 
         var decorator = new CommandExecutionDecorator<FakeCommand>(
@@ -86,19 +88,21 @@ public class CommandExecutionDecoratorTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Result>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Result>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(Result.Failure(error));
 
         var decorator = new CommandExecutionDecorator<FakeCommand>(
@@ -138,7 +142,6 @@ public class CommandExecutionDecoratorTests {
     public async Task HandleAsync_ShouldPropagateException_WhenInnerHandlerThrows() {
         // Arrange
         var command = new FakeCommand();
-
         var exception = new InvalidOperationException();
 
         var info = new ExecutionInfo(
@@ -150,19 +153,21 @@ public class CommandExecutionDecoratorTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Exception>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Exception>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(Task.FromException<Result>(exception));
 
         var decorator = new CommandExecutionDecorator<FakeCommand>(

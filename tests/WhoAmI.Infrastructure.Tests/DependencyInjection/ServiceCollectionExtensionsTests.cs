@@ -12,26 +12,22 @@ using WhoAmI.Infrastructure.DependencyInjection;
 
 namespace WhoAmI.Infrastructure.Tests.DependencyInjection;
 
-public sealed class ServiceCollectionExtensionsTests {
+public class ServiceCollectionExtensionsTests {
     [Fact]
     public void AddInfrastructure_ShouldRegisterPersistenceServices() {
         // Arrange
         var services = new ServiceCollection();
-
         var configuration = CreateConfiguration();
-
         var environment = Substitute.For<IHostEnvironment>();
 
         // Act
         services.AddInfrastructure(configuration, environment);
 
+        // Assert
         var provider = services.BuildServiceProvider();
 
-        // Assert
         provider.GetService<WhoAmIDbContext>().Should().NotBeNull();
-
         provider.GetService<IUnitOfWork>().Should().NotBeNull();
-
         provider.GetService<IProfileRepository>().Should().NotBeNull();
     }
 
@@ -39,17 +35,15 @@ public sealed class ServiceCollectionExtensionsTests {
     public void AddInfrastructure_ShouldRegisterViolationMappers() {
         // Arrange
         var services = new ServiceCollection();
-
         var configuration = CreateConfiguration();
-
         var environment = Substitute.For<IHostEnvironment>();
 
         // Act
         services.AddInfrastructure(configuration, environment);
 
+        // Assert
         var provider = services.BuildServiceProvider();
 
-        // Assert
         provider
             .GetServices<IPersistenceViolationMapper>()
             .Should()
@@ -60,17 +54,15 @@ public sealed class ServiceCollectionExtensionsTests {
     public void AddInfrastructure_ShouldRegisterSqliteParser() {
         // Arrange
         var services = new ServiceCollection();
-
         var configuration = CreateConfiguration();
-
         var environment = Substitute.For<IHostEnvironment>();
 
         // Act
         services.AddInfrastructure(configuration, environment);
 
+        // Assert
         var provider = services.BuildServiceProvider();
 
-        // Assert
         provider
             .GetService<IConstraintViolationParser>()
             .Should()

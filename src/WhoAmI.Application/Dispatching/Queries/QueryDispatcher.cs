@@ -8,7 +8,9 @@ namespace WhoAmI.Application.Dispatching.Queries;
 internal sealed class QueryDispatcher : IQueryDispatcher {
     private readonly IServiceProvider _provider;
 
-    public QueryDispatcher(IServiceProvider provider) => _provider = provider;
+    public QueryDispatcher(IServiceProvider provider) {
+        _provider = provider;
+    }
 
     public async Task<Result<TResult>> Send<TResult>(
         IQuery<TResult> query,

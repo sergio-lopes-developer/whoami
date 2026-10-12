@@ -8,9 +8,8 @@ namespace WhoAmI.IntegrationTests.Features;
 public class ProfileTests : IClassFixture<TestApplicationFactory> {
     private readonly TestApplicationFactory _applicationFactory;
 
-    public ProfileTests(TestApplicationFactory applicationFactory) {
+    public ProfileTests(TestApplicationFactory applicationFactory) =>
         _applicationFactory = applicationFactory;
-    }
 
     [Fact]
     public async Task CreateProfile_ShouldThrowDuplicateEmailException_WhenEmailAlreadyExists() {
@@ -26,10 +25,7 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
                 "https://github.com/sergio"
             );
 
-            await scope.Execute(
-                command,
-                TestContext.Current.CancellationToken
-            );
+            await scope.Execute(command, TestContext.Current.CancellationToken);
 
             // Act
             var result = await scope.Execute(
@@ -40,6 +36,7 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
             // Assert
             result.IsFailure.Should().BeTrue();
             result.FirstError!.Code.Should().Be("Profile.EmailAlreadyExists");
+
             result.FirstError.Metadata!["ProfileEmail"]
                 .Should()
                 .Be(command.Email);
@@ -49,10 +46,8 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
     [Fact]
     public async Task GetProfileByEmail_ShouldReturnNotFound_WhenProfileDoesNotExist() {
         // Arrange
-        var email = "john.doe@email.com";
-
+        const string email = "john.doe@email.com";
         var query = new GetProfileByEmailQuery(email);
-
         var scope = await _applicationFactory.CreateScopeAsync();
 
         await using (scope) {
@@ -72,7 +67,7 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
     [Fact]
     public async Task GetProfileByEmail_ShouldReturnProfile_WhenProfileExists() {
         // Arrange
-        var email = "email@example.com";
+        const string email = "email@example.com";
 
         var command = new CreateProfileCommand(
             "Sergio",

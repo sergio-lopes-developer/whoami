@@ -8,7 +8,7 @@ using WhoAmI.Application.Results;
 
 namespace WhoAmI.Application.Tests.Decorators.Commands;
 
-public class CommandExecutionDecoratorGenericTests {
+public class CommandExecutionDecoratorGenericResultTests {
     public sealed record FakeCommand : ICommand<FakeResult>;
 
     public sealed record FakeResult;
@@ -17,7 +17,6 @@ public class CommandExecutionDecoratorGenericTests {
     public async Task HandleAsync_ShouldReturnSuccess_WhenInnerHandlerSucceeds() {
         // Arrange
         var command = new FakeCommand();
-
         var expected = new FakeResult();
 
         var info = new ExecutionInfo(
@@ -28,25 +27,24 @@ public class CommandExecutionDecoratorGenericTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Result<FakeResult>>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Result<FakeResult>>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand, FakeResult>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(Result<FakeResult>.Success(expected));
 
-        var decorator = new CommandExecutionDecorator<
-            FakeCommand,
-            FakeResult
-        >(
+        var decorator = new CommandExecutionDecorator<FakeCommand, FakeResult>(
             inner,
             logger,
             executionInfoFactory
@@ -98,25 +96,24 @@ public class CommandExecutionDecoratorGenericTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Result<FakeResult>>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Result<FakeResult>>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand, FakeResult>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(Result<FakeResult>.Failure(error));
 
-        var decorator = new CommandExecutionDecorator<
-            FakeCommand,
-            FakeResult
-        >(
+        var decorator = new CommandExecutionDecorator<FakeCommand, FakeResult>(
             inner,
             logger,
             executionInfoFactory
@@ -153,7 +150,6 @@ public class CommandExecutionDecoratorGenericTests {
     public async Task HandleAsync_ShouldPropagateException_WhenInnerHandlerThrows() {
         // Arrange
         var command = new FakeCommand();
-
         var exception = new InvalidOperationException();
 
         var info = new ExecutionInfo(
@@ -165,25 +161,24 @@ public class CommandExecutionDecoratorGenericTests {
         );
 
         var logger = Substitute.For<ISafeExecutionLogger>();
-
         var executionInfoFactory = Substitute.For<IExecutionInfoFactory>();
 
-        executionInfoFactory.Create(
-            Arg.Any<string>(),
-            Arg.Any<object>(),
-            Arg.Any<Exception>(),
-            Arg.Any<long>()
-        ).Returns(info);
+        executionInfoFactory
+            .Create(
+                Arg.Any<string>(),
+                Arg.Any<object>(),
+                Arg.Any<Exception>(),
+                Arg.Any<long>()
+            )
+            .Returns(info);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand, FakeResult>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(Task.FromException<Result<FakeResult>>(exception));
 
-        var decorator = new CommandExecutionDecorator<
-            FakeCommand,
-            FakeResult
-        >(
+        var decorator = new CommandExecutionDecorator<FakeCommand, FakeResult>(
             inner,
             logger,
             executionInfoFactory

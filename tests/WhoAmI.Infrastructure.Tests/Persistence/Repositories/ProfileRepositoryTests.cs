@@ -9,7 +9,7 @@ using WhoAmI.Testing.Factories;
 
 namespace WhoAmI.Infrastructure.Tests.Persistence.Repositories;
 
-public sealed class ProfileRepositoryTests {
+public class ProfileRepositoryTests {
     [Fact]
     public async Task GetByIdAsync_ShouldReturnProfile_WhenProfileExists() {
         // Arrange
@@ -19,10 +19,9 @@ public sealed class ProfileRepositoryTests {
             options => new WhoAmIDbContext(options, mapper)
         );
 
-        var context = scope.Context;
-
         var profile = ProfileFactory.Create();
 
+        var context = scope.Context;
         context.Profiles.Add(profile);
 
         await context.CommitAsync(TestContext.Current.CancellationToken);
@@ -50,7 +49,6 @@ public sealed class ProfileRepositoryTests {
         );
 
         var context = scope.Context;
-
         var repository = new ProfileRepository(context);
 
         // Act
@@ -73,9 +71,7 @@ public sealed class ProfileRepositoryTests {
         );
 
         var context = scope.Context;
-
         var repository = new ProfileRepository(context);
-
         var profile = ProfileFactory.Create();
 
         // Act

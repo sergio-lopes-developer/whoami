@@ -24,9 +24,7 @@ internal static class CliExecutionContextFactory {
         ServiceConfiguration.RegisterCliServices(services);
 
         var provider = services.BuildServiceProvider();
-
         var registrar = new SpectreCliTypeRegistrar(provider);
-
         var commandApp = CommandConfiguration.Create(registrar);
 
         return new CliExecutionContext(

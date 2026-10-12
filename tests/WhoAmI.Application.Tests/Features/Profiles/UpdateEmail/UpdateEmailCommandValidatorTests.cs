@@ -139,7 +139,6 @@ public class UpdateEmailCommandValidatorTests {
 
         // Assert
         errors.Should().ContainSingle();
-
         errors.Single().Code.Should().Be("Validation.Required");
     }
 
@@ -156,7 +155,6 @@ public class UpdateEmailCommandValidatorTests {
 
         // Assert
         errors.Should().ContainSingle();
-
         errors.Single().Code.Should().Be("Validation.Required");
     }
 }

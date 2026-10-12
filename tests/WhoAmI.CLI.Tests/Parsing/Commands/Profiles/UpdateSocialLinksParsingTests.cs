@@ -6,7 +6,7 @@ using WhoAmI.CLI.Settings.Profiles;
 
 namespace WhoAmI.CLI.Tests.Parsing.Commands.Profiles;
 
-public sealed class UpdateSocialLinksParsingTests {
+public class UpdateSocialLinksParsingTests {
     private const string Id = "11111111-1111-1111-1111-111111111111";
     private const string LinkedIn = "https://www.linkedin.com/in/username";
     private const string GitHub = "https://github.com/username";
@@ -39,7 +39,7 @@ public sealed class UpdateSocialLinksParsingTests {
             .Subject;
 
     [Fact]
-    public void UpdateSocialLinks_Should_ParseAllOptions() {
+    public void UpdateSocialLinks_ShouldParseAllOptions_WhenAllOptionsAreProvided() {
         // Act
         var execution = Parse(
             "--id", Id,
@@ -56,7 +56,7 @@ public sealed class UpdateSocialLinksParsingTests {
     }
 
     [Fact]
-    public void UpdateSocialLinks_Should_ParseShortOptionsTogether() {
+    public void UpdateSocialLinks_ShouldParseAllOptions_WhenShortOptionsAreProvided() {
         // Act
         var execution = Parse(
             "-i", Id,
@@ -75,7 +75,7 @@ public sealed class UpdateSocialLinksParsingTests {
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
-    public void UpdateSocialLinks_Should_ParseId(string option) {
+    public void UpdateSocialLinks_ShouldParseId_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, Id);
 
@@ -88,7 +88,7 @@ public sealed class UpdateSocialLinksParsingTests {
     [Theory]
     [InlineData("--linkedin")]
     [InlineData("-n")]
-    public void UpdateSocialLinks_Should_ParseLinkedIn(string option) {
+    public void UpdateSocialLinks_ShouldParseLinkedIn_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, LinkedIn);
 
@@ -101,7 +101,7 @@ public sealed class UpdateSocialLinksParsingTests {
     [Theory]
     [InlineData("--github")]
     [InlineData("-g")]
-    public void UpdateSocialLinks_Should_ParseGitHub(string option) {
+    public void UpdateSocialLinks_ShouldParseGitHub_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, GitHub);
 

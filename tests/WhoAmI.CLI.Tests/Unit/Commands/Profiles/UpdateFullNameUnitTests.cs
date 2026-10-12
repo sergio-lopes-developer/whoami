@@ -11,17 +11,18 @@ using WhoAmI.CLI.Tests.Unit.Support;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
 [Collection("CLI Console")]
-public sealed class UpdateFullNameUnitTests {
+public class UpdateFullNameUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
 
     private readonly UpdateFullName _command;
 
-    public UpdateFullNameUnitTests() =>
+    public UpdateFullNameUnitTests() {
         _command = new UpdateFullName(
             _dispatcher,
             LoggerFactory.Create<UpdateFullName>()
         );
+    }
 
     private Task<(int ExitCode, string ConsoleOutput)> Execute(
         UpdateFullNameCommandSettings settings
@@ -45,6 +46,7 @@ public sealed class UpdateFullNameUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Success());
+
         consoleOutput.Should().ContainAll("Name successfully updated.");
 
         await _dispatcher.Received(1).Send(
@@ -76,6 +78,7 @@ public sealed class UpdateFullNameUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Error());
+
         consoleOutput.Should().ContainAll("Profile not found.");
 
         await _dispatcher.Received(1).Send(

@@ -11,18 +11,16 @@ using WhoAmI.Domain.Profiles;
 
 namespace WhoAmI.Application.Tests.Pipeline.Commands;
 
-public class CommandDispatcherPipelineGenericTests {
+public class CommandDispatcherPipelineGenericResultTests {
     [Fact]
     public async Task Pipeline_ShouldCallCommit_WhenCommandSucceeds() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var uow = Substitute.For<IUnitOfWork>();
 
         uow.CommitAsync(Arg.Any<CancellationToken>()).Returns(Result.Success());
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
 
         var command = new CreateProfileCommand(
@@ -49,11 +47,8 @@ public class CommandDispatcherPipelineGenericTests {
     public async Task Pipeline_ShouldReturnValidationFailure_WhenCommandIsInvalid() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var uow = Substitute.For<IUnitOfWork>();
-
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
 
         var command = new CreateProfileCommand(
@@ -80,19 +75,13 @@ public class CommandDispatcherPipelineGenericTests {
     public async Task Pipeline_ShouldReturnFailure_WhenPersistenceFails() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
-        var error = new Error(
-            "Persistence.Error",
-            "Database failure."
-        );
-
+        var error = new Error("Persistence.Error", "Database failure.");
         var uow = Substitute.For<IUnitOfWork>();
 
         uow.CommitAsync(Arg.Any<CancellationToken>())
             .Returns(Result.Failure(error));
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
 
         var command = new CreateProfileCommand(
@@ -118,16 +107,13 @@ public class CommandDispatcherPipelineGenericTests {
     public async Task Pipeline_ShouldRethrowUnexpectedExceptions_FromPersistence() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var exception = new InvalidOperationException();
-
         var uow = Substitute.For<IUnitOfWork>();
 
         uow.CommitAsync(Arg.Any<CancellationToken>())
             .Returns(Task.FromException<Result>(exception));
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
 
         var command = new CreateProfileCommand(
@@ -151,13 +137,11 @@ public class CommandDispatcherPipelineGenericTests {
     public async Task Pipeline_ShouldInvokeHandlerExactlyOnce() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var uow = Substitute.For<IUnitOfWork>();
 
         uow.CommitAsync(Arg.Any<CancellationToken>()).Returns(Result.Success());
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
 
         var command = new CreateProfileCommand(
@@ -169,10 +153,7 @@ public class CommandDispatcherPipelineGenericTests {
         );
 
         // Act
-        await dispatcher.Send(
-            command,
-            TestContext.Current.CancellationToken
-        );
+        await dispatcher.Send(command, TestContext.Current.CancellationToken);
 
         // Assert
         await uow.Received(1).CommitAsync(Arg.Any<CancellationToken>());
@@ -184,7 +165,6 @@ public class CommandDispatcherPipelineGenericTests {
     public async Task Pipeline_ShouldCallCommit_AfterHandler() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var executionOrder = new List<string>();
 
         repo.When(x => x.Add(Arg.Any<Profile>()))
@@ -199,7 +179,6 @@ public class CommandDispatcherPipelineGenericTests {
             });
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
 
         var command = new CreateProfileCommand(
@@ -211,10 +190,7 @@ public class CommandDispatcherPipelineGenericTests {
         );
 
         // Act
-        await dispatcher.Send(
-            command,
-            TestContext.Current.CancellationToken
-        );
+        await dispatcher.Send(command, TestContext.Current.CancellationToken);
 
         // Assert
         executionOrder.Should().ContainInOrder("handler", "uow");

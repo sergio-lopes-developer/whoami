@@ -4,7 +4,7 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
-public sealed class GetProfileWiringTests {
+public class GetProfileWiringTests {
     private static GetProfileByEmailResponse GetProfileResponse() => new(
         Guid.NewGuid(),
         "John",
@@ -27,7 +27,7 @@ public sealed class GetProfileWiringTests {
     }
 
     [Fact]
-    public void GetProfile_Should_BindCliArgumentsAndDispatchQuery() {
+    public void GetProfile_ShouldBindCliArgumentsAndDispatchQuery_WhenArgumentsAreProvided() {
         // Arrange
         const string email = "john@doe.com";
 

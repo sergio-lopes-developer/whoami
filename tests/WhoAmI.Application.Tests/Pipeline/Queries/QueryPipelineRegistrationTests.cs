@@ -50,7 +50,6 @@ public class QueryPipelineRegistrationTests {
     public void Pipeline_ShouldHave_TwoDecorators() {
         // Arrange
         var connectionFactory = Substitute.For<IDbConnectionFactory>();
-
         var provider = QueryPipelineTestFactory.Create(connectionFactory);
 
         var handlerInterfaces =
@@ -61,7 +60,6 @@ public class QueryPipelineRegistrationTests {
         // Act + Assert
         foreach (var handlerInterface in handlerInterfaces) {
             var handler = provider.GetRequiredService(handlerInterface);
-
             var pipeline = PipelineIntrospector.Unwrap(handler).ToList();
 
             AssertPipeline(handlerInterface, pipeline);

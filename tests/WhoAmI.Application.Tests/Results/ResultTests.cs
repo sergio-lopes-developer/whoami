@@ -5,7 +5,7 @@ namespace WhoAmI.Application.Tests.Results;
 
 public class ResultTests {
     [Fact]
-    public void Success_ShouldCreateSuccessfulResult() {
+    public void Success_ShouldReturnSuccessfulResult_WhenCalled() {
         // Act
         var result = Result.Success();
 
@@ -17,12 +17,9 @@ public class ResultTests {
     }
 
     [Fact]
-    public void Failure_ShouldCreateFailedResult_WhenSingleErrorProvided() {
+    public void Failure_ShouldReturnFailedResult_WhenSingleErrorIsProvided() {
         // Arrange
-        var error = new Error(
-            "Test.Error",
-            "Something went wrong."
-        );
+        var error = new Error("Test.Error", "Something went wrong.");
 
         // Act
         var result = Result.Failure(error);
@@ -30,13 +27,12 @@ public class ResultTests {
         // Assert
         result.IsSuccess.Should().BeFalse();
         result.IsFailure.Should().BeTrue();
-
         result.Errors.Should().ContainSingle();
         result.FirstError.Should().Be(error);
     }
 
     [Fact]
-    public void Failure_ShouldCreateFailedResult_WhenMultipleErrorsProvided() {
+    public void Failure_ShouldReturnFailedResult_WhenMultipleErrorsAreProvided() {
         // Arrange
         var errors = new List<Error> {
             new("Error.One", "First error."),
@@ -49,29 +45,22 @@ public class ResultTests {
         // Assert
         result.IsSuccess.Should().BeFalse();
         result.IsFailure.Should().BeTrue();
-
         result.Errors.Should().HaveCount(2);
-
         result.Errors.Should().Contain(errors[0]);
         result.Errors.Should().Contain(errors[1]);
-
         result.FirstError.Should().Be(errors[0]);
     }
 
     [Fact]
-    public void ImplicitOperator_ShouldCreateFailureResult_FromError() {
+    public void ImplicitOperator_ShouldReturnFailureResult_WhenErrorIsProvided() {
         // Arrange
-        var error = new Error(
-            "Test.Error",
-            "Something went wrong."
-        );
+        var error = new Error("Test.Error", "Something went wrong.");
 
         // Act
         Result result = error;
 
         // Assert
         result.IsFailure.Should().BeTrue();
-
         result.Errors.Should().ContainSingle();
         result.FirstError.Should().Be(error);
     }
@@ -79,15 +68,8 @@ public class ResultTests {
     [Fact]
     public void FirstError_ShouldReturnFirstError_WhenMultipleErrorsExist() {
         // Arrange
-        var first = new Error(
-            "Error.One",
-            "First error."
-        );
-
-        var second = new Error(
-            "Error.Two",
-            "Second error."
-        );
+        var first = new Error("Error.One", "First error.");
+        var second = new Error("Error.Two", "Second error.");
 
         // Act
         var result = Result.Failure([first, second]);

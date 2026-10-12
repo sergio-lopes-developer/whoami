@@ -4,7 +4,7 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
-public sealed class CreateProfileWiringTests {
+public class CreateProfileWiringTests {
     private static CreateProfileResponse CreateProfileResponse() => new(
         Guid.NewGuid(),
         "John",
@@ -25,7 +25,7 @@ public sealed class CreateProfileWiringTests {
     }
 
     [Fact]
-    public void CreateProfile_Should_BindCliArgumentsAndDispatchCommand() {
+    public void CreateProfile_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
         // Arrange
         const string firstName = "John";
         const string lastName = "Doe";

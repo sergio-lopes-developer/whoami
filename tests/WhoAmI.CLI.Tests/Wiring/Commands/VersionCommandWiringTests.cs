@@ -4,11 +4,11 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands;
 
-public sealed class VersionCommandWiringTests {
+public class VersionCommandWiringTests {
     [Theory]
     [InlineData("version")]
     [InlineData("v")]
-    public void Version_Should_BeRegistered(string command) {
+    public void Version_ShouldRunSuccessfully_WhenCommandOrAliasIsProvided(string command) {
         // Act
         var exit = CliRunner.Run(command);
 

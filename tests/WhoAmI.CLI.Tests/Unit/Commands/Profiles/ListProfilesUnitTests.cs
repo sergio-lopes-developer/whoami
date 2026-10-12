@@ -11,7 +11,7 @@ using WhoAmI.CLI.Tests.Unit.Support;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
 [Collection("CLI Console")]
-public sealed class ListProfilesUnitTests {
+public class ListProfilesUnitTests {
     private readonly IQueryDispatcher _dispatcher =
         DispatcherFactory.CreateQueryDispatcher();
 
@@ -63,6 +63,7 @@ public sealed class ListProfilesUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Success());
+
         consoleOutput.Should().ContainAll(
             $"{johnProfile.FirstName} {johnProfile.LastName}",
             johnProfile.Email,
@@ -77,7 +78,7 @@ public sealed class ListProfilesUnitTests {
     }
 
     [Fact]
-    public async Task ExecuteInternalAsync_ShouldReturnSuccess_WhenNoProfilesWereFound() {
+    public async Task ExecuteInternalAsync_ShouldDisplayNoProfilesMessage_WhenQueryReturnsNoProfiles() {
         // Arrange
         var settings = CommandSettingsFactory.ListProfiles();
 
@@ -95,6 +96,7 @@ public sealed class ListProfilesUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Success());
+
         consoleOutput.Should().ContainAll("No profiles were found.");
 
         await _dispatcher.Received(1).Send(
@@ -127,6 +129,7 @@ public sealed class ListProfilesUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Error());
+
         consoleOutput.Should().Contain("No profiles found.");
 
         await _dispatcher.Received(1).Send(

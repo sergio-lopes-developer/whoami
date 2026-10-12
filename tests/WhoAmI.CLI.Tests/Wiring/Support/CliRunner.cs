@@ -18,7 +18,6 @@ internal static class CliRunner {
 
     public static int Run(params string[] args) {
         var cli = CliExecutionContextFactory.CreateContext();
-
         return cli.CommandApp.Run(args, TestContext.Current.CancellationToken);
     }
 }

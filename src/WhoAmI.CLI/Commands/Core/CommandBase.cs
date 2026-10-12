@@ -11,7 +11,9 @@ public abstract class CommandBase<TCommand, TSettings>
 {
     private readonly ILogger<TCommand> _logger;
 
-    protected CommandBase(ILogger<TCommand> logger) => _logger = logger;
+    protected CommandBase(ILogger<TCommand> logger) {
+        _logger = logger;
+    }
 
     protected sealed override async Task<int> ExecuteAsync(
         CommandContext context,

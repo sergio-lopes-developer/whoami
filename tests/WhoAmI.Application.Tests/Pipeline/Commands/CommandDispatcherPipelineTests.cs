@@ -17,20 +17,16 @@ public class CommandDispatcherPipelineTests {
     public async Task Pipeline_ShouldCallCommit_WhenCommandSucceeds() {
         // Arrange
         var profile = ProfileFactory.Create();
-
         var repo = Substitute.For<IProfileRepository>();
 
         repo.GetByIdAsync(profile.Id, Arg.Any<CancellationToken>())
             .Returns(profile);
 
         var uow = Substitute.For<IUnitOfWork>();
-
         uow.CommitAsync(Arg.Any<CancellationToken>()).Returns(Result.Success());
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
-
         var command = new UpdateEmailCommand(profile.Id, "new@email.com");
 
         // Act
@@ -49,18 +45,14 @@ public class CommandDispatcherPipelineTests {
     public async Task Pipeline_ShouldReturnFailure_WhenProfileDoesNotExist() {
         // Arrange
         var profile = ProfileFactory.Create();
-
         var repo = Substitute.For<IProfileRepository>();
 
         repo.GetByIdAsync(profile.Id, Arg.Any<CancellationToken>())
             .Returns((Profile?)null);
 
         var uow = Substitute.For<IUnitOfWork>();
-
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
-
         var command = new UpdateEmailCommand(profile.Id, "duplicate@email.com");
 
         // Act
@@ -80,10 +72,8 @@ public class CommandDispatcherPipelineTests {
     [Fact]
     public async Task Pipeline_ShouldReturnFailure_WhenPersistenceFails() {
         // Arrange
+        const string duplicateEmail = "new@email.com";
         var profile = ProfileFactory.Create();
-
-        var duplicateEmail = "new@email.com";
-
         var repo = Substitute.For<IProfileRepository>();
 
         repo.GetByIdAsync(profile.Id, Arg.Any<CancellationToken>())
@@ -96,9 +86,7 @@ public class CommandDispatcherPipelineTests {
         );
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
-
         var command = new UpdateEmailCommand(profile.Id, duplicateEmail);
 
         // Act
@@ -117,7 +105,6 @@ public class CommandDispatcherPipelineTests {
     public async Task Pipeline_ShouldRethrowUnexpectedExceptions_FromPersistence() {
         // Arrange
         var profile = ProfileFactory.Create();
-
         var repo = Substitute.For<IProfileRepository>();
 
         repo.GetByIdAsync(profile.Id, Arg.Any<CancellationToken>())
@@ -130,9 +117,7 @@ public class CommandDispatcherPipelineTests {
             .Returns(Task.FromException<Result>(exception));
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
-
         var command = new UpdateEmailCommand(profile.Id, "new@email.com");
 
         // Act
@@ -140,6 +125,7 @@ public class CommandDispatcherPipelineTests {
 
         // Assert
         var thrown = await act.Should().ThrowAsync<InvalidOperationException>();
+
         thrown.Which.Should().BeSameAs(exception);
     }
 
@@ -147,42 +133,33 @@ public class CommandDispatcherPipelineTests {
     public async Task Pipeline_ShouldInvokeHandlerExactlyOnce() {
         // Arrange
         var profile = ProfileFactory.Create();
-
         var repo = Substitute.For<IProfileRepository>();
 
         repo.GetByIdAsync(profile.Id, Arg.Any<CancellationToken>())
             .Returns(profile);
 
         var uow = Substitute.For<IUnitOfWork>();
-
         uow.CommitAsync(Arg.Any<CancellationToken>()).Returns(Result.Success());
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
-
         var command = new UpdateEmailCommand(profile.Id, "new@email.com");
 
         // Act
-        await dispatcher.Send(
-            command,
-            TestContext.Current.CancellationToken
-        );
+        await dispatcher.Send(command, TestContext.Current.CancellationToken);
 
         // Assert
         await uow.Received(1).CommitAsync(Arg.Any<CancellationToken>());
 
-        await repo
-            .Received(1).GetByIdAsync(profile.Id, Arg.Any<CancellationToken>());
+        await repo.Received(1)
+            .GetByIdAsync(profile.Id, Arg.Any<CancellationToken>());
     }
 
     [Fact]
     public async Task Pipeline_ShouldCallCommit_AfterHandler() {
         // Arrange
         var profile = ProfileFactory.Create();
-
         var executionOrder = new List<string>();
-
         var repo = Substitute.For<IProfileRepository>();
 
         repo.GetByIdAsync(profile.Id, Arg.Any<CancellationToken>())
@@ -192,6 +169,7 @@ public class CommandDispatcherPipelineTests {
             });
 
         var uow = Substitute.For<IUnitOfWork>();
+
         uow.CommitAsync(Arg.Any<CancellationToken>())
             .Returns(_ => {
                 executionOrder.Add("uow");
@@ -199,16 +177,11 @@ public class CommandDispatcherPipelineTests {
             });
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
-
         var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
-
         var command = new UpdateEmailCommand(profile.Id, "new@email.com");
 
         // Act
-        await dispatcher.Send(
-            command,
-            TestContext.Current.CancellationToken
-        );
+        await dispatcher.Send(command, TestContext.Current.CancellationToken);
 
         // Assert
         executionOrder.Should().ContainInOrder("handler", "uow");

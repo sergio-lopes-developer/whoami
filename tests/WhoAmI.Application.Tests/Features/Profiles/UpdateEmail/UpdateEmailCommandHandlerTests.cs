@@ -12,10 +12,8 @@ public class UpdateEmailCommandHandlerTests {
     [Fact]
     public async Task UpdateEmail_ShouldUpdateEmail_WhenNewEmailIsUnique() {
         // Arrange
+        const string newEmail = "new.email@provider.com";
         var profile = ProfileFactory.Create();
-
-        var newEmail = "new.email@provider.com";
-
         var repo = Substitute.For<IProfileRepository>();
 
         var updatedAt = new DateTimeOffset(
@@ -31,7 +29,6 @@ public class UpdateEmailCommandHandlerTests {
             .Returns(profile);
 
         var handler = new UpdateEmailCommandHandler(repo, clock);
-
         var command = new UpdateEmailCommand(profile.Id, newEmail);
 
         // Act
@@ -51,16 +48,13 @@ public class UpdateEmailCommandHandlerTests {
     public async Task UpdateEmail_ShouldReturnFailure_WhenProfileDoesNotExist() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns((Profile?)null);
 
         var handler = new UpdateEmailCommandHandler(repo, clock);
-
         var id = Guid.NewGuid();
-
         var command = new UpdateEmailCommand(id, "new.email@provider.com");
 
         // Act
@@ -79,7 +73,6 @@ public class UpdateEmailCommandHandlerTests {
     public async Task UpdateEmail_ShouldReturnFailure_WhenProfileIsAlreadyDeleted() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         var deletedAt = new DateTimeOffset(

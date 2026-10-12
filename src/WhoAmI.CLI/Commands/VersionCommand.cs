@@ -12,7 +12,6 @@ public sealed class VersionCommand : Command {
         CancellationToken cancellationToken
     ) {
         CliMessage.ShowInfo($"WhoAmI CLI - v{CliVersion.Current}");
-
         return CliExit.Success();
     }
 }

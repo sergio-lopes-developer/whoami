@@ -12,11 +12,9 @@ public class UpdateSocialLinksCommandHandlerTests {
     [Fact]
     public async Task UpdateSocialLinks_ShouldUpdateSocialLinks_WhenLinksAreValid() {
         // Arrange
+        const string newLinkedIn = "https://www.linkedin.com/in/new-username";
+        const string newGitHub = "https://github.com/new-username";
         var profile = ProfileFactory.Create();
-
-        var newLinkedIn = "https://www.linkedin.com/in/new-username";
-
-        var newGitHub = "https://github.com/new-username";
 
         var updatedAt = new DateTimeOffset(
             2026, 9, 23,
@@ -58,14 +56,12 @@ public class UpdateSocialLinksCommandHandlerTests {
     public async Task UpdateSocialLinks_ShouldReturnFailure_WhenProfileDoesNotExist() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns((Profile)null!);
 
         var handler = new UpdateSocialLinksCommandHandler(repo, clock);
-
         var id = Guid.NewGuid();
 
         var command = new UpdateSocialLinksCommand(
@@ -90,7 +86,6 @@ public class UpdateSocialLinksCommandHandlerTests {
     public async Task UpdateSocialLinks_ShouldReturnFailure_WhenProfileIsAlreadyDeleted() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         var deletedAt = new DateTimeOffset(

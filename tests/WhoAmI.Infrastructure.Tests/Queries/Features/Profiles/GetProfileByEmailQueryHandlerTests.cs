@@ -7,7 +7,13 @@ using WhoAmI.Infrastructure.Tests.Queries.TestDoubles;
 
 namespace WhoAmI.Infrastructure.Tests.Queries.Features.Profiles;
 
-public sealed class GetProfileByEmailQueryHandlerTests {
+public class GetProfileByEmailQueryHandlerTests {
+    private const string FirstName = "John";
+    private const string LastName = "Doe";
+    private const string Email = "john@doe.com";
+    private const string LinkedIn = "https://linkedin.com/john";
+    private const string GitHub = "https://github.com/john";
+
     private static readonly DateTimeOffset _createdAt =
         new(2026, 9, 22, 13, 25, 0, TimeSpan.Zero);
 
@@ -30,14 +36,8 @@ public sealed class GetProfileByEmailQueryHandlerTests {
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnProfile_WhenProfileExists() {
+    public async Task GetProfileByEmail_ShouldReturnProfile_WhenProfileExists() {
         // Arrange
-        const string firstName = "John";
-        const string lastName = "Doe";
-        const string email = "john@doe.com";
-        const string linkedIn = "https://linkedin.com/john";
-        const string gitHub = "https://github.com/john";
-
         var updatedAt = new DateTimeOffset(
             2026, 9, 23,
             10, 15, 0,
@@ -76,41 +76,39 @@ public sealed class GetProfileByEmailQueryHandlerTests {
             """,
             new {
                 Id = Guid.NewGuid(),
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                LinkedIn = linkedIn,
-                GitHub = gitHub,
+                FirstName,
+                LastName,
+                Email,
+                LinkedIn,
+                GitHub,
                 CreatedAt = _createdAt,
                 UpdatedAt = updatedAt
             }
         );
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new GetProfileByEmailQueryHandler(connectionFactory);
-
-        var query = new GetProfileByEmailQuery(email);
+        var handler = new GetProfileByEmailQueryHandler(connectionFactory);
+        var query = new GetProfileByEmailQuery(Email);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             query,
             TestContext.Current.CancellationToken
         );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Email.Should().Be(email);
-        result.Value.FirstName.Should().Be(firstName);
-        result.Value.LastName.Should().Be(lastName);
-        result.Value.LinkedIn.Should().Be(linkedIn);
-        result.Value.GitHub.Should().Be(gitHub);
+        result.Value.Email.Should().Be(Email);
+        result.Value.FirstName.Should().Be(FirstName);
+        result.Value.LastName.Should().Be(LastName);
+        result.Value.LinkedIn.Should().Be(LinkedIn);
+        result.Value.GitHub.Should().Be(GitHub);
         result.Value.CreatedAt.Should().Be(_createdAt);
         result.Value.UpdatedAt.Should().Be(updatedAt);
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnFailure_WhenProfileDoesNotExist() {
+    public async Task GetProfileByEmail_ShouldReturnFailure_WhenProfileDoesNotExist() {
         // Arrange
         const string email = "missing@profile.com";
 
@@ -122,13 +120,11 @@ public sealed class GetProfileByEmailQueryHandlerTests {
         await CreateProfilesTable(connection);
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new GetProfileByEmailQueryHandler(connectionFactory);
-
+        var handler = new GetProfileByEmailQueryHandler(connectionFactory);
         var query = new GetProfileByEmailQuery(email);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             query,
             TestContext.Current.CancellationToken
         );
@@ -140,10 +136,8 @@ public sealed class GetProfileByEmailQueryHandlerTests {
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnFailure_WhenProfileIsDeleted() {
+    public async Task GetProfileByEmail_ShouldReturnFailure_WhenProfileIsDeleted() {
         // Arrange
-        const string email = "john@doe.com";
-
         var deletedAt = new DateTimeOffset(
             2026, 9, 30,
             14, 15, 0,
@@ -182,24 +176,22 @@ public sealed class GetProfileByEmailQueryHandlerTests {
             """,
             new {
                 Id = Guid.NewGuid(),
-                FirstName = "John",
-                LastName = "Doe",
-                Email = email,
-                LinkedIn = "https://linkedin.com/john",
-                GitHub = "https://github.com/john",
+                FirstName,
+                LastName,
+                Email,
+                LinkedIn,
+                GitHub,
                 CreatedAt = _createdAt,
                 DeletedAt = deletedAt
             }
         );
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new GetProfileByEmailQueryHandler(connectionFactory);
-
-        var query = new GetProfileByEmailQuery(email);
+        var handler = new GetProfileByEmailQueryHandler(connectionFactory);
+        var query = new GetProfileByEmailQuery(Email);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             query,
             TestContext.Current.CancellationToken
         );
@@ -207,14 +199,12 @@ public sealed class GetProfileByEmailQueryHandlerTests {
         // Assert
         result.IsFailure.Should().BeTrue();
         result.FirstError!.Code.Should().Be("Profile.NotFoundByEmail");
-        result.FirstError.Metadata!["ProfileEmail"].Should().Be(email);
+        result.FirstError.Metadata!["ProfileEmail"].Should().Be(Email);
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnProfileWithoutUpdatedAt_WhenProfileHasNeverBeenUpdated() {
+    public async Task GetProfileByEmail_ShouldReturnProfile_WhenProfileHasNeverBeenUpdated() {
         // Arrange
-        const string email = "john@doe.com";
-
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
 
@@ -245,23 +235,21 @@ public sealed class GetProfileByEmailQueryHandlerTests {
             """,
             new {
                 Id = Guid.NewGuid(),
-                FirstName = "John",
-                LastName = "Doe",
-                Email = email,
-                LinkedIn = "https://linkedin.com/john",
-                GitHub = "https://github.com/john",
+                FirstName,
+                LastName,
+                Email,
+                LinkedIn,
+                GitHub,
                 CreatedAt = _createdAt
             }
         );
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new GetProfileByEmailQueryHandler(connectionFactory);
-
-        var query = new GetProfileByEmailQuery(email);
+        var handler = new GetProfileByEmailQueryHandler(connectionFactory);
+        var query = new GetProfileByEmailQuery(Email);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             query,
             TestContext.Current.CancellationToken
         );

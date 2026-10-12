@@ -6,7 +6,7 @@ using WhoAmI.Infrastructure.Tests.Persistence.ErrorHandling.TestHelpers;
 
 namespace WhoAmI.Infrastructure.Tests.Persistence.ErrorHandling.Parsers;
 
-public sealed class SqliteConstraintViolationParserTests {
+public class SqliteConstraintViolationParserTests {
     private readonly SqliteConstraintViolationParser _parser = new();
 
     [Fact]
@@ -67,7 +67,7 @@ public sealed class SqliteConstraintViolationParserTests {
     [Fact]
     public void ParseMessage_ShouldIgnoreCase() {
         // Arrange
-        var message =
+        const string message =
             "SQLite Error 19: " +
             "'UNIQUE constraint failed: profiles.EMAIL'.";
 
@@ -81,7 +81,7 @@ public sealed class SqliteConstraintViolationParserTests {
     [Fact]
     public void ParseMessage_ShouldReturnNull_WhenConstraintIsUnknown() {
         // Arrange
-        var message =
+        const string message =
             "SQLite Error 19: " +
             "'UNIQUE constraint failed: Profiles.unknown'.";
 

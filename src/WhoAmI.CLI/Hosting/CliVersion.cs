@@ -7,6 +7,5 @@ internal static class CliVersion {
         typeof(CliVersion)
             .Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
-            .InformationalVersion
-                ?? "unknown";
+            .InformationalVersion ?? "unknown";
 }

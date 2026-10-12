@@ -9,7 +9,7 @@ using WhoAmI.CLI.Logging;
 
 namespace WhoAmI.CLI.Tests.Unit.Logging;
 
-public sealed class ExecutionLoggerTests {
+public class ExecutionLoggerTests {
     private readonly ExecutionLogger _logger = new();
 
     public ExecutionLoggerTests() {
@@ -58,21 +58,24 @@ public sealed class ExecutionLoggerTests {
         _logger.Log(info);
 
         // Assert
-        InMemorySink.Instance.Should()
+        InMemorySink.Instance
+            .Should()
             .HaveMessage("Execution completed successfully")
             .Appearing()
             .Once()
             .WithLevel(LogEventLevel.Information);
 
-        InMemorySink.Instance.LogEvents.Should()
+        var logEvent = InMemorySink.Instance.LogEvents
+            .Should()
             .ContainSingle()
-            .Which.Properties.Should()
-            .ContainKeys(
-                "Operation",
-                "ElapsedMilliseconds",
-                "Request",
-                "Errors"
-            );
+            .Subject;
+
+        logEvent.Properties.Should().ContainKeys(
+            "Operation",
+            "ElapsedMilliseconds",
+            "Request",
+            "Errors"
+        );
 
         AssertCommonProperties(
             InMemorySink.Instance.LogEvents.Should().ContainSingle().Subject,
@@ -96,7 +99,8 @@ public sealed class ExecutionLoggerTests {
         _logger.Log(info);
 
         // Assert
-        InMemorySink.Instance.Should()
+        InMemorySink.Instance
+            .Should()
             .HaveMessage("Execution completed with warnings")
             .Appearing()
             .Once()
@@ -126,7 +130,8 @@ public sealed class ExecutionLoggerTests {
         _logger.Log(info);
 
         // Assert
-        InMemorySink.Instance.Should()
+        InMemorySink.Instance
+            .Should()
             .HaveMessage("Execution completed with errors.")
             .Appearing()
             .Once()

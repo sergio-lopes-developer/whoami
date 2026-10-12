@@ -9,8 +9,9 @@ internal sealed class QueryHandlerAdapter<TQuery, TResult> :
 {
     private readonly IQueryHandler<TQuery, TResult> _handler;
 
-    public QueryHandlerAdapter(IQueryHandler<TQuery, TResult> handler) =>
+    public QueryHandlerAdapter(IQueryHandler<TQuery, TResult> handler) {
         _handler = handler;
+    }
 
     public async Task<object?> HandleAsync(
         object query,

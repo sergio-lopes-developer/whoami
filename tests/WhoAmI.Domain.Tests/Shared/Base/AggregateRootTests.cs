@@ -120,10 +120,9 @@ public class AggregateRootTests {
     }
 
     [Fact]
-    public void AggregateRoot_ShouldThrowNotSupportedException_WhenExternalModificationOfDomainEventsIsAttempted() {
+    public void AggregateRoot_ShouldThrow_WhenExternalModificationOfDomainEventsIsAttempted() {
         // Arrange
         var aggregateRoot = new DummyAggregateRoot(Guid.NewGuid(), _createdAt);
-
         var domainEvents = aggregateRoot.DomainEvents;
 
         var newEvent = new EmailUpdatedEvent(
