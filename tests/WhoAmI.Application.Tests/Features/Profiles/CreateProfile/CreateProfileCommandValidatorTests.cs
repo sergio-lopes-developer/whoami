@@ -340,22 +340,27 @@ public class CreateProfileCommandValidatorTests {
 
         errors.Should().Contain(e =>
             e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.FirstName)));
+            Equals(e.Metadata!["Field"], nameof(command.FirstName))
+        );
 
         errors.Should().Contain(e =>
             e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.LastName)));
+            Equals(e.Metadata!["Field"], nameof(command.LastName))
+        );
 
         errors.Should().Contain(e =>
             e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.Email)));
+            Equals(e.Metadata!["Field"], nameof(command.Email))
+        );
 
         errors.Should().Contain(e =>
             e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.LinkedIn)));
+            Equals(e.Metadata!["Field"], nameof(command.LinkedIn))
+        );
 
         errors.Should().Contain(e =>
             e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.GitHub)));
+            Equals(e.Metadata!["Field"], nameof(command.GitHub))
+        );
     }
 }

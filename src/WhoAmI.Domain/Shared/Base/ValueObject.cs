@@ -9,6 +9,7 @@ public abstract class ValueObject {
 
     public override bool Equals(object? obj) {
         if (obj is null) return false;
+
         if (ReferenceEquals(this, obj)) return true;
 
         return obj.GetType() == GetType() && Equals((ValueObject)obj);
@@ -19,6 +20,7 @@ public abstract class ValueObject {
 
     public static bool operator ==(ValueObject? a, ValueObject? b) {
         if (a is null && b is null) return true;
+
         if (a is null || b is null) return false;
 
         return a.Equals(b);

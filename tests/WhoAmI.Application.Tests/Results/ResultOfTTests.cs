@@ -39,14 +39,8 @@ public class ResultOfTTests {
     public void Failure_ShouldReturnFailedResult_WhenMultipleErrorsAreProvided() {
         // Arrange
         var errors = new List<Error> {
-            new(
-                "Error.One",
-                "First error."
-            ),
-            new(
-                "Error.Two",
-                "Second error."
-            )
+            new("Error.One", "First error."),
+            new("Error.Two", "Second error.")
         };
 
         // Act

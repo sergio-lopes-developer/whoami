@@ -110,11 +110,7 @@ public class ExecutionRunnerTests {
     [Fact]
     public async Task ExecuteAsync_ShouldLogFailure_WhenHandlerReturnsFailure() {
         // Arrange
-        var error = new Error(
-            "Fake.Error",
-            "Something failed."
-        );
-
+        var error = new Error("Fake.Error", "Something failed.");
         var result = Result.Failure(error);
 
         var info = new ExecutionInfo(
