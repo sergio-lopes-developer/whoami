@@ -98,13 +98,16 @@ public class GetProfileByEmailQueryHandlerTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Email.Should().Be(Email);
-        result.Value.FirstName.Should().Be(FirstName);
-        result.Value.LastName.Should().Be(LastName);
-        result.Value.LinkedIn.Should().Be(LinkedIn);
-        result.Value.GitHub.Should().Be(GitHub);
-        result.Value.CreatedAt.Should().Be(_createdAt);
-        result.Value.UpdatedAt.Should().Be(updatedAt);
+
+        var value = result.GetValueOrThrow();
+
+        value.Email.Should().Be(Email);
+        value.FirstName.Should().Be(FirstName);
+        value.LastName.Should().Be(LastName);
+        value.LinkedIn.Should().Be(LinkedIn);
+        value.GitHub.Should().Be(GitHub);
+        value.CreatedAt.Should().Be(_createdAt);
+        value.UpdatedAt.Should().Be(updatedAt);
     }
 
     [Fact]
@@ -256,7 +259,10 @@ public class GetProfileByEmailQueryHandlerTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.CreatedAt.Should().Be(_createdAt);
-        result.Value.UpdatedAt.Should().BeNull();
+
+        var value = result.GetValueOrThrow();
+
+        value.CreatedAt.Should().Be(_createdAt);
+        value.UpdatedAt.Should().BeNull();
     }
 }

@@ -15,7 +15,7 @@ public sealed class Result : ResultBase {
 }
 
 public sealed class Result<T> : ResultBase {
-    public T? Value { get; }
+    private T? Value { get; }
 
     private Result(
         bool isSuccess,
@@ -38,4 +38,14 @@ public sealed class Result<T> : ResultBase {
         new(false, default, errors);
 
     public static implicit operator Result<T>(Error error) => Failure(error);
+
+    public T GetValueOrThrow() {
+        if (IsFailure || Value is null) {
+            throw new InvalidOperationException(
+                "Cannot retrieve the value from a failed result."
+            );
+        }
+
+        return Value;
+    }
 }

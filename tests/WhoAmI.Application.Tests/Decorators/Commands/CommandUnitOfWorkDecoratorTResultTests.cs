@@ -39,7 +39,7 @@ public class CommandUnitOfWorkDecoratorTResultTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().Be(expected);
+        result.GetValueOrThrow().Should().Be(expected);
 
         await inner.Received(1)
             .HandleAsync(command, Arg.Any<CancellationToken>());

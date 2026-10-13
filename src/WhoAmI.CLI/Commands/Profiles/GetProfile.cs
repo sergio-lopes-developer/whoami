@@ -39,7 +39,7 @@ public sealed class GetProfile(
             return CliExit.Error();
         }
 
-        var profile = result.Value;
+        var profile = result.GetValueOrThrow();
         var items = BuildInfoItems(profile, commandSettings).ToList();
 
         if (items.All(i => i.IsBlank)) {

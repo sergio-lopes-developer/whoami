@@ -15,7 +15,7 @@ public class ResultOfTTests {
         // Assert
         result.IsSuccess.Should().BeTrue();
         result.IsFailure.Should().BeFalse();
-        result.Value.Should().Be(value);
+        result.GetValueOrThrow().Should().Be(value);
         result.Errors.Should().BeEmpty();
         result.FirstError.Should().BeNull();
     }
@@ -31,7 +31,6 @@ public class ResultOfTTests {
         // Assert
         result.IsSuccess.Should().BeFalse();
         result.IsFailure.Should().BeTrue();
-        result.Value.Should().BeNull();
         result.Errors.Should().ContainSingle();
         result.FirstError.Should().Be(error);
     }
@@ -56,7 +55,6 @@ public class ResultOfTTests {
         // Assert
         result.IsSuccess.Should().BeFalse();
         result.IsFailure.Should().BeTrue();
-        result.Value.Should().BeNull();
         result.Errors.Should().HaveCount(2);
         result.Errors.Should().Contain(errors[0]);
         result.Errors.Should().Contain(errors[1]);
@@ -73,7 +71,6 @@ public class ResultOfTTests {
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Value.Should().BeNull();
         result.Errors.Should().ContainSingle();
         result.FirstError.Should().Be(error);
     }
@@ -100,7 +97,7 @@ public class ResultOfTTests {
         var result = Result<Guid>.Success(value);
 
         // Assert
-        result.Value.Should().Be(value);
+        result.GetValueOrThrow().Should().Be(value);
     }
 
     [Fact]
@@ -124,5 +121,19 @@ public class ResultOfTTests {
 
         // Assert
         act.Should().Throw<ArgumentNullException>();
+    }
+
+    [Fact]
+    public void GetValueOrThrow_ShouldThrow_WhenResultIsFailure() {
+        // Arrange
+        var result = Result<string>.Failure(
+            new Error("Test.Error", "Something went wrong.")
+        );
+
+        // Act
+        var act = result.GetValueOrThrow;
+
+        // Assert
+        act.Should().Throw<InvalidOperationException>();
     }
 }

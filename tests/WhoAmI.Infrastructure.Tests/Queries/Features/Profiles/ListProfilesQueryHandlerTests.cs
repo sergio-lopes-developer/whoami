@@ -54,28 +54,27 @@ public class ListProfilesQueryHandlerTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value
-            .Should()
-            .BeEquivalentTo(
-                [
-                    new ListProfilesResponse(
-                        "Alice",
-                        "Anderson",
-                        "alice2@test.com"
-                    ),
-                    new ListProfilesResponse(
-                        "Alice",
-                        "Brown",
-                        "alice@test.com"
-                    ),
-                    new ListProfilesResponse(
-                        "Zoe",
-                        "Smith",
-                        "zoe@test.com"
-                    )
-                ],
-                options => options.WithStrictOrdering()
-            );
+
+        result.GetValueOrThrow().Should().BeEquivalentTo(
+            [
+                new ListProfilesResponse(
+                    "Alice",
+                    "Anderson",
+                    "alice2@test.com"
+                ),
+                new ListProfilesResponse(
+                    "Alice",
+                    "Brown",
+                    "alice@test.com"
+                ),
+                new ListProfilesResponse(
+                    "Zoe",
+                    "Smith",
+                    "zoe@test.com"
+                )
+            ],
+            options => options.WithStrictOrdering()
+        );
     }
 
     [Fact]
@@ -99,7 +98,7 @@ public class ListProfilesQueryHandlerTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().BeEmpty();
+        result.GetValueOrThrow().Should().BeEmpty();
     }
 
     [Fact]
@@ -147,22 +146,21 @@ public class ListProfilesQueryHandlerTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value
-            .Should()
-            .BeEquivalentTo(
-                [
-                    new ListProfilesResponse(
-                        "Alice",
-                        "Active",
-                        "alice2@test.com"
-                    ),
-                    new ListProfilesResponse(
-                        "Zoe",
-                        "Active",
-                        "zoe@test.com"
-                    )
-                ],
-                options => options.WithStrictOrdering()
-            );
+
+        result.GetValueOrThrow().Should().BeEquivalentTo(
+            [
+                new ListProfilesResponse(
+                    "Alice",
+                    "Active",
+                    "alice2@test.com"
+                ),
+                new ListProfilesResponse(
+                    "Zoe",
+                    "Active",
+                    "zoe@test.com"
+                )
+            ],
+            options => options.WithStrictOrdering()
+        );
     }
 }

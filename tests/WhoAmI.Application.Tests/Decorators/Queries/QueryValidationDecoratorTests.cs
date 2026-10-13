@@ -71,7 +71,7 @@ public class QueryValidationDecoratorTests {
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().Be(expected);
+        result.GetValueOrThrow().Should().Be(expected);
 
         await inner.Received(1)
             .HandleAsync(query, Arg.Any<CancellationToken>());

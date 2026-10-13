@@ -99,9 +99,12 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
 
             // Assert
             result.IsSuccess.Should().BeTrue();
-            result.Value.Email.Should().Be(email);
-            result.Value.FirstName.Should().Be("Sergio");
-            result.Value.LastName.Should().Be("Lopes");
+
+            var value = result.GetValueOrThrow();
+
+            value.Email.Should().Be(email);
+            value.FirstName.Should().Be("Sergio");
+            value.LastName.Should().Be("Lopes");
         }
     }
 }
