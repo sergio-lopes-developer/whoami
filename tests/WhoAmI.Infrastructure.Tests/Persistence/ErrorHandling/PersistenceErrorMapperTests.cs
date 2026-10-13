@@ -8,13 +8,14 @@ using WhoAmI.Infrastructure.Data.Persistence.ErrorHandling.Abstractions;
 
 namespace WhoAmI.Infrastructure.Tests.Persistence.ErrorHandling;
 
-public sealed class PersistenceErrorMapperTests {
+public class PersistenceErrorMapperTests {
     [Fact]
-    public void Map_ShouldReturnMappedError_WhenViolationMapperExists() {
+    public void Map_ShouldReturnMappedError_WhenMatchingViolationMapperExists() {
         // Arrange
         var parser = Substitute.For<IConstraintViolationParser>();
 
-        parser.Parse(Arg.Any<Exception>())
+        parser
+            .Parse(Arg.Any<Exception>())
             .Returns(PersistenceViolationCode.DuplicateProfileEmail);
 
         var expectedError = new Error(
@@ -33,7 +34,7 @@ public sealed class PersistenceErrorMapperTests {
             .Map(Arg.Any<DbUpdateException>())
             .Returns(expectedError);
 
-        var sut = new PersistenceErrorMapper(
+        var errorMapper = new PersistenceErrorMapper(
             parser,
             [violationMapper]
         );
@@ -44,21 +45,22 @@ public sealed class PersistenceErrorMapperTests {
         );
 
         // Act
-        var result = sut.Map(exception);
+        var result = errorMapper.Map(exception);
 
         // Assert
         result.Should().Be(expectedError);
     }
 
     [Fact]
-    public void Map_ShouldReturnUnmappedViolation_WhenMapperDoesNotExist() {
+    public void Map_ShouldReturnUnmappedViolation_WhenMatchingViolationMapperDoesNotExist() {
         // Arrange
         var parser = Substitute.For<IConstraintViolationParser>();
 
-        parser.Parse(Arg.Any<Exception>())
+        parser
+            .Parse(Arg.Any<Exception>())
             .Returns(new PersistenceViolationCode("Unknown"));
 
-        var sut = new PersistenceErrorMapper(
+        var errorMapper = new PersistenceErrorMapper(
             parser,
             []
         );
@@ -69,7 +71,7 @@ public sealed class PersistenceErrorMapperTests {
         );
 
         // Act
-        var result = sut.Map(exception);
+        var result = errorMapper.Map(exception);
 
         // Assert
         result.Should().Be(PersistenceErrors.UnmappedViolation);

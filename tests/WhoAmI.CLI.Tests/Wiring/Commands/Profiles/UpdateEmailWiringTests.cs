@@ -4,7 +4,7 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
-public sealed class UpdateEmailWiringTests {
+public class UpdateEmailWiringTests {
     private static UpdateEmailCommand RunUpdateEmail(params string[] args) {
         string[] commandArgs = ["profile", "update", "email", ..args];
 
@@ -12,10 +12,10 @@ public sealed class UpdateEmailWiringTests {
     }
 
     [Fact]
-    public void UpdateEmail_Should_BindCliArgumentsAndDispatchCommand() {
+    public void UpdateEmail_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
         // Arrange
-        var id = Guid.NewGuid().ToString();
         const string email = "john@doe.com";
+        var id = Guid.NewGuid().ToString();
 
         // Act
         var command = RunUpdateEmail(

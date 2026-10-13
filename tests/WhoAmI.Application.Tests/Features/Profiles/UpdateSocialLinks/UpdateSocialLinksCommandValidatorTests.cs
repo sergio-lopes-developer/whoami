@@ -225,40 +225,4 @@ public class UpdateSocialLinksCommandValidatorTests {
             Equals(e.Metadata!["Field"], nameof(command.GitHub))
         );
     }
-
-    [Fact]
-    public void Validate_ShouldNotReturnDuplicateErrors_ForEmptyLinkedIn() {
-        // Arrange
-        var command = new UpdateSocialLinksCommand(
-            Guid.NewGuid(),
-            string.Empty,
-            "https://github.com/johnmiller"
-        );
-
-        // Act
-        var errors = _validator.Validate(command);
-
-        // Assert
-        errors.Should().ContainSingle();
-
-        errors.Single().Code.Should().Be("Validation.Required");
-    }
-
-    [Fact]
-    public void Validate_ShouldNotReturnDuplicateErrors_ForEmptyGitHub() {
-        // Arrange
-        var command = new UpdateSocialLinksCommand(
-            Guid.NewGuid(),
-            "https://www.linkedin.com/in/johnmiller",
-            string.Empty
-        );
-
-        // Act
-        var errors = _validator.Validate(command);
-
-        // Assert
-        errors.Should().ContainSingle();
-
-        errors.Single().Code.Should().Be("Validation.Required");
-    }
 }

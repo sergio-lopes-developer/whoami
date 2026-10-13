@@ -7,50 +7,63 @@ namespace WhoAmI.Domain.Tests.Profiles.ValueObjects;
 
 public class FullNameTests {
     [Fact]
-    public void FullName_ShouldAllowCreation_WhenParametersAreValid() {
+    public void FullName_ShouldCreate_WhenParametersAreValid() {
+        // Arrange
         var firstName = FirstNames.CreateSergio();
         var lastName = LastNames.CreateLopes();
 
+        // Act
         var fullName = new FullName(firstName, lastName);
 
+        // Assert
         fullName.FirstName.Should().Be(firstName);
         fullName.LastName.Should().Be(lastName);
     }
 
     [Fact]
-    public void FullName_ShouldNotAllowCreation_WhenFirstNameIsNull() {
+    public void FullName_ShouldThrow_WhenFirstNameIsNull() {
+        // Arrange
         var lastName = LastNames.CreateLopes();
 
+        // Act
         var act = () => new FullName(null!, lastName);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Fact]
-    public void FullName_ShouldNotAllowCreation_WhenLastNameIsNull() {
+    public void FullName_ShouldThrow_WhenLastNameIsNull() {
+        // Arrange
         var firstName = FirstNames.CreateSergio();
 
+        // Act
         var act = () => new FullName(firstName, null!);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Fact]
-    public void FullName_ShouldBeEqual_WhenComponentValuesAreIdentical() {
+    public void FullName_ShouldBeEqual_WhenComponentValuesAreEqual() {
+        // Arrange
         var firstName = FirstNames.CreateSergio();
         var lastName = LastNames.CreateLopes();
 
         var fullName = new FullName(firstName, lastName);
         var sameFullName = new FullName(firstName, lastName);
 
+        // Assert
         fullName.Should().Be(sameFullName);
         fullName.GetHashCode().Should().Be(sameFullName.GetHashCode());
+
         (fullName == sameFullName).Should().BeTrue();
         (fullName != sameFullName).Should().BeFalse();
     }
 
     [Fact]
     public void FullName_ShouldNotBeEqual_WhenComponentValuesAreDifferent() {
+        // Arrange
         var firstName = FirstNames.CreateSergio();
         var lastName = LastNames.CreateLopes();
         var otherFirstName = FirstNames.CreateJohnChristopher();
@@ -59,20 +72,25 @@ public class FullNameTests {
         var fullName = new FullName(firstName, lastName);
         var otherFullName = new FullName(otherFirstName, otherLastName);
 
+        // Assert
         fullName.Should().NotBe(otherFullName);
+
         (fullName != otherFullName).Should().BeTrue();
         (fullName == otherFullName).Should().BeFalse();
     }
 
     [Fact]
     public void FullName_ShouldConcatenateFirstNameAndLastName_WhenConvertedToString() {
+        // Arrange
         var firstName = FirstNames.CreateSergio();
         var lastName = LastNames.CreateLopes();
         var fullName = new FullName(firstName, lastName);
         var expected = $"{firstName} {lastName}";
 
+        // Act
         var result = fullName.ToString();
 
+        // Assert
         result.Should().Be(expected);
     }
 }

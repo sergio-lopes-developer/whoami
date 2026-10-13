@@ -26,10 +26,7 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
                 "https://github.com/sergio"
             );
 
-            await scope.Execute(
-                command,
-                TestContext.Current.CancellationToken
-            );
+            await scope.Execute(command, TestContext.Current.CancellationToken);
 
             // Act
             var result = await scope.Execute(
@@ -40,6 +37,7 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
             // Assert
             result.IsFailure.Should().BeTrue();
             result.FirstError!.Code.Should().Be("Profile.EmailAlreadyExists");
+
             result.FirstError.Metadata!["ProfileEmail"]
                 .Should()
                 .Be(command.Email);
@@ -49,10 +47,8 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
     [Fact]
     public async Task GetProfileByEmail_ShouldReturnNotFound_WhenProfileDoesNotExist() {
         // Arrange
-        var email = "john.doe@email.com";
-
+        const string email = "john.doe@email.com";
         var query = new GetProfileByEmailQuery(email);
-
         var scope = await _applicationFactory.CreateScopeAsync();
 
         await using (scope) {
@@ -72,7 +68,7 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
     [Fact]
     public async Task GetProfileByEmail_ShouldReturnProfile_WhenProfileExists() {
         // Arrange
-        var email = "email@example.com";
+        const string email = "email@example.com";
 
         var command = new CreateProfileCommand(
             "Sergio",
@@ -104,9 +100,12 @@ public class ProfileTests : IClassFixture<TestApplicationFactory> {
 
             // Assert
             result.IsSuccess.Should().BeTrue();
-            result.Value.Email.Should().Be(email);
-            result.Value.FirstName.Should().Be("Sergio");
-            result.Value.LastName.Should().Be("Lopes");
+
+            var value = result.GetValueOrThrow();
+
+            value.Email.Should().Be(email);
+            value.FirstName.Should().Be("Sergio");
+            value.LastName.Should().Be("Lopes");
         }
     }
 }

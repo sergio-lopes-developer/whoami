@@ -9,7 +9,7 @@ public class ProfileEqualityTests {
         new(2026, 9, 22, 13, 25, 0, TimeSpan.Zero);
 
     [Fact]
-    public void Profile_ShouldBeEqual_WhenIdsAreEqual() {
+    public void Profile_ShouldBeEqual_WhenIdsMatch() {
         // Arrange
         var id = Guid.NewGuid();
 
@@ -34,12 +34,13 @@ public class ProfileEqualityTests {
         // Assert
         profile.Should().Be(sameProfile);
         profile.GetHashCode().Should().Be(sameProfile.GetHashCode());
+
         (profile == sameProfile).Should().BeTrue();
         (profile != sameProfile).Should().BeFalse();
     }
 
     [Fact]
-    public void Profile_ShouldNotBeEqual_WhenIdsAreDifferent() {
+    public void Profile_ShouldNotBeEqual_WhenIdsDiffer() {
         // Arrange
         var id = Guid.NewGuid();
         var otherId = Guid.NewGuid();
@@ -64,6 +65,7 @@ public class ProfileEqualityTests {
 
         // Assert
         profile.Should().NotBe(otherProfile);
+
         (profile != otherProfile).Should().BeTrue();
         (profile == otherProfile).Should().BeFalse();
     }

@@ -5,12 +5,12 @@ using WhoAmI.Testing.TestData.Profiles.ValueObjects;
 
 namespace WhoAmI.Domain.Tests.Profiles;
 
-public class ProfileFullNameTests {
+public class ProfileUpdateFullNameTests {
     private static readonly DateTimeOffset _updatedAt =
         new(2026, 9, 23, 10, 30, 0, TimeSpan.Zero);
 
     [Fact]
-    public void Profile_ShouldAllowFullNameUpdate_WhenFullNameIsValid() {
+    public void Profile_ShouldUpdateFullName_WhenNewFullNameIsValid() {
         // Arrange
         var profile = ProfileFactory.Create();
         var createdAt = profile.CreatedAt;
@@ -26,7 +26,7 @@ public class ProfileFullNameTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowFullNameUpdate_WhenFullNameIsNull() {
+    public void Profile_ShouldThrow_WhenNewFullNameIsNull() {
         // Arrange
         var profile = ProfileFactory.Create();
 
@@ -38,7 +38,7 @@ public class ProfileFullNameTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotSetUpdatedAt_WhenFullNameIsUnchanged() {
+    public void Profile_ShouldNotUpdateTimestamp_WhenFullNameIsUnchanged() {
         // Arrange
         var profile = ProfileFactory.CreateWithoutEvents();
 

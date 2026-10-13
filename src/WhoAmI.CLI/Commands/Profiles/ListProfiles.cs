@@ -39,13 +39,14 @@ public sealed class ListProfiles(
             return CliExit.Error();
         }
 
-        if (result.Value.Count == 0) {
-            CliMessage.ShowInfo("No profiles were found.");
+        var profiles = result.GetValueOrThrow();
 
+        if (profiles.Count == 0) {
+            CliMessage.ShowInfo("No profiles were found.");
             return CliExit.Success();
         }
 
-        var listItems = BuildListItems(result.Value);
+        var listItems = BuildListItems(profiles);
 
         ListRenderer.Render(
             new ListRenderOptions {

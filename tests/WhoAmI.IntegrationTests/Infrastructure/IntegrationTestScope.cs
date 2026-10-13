@@ -28,12 +28,9 @@ public sealed class IntegrationTestScope : IAsyncDisposable {
     ) {
         var scope = rootProvider.CreateScope();
 
-        if (!useTransaction) {
-            return new IntegrationTestScope(scope, null);
-        }
+        if (!useTransaction) return new IntegrationTestScope(scope, null);
 
         var db = scope.ServiceProvider.GetRequiredService<WhoAmIDbContext>();
-
         var transaction = await db.Database.BeginTransactionAsync();
 
         return new IntegrationTestScope(scope, transaction);

@@ -14,8 +14,9 @@ public sealed class WhoAmIDbContext : DbContext, IUnitOfWork {
     public WhoAmIDbContext(
         DbContextOptions<WhoAmIDbContext> options,
         IPersistenceErrorMapper mapper
-    ) : base(options) =>
+    ) : base(options) {
         _mapper = mapper;
+    }
 
     public async Task<Result> CommitAsync(
         CancellationToken cancellationToken = default

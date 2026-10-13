@@ -18,7 +18,6 @@ public class ExecutionInfoFactoryTests {
         serializer.Serialize(Arg.Any<object>()).Returns("serialized");
 
         var factory = new ExecutionInfoFactory(serializer);
-
         var result = Result.Success();
 
         // Act
@@ -45,9 +44,7 @@ public class ExecutionInfoFactoryTests {
         serializer.Serialize(Arg.Any<object>()).Returns("serialized");
 
         var factory = new ExecutionInfoFactory(serializer);
-
         var error = new Error("EmailNotFound", "error");
-
         var result = Result.Failure(error);
 
         // Act
@@ -74,7 +71,6 @@ public class ExecutionInfoFactoryTests {
         serializer.Serialize(Arg.Any<object>()).Returns("serialized");
 
         var factory = new ExecutionInfoFactory(serializer);
-
         var result = Result<FakeResult>.Success(new FakeResult());
 
         // Act
@@ -101,9 +97,7 @@ public class ExecutionInfoFactoryTests {
         serializer.Serialize(Arg.Any<object>()).Returns("serialized");
 
         var factory = new ExecutionInfoFactory(serializer);
-
         var error = new Error("EmailNotFound", "error");
-
         var result = Result<FakeResult>.Failure(error);
 
         // Act
@@ -130,7 +124,6 @@ public class ExecutionInfoFactoryTests {
         serializer.Serialize(Arg.Any<object>()).Returns("serialized");
 
         var factory = new ExecutionInfoFactory(serializer);
-
         var ex = new InvalidOperationException("boom");
 
         // Act
@@ -157,7 +150,6 @@ public class ExecutionInfoFactoryTests {
         serializer.Serialize(Arg.Any<object>()).Returns("JSON");
 
         var factory = new ExecutionInfoFactory(serializer);
-
         var request = new FakeRequest();
 
         // Act

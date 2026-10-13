@@ -4,7 +4,7 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
-public sealed class UpdateSocialLinksWiringTests {
+public class UpdateSocialLinksWiringTests {
     private static UpdateSocialLinksCommand RunUpdateSocialLinks(
         params string[] args
     ) {
@@ -15,11 +15,11 @@ public sealed class UpdateSocialLinksWiringTests {
     }
 
     [Fact]
-    public void UpdateSocialLinks_Should_BindCliArgumentsAndDispatchCommand() {
+    public void UpdateSocialLinks_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
         // Arrange
-        var id = Guid.NewGuid().ToString();
         const string linkedIn = "https://www.linkedin.com/in/username";
         const string gitHub = "https://github.com/username";
+        var id = Guid.NewGuid().ToString();
 
         // Act
         var command = RunUpdateSocialLinks(

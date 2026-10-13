@@ -79,7 +79,6 @@ public class GetProfileByEmailQueryValidatorTests {
 
         // Assert
         errors.Should().ContainSingle();
-
         errors.Single().Code.Should().Be("Validation.Required");
     }
 
@@ -93,7 +92,6 @@ public class GetProfileByEmailQueryValidatorTests {
 
         // Assert
         errors.Should().ContainSingle();
-
         errors.Single().Code.Should().Be("Validation.Required");
     }
 }

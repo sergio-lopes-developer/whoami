@@ -14,14 +14,9 @@ public class CommandValidationDecoratorTests {
     public async Task HandleAsync_ShouldReturnFailure_WhenValidationFails() {
         // Arrange
         var command = new FakeCommand("invalid");
-
-        var error = new Error(
-            "Validation.Required",
-            "Value is required."
-        );
+        var error = new Error("Validation.Required", "Value is required.");
 
         var validator = Substitute.For<ICommandValidator<FakeCommand>>();
-
         validator.Validate(command).Returns([error]);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
@@ -55,12 +50,12 @@ public class CommandValidationDecoratorTests {
         var command = new FakeCommand("valid");
 
         var validator = Substitute.For<ICommandValidator<FakeCommand>>();
-
         validator.Validate(command).Returns([]);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(Result.Success());
 
         var decorator = new CommandValidationDecorator<FakeCommand>(
@@ -85,11 +80,7 @@ public class CommandValidationDecoratorTests {
     public async Task HandleAsync_ShouldAggregateErrors_FromAllValidators() {
         // Arrange
         var command = new FakeCommand("invalid");
-
-        var error1 = new Error(
-            "Validation.Required",
-            "Value is required."
-        );
+        var error1 = new Error("Validation.Required", "Value is required.");
 
         var error2 = new Error(
             "Validation.InvalidFormat",
@@ -97,11 +88,9 @@ public class CommandValidationDecoratorTests {
         );
 
         var validator1 = Substitute.For<ICommandValidator<FakeCommand>>();
-
         validator1.Validate(command).Returns([error1]);
 
         var validator2 = Substitute.For<ICommandValidator<FakeCommand>>();
-
         validator2.Validate(command).Returns([error2]);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
@@ -119,9 +108,7 @@ public class CommandValidationDecoratorTests {
 
         // Assert
         result.IsFailure.Should().BeTrue();
-
         result.Errors.Should().HaveCount(2);
-
         result.Errors.Should().Contain(error1);
         result.Errors.Should().Contain(error2);
 
@@ -136,23 +123,13 @@ public class CommandValidationDecoratorTests {
     public async Task HandleAsync_ShouldRemoveEquivalentErrors() {
         // Arrange
         var command = new FakeCommand("invalid");
-
-        var error1 = new Error(
-            "Validation.Required",
-            "Value is required."
-        );
-
-        var error2 = new Error(
-            "Validation.Required",
-            "Value is required."
-        );
+        var error1 = new Error("Validation.Required", "Value is required.");
+        var error2 = new Error("Validation.Required", "Value is required.");
 
         var validator1 = Substitute.For<ICommandValidator<FakeCommand>>();
-
         validator1.Validate(command).Returns([error1]);
 
         var validator2 = Substitute.For<ICommandValidator<FakeCommand>>();
-
         validator2.Validate(command).Returns([error2]);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
@@ -170,7 +147,6 @@ public class CommandValidationDecoratorTests {
 
         // Assert
         result.IsFailure.Should().BeTrue();
-
         result.Errors.Should().ContainSingle();
 
         await inner.DidNotReceive()
@@ -186,12 +162,12 @@ public class CommandValidationDecoratorTests {
         var command = new FakeCommand("valid");
 
         var validator = Substitute.For<ICommandValidator<FakeCommand>>();
-
         validator.Validate(command).Returns([]);
 
         var inner = Substitute.For<ICommandHandler<FakeCommand>>();
 
-        inner.HandleAsync(command, Arg.Any<CancellationToken>())
+        inner
+            .HandleAsync(command, Arg.Any<CancellationToken>())
             .Returns(
                 Task.FromException<Result>(new InvalidOperationException())
             );

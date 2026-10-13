@@ -11,17 +11,18 @@ using WhoAmI.CLI.Tests.Unit.Support;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
 [Collection("CLI Console")]
-public sealed class UpdateEmailUnitTests {
+public class UpdateEmailUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
 
     private readonly UpdateEmail _command;
 
-    public UpdateEmailUnitTests() =>
+    public UpdateEmailUnitTests() {
         _command = new UpdateEmail(
             _dispatcher,
             LoggerFactory.Create<UpdateEmail>()
         );
+    }
 
     private Task<(int ExitCode, string ConsoleOutput)> Execute(
         UpdateEmailCommandSettings settings
@@ -42,6 +43,7 @@ public sealed class UpdateEmailUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Success());
+
         consoleOutput.Should().ContainAll("Email successfully updated.");
 
         await _dispatcher.Received(1).Send(
@@ -69,6 +71,7 @@ public sealed class UpdateEmailUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Error());
+
         consoleOutput.Should().ContainAll("Invalid email.");
 
         await _dispatcher.Received(1).Send(

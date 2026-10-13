@@ -19,8 +19,6 @@ internal static class ListRenderer {
             table.AddRow([.. row]);
         }
 
-        AnsiConsole.Write(
-            new Align(table, options.Alignment)
-        );
+        AnsiConsole.Write(new Align(table, options.Alignment));
     }
 }

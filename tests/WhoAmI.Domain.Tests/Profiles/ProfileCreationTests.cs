@@ -12,7 +12,7 @@ public class ProfileCreationTests {
         new(2026, 9, 22, 13, 25, 0, TimeSpan.Zero);
 
     [Fact]
-    public void Profile_ShouldAllowCreation_WhenParametersAreValid() {
+    public void Profile_ShouldCreate_WhenParametersAreValid() {
         // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var email = Emails.CreateSergio();
@@ -39,7 +39,7 @@ public class ProfileCreationTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowCreation_WhenFullNameIsNull() {
+    public void Profile_ShouldThrow_WhenFullNameIsNull() {
         // Arrange
         var email = Emails.CreateSergio();
         var linkedIn = Urls.CreateLinkedIn();
@@ -59,7 +59,7 @@ public class ProfileCreationTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowCreation_WhenEmailIsNull() {
+    public void Profile_ShouldThrow_WhenEmailIsNull() {
         // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var linkedIn = Urls.CreateLinkedIn();
@@ -79,7 +79,7 @@ public class ProfileCreationTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowCreation_WhenLinkedInIsNull() {
+    public void Profile_ShouldThrow_WhenLinkedInIsNull() {
         // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var email = Emails.CreateSergio();
@@ -99,7 +99,7 @@ public class ProfileCreationTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowCreation_WhenGitHubIsNull() {
+    public void Profile_ShouldThrow_WhenGitHubIsNull() {
         // Arrange
         var fullName = FullNames.CreateSergioLopes();
         var email = Emails.CreateSergio();
@@ -119,7 +119,7 @@ public class ProfileCreationTests {
     }
 
     [Fact]
-    public void Profile_ShouldRaiseProfileCreatedEvent_WhenProfileIsCreated() {
+    public void Profile_ShouldRaiseProfileCreatedEvent_WhenCreated() {
         // Arrange
         var profile = ProfileFactory.Create();
 

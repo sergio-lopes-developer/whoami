@@ -6,7 +6,7 @@ using WhoAmI.CLI.Settings.Profiles;
 
 namespace WhoAmI.CLI.Tests.Parsing.Commands.Profiles;
 
-public sealed class DeleteProfileParsingTests {
+public class DeleteProfileParsingTests {
     private const string Id = "11111111-1111-1111-1111-111111111111";
 
     private static readonly CommandAppTester _tester = CreateTester();
@@ -37,7 +37,7 @@ public sealed class DeleteProfileParsingTests {
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
-    public void DeleteProfile_Should_ParseId(string option) {
+    public void DeleteProfile_ShouldParseId_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, Id);
 

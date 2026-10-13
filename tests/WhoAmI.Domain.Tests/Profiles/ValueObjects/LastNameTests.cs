@@ -9,38 +9,48 @@ namespace WhoAmI.Domain.Tests.Profiles.ValueObjects;
 
 public class LastNameTests {
     [Fact]
-    public void LastName_ShouldAllowCreation_WhenInputIsValid() {
-        var input = LastNames.Lopes;
+    public void LastName_ShouldCreate_WhenInputIsValid() {
+        // Arrange
+        const string input = LastNames.Lopes;
 
+        // Act
         var lastName = new LastName(input);
 
+        // Assert
         lastName.Value.Should().Be(input);
     }
 
     [Fact]
     public void LastName_ShouldPreserveInputCase_WhenCreated() {
-        var canonicalInput = LastNames.Lopes;
+        // Arrange
+        const string canonicalInput = LastNames.Lopes;
         var caseVariantInput = canonicalInput.ToUpperInvariant();
 
+        // Act
         var lastName = new LastName(caseVariantInput);
 
+        // Assert
         lastName.Value.Should().Be(caseVariantInput);
     }
 
     [Fact]
-    public void LastName_ShouldNotAllowCreation_WhenInputIsNull() {
+    public void LastName_ShouldThrow_WhenInputIsNull() {
+        // Act
         var act = () => new LastName(null!);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Theory]
     [MemberData(nameof(TextInputs.Blank), MemberType = typeof(TextInputs))]
-    public void LastName_ShouldNotAllowCreation_WhenInputIsEmptyOrWhiteSpace(
+    public void LastName_ShouldThrow_WhenInputIsEmptyOrWhiteSpace(
         string input
     ) {
+        // Act
         var act = () => new LastName(input);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
@@ -48,130 +58,166 @@ public class LastNameTests {
     [InlineData(LastNames.Lopes + " ")]
     [InlineData(" " + LastNames.Lopes)]
     [InlineData(" " + LastNames.Lopes + " ")]
-    public void LastName_ShouldTrimLeadingOrTrailingWhiteSpace_WhenInputContainsIt(
+    public void LastName_ShouldTrimLeadingAndTrailingWhiteSpace_WhenInputContainsWhiteSpace(
         string leadingOrTrailingWhiteSpaceInput
     ) {
-        var canonicalInput = LastNames.Lopes;
+        // Arrange
+        const string canonicalInput = LastNames.Lopes;
 
+        // Act
         var lastName = new LastName(leadingOrTrailingWhiteSpaceInput);
 
+        // Assert
         lastName.Value.Should().Be(canonicalInput);
     }
 
     [Fact]
-    public void LastName_ShouldNormalizeInternalWhiteSpace_WhenSpacingIsIrregular() {
-        var canonicalInput = LastNames.LewisMiller;
+    public void LastName_ShouldNormalizeInternalWhiteSpace_WhenInputContainsIrregularSpacing() {
+        // Arrange
+        const string canonicalInput = LastNames.LewisMiller;
         var irregularSpacingInput = canonicalInput.Replace(" ", "  ");
 
+        // Act
         var lastName = new LastName(irregularSpacingInput);
 
+        // Assert
         lastName.Value.Should().Be(canonicalInput);
     }
 
     [Fact]
-    public void LastName_ShouldAllowCreation_WhenInputIsAtMinLength() {
-        var minLength = LastName.MinLength;
+    public void LastName_ShouldCreate_WhenInputHasMinimumLength() {
+        // Arrange
+        var minLength = LastName.LengthConstraint.MinLength;
         var minLengthInput = TextInputs.CreateStringWithLength(minLength);
 
+        // Act
         var lastName = new LastName(minLengthInput);
 
+        // Assert
         lastName.Value.Should().Be(minLengthInput);
     }
 
     [Fact]
-    public void LastName_ShouldAllowCreation_WhenInputIsAtMaxLength() {
-        var maxLength = LastName.MaxLength;
+    public void LastName_ShouldCreate_WhenInputHasMaximumLength() {
+        // Arrange
+        var maxLength = LastName.LengthConstraint.MaxLength;
         var maxLengthInput = TextInputs.CreateStringWithLength(maxLength);
 
+        // Act
         var lastName = new LastName(maxLengthInput);
 
+        // Assert
         lastName.Value.Should().Be(maxLengthInput);
     }
 
     [Fact]
-    public void LastName_ShouldNotAllowCreation_WhenInputIsBelowMinLength() {
-        var invalidLength = LastName.MinLength - 1;
+    public void LastName_ShouldThrow_WhenInputIsBelowMinimumLength() {
+        // Arrange
+        var invalidLength = LastName.LengthConstraint.MinLength - 1;
         var tooShortInput = TextInputs.CreateStringWithLength(invalidLength);
 
+        // Act
         var act = () => new LastName(tooShortInput);
 
+        // Assert
         act.Should().Throw<InvalidLengthException>();
     }
 
     [Fact]
-    public void LastName_ShouldNotAllowCreation_WhenInputExceedsMaxLength() {
-        var invalidLength = LastName.MaxLength + 1;
+    public void LastName_ShouldThrow_WhenInputExceedsMaximumLength() {
+        // Arrange
+        var invalidLength = LastName.LengthConstraint.MaxLength + 1;
         var tooLongInput = TextInputs.CreateStringWithLength(invalidLength);
 
+        // Act
         var act = () => new LastName(tooLongInput);
 
+        // Assert
         act.Should().Throw<InvalidLengthException>();
     }
 
     [Fact]
-    public void LastName_ShouldBeEqual_WhenValuesAreIdentical() {
-        var input = LastNames.Lopes;
+    public void LastName_ShouldBeEqual_WhenValuesAreEqual() {
+        // Arrange
+        const string input = LastNames.Lopes;
 
         var lastName = new LastName(input);
         var sameLastName = new LastName(input);
 
+        // Assert
         lastName.Should().Be(sameLastName);
         lastName.GetHashCode().Should().Be(sameLastName.GetHashCode());
+
         (lastName == sameLastName).Should().BeTrue();
         (lastName != sameLastName).Should().BeFalse();
     }
 
     [Fact]
     public void LastName_ShouldBeEqual_WhenValuesDifferOnlyInCase() {
-        var input = LastNames.Lopes;
+        // Arrange
+        const string input = LastNames.Lopes;
         var variantInput = input.ToUpperInvariant();
 
         var canonicalLastName = new LastName(input);
         var caseVariant = new LastName(variantInput);
 
+        // Assert
         canonicalLastName.Should().Be(caseVariant);
         canonicalLastName.GetHashCode().Should().Be(caseVariant.GetHashCode());
+
         (canonicalLastName == caseVariant).Should().BeTrue();
         (canonicalLastName != caseVariant).Should().BeFalse();
     }
 
     [Fact]
     public void LastName_ShouldBeEqual_WhenValuesDifferOnlyInLeadingOrTrailingWhiteSpace() {
-        var input = LastNames.LewisMiller;
-        var variantInput = " " + input + " ";
+        // Arrange
+        const string input = LastNames.LewisMiller;
+        const string variantInput = " " + input + " ";
 
         var canonicalLastName = new LastName(input);
         var leadingOrTrailingWhiteSpaceVariant = new LastName(variantInput);
 
+        // Assert
         canonicalLastName.Should().Be(leadingOrTrailingWhiteSpaceVariant);
+
         canonicalLastName.GetHashCode()
             .Should().Be(leadingOrTrailingWhiteSpaceVariant.GetHashCode());
+
         (canonicalLastName == leadingOrTrailingWhiteSpaceVariant)
             .Should().BeTrue();
+
         (canonicalLastName != leadingOrTrailingWhiteSpaceVariant)
             .Should().BeFalse();
     }
 
     [Fact]
     public void LastName_ShouldBeEqual_WhenValuesDifferOnlyInInternalWhiteSpace() {
-        var input = LastNames.LewisMiller;
+        // Arrange
+        const string input = LastNames.LewisMiller;
         var variantInput = input.Replace(" ", "  ");
 
         var canonicalLastName = new LastName(input);
         var internalWhiteSpaceVariant = new LastName(variantInput);
 
+        // Assert
         canonicalLastName.Should().Be(internalWhiteSpaceVariant);
+
         canonicalLastName.GetHashCode()
             .Should().Be(internalWhiteSpaceVariant.GetHashCode());
+
         (canonicalLastName == internalWhiteSpaceVariant).Should().BeTrue();
         (canonicalLastName != internalWhiteSpaceVariant).Should().BeFalse();
     }
 
     [Fact]
     public void LastName_ShouldBeEqual_WhenValuesDifferOnlyInCaseOrWhiteSpace() {
-        var canonicalInput = LastNames.LewisMiller;
-        var leadingOrTrailingWhiteSpaceVariantInput =
+        // Arrange
+        const string canonicalInput = LastNames.LewisMiller;
+
+        const string leadingOrTrailingWhiteSpaceVariantInput =
             "  " + canonicalInput + "  ";
+
         var caseVariantInput = canonicalInput.ToUpperInvariant();
         var internalWhiteSpaceVariantInput = canonicalInput.Replace(" ", "  ");
         var canonicalLastName = new LastName(canonicalInput);
@@ -183,9 +229,11 @@ public class LastNameTests {
             new LastName(internalWhiteSpaceVariantInput)
         };
 
+        // Assert
         variations.Should().AllSatisfy(variant => {
             variant.Should().Be(canonicalLastName);
             variant.GetHashCode().Should().Be(expectedHash);
+
             (variant == canonicalLastName).Should().BeTrue();
             (variant != canonicalLastName).Should().BeFalse();
         });
@@ -193,22 +241,34 @@ public class LastNameTests {
 
     [Fact]
     public void LastName_ShouldNotBeEqual_WhenValuesAreDifferent() {
+        // Arrange
         var canonicalLastName = LastNames.CreateLopes();
         var otherLastName = LastNames.CreateLewisMiller();
 
+        // Assert
         canonicalLastName.Should().NotBe(otherLastName);
+
         (canonicalLastName != otherLastName).Should().BeTrue();
         (canonicalLastName == otherLastName).Should().BeFalse();
     }
 
     [Fact]
-    public void LastName_LengthConstraint_ShouldExposeMinLength() {
-        LastName.LengthConstraint.MinLength.Should().Be(LastName.MinLength);
+    public void LastName_ShouldReturnValue_WhenConvertedToString() {
+        // Arrange
+        var lastName = LastNames.CreateLopes();
+
+        // Act
+        var result = lastName.ToString();
+
+        // Assert
+        result.Should().Be(lastName.Value);
     }
 
     [Fact]
-    public void LastName_LengthConstraint_ShouldExposeMaxLength() {
-        LastName.LengthConstraint.MaxLength.Should().Be(LastName.MaxLength);
+    public void LastName_ShouldHaveExpectedLengthLimits() {
+        // Assert
+        LastName.LengthConstraint.MinLength.Should().Be(2);
+        LastName.LengthConstraint.MaxLength.Should().Be(100);
     }
 
     [Theory]
@@ -218,27 +278,14 @@ public class LastNameTests {
     [InlineData("", false)]
     [InlineData(" ", false)]
     [InlineData("A", false)]
-    public void LastName_LengthConstraint_ShouldValidateInput(
+    public void LengthConstraint_ShouldValidateInputLength(
         string input,
         bool expected
     ) {
+        // Act
         var result = LastName.LengthConstraint.IsSatisfiedBy(input);
 
+        // Assert
         result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void LastName_ShouldReturnValue_WhenConvertedToString() {
-        var lastName = LastNames.CreateLopes();
-
-        var result = lastName.ToString();
-
-        result.Should().Be(lastName.Value);
-    }
-
-    [Fact]
-    public void LastName_LengthLimits_ShouldMatchDomainSpecification() {
-        LastName.MinLength.Should().Be(2);
-        LastName.MaxLength.Should().Be(100);
     }
 }

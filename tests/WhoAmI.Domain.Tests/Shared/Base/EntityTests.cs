@@ -9,7 +9,7 @@ public class EntityTests {
         new(2026, 9, 22, 13, 25, 0, TimeSpan.Zero);
 
     [Fact]
-    public void Entity_ShouldBeCreated_WhenIdIsValid() {
+    public void Entity_ShouldCreate_WhenIdIsValid() {
         // Arrange
         var id = Guid.NewGuid();
 
@@ -84,7 +84,7 @@ public class EntityTests {
     }
 
     [Fact]
-    public void Entity_ShouldThrowDomainException_WhenIdIsEmpty() {
+    public void Entity_ShouldThrow_WhenIdIsEmpty() {
         // Act
         var act = () => new DummyEntity(Guid.Empty, _createdAt);
 
@@ -93,7 +93,7 @@ public class EntityTests {
     }
 
     [Fact]
-    public void Entity_ShouldThrowDomainException_WhenDeletingDeletedEntity() {
+    public void Entity_ShouldThrow_WhenDeletingAlreadyDeletedEntity() {
         // Arrange
         var entity = new DummyEntity(Guid.NewGuid(), _createdAt);
 
@@ -121,7 +121,7 @@ public class EntityTests {
     }
 
     [Fact]
-    public void Entity_ShouldThrowDomainException_WhenUpdatingDeletedEntity() {
+    public void Entity_ShouldThrow_WhenUpdatingDeletedEntity() {
         // Arrange
         var entity = new DummyEntity(Guid.NewGuid(), _createdAt);
 
@@ -149,7 +149,7 @@ public class EntityTests {
     }
 
     [Fact]
-    public void Entity_ShouldBeEqual_WhenIdsAreIdentical() {
+    public void Entity_ShouldBeEqual_WhenIdsAreEqual() {
         // Arrange
         var id = Guid.NewGuid();
 
@@ -166,6 +166,7 @@ public class EntityTests {
         // Assert
         entity.Should().Be(sameEntity);
         entity.GetHashCode().Should().Be(sameEntity.GetHashCode());
+
         (entity == sameEntity).Should().BeTrue();
         (entity != sameEntity).Should().BeFalse();
     }
@@ -185,6 +186,7 @@ public class EntityTests {
 
         // Assert
         entity.Should().NotBe(otherEntity);
+
         (entity != otherEntity).Should().BeTrue();
         (entity == otherEntity).Should().BeFalse();
     }

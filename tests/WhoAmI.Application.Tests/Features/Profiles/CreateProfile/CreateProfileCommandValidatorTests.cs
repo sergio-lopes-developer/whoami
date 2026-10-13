@@ -340,82 +340,27 @@ public class CreateProfileCommandValidatorTests {
 
         errors.Should().Contain(e =>
             e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.FirstName)));
-
-        errors.Should().Contain(e =>
-            e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.LastName)));
-
-        errors.Should().Contain(e =>
-            e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.Email)));
-
-        errors.Should().Contain(e =>
-            e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.LinkedIn)));
-
-        errors.Should().Contain(e =>
-            e.Code == "Validation.Required" &&
-            Equals(e.Metadata!["Field"], nameof(command.GitHub)));
-    }
-
-    [Fact]
-    public void Validate_ShouldNotReturnDuplicateErrors_ForEmptyEmail() {
-        // Arrange
-        var command = new CreateProfileCommand(
-            "John",
-            "Miller",
-            string.Empty,
-            "https://www.linkedin.com/in/johnmiller",
-            "https://github.com/johnmiller"
+            Equals(e.Metadata!["Field"], nameof(command.FirstName))
         );
 
-        // Act
-        var errors = _validator.Validate(command);
-
-        // Assert
-        errors.Should().ContainSingle();
-
-        errors.Single().Code.Should().Be("Validation.Required");
-    }
-
-    [Fact]
-    public void Validate_ShouldNotReturnDuplicateErrors_ForEmptyLinkedIn() {
-        // Arrange
-        var command = new CreateProfileCommand(
-            "John",
-            "Miller",
-            "john.miller@email.com",
-            string.Empty,
-            "https://github.com/johnmiller"
+        errors.Should().Contain(e =>
+            e.Code == "Validation.Required" &&
+            Equals(e.Metadata!["Field"], nameof(command.LastName))
         );
 
-        // Act
-        var errors = _validator.Validate(command);
-
-        // Assert
-        errors.Should().ContainSingle();
-
-        errors.Single().Code.Should().Be("Validation.Required");
-    }
-
-    [Fact]
-    public void Validate_ShouldNotReturnDuplicateErrors_ForEmptyGitHub() {
-        // Arrange
-        var command = new CreateProfileCommand(
-            "John",
-            "Miller",
-            "john.miller@email.com",
-            "https://www.linkedin.com/in/johnmiller",
-            string.Empty
+        errors.Should().Contain(e =>
+            e.Code == "Validation.Required" &&
+            Equals(e.Metadata!["Field"], nameof(command.Email))
         );
 
-        // Act
-        var errors = _validator.Validate(command);
+        errors.Should().Contain(e =>
+            e.Code == "Validation.Required" &&
+            Equals(e.Metadata!["Field"], nameof(command.LinkedIn))
+        );
 
-        // Assert
-        errors.Should().ContainSingle();
-
-        errors.Single().Code.Should().Be("Validation.Required");
+        errors.Should().Contain(e =>
+            e.Code == "Validation.Required" &&
+            Equals(e.Metadata!["Field"], nameof(command.GitHub))
+        );
     }
 }

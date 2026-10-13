@@ -6,7 +6,7 @@ using WhoAmI.CLI.Settings.Profiles;
 
 namespace WhoAmI.CLI.Tests.Parsing.Commands.Profiles;
 
-public sealed class CreateProfileParsingTests {
+public class CreateProfileParsingTests {
     private const string FirstName = "John";
     private const string LastName = "Doe";
     private const string Email = "john@doe.com";
@@ -39,7 +39,7 @@ public sealed class CreateProfileParsingTests {
             .Subject;
 
     [Fact]
-    public void CreateProfile_Should_ParseAllOptions() {
+    public void CreateProfile_ShouldParseAllOptions_WhenLongOptionsAreProvided() {
         // Act
         var execution = Parse(
             "--first-name", FirstName,
@@ -60,7 +60,7 @@ public sealed class CreateProfileParsingTests {
     }
 
     [Fact]
-    public void CreateProfile_Should_ParseShortOptionsTogether() {
+    public void CreateProfile_ShouldParseAllOptions_WhenShortOptionsAreProvided() {
         // Act
         var execution = Parse(
             "-f", FirstName,
@@ -83,7 +83,7 @@ public sealed class CreateProfileParsingTests {
     [Theory]
     [InlineData("--first-name")]
     [InlineData("-f")]
-    public void CreateProfile_Should_ParseFirstName(string option) {
+    public void CreateProfile_ShouldParseFirstName_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, FirstName);
 
@@ -96,7 +96,7 @@ public sealed class CreateProfileParsingTests {
     [Theory]
     [InlineData("--last-name")]
     [InlineData("-l")]
-    public void CreateProfile_Should_ParseLastName(string option) {
+    public void CreateProfile_ShouldParseLastName_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, LastName);
 
@@ -109,7 +109,7 @@ public sealed class CreateProfileParsingTests {
     [Theory]
     [InlineData("--email")]
     [InlineData("-e")]
-    public void CreateProfile_Should_ParseEmail(string option) {
+    public void CreateProfile_ShouldParseEmail_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, Email);
 
@@ -122,7 +122,7 @@ public sealed class CreateProfileParsingTests {
     [Theory]
     [InlineData("--linkedin")]
     [InlineData("-n")]
-    public void CreateProfile_Should_ParseLinkedIn(string option) {
+    public void CreateProfile_ShouldParseLinkedIn_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, LinkedIn);
 
@@ -135,7 +135,7 @@ public sealed class CreateProfileParsingTests {
     [Theory]
     [InlineData("--github")]
     [InlineData("-g")]
-    public void CreateProfile_Should_ParseGitHub(string option) {
+    public void CreateProfile_ShouldParseGitHub_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, GitHub);
 

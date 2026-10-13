@@ -20,7 +20,6 @@ public class WhoAmIDbContextTests {
         );
 
         var context = scope.Context;
-
         context.Profiles.Add(ProfileFactory.Create());
 
         // Act
@@ -41,7 +40,6 @@ public class WhoAmIDbContextTests {
         );
 
         var mapper = Substitute.For<IPersistenceErrorMapper>();
-
         mapper.Map(Arg.Any<DbUpdateException>()).Returns(expected);
 
         await using var scope = new SqliteContextScope<WhoAmIDbContext>(
@@ -49,7 +47,6 @@ public class WhoAmIDbContextTests {
         );
 
         var context = scope.Context;
-
         var profile1 = ProfileFactory.Create();
         var profile2 =  ProfileFactory.Create();
 
@@ -80,7 +77,6 @@ public class WhoAmIDbContextTests {
         );
 
         var context = scope.Context;
-
         var profile1 = ProfileFactory.Create();
         var profile2 = ProfileFactory.Create();
 

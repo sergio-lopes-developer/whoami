@@ -7,8 +7,9 @@ namespace WhoAmI.Application.Logging;
 internal sealed class ExecutionInfoFactory : IExecutionInfoFactory {
     private readonly IObjectSerializer _serializer;
 
-    public ExecutionInfoFactory(IObjectSerializer serializer) =>
+    public ExecutionInfoFactory(IObjectSerializer serializer) {
         _serializer = serializer;
+    }
 
     public ExecutionInfo Create(
         string operation,

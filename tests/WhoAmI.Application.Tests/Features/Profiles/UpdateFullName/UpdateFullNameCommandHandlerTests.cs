@@ -12,11 +12,9 @@ public class UpdateFullNameCommandHandlerTests {
     [Fact]
     public async Task UpdateFullName_ShouldUpdateFullName_WhenFirstAndLastNameAreValid() {
         // Arrange
+        const string newFirstName = "John";
+        const string newLastName = "Miller";
         var profile = ProfileFactory.Create();
-
-        var newFirstName = "John";
-
-        var newLastName = "Miller";
 
         var updatedAt = new DateTimeOffset(
             2026, 9, 23,
@@ -58,16 +56,13 @@ public class UpdateFullNameCommandHandlerTests {
     public async Task UpdateFullName_ShouldReturnFailure_WhenProfileIsNotFound() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         repo.GetByIdAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>())
             .Returns((Profile)null!);
 
         var handler = new UpdateFullNameCommandHandler(repo, clock);
-
         var id = Guid.NewGuid();
-
         var command = new UpdateFullNameCommand(id, "John", "Miller");
 
         // Act
@@ -86,7 +81,6 @@ public class UpdateFullNameCommandHandlerTests {
     public async Task UpdateFullName_ShouldReturnFailure_WhenProfileIsAlreadyDeleted() {
         // Arrange
         var repo = Substitute.For<IProfileRepository>();
-
         var clock = Substitute.For<IClock>();
 
         var deletedAt = new DateTimeOffset(
@@ -105,7 +99,6 @@ public class UpdateFullNameCommandHandlerTests {
             .Returns(profile);
 
         var handler = new UpdateFullNameCommandHandler(repo, clock);
-
         var command = new UpdateFullNameCommand(profile.Id, "Changed", "Name");
 
         // Act

@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WhoAmI.Application.Abstractions.Commands;
 using WhoAmI.Application.Abstractions.Dispatching.Commands;
 using WhoAmI.Application.Abstractions.Dispatching.Queries;
+using WhoAmI.Application.Abstractions.Execution;
 using WhoAmI.Application.Abstractions.Logging;
 using WhoAmI.Application.Abstractions.Queries;
 using WhoAmI.Application.Abstractions.Serialization;
@@ -11,6 +12,7 @@ using WhoAmI.Application.Decorators.Commands;
 using WhoAmI.Application.Decorators.Queries;
 using WhoAmI.Application.Dispatching.Commands;
 using WhoAmI.Application.Dispatching.Queries;
+using WhoAmI.Application.Execution;
 using WhoAmI.Application.Features.Profiles.CreateProfile;
 using WhoAmI.Application.Logging;
 using WhoAmI.Application.Serialization;
@@ -34,9 +36,17 @@ public static class ServiceCollectionExtensions {
     public static IServiceCollection AddApplicationPipeline(
         this IServiceCollection services
     ) {
+        AddExecutionRunner(services);
         AddCommandPipeline(services);
         AddQueryPipeline(services);
 
+        return services;
+    }
+
+    internal static IServiceCollection AddExecutionRunner(
+        this IServiceCollection services
+    ) {
+        services.AddSingleton<IExecutionRunner, ExecutionRunner>();
         return services;
     }
 
@@ -106,16 +116,18 @@ public static class ServiceCollectionExtensions {
     private static void AddHandlers(IServiceCollection services) {
         services.Scan(scan => scan
             .FromAssemblyOf<CreateProfileCommandHandler>()
-            .AddClasses(c => c
-                .AssignableTo(typeof(ICommandHandler<>))
-                .Where(type => !type.IsGenericTypeDefinition),
+            .AddClasses(
+                c => c
+                    .AssignableTo(typeof(ICommandHandler<>))
+                    .Where(type => !type.IsGenericTypeDefinition),
                 publicOnly: false
             )
             .AsImplementedInterfaces()
             .WithScopedLifetime()
-            .AddClasses(c => c
-                .AssignableTo(typeof(ICommandHandler<,>))
-                .Where(type => !type.IsGenericTypeDefinition),
+            .AddClasses(
+                c => c
+                    .AssignableTo(typeof(ICommandHandler<,>))
+                    .Where(type => !type.IsGenericTypeDefinition),
                 publicOnly: false
             )
             .AsImplementedInterfaces()
@@ -133,14 +145,14 @@ public static class ServiceCollectionExtensions {
     private static void AddValidations(IServiceCollection services) {
         services.Scan(scan => scan
             .FromAssemblyOf<ICommandValidator<object>>()
-            .AddClasses(c =>
-                c.AssignableTo(typeof(ICommandValidator<>)),
+            .AddClasses(
+                c => c.AssignableTo(typeof(ICommandValidator<>)),
                 publicOnly: false
             )
             .AsImplementedInterfaces()
             .WithScopedLifetime()
-            .AddClasses(c =>
-                c.AssignableTo(typeof(IQueryValidator<>)),
+            .AddClasses(
+                c => c.AssignableTo(typeof(IQueryValidator<>)),
                 publicOnly: false
             )
             .AsImplementedInterfaces()

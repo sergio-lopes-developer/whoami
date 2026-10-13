@@ -86,7 +86,7 @@ internal sealed class ProfileConfiguration : IEntityTypeConfiguration<Profile> {
                 firstName
                     .Property(f => f.Value)
                     .HasColumnName("first_name")
-                    .HasMaxLength(FirstName.MaxLength)
+                    .HasMaxLength(FirstName.LengthConstraint.MaxLength)
                     .IsRequired();
             });
 
@@ -94,7 +94,7 @@ internal sealed class ProfileConfiguration : IEntityTypeConfiguration<Profile> {
                 lastName
                     .Property(l => l.Value)
                     .HasColumnName("last_name")
-                    .HasMaxLength(LastName.MaxLength)
+                    .HasMaxLength(LastName.LengthConstraint.MaxLength)
                     .IsRequired();
             });
         });

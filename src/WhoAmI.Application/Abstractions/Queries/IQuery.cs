@@ -1,3 +1,5 @@
 namespace WhoAmI.Application.Abstractions.Queries;
 
-public interface IQuery<TResult>;
+public interface IQuery;
+
+public interface IQuery<TResult> : IQuery;

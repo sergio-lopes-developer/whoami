@@ -36,12 +36,13 @@ public static class ServiceCollectionExtensions {
     private static void AddErrorHandling(IServiceCollection services) {
         services.Scan(scan => scan
             .FromAssemblyOf<IPersistenceViolationMapper>()
-            .AddClasses(classes =>
-                classes.AssignableTo<IPersistenceViolationMapper>(),
+            .AddClasses(
+                classes => classes.AssignableTo<IPersistenceViolationMapper>(),
                 publicOnly: false
             )
             .AsImplementedInterfaces()
-            .WithScopedLifetime());
+            .WithScopedLifetime()
+        );
 
         services.AddScoped<
             IConstraintViolationParser,

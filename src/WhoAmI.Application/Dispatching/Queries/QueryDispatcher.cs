@@ -8,7 +8,9 @@ namespace WhoAmI.Application.Dispatching.Queries;
 internal sealed class QueryDispatcher : IQueryDispatcher {
     private readonly IServiceProvider _provider;
 
-    public QueryDispatcher(IServiceProvider provider) => _provider = provider;
+    public QueryDispatcher(IServiceProvider provider) {
+        _provider = provider;
+    }
 
     public async Task<Result<TResult>> Send<TResult>(
         IQuery<TResult> query,
@@ -17,11 +19,9 @@ internal sealed class QueryDispatcher : IQueryDispatcher {
         var adapterType = typeof(QueryHandlerAdapter<,>)
             .MakeGenericType(query.GetType(), typeof(TResult));
 
-        var adapter = (IQueryHandlerAdapter)_provider
+        var adapter = (IQueryHandlerAdapter<TResult>)_provider
             .GetRequiredService(adapterType);
 
-        var result = await adapter.HandleAsync(query, cancellationToken);
-
-        return (Result<TResult>)result!;
+        return await adapter.HandleAsync(query, cancellationToken);
     }
 }

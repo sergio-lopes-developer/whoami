@@ -11,7 +11,7 @@ using WhoAmI.CLI.Tests.Unit.Support;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
 [Collection("CLI Console")]
-public sealed class CreateProfileUnitTests {
+public class CreateProfileUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
 
@@ -52,6 +52,7 @@ public sealed class CreateProfileUnitTests {
 
         // Assert
         exitCode.Should().Be(CliExit.Success());
+
         consoleOutput.Should().Contain("Profile successfully created.");
 
         await _dispatcher.Received(1).Send(

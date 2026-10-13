@@ -6,12 +6,12 @@ using WhoAmI.Testing.TestData.Profiles.ValueObjects;
 
 namespace WhoAmI.Domain.Tests.Profiles;
 
-public class ProfileEmailTests {
+public class ProfileUpdateEmailTests {
     private static readonly DateTimeOffset _updatedAt =
         new(2026, 9, 23, 10, 30, 0, TimeSpan.Zero);
 
     [Fact]
-    public void Profile_ShouldAllowEmailUpdate_WhenEmailIsValid() {
+    public void Profile_ShouldUpdateEmail_WhenNewEmailIsValid() {
         // Arrange
         var profile = ProfileFactory.Create();
         var createdAt = profile.CreatedAt;
@@ -27,7 +27,7 @@ public class ProfileEmailTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowEmailUpdate_WhenEmailIsNull() {
+    public void Profile_ShouldThrow_WhenNewEmailIsNull() {
         // Arrange
         var profile = ProfileFactory.Create();
 
@@ -39,7 +39,7 @@ public class ProfileEmailTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotSetUpdatedAt_WhenEmailIsUnchanged() {
+    public void Profile_ShouldNotUpdateTimestamp_WhenEmailIsUnchanged() {
         // Arrange
         var profile = ProfileFactory.CreateWithoutEvents();
 
@@ -51,7 +51,7 @@ public class ProfileEmailTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotRaiseDomainEvents_WhenEmailIsUnchanged() {
+    public void Profile_ShouldNotRaiseDomainEvent_WhenEmailIsUnchanged() {
         // Arrange
         var profile = ProfileFactory.CreateWithoutEvents();
 
@@ -63,7 +63,7 @@ public class ProfileEmailTests {
     }
 
     [Fact]
-    public void Profile_ShouldRaiseEmailUpdatedEvent_WhenEmailIsUpdated() {
+    public void Profile_ShouldRaiseEmailUpdatedEvent_WhenEmailChanges() {
         // Arrange
         var profile = ProfileFactory.CreateWithoutEvents();
         var newEmail = Emails.CreateValid();

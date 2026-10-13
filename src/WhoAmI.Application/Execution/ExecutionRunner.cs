@@ -1,47 +1,39 @@
 using System.Diagnostics;
-using WhoAmI.Application.Abstractions.Commands;
-using WhoAmI.Application.Abstractions.Decorators;
+using WhoAmI.Application.Abstractions.Execution;
 using WhoAmI.Application.Abstractions.Logging;
 using WhoAmI.Application.Results;
 
-namespace WhoAmI.Application.Decorators.Commands;
+namespace WhoAmI.Application.Execution;
 
-internal sealed class CommandExecutionDecorator<TCommand, TResult> :
-    ICommandHandler<TCommand, TResult>,
-    IHandlerDecorator<ICommandHandler<TCommand, TResult>>
-    where TCommand : ICommand<TResult>
-{
-    public ICommandHandler<TCommand, TResult> Inner { get; }
-
+internal sealed class ExecutionRunner : IExecutionRunner {
     private readonly ISafeExecutionLogger _logger;
 
     private readonly IExecutionInfoFactory _executionInfo;
 
-    public CommandExecutionDecorator(
-        ICommandHandler<TCommand, TResult> inner,
+    public ExecutionRunner(
         ISafeExecutionLogger logger,
         IExecutionInfoFactory executionInfo
     ) {
-        Inner = inner;
         _logger = logger;
         _executionInfo = executionInfo;
     }
 
-    public async Task<Result<TResult>> HandleAsync(
-        TCommand command,
-        CancellationToken cancellationToken = default
-    ) {
+    public async Task<TResult> ExecuteAsync<TResult>(
+        string operation,
+        object request,
+        Func<Task<TResult>> handler
+    ) where TResult : ResultBase {
         var stopwatch = Stopwatch.StartNew();
 
         try {
-            var result = await Inner.HandleAsync(command, cancellationToken);
+            var result = await handler();
 
             stopwatch.Stop();
 
             _logger.Log(
                 _executionInfo.Create(
-                    typeof(TCommand).Name,
-                    command,
+                    operation,
+                    request,
                     result,
                     stopwatch.ElapsedMilliseconds
                 )
@@ -54,8 +46,8 @@ internal sealed class CommandExecutionDecorator<TCommand, TResult> :
 
             _logger.Log(
                 _executionInfo.Create(
-                    typeof(TCommand).Name,
-                    command,
+                    operation,
+                    request,
                     ex,
                     stopwatch.ElapsedMilliseconds
                 )

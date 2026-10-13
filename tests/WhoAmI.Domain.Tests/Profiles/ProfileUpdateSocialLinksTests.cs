@@ -5,12 +5,12 @@ using WhoAmI.Testing.TestData.Profiles.ValueObjects;
 
 namespace WhoAmI.Domain.Tests.Profiles;
 
-public class ProfileSocialLinksTests {
+public class ProfileUpdateSocialLinksTests {
     private static readonly DateTimeOffset _updatedAt =
         new(2026, 9, 23, 10, 30, 0, TimeSpan.Zero);
 
     [Fact]
-    public void Profile_ShouldAllowSocialLinksUpdate_WhenSocialLinksAreValid() {
+    public void Profile_ShouldUpdateSocialLinks_WhenNewSocialLinksAreValid() {
         // Arrange
         var profile = ProfileFactory.Create();
         var createdAt = profile.CreatedAt;
@@ -28,7 +28,7 @@ public class ProfileSocialLinksTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowSocialLinksUpdate_WhenLinkedInIsNull() {
+    public void Profile_ShouldThrow_WhenNewLinkedInIsNull() {
         // Arrange
         var profile = ProfileFactory.Create();
         var newGitHub = Urls.CreateExample();
@@ -41,7 +41,7 @@ public class ProfileSocialLinksTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotAllowSocialLinksUpdate_WhenGitHubIsNull() {
+    public void Profile_ShouldThrow_WhenNewGitHubIsNull() {
         // Arrange
         var profile = ProfileFactory.Create();
         var newLinkedIn = Urls.CreateExample();
@@ -58,7 +58,7 @@ public class ProfileSocialLinksTests {
     }
 
     [Fact]
-    public void Profile_ShouldNotSetUpdatedAt_WhenSocialLinksAreUnchanged() {
+    public void Profile_ShouldNotUpdateTimestamp_WhenSocialLinksAreUnchanged() {
         // Arrange
         var profile = ProfileFactory.CreateWithoutEvents();
 

@@ -16,14 +16,14 @@ internal static class QueryPipelineTestFactory {
 
         services.AddLogging();
         services.AddApplicationServices();
+        services.AddExecutionRunner();
         services.AddSingleton(connectionFactory);
-
         services.AddSingleton(Substitute.For<ISafeExecutionLogger>());
 
         services.Scan(scan => scan
             .FromAssemblyOf<GetProfileByEmailQueryHandler>()
-            .AddClasses(c => c
-                    .AssignableTo(typeof(IQueryHandler<,>)),
+            .AddClasses(
+                c => c.AssignableTo(typeof(IQueryHandler<,>)),
                 publicOnly: false
             )
             .AsImplementedInterfaces()

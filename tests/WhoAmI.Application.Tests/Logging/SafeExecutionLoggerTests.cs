@@ -10,7 +10,6 @@ public class SafeExecutionLoggerTests {
     public void Log_ShouldCallInnerLogger() {
         // Arrange
         var logger = Substitute.For<IExecutionLogger>();
-
         var safeLogger = new SafeExecutionLogger(logger);
 
         var info = new ExecutionInfo(

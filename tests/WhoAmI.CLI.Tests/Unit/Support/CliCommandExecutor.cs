@@ -1,10 +1,10 @@
 using Spectre.Console;
-using Spectre.Console.Testing;
 using Spectre.Console.Cli;
+using Spectre.Console.Testing;
 
 namespace WhoAmI.CLI.Tests.Unit.Support;
 
-public static class CliCommandExecutor {
+internal static class CliCommandExecutor {
     public static async Task<(
         int ExitCode,
         string ConsoleOutput

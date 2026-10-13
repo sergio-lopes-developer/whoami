@@ -8,9 +8,13 @@ namespace WhoAmI.Infrastructure.Data.Queries.Connections;
 internal sealed class SqliteConnectionFactory : IDbConnectionFactory {
     private readonly string _connectionString;
 
-    public SqliteConnectionFactory(IConfiguration configuration) =>
+    public SqliteConnectionFactory(IConfiguration configuration) {
         _connectionString =
-            configuration.GetConnectionString("DefaultConnection")!;
+            configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException(
+                "The connection string 'DefaultConnection' was not configured."
+            );
+    }
 
     public async Task<DbConnection> CreateOpenConnectionAsync(
         CancellationToken cancellationToken = default

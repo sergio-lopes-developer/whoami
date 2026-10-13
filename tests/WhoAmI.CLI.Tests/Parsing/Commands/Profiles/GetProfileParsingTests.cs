@@ -6,7 +6,7 @@ using WhoAmI.CLI.Settings.Profiles;
 
 namespace WhoAmI.CLI.Tests.Parsing.Commands.Profiles;
 
-public sealed class GetProfileParsingTests {
+public class GetProfileParsingTests {
     private const string Email = "john@doe.com";
 
     private static readonly CommandAppTester _tester = CreateTester();
@@ -35,7 +35,7 @@ public sealed class GetProfileParsingTests {
             .Subject;
 
     [Fact]
-    public void GetProfile_Should_ParseAllOptions() {
+    public void GetProfile_ShouldParseAllOptions_WhenLongOptionsAreProvided() {
         // Act
         var execution = Parse(
             "--email", Email,
@@ -56,7 +56,7 @@ public sealed class GetProfileParsingTests {
     }
 
     [Fact]
-    public void GetProfile_Should_ParseShortOptionsTogether() {
+    public void GetProfile_ShouldParseAllOptions_WhenShortOptionsAreProvided() {
         // Act
         var execution = Parse(
             "-e", Email,
@@ -79,7 +79,7 @@ public sealed class GetProfileParsingTests {
     [Theory]
     [InlineData("--email")]
     [InlineData("-e")]
-    public void GetProfile_Should_ParseEmail(string option) {
+    public void GetProfile_ShouldParseEmail_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option, Email);
 
@@ -92,7 +92,7 @@ public sealed class GetProfileParsingTests {
     [Theory]
     [InlineData("--hide-email")]
     [InlineData("-m")]
-    public void GetProfile_Should_ParseHideEmail(string option) {
+    public void GetProfile_ShouldParseHideEmail_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option);
 
@@ -105,7 +105,7 @@ public sealed class GetProfileParsingTests {
     [Theory]
     [InlineData("--hide-github")]
     [InlineData("-g")]
-    public void GetProfile_Should_ParseHideGitHub(string option) {
+    public void GetProfile_ShouldParseHideGitHub_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option);
 
@@ -118,7 +118,7 @@ public sealed class GetProfileParsingTests {
     [Theory]
     [InlineData("--hide-linkedin")]
     [InlineData("-n")]
-    public void GetProfile_Should_ParseHideLinkedIn(string option) {
+    public void GetProfile_ShouldParseHideLinkedIn_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option);
 
@@ -131,7 +131,7 @@ public sealed class GetProfileParsingTests {
     [Theory]
     [InlineData("--verbose")]
     [InlineData("-v")]
-    public void GetProfile_Should_ParseVerbose(string option) {
+    public void GetProfile_ShouldParseVerbose_WhenOptionIsProvided(string option) {
         // Act
         var execution = Parse(option);
 
@@ -142,7 +142,7 @@ public sealed class GetProfileParsingTests {
     }
 
     [Fact]
-    public void GetProfile_Should_UseDefaultValuesForOptionalArguments() {
+    public void GetProfile_ShouldUseDefaultOptionValues_WhenOptionalOptionsAreNotProvided() {
         // Act
         var execution = Parse();
 

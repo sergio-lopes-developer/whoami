@@ -10,7 +10,7 @@ using WhoAmI.Infrastructure.Tests.Persistence.TestInfrastructure;
 
 namespace WhoAmI.Infrastructure.Tests.Persistence.Configurations;
 
-public sealed class ProfileConfigurationTests : IAsyncDisposable {
+public class ProfileConfigurationTests : IAsyncDisposable {
     private readonly SqliteContextScope<WhoAmIDbContext> _scope;
 
     private readonly IModel _model;
@@ -49,7 +49,6 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         string columnName
     ) {
         property = AssertMappedProperty(property, columnName);
-
         property.IsNullable.Should().BeTrue();
 
         return property;
@@ -60,7 +59,6 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         string columnName
     ) {
         property = AssertMappedProperty(property, columnName);
-
         property.IsNullable.Should().BeFalse();
 
         return property;
@@ -80,7 +78,6 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
 
         // Assert
         index.IsUnique.Should().BeTrue();
-
         index.GetDatabaseName().Should().Be("UX_Profiles_Guid");
     }
 
@@ -92,7 +89,6 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
 
         // Assert
         index.IsUnique.Should().BeTrue();
-
         index.GetDatabaseName().Should().Be("UX_Profiles_Email");
     }
 
@@ -195,7 +191,10 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         // Assert
         var firstName = AssertRequiredProperty(property, "first_name");
 
-        firstName.GetMaxLength().Should().Be(FirstName.MaxLength);
+        firstName
+            .GetMaxLength()
+            .Should()
+            .Be(FirstName.LengthConstraint.MaxLength);
     }
 
     [Fact]
@@ -209,7 +208,10 @@ public sealed class ProfileConfigurationTests : IAsyncDisposable {
         // Assert
         var lastName = AssertRequiredProperty(property, "last_name");
 
-        lastName.GetMaxLength().Should().Be(LastName.MaxLength);
+        lastName
+            .GetMaxLength()
+            .Should()
+            .Be(LastName.LengthConstraint.MaxLength);
     }
 
     [Fact]

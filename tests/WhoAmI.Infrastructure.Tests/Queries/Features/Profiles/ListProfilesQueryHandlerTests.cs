@@ -7,7 +7,7 @@ using WhoAmI.Infrastructure.Tests.Queries.TestDoubles;
 
 namespace WhoAmI.Infrastructure.Tests.Queries.Features.Profiles;
 
-public sealed class ListProfilesQueryHandlerTests {
+public class ListProfilesQueryHandlerTests {
     private static async Task CreateProfilesTable(SqliteConnection connection) {
         await connection.ExecuteAsync("""
             CREATE TABLE Profiles (
@@ -20,7 +20,7 @@ public sealed class ListProfilesQueryHandlerTests {
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnProfilesOrderedByFirstNameThenLastName_WhenProfilesExist() {
+    public async Task ListProfiles_ShouldReturnProfilesOrderedByFirstNameThenLastName_WhenProfilesExist() {
         // Arrange
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
@@ -44,43 +44,41 @@ public sealed class ListProfilesQueryHandlerTests {
         );
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new ListProfilesQueryHandler(connectionFactory);
+        var handler = new ListProfilesQueryHandler(connectionFactory);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             new ListProfilesQuery(),
             TestContext.Current.CancellationToken
         );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value
-            .Should()
-            .BeEquivalentTo(
-                [
-                    new ListProfilesResponse(
-                        "Alice",
-                        "Anderson",
-                        "alice2@test.com"
-                    ),
-                    new ListProfilesResponse(
-                        "Alice",
-                        "Brown",
-                        "alice@test.com"
-                    ),
-                    new ListProfilesResponse(
-                        "Zoe",
-                        "Smith",
-                        "zoe@test.com"
-                    )
-                ],
-                options => options.WithStrictOrdering()
-            );
+
+        result.GetValueOrThrow().Should().BeEquivalentTo(
+            [
+                new ListProfilesResponse(
+                    "Alice",
+                    "Anderson",
+                    "alice2@test.com"
+                ),
+                new ListProfilesResponse(
+                    "Alice",
+                    "Brown",
+                    "alice@test.com"
+                ),
+                new ListProfilesResponse(
+                    "Zoe",
+                    "Smith",
+                    "zoe@test.com"
+                )
+            ],
+            options => options.WithStrictOrdering()
+        );
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldReturnEmptyCollection_WhenNoProfilesExist() {
+    public async Task ListProfiles_ShouldReturnEmptyCollection_WhenNoProfilesExist() {
         // Arrange
         await using var connection =
             new SqliteConnection("Data Source=:memory:");
@@ -90,22 +88,21 @@ public sealed class ListProfilesQueryHandlerTests {
         await CreateProfilesTable(connection);
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new ListProfilesQueryHandler(connectionFactory);
+        var handler = new ListProfilesQueryHandler(connectionFactory);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             new ListProfilesQuery(),
             TestContext.Current.CancellationToken
         );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Should().BeEmpty();
+        result.GetValueOrThrow().Should().BeEmpty();
     }
 
     [Fact]
-    public async Task HandleAsync_ShouldNotReturnDeletedProfiles_WhenTheyExist() {
+    public async Task ListProfiles_ShouldReturnOnlyActiveProfiles_WhenDeletedProfilesExist() {
         // Arrange
         var deletedAt = new DateTimeOffset(
             2026, 9, 30,
@@ -139,33 +136,31 @@ public sealed class ListProfilesQueryHandlerTests {
         );
 
         var connectionFactory = new FakeDbConnectionFactory(connection);
-
-        var sut = new ListProfilesQueryHandler(connectionFactory);
+        var handler = new ListProfilesQueryHandler(connectionFactory);
 
         // Act
-        var result = await sut.HandleAsync(
+        var result = await handler.HandleAsync(
             new ListProfilesQuery(),
             TestContext.Current.CancellationToken
         );
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value
-            .Should()
-            .BeEquivalentTo(
-                [
-                    new ListProfilesResponse(
-                        "Alice",
-                        "Active",
-                        "alice2@test.com"
-                    ),
-                    new ListProfilesResponse(
-                        "Zoe",
-                        "Active",
-                        "zoe@test.com"
-                    )
-                ],
-                options => options.WithStrictOrdering()
-            );
+
+        result.GetValueOrThrow().Should().BeEquivalentTo(
+            [
+                new ListProfilesResponse(
+                    "Alice",
+                    "Active",
+                    "alice2@test.com"
+                ),
+                new ListProfilesResponse(
+                    "Zoe",
+                    "Active",
+                    "zoe@test.com"
+                )
+            ],
+            options => options.WithStrictOrdering()
+        );
     }
 }

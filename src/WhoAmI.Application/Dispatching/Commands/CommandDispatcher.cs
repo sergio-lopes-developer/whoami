@@ -8,7 +8,9 @@ namespace WhoAmI.Application.Dispatching.Commands;
 internal sealed class CommandDispatcher : ICommandDispatcher {
     private readonly IServiceProvider _provider;
 
-    public CommandDispatcher(IServiceProvider provider) => _provider = provider;
+    public CommandDispatcher(IServiceProvider provider) {
+        _provider = provider;
+    }
 
     public async Task<Result> Send(
         ICommand command,
@@ -20,9 +22,7 @@ internal sealed class CommandDispatcher : ICommandDispatcher {
         var adapter = (ICommandHandlerAdapter)_provider
             .GetRequiredService(adapterType);
 
-        var result = await adapter.HandleAsync(command, cancellationToken);
-
-        return (Result)result!;
+        return await adapter.HandleAsync(command, cancellationToken);
     }
 
     public async Task<Result<TResult>> Send<TResult>(
@@ -32,11 +32,9 @@ internal sealed class CommandDispatcher : ICommandDispatcher {
         var adapterType = typeof(CommandHandlerAdapter<,>)
             .MakeGenericType(command.GetType(), typeof(TResult));
 
-        var adapter = (ICommandHandlerAdapter)_provider
+        var adapter = (ICommandHandlerAdapter<TResult>)_provider
             .GetRequiredService(adapterType);
 
-        var result = await adapter.HandleAsync(command, cancellationToken);
-
-        return (Result<TResult>)result!;
+        return await adapter.HandleAsync(command, cancellationToken);
     }
 }

@@ -9,15 +9,12 @@ namespace WhoAmI.CLI.Configuration;
 internal static class CommandConfiguration {
     internal static CommandApp Create(ITypeRegistrar registrar) {
         var app = new CommandApp(registrar);
-
         app.Configure(Configure);
-
         return app;
     }
 
     internal static int Run(IHost host, string[] args) {
         var registrar = new SpectreCliTypeRegistrar(host.Services);
-
         return Create(registrar).Run(args);
     }
 

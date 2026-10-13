@@ -39,8 +39,7 @@ public sealed class GetProfile(
             return CliExit.Error();
         }
 
-        var profile = result.Value;
-
+        var profile = result.GetValueOrThrow();
         var items = BuildInfoItems(profile, commandSettings).ToList();
 
         if (items.All(i => i.IsBlank)) {
@@ -68,7 +67,6 @@ public sealed class GetProfile(
     ) {
         if (settings.Verbose) {
             yield return InfoItem.Identifier("ID:", profile.Id);
-
             yield return InfoItem.BlankLine();
         }
 
@@ -86,9 +84,7 @@ public sealed class GetProfile(
 
         if (settings.Verbose) {
             yield return InfoItem.BlankLine();
-
             yield return InfoItem.Timestamp("Created at:", profile.CreatedAt);
-
             yield return InfoItem.Timestamp("Updated at:", profile.UpdatedAt);
         }
     }

@@ -12,17 +12,18 @@ using WhoAmI.CLI.Tests.Unit.Support;
 namespace WhoAmI.CLI.Tests.Unit.Commands.Profiles;
 
 [Collection("CLI Console")]
-public sealed class DeleteProfileUnitTests {
+public class DeleteProfileUnitTests {
     private readonly ICommandDispatcher _dispatcher =
         DispatcherFactory.CreateCommandDispatcher();
 
     private readonly DeleteProfile _command;
 
-    public DeleteProfileUnitTests() =>
+    public DeleteProfileUnitTests() {
         _command = new DeleteProfile(
             _dispatcher,
             LoggerFactory.Create<DeleteProfile>()
         );
+    }
 
     private Task<(int ExitCode, string ConsoleOutput)> Execute(
         DeleteProfileCommandSettings settings

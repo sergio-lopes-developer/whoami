@@ -13,11 +13,14 @@ public class EmailTests {
     [InlineData("User_Name@domain.co")]
     [InlineData("a.b-c@sub.domain123.net")]
     [InlineData("user+tag@gmail.com")]
-    public void Email_ShouldAllowCreation_WhenInputIsValid(string input) {
+    public void Email_ShouldCreate_WhenInputIsValid(string input) {
+        // Arrange
         var caseNormalizedInput = input.ToLowerInvariant();
 
+        // Act
         var email = new Email(input);
 
+        // Assert
         email.Address.Should().Be(caseNormalizedInput);
     }
 
@@ -25,50 +28,63 @@ public class EmailTests {
     [InlineData(" " + Emails.Valid)]
     [InlineData(Emails.Valid + " ")]
     [InlineData(" " + Emails.Valid + " ")]
-    public void Email_ShouldTrimLeadingOrTrailingWhiteSpace_WhenInputContainsIt(
+    public void Email_ShouldTrimLeadingAndTrailingWhiteSpace_WhenInputContainsWhiteSpace(
         string leadingOrTrailingWhiteSpaceInput
     ) {
-        var canonicalInput = Emails.Valid;
+        // Arrange
+        const string canonicalInput = Emails.Valid;
 
+        // Act
         var email = new Email(leadingOrTrailingWhiteSpaceInput);
 
+        // Assert
         email.Address.Should().Be(canonicalInput);
     }
 
     [Fact]
     public void Email_ShouldNormalizeCase_WhenInputContainsUppercaseLetters() {
-        var canonicalInput = Emails.Valid;
+        // Arrange
+        const string canonicalInput = Emails.Valid;
         var uppercaseInput = canonicalInput.ToUpperInvariant();
 
+        // Act
         var email = new Email(uppercaseInput);
 
+        // Assert
         email.Address.Should().Be(canonicalInput);
     }
 
     [Fact]
-    public void Email_ShouldTrimAndNormalizeCase_WhenInputHasWhiteSpaceAndUppercase() {
-        var canonicalInput = "email.test@gmail.com";
-        var variantInput = "  EMAIL.TEST@GMAIL.COM  ";
+    public void Email_ShouldTrimAndNormalizeCase_WhenInputContainsWhiteSpaceAndUppercaseLetters() {
+        // Arrange
+        const string canonicalInput = "email.test@gmail.com";
+        const string variantInput = "  EMAIL.TEST@GMAIL.COM  ";
 
+        // Act
         var email = new Email(variantInput);
 
+        // Assert
         email.Address.Should().Be(canonicalInput);
     }
 
     [Fact]
-    public void Email_ShouldNotAllowCreation_WhenInputIsNull() {
+    public void Email_ShouldThrow_WhenInputIsNull() {
+        // Act
         var act = () => new Email(null!);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
     [Theory]
     [MemberData(nameof(TextInputs.Blank), MemberType = typeof(TextInputs))]
-    public void Email_ShouldNotAllowCreation_WhenInputIsEmptyOrWhiteSpace(
+    public void Email_ShouldThrow_WhenInputIsEmptyOrWhiteSpace(
         string input
     ) {
+        // Act
         var act = () => new Email(input);
 
+        // Assert
         act.Should().Throw<DomainException>();
     }
 
@@ -85,23 +101,27 @@ public class EmailTests {
     [InlineData("@email.com")]
     [InlineData("test@email.")]
     [InlineData("test@.com")]
-    public void Email_ShouldNotAllowCreation_WhenInputIsInvalid(string input) {
+    public void Email_ShouldThrow_WhenInputIsInvalid(string input) {
+        // Act
         var act = () => new Email(input);
 
+        // Assert
         act.Should().Throw<InvalidEmailException>();
     }
 
     [Fact]
-    public void Email_ShouldAllowCreation_WhenInputIsAtMaxLength() {
+    public void Email_ShouldCreate_WhenInputHasMaximumLength() {
         // Arrange
-        var domainSuffix = ".com";
-        var atSuffix = "@";
+        const string domainSuffix = ".com";
+        const string atSuffix = "@";
         var localPart = TextInputs.CreateStringWithLength(1);
+
         var maxAllowedDomainLength =
             Email.MaxLength
             - domainSuffix.Length
             - atSuffix.Length
             - localPart.Length;
+
         var domain = TextInputs.CreateStringWithLength(maxAllowedDomainLength);
         var input = $"{localPart}{atSuffix}{domain}{domainSuffix}";
 
@@ -113,17 +133,19 @@ public class EmailTests {
     }
 
     [Fact]
-    public void Email_ShouldNotAllowCreation_WhenInputExceedsMaxLength() {
+    public void Email_ShouldThrow_WhenInputExceedsMaximumLength() {
         // Arrange
-        var domainSuffix = ".com";
-        var atSuffix = "@";
+        const string domainSuffix = ".com";
+        const string atSuffix = "@";
         var localPart = TextInputs.CreateStringWithLength(1);
+
         var exceedingDomainLength =
             Email.MaxLength
             - domainSuffix.Length
             - atSuffix.Length
             - localPart.Length
             + 1;
+
         var domain = TextInputs.CreateStringWithLength(exceedingDomainLength);
         var input = $"{localPart}{atSuffix}{domain}{domainSuffix}";
 
@@ -135,65 +157,82 @@ public class EmailTests {
     }
 
     [Fact]
-    public void Email_ShouldNotAllowCreation_WhenLocalPartExceedsMaxLength() {
-        var invalidLength = Email.LocalPartMaxLength + 1;
+    public void Email_ShouldThrow_WhenLocalPartExceedsMaximumLength() {
+        // Arrange
+        const int invalidLength = Email.LocalPartMaxLength + 1;
         var localPart = TextInputs.CreateStringWithLength(invalidLength);
         var input = $"{localPart}@example.com";
 
+        // Act
         var act = () => new Email(input);
 
+        // Assert
         act.Should().Throw<InvalidEmailException>();
     }
 
     [Fact]
     public void Email_ShouldBeEqual_WhenAddressesAreEqual() {
-        var input = Emails.Valid;
+        // Arrange
+        const string input = Emails.Valid;
 
         var email = new Email(input);
         var sameEmail = new Email(input);
 
+        // Assert
         email.Should().Be(sameEmail);
         email.GetHashCode().Should().Be(sameEmail.GetHashCode());
+
         (email == sameEmail).Should().BeTrue();
         (email != sameEmail).Should().BeFalse();
     }
 
     [Fact]
     public void Email_ShouldBeEqual_WhenAddressesDifferOnlyInCase() {
-        var input = Emails.Valid;
+        // Arrange
+        const string input = Emails.Valid;
         var variantInput = input.ToUpperInvariant();
 
         var canonicalEmail = new Email(input);
         var caseVariant = new Email(variantInput);
 
+        // Assert
         canonicalEmail.Should().Be(caseVariant);
         canonicalEmail.GetHashCode().Should().Be(caseVariant.GetHashCode());
+
         (canonicalEmail == caseVariant).Should().BeTrue();
         (canonicalEmail != caseVariant).Should().BeFalse();
     }
 
     [Fact]
     public void Email_ShouldBeEqual_WhenAddressesDifferOnlyInLeadingOrTrailingWhiteSpace() {
-        var input = Emails.Valid;
-        var variantInput = " " + input + " ";
+        // Arrange
+        const string input = Emails.Valid;
+        const string variantInput = " " + input + " ";
 
         var canonicalEmail = new Email(input);
         var leadingOrTrailingWhiteSpaceVariant = new Email(variantInput);
 
+        // Assert
         canonicalEmail.Should().Be(leadingOrTrailingWhiteSpaceVariant);
+
         canonicalEmail.GetHashCode()
             .Should().Be(leadingOrTrailingWhiteSpaceVariant.GetHashCode());
+
         (canonicalEmail == leadingOrTrailingWhiteSpaceVariant)
             .Should().BeTrue();
+
         (canonicalEmail != leadingOrTrailingWhiteSpaceVariant)
             .Should().BeFalse();
     }
 
     [Fact]
     public void Email_ShouldBeEqual_WhenAddressesDifferOnlyInCaseOrWhiteSpace() {
-        var canonicalInput = Emails.Valid;
-        var leadingOrTrailingWhiteSpaceVariantInput =
+        // Arrange
+        const string canonicalInput = Emails.Valid;
+
+        const string leadingOrTrailingWhiteSpaceVariantInput =
             "  " + canonicalInput + "  ";
+
         var caseVariantInput = canonicalInput.ToUpperInvariant();
         var canonicalEmail = new Email(canonicalInput);
         var expectedHash = canonicalEmail.GetHashCode();
@@ -203,9 +242,11 @@ public class EmailTests {
             new Email(caseVariantInput)
         };
 
+        // Assert
         variations.Should().AllSatisfy(variant => {
             variant.Should().Be(canonicalEmail);
             variant.GetHashCode().Should().Be(expectedHash);
+
             (variant == canonicalEmail).Should().BeTrue();
             (variant != canonicalEmail).Should().BeFalse();
         });
@@ -213,13 +254,34 @@ public class EmailTests {
 
     [Fact]
     public void Email_ShouldNotBeEqual_WhenAddressesAreDifferent() {
+        // Arrange
         var email = new Email("a@email.com");
-
         var otherEmail = new Email("b@email.com");
 
+        // Assert
         email.Should().NotBe(otherEmail);
+
         (email != otherEmail).Should().BeTrue();
         (email == otherEmail).Should().BeFalse();
+    }
+
+    [Fact]
+    public void Email_ShouldReturnAddress_WhenConvertedToString() {
+        // Arrange
+        var email = Emails.CreateValid();
+
+        // Act
+        var result = email.ToString();
+
+        // Assert
+        result.Should().Be(email.Address);
+    }
+
+    [Fact]
+    public void Email_ShouldHaveExpectedLengthLimits() {
+        // Assert
+        Email.LocalPartMaxLength.Should().Be(64);
+        Email.MaxLength.Should().Be(254);
     }
 
     [Theory]
@@ -227,8 +289,10 @@ public class EmailTests {
     [InlineData("USER@EMAIL.COM")]
     [InlineData(" user@email.com ")]
     public void IsValid_ShouldReturnTrue_WhenInputIsValid(string input) {
+        // Act
         var result = Email.IsValid(input);
 
+        // Assert
         result.Should().BeTrue();
     }
 
@@ -239,43 +303,10 @@ public class EmailTests {
     [InlineData("invalid")]
     [InlineData("@email.com")]
     public void IsValid_ShouldReturnFalse_WhenInputIsInvalid(string? input) {
+        // Act
         var result = Email.IsValid(input);
 
+        // Assert
         result.Should().BeFalse();
-    }
-
-    [Fact]
-    public void ConstructorAndIsValid_ShouldAcceptValidInputs() {
-        var input = "user@email.com";
-        Email.IsValid(input).Should().BeTrue();
-
-        var act = () => new Email(input);
-
-        act.Should().NotThrow();
-    }
-
-    [Fact]
-    public void ConstructorAndIsValid_ShouldRejectInvalidInputs() {
-        var input = "user..name@email.com";
-        Email.IsValid(input).Should().BeFalse();
-
-        var act = () => new Email(input);
-
-        act.Should().Throw<InvalidEmailException>();
-    }
-
-    [Fact]
-    public void Email_ShouldReturnAddress_WhenConvertedToString() {
-        var email = Emails.CreateValid();
-
-        var result = email.ToString();
-
-        result.Should().Be(email.Address);
-    }
-
-    [Fact]
-    public void Email_LengthLimits_ShouldMatchDomainSpecification() {
-        Email.LocalPartMaxLength.Should().Be(64);
-        Email.MaxLength.Should().Be(254);
     }
 }

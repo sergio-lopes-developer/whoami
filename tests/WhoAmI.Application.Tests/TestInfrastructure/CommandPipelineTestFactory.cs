@@ -16,6 +16,7 @@ internal static class CommandPipelineTestFactory {
 
         services.AddLogging();
         services.AddApplicationServices();
+        services.AddExecutionRunner();
         services.AddCommandPipeline();
 
         // Replace real dependencies with test doubles

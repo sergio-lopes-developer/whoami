@@ -16,11 +16,11 @@ internal sealed class SqliteConstraintViolationParser :
         }
 
         return ParseMessage(sqliteEx.Message)
-               ?? throw new UnrecognizedConstraintException(
-                   $"Constraint could not be mapped from message: " +
-                   $"'{sqliteEx.Message}'.",
-                   sqliteEx
-               );
+            ?? throw new UnrecognizedConstraintException(
+                $"Constraint could not be mapped from message: " +
+                $"'{sqliteEx.Message}'.",
+                sqliteEx
+            );
     }
 
     internal static PersistenceViolationCode? ParseMessage(string message) {

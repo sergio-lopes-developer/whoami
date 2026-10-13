@@ -4,11 +4,10 @@ internal static class SqliteConstraintSignatures {
     internal static readonly IReadOnlyDictionary<
         string,
         PersistenceViolationCode
-    > Registry =
-        new Dictionary<string, PersistenceViolationCode>(
-            StringComparer.OrdinalIgnoreCase
-        ) {
-            ["Profiles.email"] = PersistenceViolationCode.DuplicateProfileEmail,
-            ["Profiles.id"] = PersistenceViolationCode.DuplicateProfileGuid
-        };
+    > Registry = new Dictionary<string, PersistenceViolationCode>(
+        StringComparer.OrdinalIgnoreCase
+    ) {
+        ["Profiles.email"] = PersistenceViolationCode.DuplicateProfileEmail,
+        ["Profiles.id"] = PersistenceViolationCode.DuplicateProfileGuid
+    };
 }

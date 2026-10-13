@@ -75,7 +75,6 @@ public class CommandPipelineRegistrationTests {
         var repo = Substitute.For<IProfileRepository>();
 
         var uow = Substitute.For<IUnitOfWork>();
-
         uow.CommitAsync(Arg.Any<CancellationToken>()).Returns(Result.Success());
 
         var provider = CommandPipelineTestFactory.Create(repo, uow);
@@ -88,7 +87,6 @@ public class CommandPipelineRegistrationTests {
         // Act + Assert
         foreach (var handlerInterface in handlerInterfaces) {
             var handler = provider.GetRequiredService(handlerInterface);
-
             var pipeline = PipelineIntrospector.Unwrap(handler).ToList();
 
             AssertPipeline(handlerInterface, pipeline);

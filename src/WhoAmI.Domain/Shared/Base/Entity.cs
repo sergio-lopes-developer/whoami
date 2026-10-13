@@ -46,7 +46,9 @@ public abstract class Entity {
 
     public override bool Equals(object? obj) {
         if (obj is null) return false;
+
         if (ReferenceEquals(this, obj)) return true;
+
         return obj.GetType() == GetType() && Equals((Entity)obj);
     }
 
@@ -54,7 +56,9 @@ public abstract class Entity {
 
     public static bool operator ==(Entity? a, Entity? b) {
         if (a is null && b is null) return true;
+
         if (a is null || b is null) return false;
+
         return a.Equals(b);
     }
 
