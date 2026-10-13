@@ -186,7 +186,7 @@ Application validation ensures that requests are well-formed and complete.
 
 Application operations communicate expected business failures through the Result pattern instead of using exceptions for control flow.
 
-Operations return either [Result](./Results/Result.cs) or [Result&lt;T&gt;](./Results/ResultOfT.cs). On failure, the result contains one or more error instances.
+Operations return either [Result](./Results/Result.cs) or [Result&lt;T&gt;](./Results/Result.cs). On failure, the result contains one or more error instances.
 
 Each [Error](./Results/Error.cs) contains:
 
