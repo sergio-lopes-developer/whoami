@@ -8,8 +8,9 @@ namespace WhoAmI.IntegrationTests.Features;
 public class ProfileTests : IClassFixture<TestApplicationFactory> {
     private readonly TestApplicationFactory _applicationFactory;
 
-    public ProfileTests(TestApplicationFactory applicationFactory) =>
+    public ProfileTests(TestApplicationFactory applicationFactory) {
         _applicationFactory = applicationFactory;
+    }
 
     [Fact]
     public async Task CreateProfile_ShouldThrowDuplicateEmailException_WhenEmailAlreadyExists() {
