@@ -10,7 +10,7 @@ namespace WhoAmI.CLI.Tests.Unit.Commands.Core;
 
 [Collection("CLI Console")]
 public class CommandBaseUnitTests {
-    public class TestCommand(
+    public sealed class TestCommand(
         ILogger<TestCommand> logger,
         Func<CommandContext, TestSettings, CancellationToken, Task<int>> execute
     ) : CommandBase<TestCommand, TestSettings>(logger) {
