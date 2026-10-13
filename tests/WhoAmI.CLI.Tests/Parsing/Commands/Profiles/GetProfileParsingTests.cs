@@ -142,7 +142,7 @@ public class GetProfileParsingTests {
     }
 
     [Fact]
-    public void GetProfile_ShouldUseDefaultValues_WhenOptionalArgumentsAreNotProvided() {
+    public void GetProfile_ShouldUseDefaultOptionValues_WhenOptionalOptionsAreNotProvided() {
         // Act
         var execution = Parse();
 
