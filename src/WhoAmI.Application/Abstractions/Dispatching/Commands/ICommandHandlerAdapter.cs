@@ -9,3 +9,10 @@ internal interface ICommandHandlerAdapter {
         CancellationToken cancellationToken
     );
 }
+
+internal interface ICommandHandlerAdapter<TResult> {
+    Task<Result<TResult>> HandleAsync(
+        ICommand<TResult> command,
+        CancellationToken cancellationToken
+    );
+}

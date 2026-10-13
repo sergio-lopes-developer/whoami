@@ -19,3 +19,19 @@ internal sealed class CommandHandlerAdapter<TCommand> :
     ) =>
         await _handler.HandleAsync((TCommand)command, cancellationToken);
 }
+
+internal sealed class CommandHandlerAdapter<TCommand, TResult> :
+    ICommandHandlerAdapter<TResult> where TCommand : ICommand<TResult>
+{
+    private readonly ICommandHandler<TCommand, TResult> _handler;
+
+    public CommandHandlerAdapter(ICommandHandler<TCommand, TResult> handler) {
+        _handler = handler;
+    }
+
+    public async Task<Result<TResult>> HandleAsync(
+        ICommand<TResult> command,
+        CancellationToken cancellationToken
+    ) =>
+        await _handler.HandleAsync((TCommand)command, cancellationToken);
+}

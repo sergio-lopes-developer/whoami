@@ -10,7 +10,10 @@ internal sealed class SqliteConnectionFactory : IDbConnectionFactory {
 
     public SqliteConnectionFactory(IConfiguration configuration) {
         _connectionString =
-            configuration.GetConnectionString("DefaultConnection")!;
+            configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException(
+                "The connection string 'DefaultConnection' was not configured."
+            );
     }
 
     public async Task<DbConnection> CreateOpenConnectionAsync(

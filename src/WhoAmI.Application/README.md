@@ -25,7 +25,7 @@ The Application layer is responsible for the following tasks:
 - Validating requests.
 - Managing transactions through the [**Unit of Work**](https://martinfowler.com/eaaCatalog/unitOfWork.html).
 - Producing application results.
-- Publishing execution information for observability.
+- Capturing application execution information through execution abstractions.
 
 The Application layer coordinates requests, delegates business behavior to the Domain, and collaborates with Infrastructure through abstractions.
 
@@ -119,15 +119,27 @@ Commands are executed through the following pipeline:
   />
 </p>
 
-Commands are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and addresses a specific cross-cutting concern, such as logging, validation, or transaction management.
+Commands are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and addresses a specific cross-cutting concern, such as execution tracking, validation, or transaction management.
 
 The command pipeline is composed of the following decorators:
 
-- [CommandExecutionDecorator&lt;TCommand&gt;](./Decorators/Commands/CommandExecutionDecorator.cs) and [CommandExecutionDecorator&lt;TCommand, TResult&gt;](./Decorators/Commands/CommandExecutionDecoratorOfT.cs), record execution information for logging and observability.
-- [CommandValidationDecorator&lt;TCommand&gt;](./Decorators/Commands/CommandValidationDecorator.cs) and [CommandValidationDecorator&lt;TCommand, TResult&gt;](./Decorators/Commands/CommandValidationDecoratorOfT.cs), validate incoming commands before execution.
-- [CommandUnitOfWorkDecorator&lt;TCommand&gt;](./Decorators/Commands/CommandUnitOfWorkDecorator.cs) and [CommandUnitOfWorkDecorator&lt;TCommand, TResult&gt;](./Decorators/Commands/CommandUnitOfWorkDecoratorOfT.cs), execute the handler inside a Unit of Work and commit the transaction when the operation succeeds.
+- [CommandExecutionDecorator](./Decorators/Commands/CommandExecutionDecorator.cs), delegates command execution to the execution runner responsible for execution tracking and observability.
+- [CommandValidationDecorator](./Decorators/Commands/CommandValidationDecorator.cs), validates incoming commands before execution.
+- [CommandUnitOfWorkDecorator](./Decorators/Commands/CommandUnitOfWorkDecorator.cs), executes the handler inside a Unit of Work and commits the transaction when the operation succeeds.
 
-Each decorator is available in two versions: one for commands that do not return a value and one for commands that return a result.
+Each command decorator supports both application result types:
+
+- `Result` through:
+  - `CommandExecutionDecorator<TCommand>`
+  - `CommandValidationDecorator<TCommand>`
+  - `CommandUnitOfWorkDecorator<TCommand>`
+
+- `Result<TResult>` through:
+  - `CommandExecutionDecorator<TCommand, TResult>`
+  - `CommandValidationDecorator<TCommand, TResult>`
+  - `CommandUnitOfWorkDecorator<TCommand, TResult>`
+
+---
 
 ## Query Pipeline
 
@@ -142,12 +154,12 @@ Queries are executed through the following pipeline:
   />
 </p>
 
-Queries are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and addresses a specific cross-cutting concern, such as logging or validation.
+Queries are processed through a decorator pipeline before reaching their handlers. Each decorator has a single responsibility and addresses a specific cross-cutting concern, such as execution tracking or validation.
 
 The query pipeline is composed of the following decorators:
 
-- [QueryExecutionDecorator&lt;TQuery, TResult&gt;](./Decorators/Queries/QueryExecutionDecorator.cs).
-- [QueryValidationDecorator&lt;TQuery, TResult&gt;](./Decorators/Queries/QueryValidationDecorator.cs).
+- [QueryExecutionDecorator](./Decorators/Queries/QueryExecutionDecorator.cs), delegates query execution to the execution runner responsible for execution tracking and observability.
+- [QueryValidationDecorator](./Decorators/Queries/QueryValidationDecorator.cs), validates incoming queries before execution.
 
 Unlike the command pipeline, the query pipeline does not include transaction management because queries never modify application state.
 
@@ -194,7 +206,11 @@ This approach:
 
 ## Observability
 
-The Application layer publishes execution information through abstractions without depending on any specific logging or monitoring framework.
+The Application layer provides execution tracking through abstractions without depending on any specific logging or monitoring framework.
+
+Execution tracking is centralized by [ExecutionRunner](./Execution/ExecutionRunner.cs), which wraps application operations and coordinates execution measurement, exception handling, and publishing of execution information.
+
+---
 
 ### Execution Information
 
@@ -207,15 +223,35 @@ Execution information includes:
 - Business errors.
 - Unhandled exceptions.
 
-The execution information is represented by [ExecutionInfo](./Logging/ExecutionInfo.cs) and is produced through [ExecutionInfoFactory](./Logging/ExecutionInfoFactory.cs).
+The execution information is represented by [ExecutionInfo](./Logging/ExecutionInfo.cs) and is created through [ExecutionInfoFactory](./Logging/ExecutionInfoFactory.cs).
+
+The [ExecutionRunner](./Execution/ExecutionRunner.cs) coordinates the execution flow:
+
+- Starts execution timing.
+- Executes the operation delegate.
+- Captures successful results.
+- Captures unhandled exceptions.
+- Publishes execution information through the safe logging abstraction.
 
 Presentation or Infrastructure projects may consume this information using logging providers, monitoring systems, or other observability tools without introducing dependencies into the Application layer.
 
+---
+
+### Execution Runner
+
+The [ExecutionRunner](./Execution/ExecutionRunner.cs) provides a reusable execution boundary for commands and queries.
+
+Decorators such as [CommandExecutionDecorator](./Decorators/Commands/CommandExecutionDecorator.cs) and [QueryExecutionDecorator](./Decorators/Queries/QueryExecutionDecorator.cs) delegate execution tracking to this component instead of implementing logging concerns directly.
+
+This keeps decorators focused on pipeline composition while centralizing execution-related behavior.
+
+---
+
 ### Safe Logging
 
-The [SafeExecutionLogger](./Logging/SafeExecutionLogger.cs) ensures that failures occurring while publishing execution information never affect the execution of the application itself.
+The [SafeExecutionLogger](./Logging/SafeExecutionLogger.cs) ensures that failures occurring while publishing execution information never interrupt application execution.
 
-Exceptions thrown by the logging implementation are ignored after being written to the debug output.
+Exceptions thrown while publishing execution information are isolated and written to debug output instead of propagating back to application workflows.
 
 ---
 

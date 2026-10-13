@@ -32,4 +32,20 @@ public class SqliteConnectionFactoryTests {
 
         await result.DisposeAsync();
     }
+
+    [Fact]
+    public void SqliteConnectionFactory_ShouldThrow_WhenDefaultConnectionStringIsMissing() {
+        // Arrange
+        var configuration = new ConfigurationBuilder().Build();
+
+        // Act
+        var act = () => new SqliteConnectionFactory(configuration);
+
+        // Assert
+        act.Should()
+            .Throw<InvalidOperationException>()
+            .WithMessage(
+                "The connection string 'DefaultConnection' was not configured."
+            );
+    }
 }

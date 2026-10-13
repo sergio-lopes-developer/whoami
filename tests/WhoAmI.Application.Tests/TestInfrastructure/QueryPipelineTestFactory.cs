@@ -16,6 +16,7 @@ internal static class QueryPipelineTestFactory {
 
         services.AddLogging();
         services.AddApplicationServices();
+        services.AddExecutionRunner();
         services.AddSingleton(connectionFactory);
         services.AddSingleton(Substitute.For<ISafeExecutionLogger>());
 

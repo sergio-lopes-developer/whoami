@@ -123,8 +123,6 @@ public class ResultOfTTests {
         var act = () => Result<string>.Success(null!);
 
         // Assert
-        act.Should()
-            .Throw<ArgumentException>()
-            .WithMessage("Success result must contain a value.");
+        act.Should().Throw<ArgumentNullException>();
     }
 }

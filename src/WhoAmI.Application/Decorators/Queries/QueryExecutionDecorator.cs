@@ -1,6 +1,5 @@
-using System.Diagnostics;
 using WhoAmI.Application.Abstractions.Decorators;
-using WhoAmI.Application.Abstractions.Logging;
+using WhoAmI.Application.Abstractions.Execution;
 using WhoAmI.Application.Abstractions.Queries;
 using WhoAmI.Application.Results;
 
@@ -13,55 +12,23 @@ internal sealed class QueryExecutionDecorator<TQuery, TResult> :
 {
     public IQueryHandler<TQuery, TResult> Inner { get; }
 
-    private readonly ISafeExecutionLogger _logger;
-
-    private readonly IExecutionInfoFactory _executionInfo;
+    private readonly IExecutionRunner _runner;
 
     public QueryExecutionDecorator(
         IQueryHandler<TQuery, TResult> inner,
-        ISafeExecutionLogger logger,
-        IExecutionInfoFactory executionInfo
+        IExecutionRunner runner
     ) {
         Inner = inner;
-        _logger = logger;
-        _executionInfo = executionInfo;
+        _runner = runner;
     }
 
     public async Task<Result<TResult>> HandleAsync(
         TQuery query,
         CancellationToken cancellationToken = default
-    ) {
-        var stopwatch = Stopwatch.StartNew();
-
-        try {
-            var result = await Inner.HandleAsync(query, cancellationToken);
-
-            stopwatch.Stop();
-
-            _logger.Log(
-                _executionInfo.Create(
-                    typeof(TQuery).Name,
-                    query,
-                    result,
-                    stopwatch.ElapsedMilliseconds
-                )
-            );
-
-            return result;
-        }
-        catch (Exception ex) {
-            stopwatch.Stop();
-
-            _logger.Log(
-                _executionInfo.Create(
-                    typeof(TQuery).Name,
-                    query,
-                    ex,
-                    stopwatch.ElapsedMilliseconds
-                )
-            );
-
-            throw;
-        }
-    }
+    ) =>
+        await _runner.ExecuteAsync(
+            typeof(TQuery).Name,
+            query,
+            () => Inner.HandleAsync(query, cancellationToken)
+        );
 }

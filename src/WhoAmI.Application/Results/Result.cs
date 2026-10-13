@@ -13,3 +13,29 @@ public sealed class Result : ResultBase {
 
     public static implicit operator Result(Error error) => Failure(error);
 }
+
+public sealed class Result<T> : ResultBase {
+    public T? Value { get; }
+
+    private Result(
+        bool isSuccess,
+        T? value,
+        IReadOnlyList<Error> errors
+    ) : base(isSuccess, errors) {
+        Value = value;
+    }
+
+    public static Result<T> Success(T value) {
+        ArgumentNullException.ThrowIfNull(value);
+
+        return new(true, value, []);
+    }
+
+    public static Result<T> Failure(Error error) =>
+        new(false, default, [error]);
+
+    public static Result<T> Failure(IReadOnlyList<Error> errors) =>
+        new(false, default, errors);
+
+    public static implicit operator Result<T>(Error error) => Failure(error);
+}

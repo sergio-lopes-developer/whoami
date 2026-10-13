@@ -7,7 +7,7 @@ using WhoAmI.Application.Results;
 
 namespace WhoAmI.Application.Tests.Decorators.Commands;
 
-public class CommandUnitOfWorkDecoratorGenericResultTests {
+public class CommandUnitOfWorkDecoratorTResultTests {
     public sealed record FakeCommand : ICommand<FakeResult>;
 
     public sealed record FakeResult;
