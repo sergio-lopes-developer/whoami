@@ -18,7 +18,7 @@ public sealed class Email : ValueObject {
         @"(\.[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)*" +
         @"\.[a-zA-Z]{2,}$";
 
-    private static readonly Regex _regex = new(
+    private static readonly Regex _emailRegex = new(
         EmailPattern,
         RegexOptions.Compiled | RegexOptions.IgnoreCase
     );
@@ -73,5 +73,6 @@ public sealed class Email : ValueObject {
         return atIndex is > 0 and <= LocalPartMaxLength;
     }
 
-    private static bool HasValidFormat(string email) => _regex.IsMatch(email);
+    private static bool HasValidFormat(string email) =>
+        _emailRegex.IsMatch(email);
 }
