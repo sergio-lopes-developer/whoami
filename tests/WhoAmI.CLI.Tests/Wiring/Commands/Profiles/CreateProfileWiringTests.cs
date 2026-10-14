@@ -14,18 +14,20 @@ public class CreateProfileWiringTests {
         "https://github.com/username"
     );
 
-    private static CreateProfileCommand RunCreateProfile(params string[] args) {
-        string[] commandArgs = ["profile", "create", ..args];
+    private static CreateProfileCommand RunCreateProfile(
+        params string[] commandOptions
+    ) {
+        string[] commandLineArguments = ["profile", "create", ..commandOptions];
 
         return CliApplicationCommandRunner
             .Run<CreateProfileCommand, CreateProfileResponse>(
                 CreateProfileResponse(),
-                commandArgs
+                commandLineArguments
             );
     }
 
     [Fact]
-    public void CreateProfile_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
+    public void CreateProfile_ShouldBindOptionsAndDispatchCommand_WhenOptionsAreProvided() {
         // Arrange
         const string firstName = "John";
         const string lastName = "Doe";

@@ -5,14 +5,22 @@ using WhoAmI.CLI.Tests.Wiring.Support;
 namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
 public class UpdateEmailWiringTests {
-    private static UpdateEmailCommand RunUpdateEmail(params string[] args) {
-        string[] commandArgs = ["profile", "update", "email", ..args];
+    private static UpdateEmailCommand RunUpdateEmail(
+        params string[] commandOptions
+    ) {
+        string[] commandLineArguments = [
+            "profile",
+            "update",
+            "email",
+            ..commandOptions
+        ];
 
-        return CliApplicationCommandRunner.Run<UpdateEmailCommand>(commandArgs);
+        return CliApplicationCommandRunner
+            .Run<UpdateEmailCommand>(commandLineArguments);
     }
 
     [Fact]
-    public void UpdateEmail_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
+    public void UpdateEmail_ShouldBindOptionsAndDispatchCommand_WhenOptionsAreProvided() {
         // Arrange
         const string email = "john@doe.com";
         var id = Guid.NewGuid().ToString();

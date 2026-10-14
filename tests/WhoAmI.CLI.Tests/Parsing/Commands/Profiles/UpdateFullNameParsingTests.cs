@@ -27,8 +27,8 @@ public class UpdateFullNameParsingTests {
         return tester;
     }
 
-    private static CommandAppResult Parse(params string[] args) =>
-        _tester.Run(["profile", "update", "name", .. args]);
+    private static CommandAppResult Parse(params string[] commandOptions) =>
+        _tester.Run(["profile", "update", "name", .. commandOptions]);
 
     private static UpdateFullNameCommandSettings GetSettings(
         CommandAppResult execution
@@ -75,7 +75,9 @@ public class UpdateFullNameParsingTests {
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
-    public void UpdateFullName_ShouldParseId_WhenOptionIsProvided(string option) {
+    public void UpdateFullName_ShouldParseId_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, Id);
 
@@ -88,7 +90,9 @@ public class UpdateFullNameParsingTests {
     [Theory]
     [InlineData("--first-name")]
     [InlineData("-f")]
-    public void UpdateFullName_ShouldParseFirstName_WhenOptionIsProvided(string option) {
+    public void UpdateFullName_ShouldParseFirstName_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, FirstName);
 
@@ -101,7 +105,9 @@ public class UpdateFullNameParsingTests {
     [Theory]
     [InlineData("--last-name")]
     [InlineData("-l")]
-    public void UpdateFullName_ShouldParseLastName_WhenOptionIsProvided(string option) {
+    public void UpdateFullName_ShouldParseLastName_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, LastName);
 

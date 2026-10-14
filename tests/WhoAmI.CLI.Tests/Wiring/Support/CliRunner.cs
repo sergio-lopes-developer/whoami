@@ -6,18 +6,23 @@ namespace WhoAmI.CLI.Tests.Wiring.Support;
 internal static class CliRunner {
     public static CliExecutionContext Run(
         CliExecutionContext context,
-        params string[] args
+        params string[] commandLineArguments
     ) {
         // Assert
-        context.CommandApp.Run(args, TestContext.Current.CancellationToken)
+        context.CommandApp
+            .Run(commandLineArguments, TestContext.Current.CancellationToken)
             .Should()
             .Be(CliExit.Success());
 
         return context;
     }
 
-    public static int Run(params string[] args) {
+    public static int Run(params string[] commandLineArguments) {
         var cli = CliExecutionContextFactory.CreateContext();
-        return cli.CommandApp.Run(args, TestContext.Current.CancellationToken);
+
+        return cli.CommandApp.Run(
+            commandLineArguments,
+            TestContext.Current.CancellationToken
+        );
     }
 }

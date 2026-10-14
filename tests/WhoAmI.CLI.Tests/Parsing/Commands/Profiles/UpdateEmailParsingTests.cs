@@ -26,8 +26,8 @@ public class UpdateEmailParsingTests {
         return tester;
     }
 
-    private static CommandAppResult Parse(params string[] args) =>
-        _tester.Run(["profile", "update", "email", .. args]);
+    private static CommandAppResult Parse(params string[] commandOptions) =>
+        _tester.Run(["profile", "update", "email", .. commandOptions]);
 
     private static UpdateEmailCommandSettings GetSettings(
         CommandAppResult execution
@@ -83,7 +83,9 @@ public class UpdateEmailParsingTests {
     [Theory]
     [InlineData("--email")]
     [InlineData("-e")]
-    public void UpdateEmail_ShouldParseEmail_WhenOptionIsProvided(string option) {
+    public void UpdateEmail_ShouldParseEmail_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, Email);
 
