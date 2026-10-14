@@ -27,7 +27,7 @@ public class UpdateEmailParsingTests {
     }
 
     private static CommandAppResult Parse(params string[] commandOptions) =>
-        _tester.Run(["profile", "update", "email", .. commandOptions]);
+        _tester.Run(["profile", "update", "email", ..commandOptions]);
 
     private static UpdateEmailCommandSettings GetSettings(
         CommandAppResult execution

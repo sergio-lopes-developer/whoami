@@ -28,7 +28,7 @@ public class UpdateFullNameParsingTests {
     }
 
     private static CommandAppResult Parse(params string[] commandOptions) =>
-        _tester.Run(["profile", "update", "name", .. commandOptions]);
+        _tester.Run(["profile", "update", "name", ..commandOptions]);
 
     private static UpdateFullNameCommandSettings GetSettings(
         CommandAppResult execution

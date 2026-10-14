@@ -28,7 +28,7 @@ public class CreateProfileParsingTests {
     }
 
     private static CommandAppResult Parse(params string[] commandOptions) =>
-        _tester.Run(["profile", "create", .. commandOptions]);
+        _tester.Run(["profile", "create", ..commandOptions]);
 
     private static CreateProfileCommandSettings GetSettings(
         CommandAppResult execution

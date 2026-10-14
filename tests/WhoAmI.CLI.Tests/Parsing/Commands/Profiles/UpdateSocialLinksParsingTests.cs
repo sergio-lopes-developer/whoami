@@ -28,7 +28,7 @@ public class UpdateSocialLinksParsingTests {
     }
 
     private static CommandAppResult Parse(params string[] commandOptions) =>
-        _tester.Run(["profile", "update", "social-links", .. commandOptions]);
+        _tester.Run(["profile", "update", "social-links", ..commandOptions]);
 
     private static UpdateSocialLinksCommandSettings GetSettings(
         CommandAppResult execution

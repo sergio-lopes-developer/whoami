@@ -24,7 +24,7 @@ public class DeleteProfileParsingTests {
     }
 
     private static CommandAppResult Parse(params string[] commandOptions) =>
-        _tester.Run(["profile", "delete", .. commandOptions]);
+        _tester.Run(["profile", "delete", ..commandOptions]);
 
     private static DeleteProfileCommandSettings GetSettings(
         CommandAppResult execution
