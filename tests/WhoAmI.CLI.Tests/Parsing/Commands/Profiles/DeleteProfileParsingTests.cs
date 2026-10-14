@@ -23,8 +23,8 @@ public class DeleteProfileParsingTests {
         return tester;
     }
 
-    private static CommandAppResult Parse(params string[] args) =>
-        _tester.Run(["profile", "delete", .. args]);
+    private static CommandAppResult Parse(params string[] commandOptions) =>
+        _tester.Run(["profile", "delete", ..commandOptions]);
 
     private static DeleteProfileCommandSettings GetSettings(
         CommandAppResult execution
@@ -37,7 +37,9 @@ public class DeleteProfileParsingTests {
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
-    public void DeleteProfile_ShouldParseId_WhenOptionIsProvided(string option) {
+    public void DeleteProfile_ShouldParseId_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, Id);
 

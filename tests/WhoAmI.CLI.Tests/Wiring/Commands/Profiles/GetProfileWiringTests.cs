@@ -16,18 +16,20 @@ public class GetProfileWiringTests {
         null
     );
 
-    private static GetProfileByEmailQuery RunGetProfile(params string[] args) {
-        string[] commandArgs = ["profile", "get", ..args];
+    private static GetProfileByEmailQuery RunGetProfile(
+        params string[] commandOptions
+    ) {
+        string[] commandLineArguments = ["profile", "get", ..commandOptions];
 
         return CliApplicationQueryRunner
             .Run<GetProfileByEmailQuery, GetProfileByEmailResponse>(
                 GetProfileResponse(),
-                commandArgs
+                commandLineArguments
             );
     }
 
     [Fact]
-    public void GetProfile_ShouldBindCliArgumentsAndDispatchQuery_WhenArgumentsAreProvided() {
+    public void GetProfile_ShouldBindOptionsAndDispatchQuery_WhenOptionsAreProvided() {
         // Arrange
         const string email = "john@doe.com";
 

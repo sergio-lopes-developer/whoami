@@ -6,16 +6,21 @@ namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
 public class UpdateSocialLinksWiringTests {
     private static UpdateSocialLinksCommand RunUpdateSocialLinks(
-        params string[] args
+        params string[] commandOptions
     ) {
-        string[] commandArgs = ["profile", "update", "social-links", ..args];
+        string[] commandLineArguments = [
+            "profile",
+            "update",
+            "social-links",
+            ..commandOptions
+        ];
 
         return CliApplicationCommandRunner
-            .Run<UpdateSocialLinksCommand>(commandArgs);
+            .Run<UpdateSocialLinksCommand>(commandLineArguments);
     }
 
     [Fact]
-    public void UpdateSocialLinks_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
+    public void UpdateSocialLinks_ShouldBindOptionsAndDispatchCommand_WhenOptionsAreProvided() {
         // Arrange
         const string linkedIn = "https://www.linkedin.com/in/username";
         const string gitHub = "https://github.com/username";

@@ -27,8 +27,8 @@ public class UpdateSocialLinksParsingTests {
         return tester;
     }
 
-    private static CommandAppResult Parse(params string[] args) =>
-        _tester.Run(["profile", "update", "social-links", .. args]);
+    private static CommandAppResult Parse(params string[] commandOptions) =>
+        _tester.Run(["profile", "update", "social-links", ..commandOptions]);
 
     private static UpdateSocialLinksCommandSettings GetSettings(
         CommandAppResult execution
@@ -75,7 +75,9 @@ public class UpdateSocialLinksParsingTests {
     [Theory]
     [InlineData("--id")]
     [InlineData("-i")]
-    public void UpdateSocialLinks_ShouldParseId_WhenOptionIsProvided(string option) {
+    public void UpdateSocialLinks_ShouldParseId_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, Id);
 
@@ -88,7 +90,9 @@ public class UpdateSocialLinksParsingTests {
     [Theory]
     [InlineData("--linkedin")]
     [InlineData("-n")]
-    public void UpdateSocialLinks_ShouldParseLinkedIn_WhenOptionIsProvided(string option) {
+    public void UpdateSocialLinks_ShouldParseLinkedIn_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, LinkedIn);
 
@@ -101,7 +105,9 @@ public class UpdateSocialLinksParsingTests {
     [Theory]
     [InlineData("--github")]
     [InlineData("-g")]
-    public void UpdateSocialLinks_ShouldParseGitHub_WhenOptionIsProvided(string option) {
+    public void UpdateSocialLinks_ShouldParseGitHub_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, GitHub);
 

@@ -27,8 +27,8 @@ public class CreateProfileParsingTests {
         return tester;
     }
 
-    private static CommandAppResult Parse(params string[] args) =>
-        _tester.Run(["profile", "create", .. args]);
+    private static CommandAppResult Parse(params string[] commandOptions) =>
+        _tester.Run(["profile", "create", ..commandOptions]);
 
     private static CreateProfileCommandSettings GetSettings(
         CommandAppResult execution
@@ -83,7 +83,9 @@ public class CreateProfileParsingTests {
     [Theory]
     [InlineData("--first-name")]
     [InlineData("-f")]
-    public void CreateProfile_ShouldParseFirstName_WhenOptionIsProvided(string option) {
+    public void CreateProfile_ShouldParseFirstName_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, FirstName);
 
@@ -96,7 +98,9 @@ public class CreateProfileParsingTests {
     [Theory]
     [InlineData("--last-name")]
     [InlineData("-l")]
-    public void CreateProfile_ShouldParseLastName_WhenOptionIsProvided(string option) {
+    public void CreateProfile_ShouldParseLastName_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, LastName);
 
@@ -109,7 +113,9 @@ public class CreateProfileParsingTests {
     [Theory]
     [InlineData("--email")]
     [InlineData("-e")]
-    public void CreateProfile_ShouldParseEmail_WhenOptionIsProvided(string option) {
+    public void CreateProfile_ShouldParseEmail_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, Email);
 
@@ -122,7 +128,9 @@ public class CreateProfileParsingTests {
     [Theory]
     [InlineData("--linkedin")]
     [InlineData("-n")]
-    public void CreateProfile_ShouldParseLinkedIn_WhenOptionIsProvided(string option) {
+    public void CreateProfile_ShouldParseLinkedIn_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, LinkedIn);
 
@@ -135,7 +143,9 @@ public class CreateProfileParsingTests {
     [Theory]
     [InlineData("--github")]
     [InlineData("-g")]
-    public void CreateProfile_ShouldParseGitHub_WhenOptionIsProvided(string option) {
+    public void CreateProfile_ShouldParseGitHub_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, GitHub);
 

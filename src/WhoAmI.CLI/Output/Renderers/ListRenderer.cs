@@ -16,7 +16,7 @@ internal static class ListRenderer {
         }
 
         foreach (var row in options.Items) {
-            table.AddRow([.. row]);
+            table.AddRow([..row]);
         }
 
         AnsiConsole.Write(new Align(table, options.Alignment));

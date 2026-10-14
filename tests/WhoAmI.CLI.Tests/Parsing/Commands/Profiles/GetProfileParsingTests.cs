@@ -23,8 +23,8 @@ public class GetProfileParsingTests {
         return tester;
     }
 
-    private static CommandAppResult Parse(params string[] args) =>
-        _tester.Run(["profile", "get", .. args]);
+    private static CommandAppResult Parse(params string[] commandOptions) =>
+        _tester.Run(["profile", "get", ..commandOptions]);
 
     private static GetProfileCommandSettings GetSettings(
         CommandAppResult execution
@@ -79,7 +79,9 @@ public class GetProfileParsingTests {
     [Theory]
     [InlineData("--email")]
     [InlineData("-e")]
-    public void GetProfile_ShouldParseEmail_WhenOptionIsProvided(string option) {
+    public void GetProfile_ShouldParseEmail_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option, Email);
 
@@ -92,7 +94,9 @@ public class GetProfileParsingTests {
     [Theory]
     [InlineData("--hide-email")]
     [InlineData("-m")]
-    public void GetProfile_ShouldParseHideEmail_WhenOptionIsProvided(string option) {
+    public void GetProfile_ShouldParseHideEmail_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option);
 
@@ -105,7 +109,9 @@ public class GetProfileParsingTests {
     [Theory]
     [InlineData("--hide-github")]
     [InlineData("-g")]
-    public void GetProfile_ShouldParseHideGitHub_WhenOptionIsProvided(string option) {
+    public void GetProfile_ShouldParseHideGitHub_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option);
 
@@ -118,7 +124,9 @@ public class GetProfileParsingTests {
     [Theory]
     [InlineData("--hide-linkedin")]
     [InlineData("-n")]
-    public void GetProfile_ShouldParseHideLinkedIn_WhenOptionIsProvided(string option) {
+    public void GetProfile_ShouldParseHideLinkedIn_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option);
 
@@ -131,7 +139,9 @@ public class GetProfileParsingTests {
     [Theory]
     [InlineData("--verbose")]
     [InlineData("-v")]
-    public void GetProfile_ShouldParseVerbose_WhenOptionIsProvided(string option) {
+    public void GetProfile_ShouldParseVerbose_WhenOptionIsProvided(
+        string option
+    ) {
         // Act
         var execution = Parse(option);
 

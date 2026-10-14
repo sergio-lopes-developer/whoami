@@ -8,7 +8,9 @@ public class VersionCommandWiringTests {
     [Theory]
     [InlineData("version")]
     [InlineData("v")]
-    public void Version_ShouldRunSuccessfully_WhenCommandOrAliasIsProvided(string command) {
+    public void Version_ShouldRunSuccessfully_WhenCommandOrAliasIsProvided(
+        string command
+    ) {
         // Act
         var exit = CliRunner.Run(command);
 

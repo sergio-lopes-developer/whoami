@@ -6,16 +6,21 @@ namespace WhoAmI.CLI.Tests.Wiring.Commands.Profiles;
 
 public class UpdateFullNameWiringTests {
     private static UpdateFullNameCommand RunUpdateFullName(
-        params string[] args
+        params string[] commandOptions
     ) {
-        string[] commandArgs = ["profile", "update", "name", ..args];
+        string[] commandLineArguments = [
+            "profile",
+            "update",
+            "name",
+            ..commandOptions
+        ];
 
         return CliApplicationCommandRunner
-            .Run<UpdateFullNameCommand>(commandArgs);
+            .Run<UpdateFullNameCommand>(commandLineArguments);
     }
 
     [Fact]
-    public void UpdateFullName_ShouldBindCliArgumentsAndDispatchCommand_WhenArgumentsAreProvided() {
+    public void UpdateFullName_ShouldBindOptionsAndDispatchCommand_WhenOptionsAreProvided() {
         // Arrange
         const string firstName = "John";
         const string lastName = "Doe";

@@ -13,9 +13,9 @@ internal static class CommandConfiguration {
         return app;
     }
 
-    internal static int Run(IHost host, string[] args) {
+    internal static int Run(IHost host, string[] commandLineArguments) {
         var registrar = new SpectreCliTypeRegistrar(host.Services);
-        return Create(registrar).Run(args);
+        return Create(registrar).Run(commandLineArguments);
     }
 
     private static void Configure(IConfigurator config) {

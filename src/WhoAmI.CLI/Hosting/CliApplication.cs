@@ -10,25 +10,25 @@ public sealed class CliApplication : IAsyncDisposable {
 
     private readonly CliApplicationOptions _options;
 
-    private readonly string[] _args;
+    private readonly string[] _commandLineArguments;
 
     private CliApplication(
         IHost host,
         CliApplicationOptions options,
-        string[] args
+        string[] commandLineArguments
     ) {
         _host = host;
         _options = options;
-        _args = args;
+        _commandLineArguments = commandLineArguments;
     }
 
     public static CliApplication Create(
-        string[] args,
+        string[] commandLineArguments,
         CliApplicationOptions? options = null
     ) {
         options ??= new CliApplicationOptions();
 
-        var builder = Host.CreateApplicationBuilder(args);
+        var builder = Host.CreateApplicationBuilder(commandLineArguments);
 
         if (options.ConfigureLogging) {
             LoggingConfiguration.Configure(builder);
@@ -36,7 +36,11 @@ public sealed class CliApplication : IAsyncDisposable {
 
         ServiceConfiguration.Configure(builder);
 
-        return new CliApplication(builder.Build(), options, args);
+        return new CliApplication(
+            builder.Build(),
+            options,
+            commandLineArguments
+        );
     }
 
     public async Task InitializeAsync() {
@@ -45,7 +49,7 @@ public sealed class CliApplication : IAsyncDisposable {
         }
     }
 
-    public int Run() => CommandConfiguration.Run(_host, _args);
+    public int Run() => CommandConfiguration.Run(_host, _commandLineArguments);
 
     public async ValueTask DisposeAsync() {
         try {
