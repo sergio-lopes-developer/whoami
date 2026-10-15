@@ -81,7 +81,7 @@ Profile successfully created.
 
 | &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | :----------------------------------------------------: | :------------------------------------------------------------------------: |
-| [Usage](../../usage.md) | [Profile Get](./get.md) |
+| [Usage](../../usage.md) | [Profile Delete](./delete.md) |
 
 </div>
 

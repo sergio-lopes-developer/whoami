@@ -177,7 +177,7 @@ Expected output:
 
 | &nbsp;&nbsp;&nbsp; ⬅️ Previous Page &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next Page ➡️ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | :----------------------------------------------------: | :------------------------------------------------------------------------: |
-| [Profile Create](./create.md) | [Profile List](./list.md) |
+| [Profile Delete](./delete.md) | [Profile List](./list.md) |
 
 </div>
 

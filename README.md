@@ -28,7 +28,7 @@ Although the screenshots and examples throughout this repository use my own prof
 
 ### 1. Interactive developer profiles
 
-A command-line application that allows developers to create, store, update, and display their own developer profiles.
+A command-line application that allows developers to manage and display their own developer profiles.
 
 The CLI provides a simple interface for managing profile information such as names, email addresses, and social links. My own profile is used as the primary example and serves as the banner for my LinkedIn profile.
 
@@ -88,7 +88,7 @@ The repository is organized into three top-level directories: `docs/`, `src/`, a
 
 For detailed tracking of issues, pull requests, and ongoing work, see the GitHub Project:
 
-[WhoAmI Development Roadmap](https://github.com/sergio-lopes-developer/whoami/projects)
+[WhoAmI Development Roadmap](https://github.com/users/sergio-lopes-developer/projects/2)
 
 Project development follows a transparent workflow based on GitHub Issues, Pull Requests, Milestones, GitHub Projects, and GitHub Actions.
 
