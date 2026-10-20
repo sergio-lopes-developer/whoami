@@ -41,11 +41,11 @@
 >
 > **Legend:** ✅ Completed · ⏳ Planned
 
-For detailed tracking of issues, pull requests, and ongoing work, see the GitHub Project:
+For detailed tracking of planned and completed work, see the GitHub Project:
 
 [WhoAmI Development Roadmap](https://github.com/users/sergio-lopes-developer/projects/2)
 
-Project development follows a transparent workflow based on GitHub Issues, Pull Requests, Milestones, GitHub Projects, and GitHub Actions.
+Project development follows a transparent workflow using GitHub Issues, Milestones, Pull Requests, GitHub Projects, and GitHub Actions.
 
 ---
 
