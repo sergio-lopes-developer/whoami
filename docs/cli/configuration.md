@@ -41,9 +41,9 @@ By default, the connection is configured in `appsettings.json`:
 }
 ```
 
-This relative path stores the SQLite database file in the application's working directory.
+This relative path creates the SQLite database file in the application's working directory if it does not already exist.
 
-When running in the `Development` environment, `appsettings.Development.json` can override the default configuration.
+When running in the `Development` environment, values from `appsettings.Development.json` override values from `appsettings.json`.
 
 To customize development settings, create this file by copying:
 
@@ -70,7 +70,7 @@ Then update the settings according to your local environment.
 
 Using an environment-specific configuration file allows developers to customize local settings without modifying the repository's default configuration.
 
-The example file provides a template for local development settings and should not contain machine-specific configuration.
+The example file provides a template for local development settings and must not contain machine-specific configuration.
 
 ---
 
