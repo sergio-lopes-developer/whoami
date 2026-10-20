@@ -257,7 +257,7 @@ Exceptions thrown while publishing execution information are isolated and writte
 
 ## Related Documentation
 
-- [Repository Guide](../../README.md) — Repository overview and getting started.
+- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
 - [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.

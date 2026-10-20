@@ -62,7 +62,7 @@ This ensures that the database schema is kept up to date before the application 
 
 ## Related Documentation
 
-- [Repository Guide](../../README.md) — Repository overview and getting started.
+- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
 - [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
 - [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
 - [WhoAmI.Application](../WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.

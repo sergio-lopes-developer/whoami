@@ -127,7 +127,7 @@ Higher architectural layers are responsible for handling and translating domain 
 
 ## Related Documentation
 
-- [Repository Guide](../../README.md) — Repository overview and getting started.
+- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
 - [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
 - [WhoAmI.Application](../WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
 - [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
