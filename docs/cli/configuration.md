@@ -6,7 +6,7 @@
 
 ## Introduction
 
-This guide explains how the **WhoAmI CLI** loads its configuration and how to customize database connection and logging behavior.
+This guide explains how the **WhoAmI CLI** loads its configuration and how to customize the database connection and logging behavior.
 
 All configuration files are located in the `src/WhoAmI.CLI` project.
 
