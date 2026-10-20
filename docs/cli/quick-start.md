@@ -12,10 +12,21 @@ This guide explains how to set up and run the **WhoAmI CLI** for the first time.
 
 ## Prerequisites
 
-Before starting, ensure you have the following installed:
+Before getting started, ensure the following tools are installed:
 
-- .NET 10 SDK.
-- Git.
+- [.NET 10 SDK](https://dotnet.microsoft.com/download) — Download and installation instructions for Linux, macOS, and Windows.
+- [Git](https://git-scm.com/downloads) — Download and installation instructions for Linux, macOS, and Windows.
+
+Verify the installation by running:
+
+```bash
+dotnet --version
+git --version
+```
+
+Each command should print the installed version.
+
+The repository includes a [global.json](../../global.json) file that defines the .NET SDK version used by the project.
 
 ---
 
@@ -30,36 +41,17 @@ cd whoami
 
 ---
 
-## 2. Configure the Database Connection
+## 2. Database Setup
 
-For development, copy:
-
-```text
-src/WhoAmI.CLI/appsettings.Development.example.json
-```
-
-to:
+The CLI uses SQLite with the default connection string configured in:
 
 ```text
-src/WhoAmI.CLI/appsettings.Development.json
+src/WhoAmI.CLI/appsettings.json
 ```
 
-Then update the connection string to specify the location of the SQLite database file.
+The default configuration creates the database file automatically in the application's working directory.
 
-For example:
-
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection":
-      "Data Source=/absolute/path/to/whoami.db;"
-  }
-}
-```
-
-The development configuration overrides the default connection string without modifying the repository's default configuration.
-
-For more information, see the [Configuration](./configuration.md) guide.
+To customize the database location or use environment-specific configuration, see the [Configuration](./configuration.md) guide.
 
 ---
 
@@ -87,7 +79,7 @@ Run the following command:
 dotnet run --project src/WhoAmI.CLI -- profile list
 ```
 
-If the database does not exist, the CLI automatically creates it and applies any pending Entity Framework Core migrations.
+If the database does not exist, the CLI creates it automatically and applies any pending migrations.
 
 If the database is empty, you should see:
 
@@ -95,7 +87,7 @@ If the database is empty, you should see:
 No profiles were found.
 ```
 
-If the command completes successfully, your **WhoAmI CLI** installation is ready to use.
+If the command completes successfully, your **WhoAmI CLI** setup is complete.
 
 ---
 
@@ -116,4 +108,3 @@ After verifying the installation, you may want to:
 | [CLI](../../src/WhoAmI.CLI/README.md) | [Configuration](./configuration.md) |
 
 </div>
-

@@ -150,9 +150,42 @@ Each presentation layer can be introduced independently without changing the res
 
 ---
 
+## Repository Structure
+
+```text
+whoami/
+├── docs/
+├── src/
+│   ├── WhoAmI.Application/
+│   ├── WhoAmI.Bootstrap/
+│   ├── WhoAmI.CLI/
+│   ├── WhoAmI.Domain/
+│   └── WhoAmI.Infrastructure/
+└── tests/
+    ├── WhoAmI.Application.Tests/
+    ├── WhoAmI.CLI.Tests/
+    ├── WhoAmI.Domain.Tests/
+    ├── WhoAmI.Infrastructure.Tests/
+    ├── WhoAmI.IntegrationTests/
+    └── WhoAmI.Testing/
+```
+
+The repository is organized into three top-level directories. The `src/` directory contains the application projects that implement the architectural layers described above, while `docs/` contains project documentation and `tests/` contains the test projects that validate the solution.
+
+- **`docs/`** — Project documentation, including architecture, design decisions, diagrams, and development guides.
+- **`src/`** — Application source code. Each project has a single architectural responsibility following the principles of Clean Architecture.
+  - **`src/WhoAmI.Domain/`** — Domain model, business rules, entities, value objects, and aggregates.
+  - **`src/WhoAmI.Application/`** — CQRS, use cases, validation, command handlers, and application services.
+  - **`src/WhoAmI.Infrastructure/`** — EF Core, repositories, query handlers, Dapper, database access, and infrastructure services.
+  - **`src/WhoAmI.Bootstrap/`** — Composition root and dependency injection configuration.
+  - **`src/WhoAmI.CLI/`** — Command-line interface and command implementations.
+- **`tests/`** — Unit tests, integration tests, and shared testing utilities.
+
+---
+
 ## Related Documentation
 
-- [Repository Guide](../../README.md) — Repository overview and getting started.
+- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
 - [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
 - [WhoAmI.Application](../../src/WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
 - [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.

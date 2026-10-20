@@ -20,11 +20,11 @@ whoami-cli profile update email [options]
 
 ## Options
 
-| Option  | Alias | Required |  Type   | Domain Value Object                                                   | Description            |
-|:--------|:-----:|:--------:|:-------:|:----------------------------------------------------------------------|:-----------------------|
-| --id    |  -i   |   Yes    |  GUID   |                                                                       | Profile identifier.    |
-| --email |  -e   |   Yes    |  Email  | [Email](../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | New email address.     |
-| --help  |  -h   |    No    | Boolean |                                                                       | Displays command help. |
+| Option  | Alias | Required |  Type   | Domain Value Object                                                      | Description            |
+|:--------|:-----:|:--------:|:-------:|:-------------------------------------------------------------------------|:-----------------------|
+| --id    |  -i   |   Yes    |  GUID   |                                                                          | Profile identifier.    |
+| --email |  -e   |   Yes    |  Email  | [Email](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Email.cs) | New email address.     |
+| --help  |  -h   |    No    | Boolean |                                                                          | Displays command help. |
 
 ---
 

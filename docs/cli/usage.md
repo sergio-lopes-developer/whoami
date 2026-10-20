@@ -14,14 +14,15 @@ The tables below provide a quick reference to the available commands and links t
 
 ## Profile Commands
 
-| Command                                                                   | Description                       |
-|:--------------------------------------------------------------------------|:----------------------------------|
-| [profile create](./commands/profiles/create.md)                           | Creates a new profile.            |
-| [profile get](./commands/profiles/get.md)                                 | Displays a profile.               |
-| [profile list](./commands/profiles/list.md)                               | Lists all profiles.               |
-| [profile update email](./commands/profiles/update/email.md)               | Updates a profile's email.        |
-| [profile update name](./commands/profiles/update/name.md)                 | Updates a profile's name.         |
-| [profile update social-links](./commands/profiles/update/social-links.md) | Updates a profile's social links. |
+| Command                                                                   | Description                        |
+|:--------------------------------------------------------------------------|:-----------------------------------|
+| [profile create](./commands/profiles/create.md)                           | Creates a new profile.             |
+| [profile delete](./commands/profiles/delete.md)                           | Deletes a profile.                 |
+| [profile get](./commands/profiles/get.md)                                 | Displays a profile.                |
+| [profile list](./commands/profiles/list.md)                               | Lists all profiles.                |
+| [profile update email](./commands/profiles/update/email.md)               | Updates a profile's email address. |
+| [profile update name](./commands/profiles/update/name.md)                 | Updates a profile's name.          |
+| [profile update social-links](./commands/profiles/update/social-links.md) | Updates a profile's social links.  |
 
 ---
 
@@ -40,4 +41,3 @@ The tables below provide a quick reference to the available commands and links t
 | [Configuration](./configuration.md) | [Profile Create](./commands/profiles/create.md) |
 
 </div>
-
