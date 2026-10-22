@@ -6,9 +6,9 @@
 
 ## Introduction
 
-The **WhoAmI.Bootstrap** project is responsible for composing the application.
+The **WhoAmI.Bootstrap** project is responsible for composing and initializing the application.
 
-It centralizes dependency injection, infrastructure registration, and application startup logic, providing a single entry point for configuring the system.
+It centralizes dependency injection and application startup, providing a single entry point for configuring and initializing the application.
 
 This project acts as the **Composition Root**, keeping host applications (such as the CLI, Web API, or future UI projects) lightweight and focused on their own concerns.
 
@@ -21,20 +21,16 @@ The Bootstrap layer is responsible for the following tasks:
 - Register application services.
 - Register infrastructure services.
 - Configure the application pipeline.
-- Initialize the database during application startup.
+- Orchestrate application startup.
 - Provide a single entry point for application composition.
 
 ---
 
 ## Composition Root
 
-The `AddBootstrap` extension method configures the application's service collection by registering every required layer.
+The Bootstrap project acts as the application's Composition Root by registering every required layer.
 
-```csharp
-services.AddBootstrap(configuration, environment);
-```
-
-Internally, it composes the application by:
+It composes the application by:
 
 - Registering the Application layer.
 - Registering the Infrastructure layer.
@@ -48,15 +44,18 @@ Internally, it composes the application by:
 
 ---
 
-## Database Initialization
+## Application Initialization
 
-The `InitializeDatabaseAsync` extension method applies any pending Entity Framework Core migrations during application startup.
+During application startup, Bootstrap coordinates the database initialization process.
 
-```csharp
-await serviceProvider.InitializeDatabaseAsync();
-```
+The initialization process consists of two steps:
 
-This ensures that the database schema is kept up to date before the application begins processing requests.
+1. Preparing the database environment.
+2. Applying any pending Entity Framework Core migrations.
+
+Bootstrap coordinates this process while delegating each responsibility to the appropriate layer. Database preparation is handled by the Infrastructure layer, and schema updates are applied through Entity Framework Core.
+
+By centralizing startup initialization, every host application follows the same initialization workflow without duplicating startup logic.
 
 ---
 

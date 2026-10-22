@@ -16,26 +16,35 @@
   >
 </p>
 
+Get started with the application or explore its architecture using the documentation below.
+
 ---
 
-## Features
+## Explore the Project
 
-- Manage developer profiles through a command-line interface.
-- Built with [**Domain-Driven Design (DDD)**](https://www.domainlanguage.com/), [**Command Query Responsibility Segregation (CQRS)**](https://martinfowler.com/bliki/CQRS.html) and [**Clean Architecture**](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html).
-- Cross-platform (.NET 10).
-- Comprehensive unit and integration tests.
-- Designed to support multiple clients through independent presentation layers.
+### 🚀 Get Started
+
+- [Quick Start](./docs/cli/quick-start.md)
+- [Configuration](./docs/cli/configuration.md)
+- [Usage](./docs/cli/usage.md)
+
+### 🏛️ Understand the Architecture
+
+- [Architecture](./docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Domain](./src/WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
+- [WhoAmI.Application](./src/WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Infrastructure](./src/WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
+- [WhoAmI.Bootstrap](./src/WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
 
 ---
 
 ## Project Roadmap
 
-| Category        | Scope                                                                                 |
-|-----------------|------------------------------------------------------------------------------------------|
-| Architecture    | ✅ Domain layer<br>✅ Application layer<br>✅ Infrastructure layer<br>✅ Bootstrap       |
-| Interfaces      | ✅ Command-line interface<br>⏳ REST API<br>⏳ Web application<br>⏳ Desktop application |
-| Domain Features | ✅ Profile management<br>⏳ Skills management                                            |
-| Enhancements    | ⏳ Pagination                                                                            |
+| Category     | Scope                                                                                    |
+|--------------|------------------------------------------------------------------------------------------|
+| Interfaces   | ✅ Command-line interface<br>⏳ REST API<br>⏳ Web application<br>⏳ Desktop application |
+| Features     | ✅ Profile management<br>⏳ Skills management                                            |
+| Enhancements | ⏳ Pagination                                                                            |
 
 > [!NOTE]
 >
@@ -46,25 +55,6 @@ For detailed tracking of planned and completed work, see the GitHub Project:
 [WhoAmI Development Roadmap](https://github.com/users/sergio-lopes-developer/projects/2)
 
 Project development follows a transparent workflow using GitHub Issues, Milestones, Pull Requests, GitHub Projects, and GitHub Actions.
-
----
-
-## Documentation
-
-- [Architecture](./docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
-- [WhoAmI.Domain](./src/WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
-- [WhoAmI.Application](./src/WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
-- [WhoAmI.Infrastructure](./src/WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-- [WhoAmI.Bootstrap](./src/WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
-- [WhoAmI.CLI](./src/WhoAmI.CLI/README.md) — Command-line interface and available commands.
-
----
-
-## References
-
-- [Domain-Driven Design](https://www.domainlanguage.com/) — Eric Evans
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) — Robert C. Martin
-- [CQRS](https://martinfowler.com/bliki/CQRS.html) — Martin Fowler
 
 ---
 
