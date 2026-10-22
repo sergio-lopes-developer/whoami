@@ -1,7 +1,7 @@
 using FluentAssertions;
 using WhoAmI.Application.Features.Profiles.CreateProfile;
 using WhoAmI.Application.Features.Profiles.GetProfileByEmail;
-using WhoAmI.IntegrationTests.Infrastructure;
+using WhoAmI.IntegrationTests.TestInfrastructure;
 
 namespace WhoAmI.IntegrationTests.Features;
 

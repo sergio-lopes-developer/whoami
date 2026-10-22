@@ -8,6 +8,7 @@ using WhoAmI.Application.Features.Profiles;
 using WhoAmI.Infrastructure.Data.Persistence.Context;
 using WhoAmI.Infrastructure.Data.Persistence.ErrorHandling.Abstractions;
 using WhoAmI.Infrastructure.Data.Persistence.ErrorHandling.Parsers.Sqlite;
+using WhoAmI.Infrastructure.Data.Persistence.Initialization;
 using WhoAmI.Infrastructure.DependencyInjection;
 
 namespace WhoAmI.Infrastructure.Tests.DependencyInjection;
@@ -51,7 +52,7 @@ public class ServiceCollectionExtensionsTests {
     }
 
     [Fact]
-    public void AddInfrastructure_ShouldRegisterSqliteParser() {
+    public void AddInfrastructure_ShouldRegisterSqliteConstraintViolationParser() {
         // Arrange
         var services = new ServiceCollection();
         var configuration = CreateConfiguration();
@@ -67,6 +68,67 @@ public class ServiceCollectionExtensionsTests {
             .GetService<IConstraintViolationParser>()
             .Should()
             .BeOfType<SqliteConstraintViolationParser>();
+    }
+
+    [Fact]
+    public void AddInfrastructure_ShouldRegisterDatabasePreparation() {
+        // Arrange
+        var services = new ServiceCollection();
+        var configuration = CreateConfiguration();
+        var environment = Substitute.For<IHostEnvironment>();
+
+        // Act
+        services.AddInfrastructure(configuration, environment);
+
+        // Assert
+        var provider = services.BuildServiceProvider();
+
+        provider
+            .GetService<IDatabasePreparation>()
+            .Should()
+            .NotBeNull();
+    }
+
+    [Fact]
+    public void AddInfrastructure_ShouldThrow_WhenDatabaseConnectionStringIsMissingOrEmpty() {
+        // Arrange
+        var services = new ServiceCollection();
+        var configuration = new ConfigurationBuilder().Build();
+        var environment = Substitute.For<IHostEnvironment>();
+
+        // Act
+        var act = () => services.AddInfrastructure(configuration, environment);
+
+        // Assert
+        act.Should()
+            .Throw<InvalidOperationException>()
+            .WithMessage("The database connection string is missing or empty.");
+    }
+
+    [Fact]
+    public void AddInfrastructure_ShouldThrow_WhenDatabaseConnectionStringIsEmpty() {
+        // Arrange
+        var services = new ServiceCollection();
+
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(
+                new Dictionary<string, string?> {
+                    ["ConnectionStrings:DefaultConnection"] = ""
+                }
+            )
+            .Build();
+
+        var environment = Substitute.For<IHostEnvironment>();
+
+        // Act
+        var act = () =>
+            services.AddInfrastructure(configuration, environment);
+
+        // Assert
+        act
+            .Should()
+            .Throw<InvalidOperationException>()
+            .WithMessage("The database connection string is missing or empty.");
     }
 
     private static IConfiguration CreateConfiguration() =>

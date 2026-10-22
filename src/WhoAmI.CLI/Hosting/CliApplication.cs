@@ -28,7 +28,12 @@ public sealed class CliApplication : IAsyncDisposable {
     ) {
         options ??= new CliApplicationOptions();
 
-        var builder = Host.CreateApplicationBuilder(commandLineArguments);
+        var builder = Host.CreateApplicationBuilder(
+            new HostApplicationBuilderSettings {
+                Args = commandLineArguments,
+                ContentRootPath = AppContext.BaseDirectory
+            }
+        );
 
         if (options.ConfigureLogging) {
             LoggingConfiguration.Configure(builder);
