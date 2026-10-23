@@ -30,11 +30,11 @@ Get started with the application or explore its architecture using the documenta
 
 ### 🏛️ Understand the Architecture
 
-- [Architecture](./docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
-- [WhoAmI.Domain](./src/WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
-- [WhoAmI.Application](./src/WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
-- [WhoAmI.Infrastructure](./src/WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-- [WhoAmI.Bootstrap](./src/WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
+- [Architecture](./docs/architecture/README.md) — Explains the application's architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Domain](./src/WhoAmI.Domain/README.md) — Defines the business model, entities, value objects, and domain events.
+- [WhoAmI.Application](./src/WhoAmI.Application/README.md) — Implements application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Infrastructure](./src/WhoAmI.Infrastructure/README.md) — Provides persistence, repositories, queries, and infrastructure services.
+- [WhoAmI.Bootstrap](./src/WhoAmI.Bootstrap/README.md) — Configures dependency injection and application composition.
 
 ---
 

@@ -36,12 +36,12 @@ The CLI is responsible for the following tasks:
 
 ## Related Documentation
 
-- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
-- [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
-- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
-- [WhoAmI.Application](../WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
-- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
+- [Project Overview](../../README.md) — Introduces the project, demonstrates its functionality, and outlines its roadmap.
+- [Architecture](../../docs/architecture/README.md) — Explains the application's architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Defines the business model, entities, value objects, and domain events.
+- [WhoAmI.Application](../WhoAmI.Application/README.md) — Implements application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Provides persistence, repositories, queries, and infrastructure services.
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Configures dependency injection and application composition.
 
 ---
 
