@@ -93,11 +93,10 @@ If the command completes successfully, your **WhoAmI CLI** setup is complete.
 
 ## Next Steps
 
-After verifying the installation, you may want to:
+Now that the CLI is running, continue with:
 
-- Learn how to [configure the CLI](./configuration.md).
-- Explore the [command reference](usage.md).
-- Learn about the [project's architecture](../architecture/README.md).
+- [Usage](./usage.md) — Learn the available commands.
+- [Configuration](./configuration.md) — Customize the CLI.
 
 ---
 

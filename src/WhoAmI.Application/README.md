@@ -63,8 +63,6 @@ WhoAmI.Application
              └── UpdateEmailCommandValidator.cs
 ```
 
----
-
 ### Queries
 
 A query feature typically consists of:
@@ -210,8 +208,6 @@ The Application layer provides execution tracking through abstractions without d
 
 Execution tracking is centralized by [ExecutionRunner](./Execution/ExecutionRunner.cs), which wraps application operations and coordinates execution measurement, exception handling, and publishing of execution information.
 
----
-
 ### Execution Information
 
 Execution information includes:
@@ -235,8 +231,6 @@ The [ExecutionRunner](./Execution/ExecutionRunner.cs) coordinates the execution 
 
 Presentation or Infrastructure projects may consume this information using logging providers, monitoring systems, or other observability tools without introducing dependencies into the Application layer.
 
----
-
 ### Execution Runner
 
 The [ExecutionRunner](./Execution/ExecutionRunner.cs) provides a reusable execution boundary for commands and queries.
@@ -244,8 +238,6 @@ The [ExecutionRunner](./Execution/ExecutionRunner.cs) provides a reusable execut
 Decorators such as [CommandExecutionDecorator](./Decorators/Commands/CommandExecutionDecorator.cs) and [QueryExecutionDecorator](./Decorators/Queries/QueryExecutionDecorator.cs) delegate execution tracking to this component instead of implementing logging concerns directly.
 
 This keeps decorators focused on pipeline composition while centralizing execution-related behavior.
-
----
 
 ### Safe Logging
 

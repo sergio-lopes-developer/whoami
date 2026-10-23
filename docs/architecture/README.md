@@ -90,8 +90,6 @@ It owns:
 
 The Domain never depends on higher layers.
 
----
-
 ### Application
 
 The Application layer coordinates use cases.
@@ -99,8 +97,6 @@ The Application layer coordinates use cases.
 It defines application workflows while remaining independent of persistence, presentation frameworks, and infrastructure implementations.
 
 Business rules remain inside the Domain.
-
----
 
 ### Infrastructure
 
@@ -116,8 +112,6 @@ Responsibilities typically include:
 
 Infrastructure depends on the Application and Domain layers, never the opposite.
 
----
-
 ### Bootstrap
 
 The Bootstrap layer acts as the application's composition root.
@@ -130,8 +124,6 @@ Its responsibility is to configure the application by:
 - Providing a single composition root for presentation projects.
 
 Presentation projects use the Bootstrap layer to initialize the application without containing dependency injection or infrastructure configuration themselves.
-
----
 
 ### Presentation
 
