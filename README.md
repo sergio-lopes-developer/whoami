@@ -25,8 +25,8 @@ Get started with the application or explore its architecture using the documenta
 ### 🚀 Get Started
 
 - [Quick Start](./docs/cli/quick-start.md) — Clone, build, and run the project.
-- [Configuration](./docs/cli/configuration.md) — Learn the available commands.
-- [Usage](./docs/cli/usage.md) — Customize the CLI.
+- [Usage](./docs/cli/usage.md) — Learn the available commands.
+- [Configuration](./docs/cli/configuration.md) — Customize the CLI.
 
 ### 🏛️ Understand the Architecture
 
