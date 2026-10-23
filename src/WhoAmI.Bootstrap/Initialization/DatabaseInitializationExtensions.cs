@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WhoAmI.Infrastructure.Data.Persistence.Context;
+using WhoAmI.Infrastructure.Data.Persistence.Initialization;
 
 namespace WhoAmI.Bootstrap.Initialization;
 
@@ -10,8 +11,18 @@ public static class DatabaseInitializationExtensions {
     ) {
         using var scope = services.CreateScope();
 
-        var db = scope.ServiceProvider.GetRequiredService<WhoAmIDbContext>();
+        PrepareDatabase(scope.ServiceProvider);
 
+        await MigrateDatabaseAsync(scope.ServiceProvider);
+    }
+
+    private static void PrepareDatabase(IServiceProvider services) {
+        var preparation = services.GetRequiredService<IDatabasePreparation>();
+        preparation.Prepare();
+    }
+
+    private static async Task MigrateDatabaseAsync(IServiceProvider services) {
+        var db = services.GetRequiredService<WhoAmIDbContext>();
         await db.Database.MigrateAsync();
     }
 }

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
-namespace WhoAmI.IntegrationTests.Infrastructure;
+namespace WhoAmI.IntegrationTests.TestInfrastructure;
 
 internal sealed class TestHostEnvironment : IHostEnvironment {
     public string EnvironmentName { get; set; } = Environments.Development;

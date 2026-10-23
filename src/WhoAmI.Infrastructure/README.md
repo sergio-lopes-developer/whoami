@@ -21,6 +21,7 @@ The Infrastructure layer is designed to be extensible. New persistence providers
 The Infrastructure layer is responsible for:
 
 - Configuring the database model.
+- Preparing the database environment.
 - Implementing repositories.
 - Persisting aggregates and executing other write operations against the database.
 - Translating provider-specific persistence errors.
@@ -57,8 +58,6 @@ Database constraint names are centralized in the [DatabaseConstraintNames](./Dat
 >
 > These constants are used only when configuring the database schema for unique indexes or unique constraints.
 
----
-
 #### Context
 
 The [WhoAmIDbContext](./Data/Persistence/Context/WhoAmIDbContext.cs) class is the central entry point for Entity Framework Core persistence.
@@ -72,7 +71,13 @@ Its responsibilities include:
 - Acting as the `IUnitOfWork` implementation.
 - Coordinating persistence error translation.
 
----
+#### Database Initialization
+
+The Infrastructure layer is responsible for preparing the persistence environment before Entity Framework Core applies database migrations.
+
+Database preparation is provider-specific and is encapsulated behind the `IDatabasePreparation` abstraction. The current SQLite implementation validates the configured database path and creates any required directories before the database is accessed.
+
+This keeps provider-specific initialization concerns within the Infrastructure layer while allowing the Bootstrap layer to coordinate the overall application startup process.
 
 #### Repositories
 
@@ -87,8 +92,6 @@ Their responsibilities include:
 - Encapsulating Entity Framework Core operations.
 - Providing an abstraction over the persistence mechanism.
 
----
-
 ### Queries
 
 The query side is responsible for executing read operations against the database.
@@ -97,8 +100,6 @@ Unlike the persistence side, queries do not load or modify aggregates. Instead, 
 
 This separation follows the CQRS approach adopted by the project, enabling each side to evolve independently while keeping the Domain and Application layers unaware of persistence technology.
 
----
-
 #### Connections
 
 Query handlers obtain database connections through the [IDbConnectionFactory](./Data/Queries/Abstractions/IDbConnectionFactory.cs) abstraction.
@@ -106,8 +107,6 @@ Query handlers obtain database connections through the [IDbConnectionFactory](./
 The current implementation provides a SQLite connection factory, but the abstraction allows the underlying provider to be replaced without affecting query handlers.
 
 This keeps connection creation centralized and prevents provider-specific code from being scattered throughout the query implementation.
-
----
 
 #### Query Handlers
 
@@ -162,8 +161,6 @@ This prevents SQLite, SQL Server, PostgreSQL, or any other database-specific imp
 
 For example, SQLite may generate an exception such as `UNIQUE constraint failed: Profiles.email`.
 
----
-
 ### PersistenceErrorMapper
 
 Coordinates the persistence error translation process.
@@ -175,8 +172,6 @@ It receives provider-specific exceptions, delegates the parsing and violation ma
 The Application layer receives only the resulting application error and never depends on provider-specific exception details.
 
 This process is implemented by [PersistenceErrorMapper](./Data/Persistence/ErrorHandling/PersistenceErrorMapper.cs).
-
----
 
 ### Parsing
 
@@ -191,8 +186,6 @@ For example, the exception message `UNIQUE constraint failed: Profiles.email` is
 This translation isolates provider-specific knowledge within the Infrastructure layer, ensuring that no SQLite-specific details leak into the Application layer.
 
 For SQLite, this responsibility is implemented by [SqliteConstraintViolationParser](./Data/Persistence/ErrorHandling/Parsers/Sqlite/SqliteConstraintViolationParser.cs).
-
----
 
 ### [PersistenceViolationCode](./Data/Persistence/ErrorHandling/PersistenceViolationCode.cs)
 
@@ -214,8 +207,6 @@ The codes intentionally do not represent:
 
 Instead, they describe the semantic meaning of the persistence violation, allowing the Application layer to remain completely independent of persistence technology.
 
----
-
 ### Constraint Signatures
 
 Constraint signatures define the mapping between provider-specific exception signatures and provider-independent persistence violation codes.
@@ -225,8 +216,6 @@ They centralize all database-specific knowledge in a single location, allowing p
 If support for another database provider is introduced, it can define its own parser and corresponding signature registry without affecting the existing implementation.
 
 For SQLite, the signature registry is implemented by [SqliteConstraintSignatures](./Data/Persistence/ErrorHandling/Parsers/Sqlite/SqliteConstraintSignatures.cs).
-
----
 
 ### Violation Mappers
 
@@ -242,15 +231,11 @@ Adding support for a new persistence violation typically requires creating a new
 
 For example, the mapper for `DuplicateProfileEmail` is implemented by [DuplicateProfileEmailViolationMapper](./Data/Persistence/ErrorHandling/ViolationMappers/DuplicateProfileEmailViolationMapper.cs).
 
----
-
 ### [UnrecognizedConstraintException](./Data/Persistence/ErrorHandling/Exceptions/UnrecognizedConstraintException.cs)
 
 Thrown when the parser receives an unexpected provider exception type or cannot match a provider-specific exception to a registered constraint signature.
 
 Failing fast prevents silent data inconsistencies and makes unsupported database constraint violations immediately visible during development.
-
----
 
 ### Persistence Error Pipeline
 
@@ -293,12 +278,12 @@ This keeps the database schema synchronized with the persistence model as the ap
 
 ## Related Documentation
 
-- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
-- [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
-- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
-- [WhoAmI.Application](../WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
-- [WhoAmI.CLI](../WhoAmI.CLI/README.md) — Command-line interface and available commands.
+- [Project Overview](../../README.md) — Introduces the project, demonstrates its functionality, and outlines its roadmap.
+- [Architecture](../../docs/architecture/README.md) — Explains the application's architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Defines the business model, entities, value objects, and domain events.
+- [WhoAmI.Application](../WhoAmI.Application/README.md) — Implements application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Configures dependency injection and application composition.
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md) — Implements the application's command-line interface.
 
 ---
 

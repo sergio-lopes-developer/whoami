@@ -90,8 +90,6 @@ It owns:
 
 The Domain never depends on higher layers.
 
----
-
 ### Application
 
 The Application layer coordinates use cases.
@@ -99,8 +97,6 @@ The Application layer coordinates use cases.
 It defines application workflows while remaining independent of persistence, presentation frameworks, and infrastructure implementations.
 
 Business rules remain inside the Domain.
-
----
 
 ### Infrastructure
 
@@ -116,8 +112,6 @@ Responsibilities typically include:
 
 Infrastructure depends on the Application and Domain layers, never the opposite.
 
----
-
 ### Bootstrap
 
 The Bootstrap layer acts as the application's composition root.
@@ -130,8 +124,6 @@ Its responsibility is to configure the application by:
 - Providing a single composition root for presentation projects.
 
 Presentation projects use the Bootstrap layer to initialize the application without containing dependency injection or infrastructure configuration themselves.
-
----
 
 ### Presentation
 
@@ -185,12 +177,12 @@ The repository is organized into three top-level directories. The `src/` directo
 
 ## Related Documentation
 
-- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
-- [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
-- [WhoAmI.Application](../../src/WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
-- [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-- [WhoAmI.Bootstrap](../../src/WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
-- [WhoAmI.CLI](../../src/WhoAmI.CLI/README.md) — Command-line interface and available commands.
+- [Project Overview](../../README.md) — Introduces the project, demonstrates its functionality, and outlines its roadmap.
+- [WhoAmI.Domain](../../src/WhoAmI.Domain/README.md) — Defines the business model, entities, value objects, and domain events.
+- [WhoAmI.Application](../../src/WhoAmI.Application/README.md) — Implements application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Infrastructure](../../src/WhoAmI.Infrastructure/README.md) — Provides persistence, repositories, queries, and infrastructure services.
+- [WhoAmI.Bootstrap](../../src/WhoAmI.Bootstrap/README.md) — Configures dependency injection and application composition.
+- [WhoAmI.CLI](../../src/WhoAmI.CLI/README.md) — Implements the application's command-line interface.
 
 ---
 

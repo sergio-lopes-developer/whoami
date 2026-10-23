@@ -63,8 +63,6 @@ WhoAmI.Application
              └── UpdateEmailCommandValidator.cs
 ```
 
----
-
 ### Queries
 
 A query feature typically consists of:
@@ -210,8 +208,6 @@ The Application layer provides execution tracking through abstractions without d
 
 Execution tracking is centralized by [ExecutionRunner](./Execution/ExecutionRunner.cs), which wraps application operations and coordinates execution measurement, exception handling, and publishing of execution information.
 
----
-
 ### Execution Information
 
 Execution information includes:
@@ -235,8 +231,6 @@ The [ExecutionRunner](./Execution/ExecutionRunner.cs) coordinates the execution 
 
 Presentation or Infrastructure projects may consume this information using logging providers, monitoring systems, or other observability tools without introducing dependencies into the Application layer.
 
----
-
 ### Execution Runner
 
 The [ExecutionRunner](./Execution/ExecutionRunner.cs) provides a reusable execution boundary for commands and queries.
@@ -244,8 +238,6 @@ The [ExecutionRunner](./Execution/ExecutionRunner.cs) provides a reusable execut
 Decorators such as [CommandExecutionDecorator](./Decorators/Commands/CommandExecutionDecorator.cs) and [QueryExecutionDecorator](./Decorators/Queries/QueryExecutionDecorator.cs) delegate execution tracking to this component instead of implementing logging concerns directly.
 
 This keeps decorators focused on pipeline composition while centralizing execution-related behavior.
-
----
 
 ### Safe Logging
 
@@ -257,12 +249,12 @@ Exceptions thrown while publishing execution information are isolated and writte
 
 ## Related Documentation
 
-- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
-- [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
-- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
-- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
-- [WhoAmI.CLI](../WhoAmI.CLI/README.md) — Command-line interface and available commands.
+- [Project Overview](../../README.md) — Introduces the project, demonstrates its functionality, and outlines its roadmap.
+- [Architecture](../../docs/architecture/README.md) — Explains the application's architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Defines the business model, entities, value objects, and domain events.
+- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Provides persistence, repositories, queries, and infrastructure services.
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Configures dependency injection and application composition.
+- [WhoAmI.CLI](../WhoAmI.CLI/README.md) — Implements the application's command-line interface.
 
 ---
 

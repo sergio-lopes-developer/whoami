@@ -7,12 +7,14 @@ using WhoAmI.Application.Abstractions.Queries;
 using WhoAmI.Application.Results;
 using WhoAmI.Infrastructure.Data.Persistence.Context;
 
-namespace WhoAmI.IntegrationTests.Infrastructure;
+namespace WhoAmI.IntegrationTests.TestInfrastructure;
 
 public sealed class IntegrationTestScope : IAsyncDisposable {
     private readonly IServiceScope _scope;
 
     private readonly IDbContextTransaction? _transaction;
+
+    public IServiceProvider Services => _scope.ServiceProvider;
 
     private IntegrationTestScope(
         IServiceScope scope,
@@ -36,8 +38,7 @@ public sealed class IntegrationTestScope : IAsyncDisposable {
         return new IntegrationTestScope(scope, transaction);
     }
 
-    private T Get<T>() where T : notnull =>
-        _scope.ServiceProvider.GetRequiredService<T>();
+    private T Get<T>() where T : notnull => Services.GetRequiredService<T>();
 
     public Task<Result<TResult>> Execute<TResult>(
         ICommand<TResult> command,

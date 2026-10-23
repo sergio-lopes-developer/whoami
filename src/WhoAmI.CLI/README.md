@@ -6,16 +6,7 @@
 
 ## Introduction
 
-The **WhoAmI.CLI** project implements the command-line interface for the WhoAmI application.
-
-It provides a terminal-based interface for managing developer profiles without requiring a graphical user interface.
-
-The CLI is designed to be:
-
-- Script-friendly.
-- Cross-platform.
-- Extensible.
-- Consistent.
+**WhoAmI.CLI** is the command-line interface for the WhoAmI application. It provides a cross-platform, script-friendly interface for managing developer profiles while delegating all business logic to the application layer.
 
 ---
 
@@ -29,26 +20,13 @@ The CLI is responsible for the following tasks:
 - Returning appropriate exit codes.
 - Delegating business logic to the application layer.
 
-The CLI receives user input, dispatches commands and queries through the application layer, and renders the results in a terminal-friendly format.
-
 > [!NOTE]
 >
 > The CLI intentionally contains no business rules. All business logic resides in the application and domain layers.
 
 ---
 
-## Features
-
-The CLI provides commands for:
-
-- **Profile management**
-  - Manage developer profiles, including creating, retrieving, listing, updating, and deleting profiles.
-- **Version information**
-  - Display the application version.
-
----
-
-## User Guide
+## CLI Documentation
 
 - [Quick Start](../../docs/cli/quick-start.md)
 - [Configuration](../../docs/cli/configuration.md)
@@ -58,19 +36,12 @@ The CLI provides commands for:
 
 ## Related Documentation
 
-- [Project Overview](../../README.md) — Introduction, demonstration, and roadmap.
-- [Architecture](../../docs/architecture/README.md) — High-level architecture, layer responsibilities, design decisions, and dependency structure.
-- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Business model, entities, value objects, aggregates, and domain events.
-- [WhoAmI.Application](../WhoAmI.Application/README.md) — Application workflows, CQRS, validation, and the Result pattern.
-- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Persistence, repositories, queries, EF Core configuration, and infrastructure services.
-- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Dependency injection and application composition.
-
----
-
-## References
-
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) — Robert C. Martin
-- [CQRS](https://martinfowler.com/bliki/CQRS.html) — Martin Fowler
+- [Project Overview](../../README.md) — Introduces the project, demonstrates its functionality, and outlines its roadmap.
+- [Architecture](../../docs/architecture/README.md) — Explains the application's architecture, layer responsibilities, design decisions, and dependency structure.
+- [WhoAmI.Domain](../WhoAmI.Domain/README.md) — Defines the business model, entities, value objects, and domain events.
+- [WhoAmI.Application](../WhoAmI.Application/README.md) — Implements application workflows, CQRS, validation, and the Result pattern.
+- [WhoAmI.Infrastructure](../WhoAmI.Infrastructure/README.md) — Provides persistence, repositories, queries, and infrastructure services.
+- [WhoAmI.Bootstrap](../WhoAmI.Bootstrap/README.md) — Configures dependency injection and application composition.
 
 ---
 

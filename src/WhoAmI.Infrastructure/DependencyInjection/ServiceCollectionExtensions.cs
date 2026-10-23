@@ -9,6 +9,7 @@ using WhoAmI.Infrastructure.Data.Persistence.Context;
 using WhoAmI.Infrastructure.Data.Persistence.ErrorHandling;
 using WhoAmI.Infrastructure.Data.Persistence.ErrorHandling.Abstractions;
 using WhoAmI.Infrastructure.Data.Persistence.ErrorHandling.Parsers.Sqlite;
+using WhoAmI.Infrastructure.Data.Persistence.Initialization;
 using WhoAmI.Infrastructure.Data.Persistence.Repositories;
 using WhoAmI.Infrastructure.Data.Queries.Abstractions;
 using WhoAmI.Infrastructure.Data.Queries.Connections;
@@ -58,6 +59,20 @@ public static class ServiceCollectionExtensions {
         IHostEnvironment environment,
         Action<IServiceProvider, DbContextOptionsBuilder>? configureDb
     ) {
+        var connectionString = configuration.GetConnectionString(
+            DefaultConnection
+        );
+
+        if (string.IsNullOrWhiteSpace(connectionString)) {
+            throw new InvalidOperationException(
+                "The database connection string is missing or empty."
+            );
+        }
+
+        services.AddSingleton<IDatabasePreparation>(_ =>
+            new SqliteDatabasePreparation(connectionString)
+        );
+
         services.AddDbContext<WhoAmIDbContext>((sp, options) => {
             ConfigureDbContext(
                 sp,

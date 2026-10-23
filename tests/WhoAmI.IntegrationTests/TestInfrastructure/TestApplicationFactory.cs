@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WhoAmI.Application.Abstractions.Logging;
 using WhoAmI.Bootstrap.DependencyInjection;
-using WhoAmI.Infrastructure.Data.Persistence.Context;
-using WhoAmI.IntegrationTests.Infrastructure.Logging;
+using WhoAmI.Bootstrap.Initialization;
+using WhoAmI.IntegrationTests.TestInfrastructure.Logging;
 
-namespace WhoAmI.IntegrationTests.Infrastructure;
+namespace WhoAmI.IntegrationTests.TestInfrastructure;
 
 public sealed class TestApplicationFactory : IAsyncLifetime {
     const string ConnectionString =
@@ -48,16 +48,12 @@ public sealed class TestApplicationFactory : IAsyncLifetime {
             (_, options) => { options.UseSqlite(_connection); }
         );
 
-        // override production observer for tests
+        // Disable execution logging side effects during tests
         services.AddSingleton<ISafeExecutionLogger, NoOpSafeExecutionLogger>();
 
         _provider = services.BuildServiceProvider();
 
-        // Create schema once
-        using var scope = _provider.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<WhoAmIDbContext>();
-
-        await db.Database.MigrateAsync();
+        await _provider.InitializeDatabaseAsync();
     }
 
     public async ValueTask DisposeAsync() {
