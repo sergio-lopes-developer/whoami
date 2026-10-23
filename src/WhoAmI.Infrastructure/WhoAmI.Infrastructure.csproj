@@ -23,9 +23,5 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.13" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.13" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Data\Queries\Features\" />
-  </ItemGroup>
 
 </Project>

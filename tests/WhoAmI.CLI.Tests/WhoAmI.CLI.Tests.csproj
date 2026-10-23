@@ -32,8 +32,4 @@
     <ProjectReference Include="..\..\src\WhoAmI.CLI\WhoAmI.CLI.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Unit\" />
-  </ItemGroup>
-
 </Project>
