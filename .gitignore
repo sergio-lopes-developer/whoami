@@ -47,6 +47,7 @@ ScaffoldingReadMe.txt
 /data/
 CodeCoverage/
 appsettings.Development.json
+whoami.db
 
 # MSBuild Binary and Structured Log
 *.binlog

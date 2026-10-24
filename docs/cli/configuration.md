@@ -62,15 +62,27 @@ Then update the settings according to your local environment.
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection":
-      "Data Source=/absolute/path/to/whoami.db;"
+    "DefaultConnection": "Data Source=/absolute/path/to/whoami.db;"
   }
 }
 ```
 
 Using an environment-specific configuration file allows developers to customize local settings without modifying the repository's default configuration.
 
-The example file provides a template for local development settings and must not contain machine-specific configuration.
+The example file provides a template for development-specific settings and must not contain machine-specific configuration.
+
+> [!TIP]
+> A common local development setup is storing the SQLite database under the `data` directory:
+> 
+> ```json
+> {
+>   "ConnectionStrings": {
+>     "DefaultConnection": "Data Source=data/whoami.db;"
+>   }
+> }
+> ```
+>
+> The `data` directory is a convenient location for local development databases and is excluded from source control.
 
 ---
 
