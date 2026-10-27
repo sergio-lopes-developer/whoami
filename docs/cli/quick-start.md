@@ -26,7 +26,7 @@ git --version
 
 Each command should print the installed version.
 
-The repository includes a [global.json](../../global.json) file that defines the .NET SDK version used by the project.
+The repository includes a [global.json](../../global.json) file that defines the minimum supported .NET SDK version for the project.
 
 ---
 
@@ -41,21 +41,7 @@ cd whoami
 
 ---
 
-## 2. Database Setup
-
-The CLI uses SQLite with the default connection string configured in:
-
-```text
-src/WhoAmI.CLI/appsettings.json
-```
-
-The default configuration creates the database file automatically in the application's working directory.
-
-To customize the database location or use environment-specific configuration, see the [Configuration](./configuration.md) guide.
-
----
-
-## 3. Build the Solution
+## 2. Build the Solution
 
 Restore the project dependencies:
 
@@ -71,7 +57,7 @@ dotnet build
 
 ---
 
-## 4. Verify Installation
+## 3. Verify Installation
 
 Run the following command:
 
@@ -79,7 +65,7 @@ Run the following command:
 dotnet run --project src/WhoAmI.CLI -- profile list
 ```
 
-If the database does not exist, the CLI creates it automatically and applies any pending migrations.
+If the database does not exist, the CLI automatically creates it and applies any pending migrations using the default configuration.
 
 If the database is empty, you should see:
 
@@ -96,7 +82,7 @@ If the command completes successfully, your **WhoAmI CLI** setup is complete.
 Now that the CLI is running, continue with:
 
 - [Usage](./usage.md) — Learn the available commands.
-- [Configuration](./configuration.md) — Customize the CLI.
+- [Configuration](./configuration.md) — Customize the database connection and application settings.
 
 ---
 

@@ -7,7 +7,7 @@ namespace WhoAmI.CLI.Commands;
 
 [Description("Display the CLI version")]
 public sealed class VersionCommand : Command {
-    protected override int Execute(
+    public override int Execute(
         CommandContext context,
         CancellationToken cancellationToken
     ) {

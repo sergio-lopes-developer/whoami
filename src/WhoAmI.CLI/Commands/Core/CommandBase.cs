@@ -15,7 +15,7 @@ public abstract class CommandBase<TCommand, TSettings>
         _logger = logger;
     }
 
-    protected sealed override async Task<int> ExecuteAsync(
+    public sealed override async Task<int> ExecuteAsync(
         CommandContext context,
         TSettings settings,
         CancellationToken cancellationToken
