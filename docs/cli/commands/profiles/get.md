@@ -29,6 +29,12 @@ whoami-cli profile get [options]
 | --verbose       |  -v   |    No    | Boolean |                                                                       | Displays additional information, including the profile ID and audit timestamps. |
 | --help          |  -h   |    No    | Boolean |                                                                       | Displays command help.                                                          |
 
+> [!TIP]
+>
+> Use the `--verbose` option to display the profile ID.
+>
+> The profile ID is required by the `profile update` and `profile delete` commands.
+
 ---
 
 ## Validation

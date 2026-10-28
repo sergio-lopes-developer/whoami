@@ -27,6 +27,18 @@ whoami-cli profile update name [options]
 | --last-name  |  -l   |   Yes    |     2      |    100     |  Text   | [LastName](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/LastName.cs)   | New last name.         |
 | --help       |  -h   |    No    |            |            | Boolean |                                                                                  | Displays command help. |
 
+> [!TIP]
+>
+> This command requires the profile ID.
+>
+> To retrieve it, run:
+>
+> ```shell
+> whoami-cli profile get --email <EMAIL_ADDRESS> --verbose
+> ```
+>
+> The `--verbose` option displays the profile identifier required by this command.
+
 ---
 
 ## Validation
