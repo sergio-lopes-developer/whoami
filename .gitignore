@@ -23,6 +23,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Keep release documentation
+!docs/cli/release/
+!docs/cli/release/**
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json
