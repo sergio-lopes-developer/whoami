@@ -2,7 +2,7 @@
 
 # WhoAmI
 
-![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet) [![CI](https://github.com/sergio-lopes-developer/whoami/actions/workflows/ci.yml/badge.svg)](https://github.com/sergio-lopes-developer/whoami/actions/workflows/ci.yml) ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Portfolio](https://img.shields.io/badge/Portfolio-Developer-blue)
+![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet) [![CI](https://github.com/sergio-lopes-developer/whoami/actions/workflows/ci.yml/badge.svg)](https://github.com/sergio-lopes-developer/whoami/actions/workflows/ci.yml) [![Release](https://github.com/sergio-lopes-developer/whoami/actions/workflows/cd.yml/badge.svg)](https://github.com/sergio-lopes-developer/whoami/actions/workflows/cd.yml) ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Portfolio](https://img.shields.io/badge/Portfolio-Developer-blue)
 
 </div>
 
@@ -24,8 +24,14 @@ Get started with the application or explore its architecture using the documenta
 
 ### 🚀 Get Started
 
-- [Quick Start](./docs/cli/quick-start.md) — Clone, build, and run the project.
+#### 👤 For Users
+
+- [Download](https://github.com/sergio-lopes-developer/whoami/releases) — Download the latest WhoAmI CLI release.
 - [Usage](./docs/cli/usage.md) — Learn the available commands.
+
+#### 🛠️ For Developers
+
+- [Quick Start](./docs/cli/quick-start.md) — Clone, build, and run the project.
 - [Configuration](./docs/cli/configuration.md) — Customize the database connection and application settings.
 
 ### 🏛️ Understand the Architecture
