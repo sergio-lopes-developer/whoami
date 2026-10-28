@@ -2,7 +2,7 @@
 
 Thank you for downloading **WhoAmI CLI**.
 
-The application is distributed as a self-contained executable and includes the required .NET runtime, so no additional installation is necessary.
+The application is distributed as a self-contained executable that includes the required .NET runtime. No additional installation is necessary.
 
 Make sure you download the archive that matches your operating system and processor architecture.
 
