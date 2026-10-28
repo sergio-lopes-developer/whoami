@@ -50,7 +50,9 @@ jobs:
           global-json-file: global.json
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: |
+          dotnet restore ${{ env.PROJECT_PATH }} \
+            --runtime ${{ matrix.runtime }}
 
       - name: Determine version
         run: |

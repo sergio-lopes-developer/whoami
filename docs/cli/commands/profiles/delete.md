@@ -25,6 +25,18 @@ whoami-cli profile delete [options]
 | --id   |  -i   |   Yes    |  GUID   | Profile identifier.    |
 | --help |  -h   |    No    | Boolean | Displays command help. |
 
+> [!TIP]
+>
+> This command requires the profile ID.
+>
+> To retrieve it, run:
+>
+> ```shell
+> whoami-cli profile get --email <EMAIL_ADDRESS> --verbose
+> ```
+>
+> The `--verbose` option displays the profile identifier required by this command.
+
 ---
 
 ## Validation

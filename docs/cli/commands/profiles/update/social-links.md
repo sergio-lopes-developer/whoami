@@ -27,6 +27,18 @@ whoami-cli profile update social-links [options]
 | --github   |  -g   |   Yes    |    255     |   URL   | [Url](../../../../../src/WhoAmI.Domain/Profiles/ValueObjects/Url.cs) | New GitHub URL.        |
 | --help     |  -h   |    No    |            | Boolean |                                                                      | Displays command help. |
 
+> [!TIP]
+>
+> This command requires the profile ID.
+>
+> To retrieve it, run:
+>
+> ```shell
+> whoami-cli profile get --email <EMAIL_ADDRESS> --verbose
+> ```
+>
+> The `--verbose` option displays the profile identifier required by this command.
+
 ---
 
 ## Validation
