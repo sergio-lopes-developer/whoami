@@ -28,9 +28,10 @@ whoami-cli v [options]
 
 ## Options
 
-| Option  | Alias | Required |  Type   | Description            |
-|:--------|:-----:|:--------:|:-------:|:-----------------------|
-| --help  |  -h   |    No    | Boolean | Displays command help. |
+| Option    | Alias | Required |  Type   | Description                                        |
+|:----------|:-----:|:--------:|:-------:|:---------------------------------------------------|
+| --verbose |  -v   |    No    | Boolean | Displays additional build and runtime information. |
+| --help    |  -h   |    No    | Boolean | Displays command help.                             |
 
 ---
 
@@ -53,8 +54,32 @@ whoami-cli version
 Expected output:
 
 ```text
-WhoAmI CLI - v1.0.0
+WhoAmI CLI v1.0.0
 ```
+
+### Display Additional Version Information
+
+Display the CLI version together with build and runtime information.
+
+```shell
+whoami-cli version --verbose
+```
+
+Expected output:
+
+```text
+WhoAmI CLI v1.0.0
+──────────────────────────────────────────────────────
+Commit:       a79aca149a55f19f46fa7a6f63b88cfad281bf80
+Environment:  Windows 11
+Architecture: X64
+.NET Runtime: 10.0.14
+
+```
+
+> [!NOTE]
+>
+> The values displayed for Commit, Environment, Architecture, and .NET Runtime depend on the current build and execution environment.
 
 ### Using the Alias
 
@@ -67,7 +92,7 @@ whoami-cli v
 Expected output:
 
 ```text
-WhoAmI CLI - v1.0.0
+WhoAmI CLI v1.0.0
 ```
 
 ---
