@@ -40,11 +40,11 @@ Then run the application again.
 
 ## Documentation
 
-To learn the available commands, see the [Usage documentation](https://github.com/sergio-lopes-developer/whoami/blob/main/docs/cli/usage.md).
+To learn the available commands, see the [Usage documentation](https://github.com/sergio-lopes-developer/whoami/blob/<GIT_TAG>/docs/cli/usage.md).
 
 The application uses `appsettings.json` to configure the database connection and other settings.
 
-If you need to customize its behavior before running the application, see the [Configuration documentation](https://github.com/sergio-lopes-developer/whoami/blob/main/docs/cli/configuration.md).
+If you need to customize its behavior before running the application, see the [Configuration documentation](https://github.com/sergio-lopes-developer/whoami/blob/<GIT_TAG>/docs/cli/configuration.md).
 
 ---
 

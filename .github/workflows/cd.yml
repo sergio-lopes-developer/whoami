@@ -72,9 +72,19 @@ jobs:
         run: |
           chmod +x publish/${{ matrix.runtime }}/${{ env.EXECUTABLE_NAME }}
 
+      - name: Generate release guide
+        run: |
+          sed "s|<GIT_TAG>|${GITHUB_REF_NAME}|g" \
+            docs/cli/release/README.template.md \
+            > publish/${{ matrix.runtime }}/README.md
+
+          if grep -q "<GIT_TAG>" publish/${{ matrix.runtime }}/README.md; then
+            echo "Placeholder replacement failed."
+            exit 1
+          fi
+
       - name: Copy documentation
         run: |
-          cp docs/cli/release/README.md publish/${{ matrix.runtime }}/README.md
           cp LICENSE publish/${{ matrix.runtime }}/LICENSE
 
       - name: Create ZIP archive
