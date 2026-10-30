@@ -67,6 +67,10 @@ jobs:
             --self-contained true \
             --output publish/${{ matrix.runtime }}
 
+      - name: Remove debug symbols
+        run: |
+          find publish/${{ matrix.runtime }} -name "*.pdb" -delete
+
       - name: Make executable runnable
         if: matrix.archive == 'tar.gz'
         run: |
