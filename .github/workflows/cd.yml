@@ -83,7 +83,7 @@ jobs:
             > publish/${{ matrix.runtime }}/README.md
 
           if grep -q "<GIT_TAG>" publish/${{ matrix.runtime }}/README.md; then
-            echo "Placeholder replacement failed."
+            echo "Release guide generation failed: unresolved <GIT_TAG> placeholder."
             exit 1
           fi
 
