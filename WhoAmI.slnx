@@ -2,7 +2,16 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="dotnet-tools.json" />
+    <File Path="global.json" />
     <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/GitHub/" />
+  <Folder Name="/Solution Items/GitHub/Workflows/">
+    <File Path=".github\workflows\cd.yml" />
+    <File Path=".github\workflows\ci.yml" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/WhoAmI.Application/WhoAmI.Application.csproj" />
@@ -12,6 +21,7 @@
     <Project Path="src/WhoAmI.Infrastructure/WhoAmI.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/Tests/">
+    <File Path="tests\Directory.Build.props" />
     <Project Path="tests/WhoAmI.Application.Tests/WhoAmI.Application.Tests.csproj" />
     <Project Path="tests/WhoAmI.CLI.Tests/WhoAmI.CLI.Tests.csproj" />
     <Project Path="tests/WhoAmI.Domain.Tests/WhoAmI.Domain.Tests.csproj" />

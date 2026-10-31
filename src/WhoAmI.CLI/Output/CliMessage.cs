@@ -13,6 +13,8 @@ internal static class CliMessage {
     internal static void ShowInfo(string message) =>
         AnsiConsole.MarkupLine(Markup.Escape(message));
 
+    internal static void ShowSeparator() => AnsiConsole.Write(new Rule());
+
     internal static void ShowSuccess(string message) =>
         Show(message, MessageColor.Green);
 

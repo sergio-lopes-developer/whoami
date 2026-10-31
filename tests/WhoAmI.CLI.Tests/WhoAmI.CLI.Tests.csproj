@@ -1,26 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <IsPackable>false</IsPackable>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="10.1.0">
+    <PackageReference Include="coverlet.collector">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="FluentAssertions" Version="8.11.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
-    <PackageReference Include="NSubstitute" Version="6.2.0" />
-    <PackageReference Include="Serilog.Sinks.InMemory" Version="2.0.0" />
-    <PackageReference Include="Serilog.Sinks.InMemory.Assertions" Version="2.0.0" />
-    <PackageReference Include="Spectre.Console.Cli" Version="0.57.2" />
-    <PackageReference Include="Spectre.Console.Cli.Testing" Version="0.57.2" />
-    <PackageReference Include="xunit.v3" Version="4.0.2" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Serilog.Sinks.InMemory" />
+    <PackageReference Include="Serilog.Sinks.InMemory.Assertions" />
+    <PackageReference Include="Spectre.Console.Cli" />
+    <PackageReference Include="Spectre.Console.Cli.Testing" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,5 +26,4 @@
     <ProjectReference Include="..\..\src\WhoAmI.Application\WhoAmI.Application.csproj" />
     <ProjectReference Include="..\..\src\WhoAmI.CLI\WhoAmI.CLI.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,11 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\WhoAmI.Application\WhoAmI.Application.csproj" />
     <ProjectReference Include="..\WhoAmI.Domain\WhoAmI.Domain.csproj" />
@@ -16,12 +9,11 @@
     <InternalsVisibleTo Include="WhoAmI.Application.Tests" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.89" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.14" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.14" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.14" />
-  </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+  </ItemGroup>
 </Project>
