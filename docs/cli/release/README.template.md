@@ -48,6 +48,14 @@ If you need to customize its behavior before running the application, see the [C
 
 ---
 
+## Security
+
+This release is signed with Sigstore.
+
+If you want to verify the authenticity and provenance of the downloaded archive before running the application, follow the [Verification Guide](https://github.com/sergio-lopes-developer/whoami/blob/<GIT_TAG>/docs/cli/release/verification.md).
+
+---
+
 ## License
 
 This project is licensed under the MIT License. See the included LICENSE file for details.
