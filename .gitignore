@@ -26,6 +26,8 @@ bld/
 # Keep release documentation
 !docs/cli/release/
 !docs/cli/release/**
+!docs/release/
+!docs/release/**
 
 # .NET Core
 project.lock.json
