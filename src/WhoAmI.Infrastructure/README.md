@@ -122,7 +122,7 @@ A query typically consists of:
 - SQL statement.
 - Row model (when required).
 
-For example:
+Example:
 
 ```text
 Profiles/

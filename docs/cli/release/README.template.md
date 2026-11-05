@@ -4,7 +4,7 @@ Thank you for downloading **WhoAmI CLI**.
 
 The application is distributed as a self-contained executable that includes the required .NET runtime. No additional installation is necessary.
 
-Make sure you download the archive that matches your operating system and processor architecture.
+Make sure you download the archive that matches your platform (operating system and processor architecture).
 
 ---
 
@@ -50,9 +50,9 @@ If you need to customize its behavior before running the application, see the [C
 
 ## Security
 
-This release is signed with Sigstore.
+This release is signed with **Sigstore**.
 
-If you want to verify the authenticity and provenance of the downloaded archive before running the application, follow the [Verification Guide](https://github.com/sergio-lopes-developer/whoami/blob/<GIT_TAG>/docs/cli/release/verification.md).
+To verify the authenticity and provenance of the downloaded archive, use the corresponding `.sigstore.json` bundle from the **Sigstore** column on the release page and follow the [Verification Guide](https://github.com/sergio-lopes-developer/whoami/blob/<GIT_TAG>/docs/cli/release/verification.md).
 
 ---
 
