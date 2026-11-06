@@ -50,7 +50,7 @@ If you need to customize its behavior before running the application, see the [C
 
 ## Security
 
-This release is signed with **Sigstore**.
+This release is signed with [**Sigstore**](https://www.sigstore.dev/).
 
 To verify the authenticity and provenance of the downloaded archive, use the corresponding `.sigstore.json` bundle from the **Sigstore** column on the release page and follow the [Verification Guide](https://github.com/sergio-lopes-developer/whoami/blob/<GIT_TAG>/docs/cli/release/verification.md).
 

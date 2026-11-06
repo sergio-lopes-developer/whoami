@@ -1,10 +1,10 @@
 # Verify the Release
 
-This release is signed using **Sigstore**.
+This release is signed using [**Sigstore**](https://www.sigstore.dev/).
 
 The signatures are generated automatically by the GitHub Actions release workflow using Sigstore's keyless signing.
 
-To verify the authenticity and provenance of the downloaded archive, you will need **Cosign**, the official Sigstore command-line tool.
+To verify the authenticity and provenance of the downloaded archive, you will need [**Cosign**](https://docs.sigstore.dev/quickstart/quickstart-cosign/), the official Sigstore command-line tool.
 
 Follow the steps below to install Cosign, download the required verification files, and verify the release artifact.
 
@@ -13,15 +13,13 @@ Follow the steps below to install Cosign, download the required verification fil
 ## Install Cosign.
 
 - **Windows**: Download `cosign-windows-amd64.exe` from: https://github.com/sigstore/cosign/releases
-
   > [!NOTE]
   >
-  > At the end of the **Assets** list, click **Show all** if the Windows binary is not immediately visible.
+  > At the end of the **Assets** list, click **Show all** if the Windows executables are not immediately visible.
 
 - **Linux**: Follow the official installation guide for your distribution: https://docs.sigstore.dev/cosign/system_config/installation/
 
 - **macOS**: Install with Homebrew (recommended):
-
   ```shell
   brew install cosign
   ```
