@@ -10,23 +10,21 @@ Follow the steps below to install Cosign, download the required verification fil
 
 ---
 
-## Install Cosign.
+## Install Cosign
 
-- **Windows**: Download `cosign-windows-amd64.exe` from: https://github.com/sigstore/cosign/releases
-  > [!NOTE]
-  >
-  > At the end of the **Assets** list, click **Show all** if the Windows executables are not immediately visible.
+- **Windows**: Download `cosign-windows-amd64.exe` from: https://github.com/sigstore/cosign/releases. If the Windows executables are not immediately visible, click **Show all** at the end of the **Assets** list.
 
 - **Linux**: Follow the official installation guide for your distribution: https://docs.sigstore.dev/cosign/system_config/installation/
 
 - **macOS**: Install with Homebrew (recommended):
+
   ```shell
   brew install cosign
   ```
 
 ---
 
-## Download the release archive together with its corresponding `.sigstore.json` bundle.
+## Download the Archive and Signature Bundle
 
 From the release page:
 
@@ -44,7 +42,7 @@ whoami-cli-1.0.0-linux-x64.tar.gz.sigstore.json
 
 ---
 
-## Verify the downloaded archive:
+## Verify the Signature
 
 Run the following command:
 
