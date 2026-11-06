@@ -20,6 +20,8 @@ jobs:
         include:
           - runtime: win-x64
             archive: zip
+          - runtime: win-arm64
+            archive: zip
           - runtime: linux-x64
             archive: tar.gz
           - runtime: linux-arm64
@@ -137,6 +139,7 @@ jobs:
           set -euo pipefail
 
           echo "CLI_WINDOWS_X64_SHA256=$(sha256sum "artifacts/${{ env.EXECUTABLE_NAME }}-${VERSION}-win-x64.zip" | awk '{print $1}')" >> "$GITHUB_ENV"
+          echo "CLI_WINDOWS_ARM64_SHA256=$(sha256sum "artifacts/${{ env.EXECUTABLE_NAME }}-${VERSION}-win-arm64.zip" | awk '{print $1}')" >> "$GITHUB_ENV"
           echo "CLI_LINUX_X64_SHA256=$(sha256sum "artifacts/${{ env.EXECUTABLE_NAME }}-${VERSION}-linux-x64.tar.gz" | awk '{print $1}')" >> "$GITHUB_ENV"
           echo "CLI_LINUX_ARM64_SHA256=$(sha256sum "artifacts/${{ env.EXECUTABLE_NAME }}-${VERSION}-linux-arm64.tar.gz" | awk '{print $1}')" >> "$GITHUB_ENV"
           echo "CLI_MACOS_X64_SHA256=$(sha256sum "artifacts/${{ env.EXECUTABLE_NAME }}-${VERSION}-osx-x64.tar.gz" | awk '{print $1}')" >> "$GITHUB_ENV"
@@ -147,6 +150,7 @@ jobs:
             -e "s|<GIT_TAG>|${GITHUB_REF_NAME}|g" \
             -e "s|<RELEASE_VERSION>|${VERSION}|g" \
             -e "s|<CLI_WINDOWS_X64_SHA256>|${CLI_WINDOWS_X64_SHA256}|g" \
+            -e "s|<CLI_WINDOWS_ARM64_SHA256>|${CLI_WINDOWS_ARM64_SHA256}|g" \
             -e "s|<CLI_LINUX_X64_SHA256>|${CLI_LINUX_X64_SHA256}|g" \
             -e "s|<CLI_LINUX_ARM64_SHA256>|${CLI_LINUX_ARM64_SHA256}|g" \
             -e "s|<CLI_MACOS_X64_SHA256>|${CLI_MACOS_X64_SHA256}|g" \
@@ -158,6 +162,7 @@ jobs:
             "<GIT_TAG>" \
             "<RELEASE_VERSION>" \
             "<CLI_WINDOWS_X64_SHA256>" \
+            "<CLI_WINDOWS_ARM64_SHA256>" \
             "<CLI_LINUX_X64_SHA256>" \
             "<CLI_LINUX_ARM64_SHA256>" \
             "<CLI_MACOS_X64_SHA256>" \

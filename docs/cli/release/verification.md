@@ -1,22 +1,18 @@
 # Verify the Release
 
-This release is signed using **Sigstore**.
+This release is signed using [**Sigstore**](https://www.sigstore.dev/).
 
 The signatures are generated automatically by the GitHub Actions release workflow using Sigstore's keyless signing.
 
-To verify the authenticity and provenance of the downloaded archive, you will need **Cosign**, the official Sigstore command-line tool.
+To verify the authenticity and provenance of the downloaded archive, you will need [**Cosign**](https://docs.sigstore.dev/quickstart/quickstart-cosign/), the official Sigstore command-line tool.
 
 Follow the steps below to install Cosign, download the required verification files, and verify the release artifact.
 
 ---
 
-## Install Cosign.
+## Install Cosign
 
-- **Windows**: Download `cosign-windows-amd64.exe` from: https://github.com/sigstore/cosign/releases
-
-  > [!NOTE]
-  >
-  > At the end of the **Assets** list, click **Show all** if the Windows binary is not immediately visible.
+- **Windows**: Download `cosign-windows-amd64.exe` from: https://github.com/sigstore/cosign/releases. If the Windows executables are not immediately visible, click **Show all** at the end of the **Assets** list.
 
 - **Linux**: Follow the official installation guide for your distribution: https://docs.sigstore.dev/cosign/system_config/installation/
 
@@ -28,7 +24,7 @@ Follow the steps below to install Cosign, download the required verification fil
 
 ---
 
-## Download the release archive together with its corresponding `.sigstore.json` bundle.
+## Download the Archive and Signature Bundle
 
 From the release page:
 
@@ -46,7 +42,7 @@ whoami-cli-1.0.0-linux-x64.tar.gz.sigstore.json
 
 ---
 
-## Verify the downloaded archive:
+## Verify the Signature
 
 Run the following command:
 
